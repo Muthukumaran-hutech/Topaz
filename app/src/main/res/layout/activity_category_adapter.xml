@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     >
 
     <ImageView
@@ -21,7 +21,7 @@
         android:id="@+id/plwwoodsstext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:text="@string/plywood_boards"
         android:textColor="@color/black"
         android:textSize="14sp"
@@ -43,7 +43,7 @@
         android:id="@+id/laminatesstext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:text="@string/laminates"
         android:textColor="@color/black"
         android:textSize="14sp"
@@ -68,7 +68,7 @@
         android:id="@+id/veneersstext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:text="@string/veneers"
         android:textColor="@color/black"
         android:textSize="14sp"

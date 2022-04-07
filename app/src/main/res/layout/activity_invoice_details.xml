@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -171,19 +172,18 @@
                 android:textStyle="bold"
                 android:gravity="center"
                 android:layout_marginTop="10dp"
-                android:layout_marginStart="30dp"/>
+                android:layout_marginStart="19dp"/>
 
             <TextView
                 android:id="@+id/selleraddress"
-                android:layout_width="325dp"
+                android:layout_width="181dp"
                 android:layout_height="70dp"
                 android:text="92, 2nd Cross Rd, Pillanna Garden, Sagayapura, HBR Layout, Bengaluru, Karnataka 560084"
                 android:textSize="14sp"
                 android:textColor="@color/netural_black"
-                android:textStyle="bold"
                 android:gravity="left"
                 android:layout_marginTop="10dp"
-                android:layout_marginStart="30dp"/>
+                android:layout_marginStart="19dp"/>
 
             <TextView
                 android:id="@+id/billingaddress"
@@ -194,8 +194,8 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:gravity="center"
-                android:layout_marginTop="30dp"
-                android:layout_marginStart="30dp"/>
+                android:layout_marginTop="-125dp"
+                android:layout_marginStart="220dp"/>
 
             <TextView
                 android:id="@+id/customername"
@@ -207,19 +207,19 @@
                 android:textStyle="bold"
                 android:gravity="center"
                 android:layout_marginTop="10dp"
-                android:layout_marginStart="30dp"/>
+                android:layout_marginStart="216dp"/>
 
             <TextView
                 android:id="@+id/custaddress"
-                android:layout_width="332dp"
-                android:layout_height="85dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/karnataka"
                 android:textSize="14sp"
                 android:textColor="@color/netural_black"
-                android:textStyle="bold"
                 android:gravity="left"
                 android:layout_marginTop="10dp"
-                android:layout_marginStart="30dp"/>
+                android:layout_marginStart="216dp"
+                android:layout_marginEnd="5dp"/>
 
 
 

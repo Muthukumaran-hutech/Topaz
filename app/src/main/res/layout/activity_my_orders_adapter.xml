@@ -21,6 +21,48 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/oderplaced"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/order_placed"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/orderrecieved"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/quotation_received"
+        android:textColor="@color/green"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/ordercanceled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/order_cancelled"
+        android:textColor="@color/red"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/orderid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -63,6 +105,15 @@
         android:layout_height="18dp"
         android:layout_marginStart="10dp"
         android:src="@drawable/vector_msg"
+        app:layout_constraintStart_toEndOf="@+id/unit"
+        app:layout_constraintTop_toTopOf="@+id/unit" />
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/chat_icon2"
+        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@+id/unit"
         app:layout_constraintTop_toTopOf="@+id/unit" />
 

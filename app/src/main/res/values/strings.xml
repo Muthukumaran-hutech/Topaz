@@ -67,7 +67,7 @@
     <string name="supplier">Supplier</string>
     <string name="gold_wood_industries">Gold Wood Industries</string>
     <string name="description">Description</string>
-    <string name="desc_">Kitply BWR Plywood is a premium grade boiling water resistant plywood . it is manufactured with wider core and panel and bonded with high grade PF resin to resist in a high moisture environment.</string>
+    <string name="desc1_">Kitply BWR Plywood is a premium grade boiling water resistant plywood . it is manufactured with wider core and panel and bonded with high grade PF resin to resist in a high moisture environment.</string>
     <string name="get_a_price">Get a Price</string>
     <string name="buy_now">Buy Now</string>
     <string name="wooden_waterproof_plywood">Wooden Waterproof Plywood Sheet, Thickness: 18 mm</string>
@@ -144,7 +144,7 @@
     <string name="order_summary">Order Summary</string>
     <string name="change_or_add_address">Change or Add address</string>
     <string name="payment">Payment</string>
-    <string name="payment_method">Payment Method</string>
+    <string name="payment_method1">Payment Method</string>
     <string name="google_pay_upi">Google pay UPI</string>
     <string name="phonepe_upi">Phonepe UPI</string>
     <string name="cash_on_delivery">Cash on Delivery</string>
@@ -154,6 +154,37 @@
     <string name="return_to_payment_options">Return to payment options</string>
     <string name="delivery_to">Delivery to:</string>
     <string name="place_order">Place Order</string>
+    <string name="order_placed">Order Placed</string>
+    <string name="quotation_received">Quotation Received</string>
+    <string name="order_cancelled">Order Cancelled</string>
+    <string name="order_date">Order Date</string>
+    <string name="order_id">Order ID</string>
+    <string name="order_total1">Order Total</string>
+    <string name="download_invoice">Download Invoice</string>
+    <string name="print">Print</string>
+    <string name="share">Share</string>
+    <string name="shipping_details">Shipping Details</string>
+    <string name="shipped">Shipped</string>
+    <string name="payment_method">Payment Method</string>
+    <string name="payment_informations">Payment Informations</string>
+    <string name="shipping_address">Shipping Address</string>
+    <string name="order_total">Order Total</string>
+    <string name="discount">Discount</string>
+    <string name="delivery_charges">Delivery Charges</string>
+    <string name="price_3_items">Price (3 items)</string>
+    <string name="order_details">Order Details</string>
+    <string name="faq">FAQ</string>
+    <string name="frequently_asked_questions">Frequently Asked Questions</string>
+    <string name="why_is_centuryply_a_better_product">Why is CenturyPly a better product?</string>
+    <string name="century_ply_uses_good_quality_raw_material_and_also_has_rigorous_quality_checks_at_every_stage_to_verify_that_the_best_product_is_going_to_the_market">Century Ply uses good quality raw material and also has rigorous quality checks at every stage to verify that the best product is going to the market.</string>
+    <string name="what_grade_of_plywood_is_recommended_for_green_buildings">What grade of plywood is recommended for Green buildings?</string>
+    <string name="where_to_get_quality_of_plywood_checked">Where to get quality of plywood checked?</string>
+    <string name="how_to_get_redressal_of_plywood_complaints">How to get redressal of plywood complaints?</string>
+    <string name="does_using_gurjan_make_ply_better">Does using gurjan make ply better?</string>
+    <string name="how_to_check_if_it_is_gurjan">How to check if it is gurjan?</string>
+    <string name="what_is_the_alternative_timber_for_gurjan">What is the alternative timber for Gurjan?</string>
+    <string name="what_is_natural_forest_timber">What is natural forest timber?</string>
+    <string name="how_to_recognise_fake_plywood_brand">How to recognise fake plywood brand?</string>
 
 
 </resources>

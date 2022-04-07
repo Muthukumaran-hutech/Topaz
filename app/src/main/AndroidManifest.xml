@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Topaz">
         <activity
+            android:name=".Activities.OrderDetails"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.ProductDetails"
+            android:exported="false" />
+        <activity
             android:name=".Activities.MyCartNew"
             android:exported="false" />
         <activity
@@ -57,7 +63,7 @@
             android:name=".Activities.InvoiceDetails"
             android:exported="false" />
         <activity
-            android:name=".Activities.ProductDetails"
+            android:name=".Activities.CategoryActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.MyCart"
@@ -78,7 +84,7 @@
             android:name=".Activities.SearchActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.CategoryActivity"
+            android:name=".Activities.SplashScreen"
             android:exported="false" />
         <activity
             android:name=".Activities.OrderConfirmation"
@@ -102,7 +108,7 @@
             android:name=".Activities.MyOrders"
             android:exported="false" />
         <activity
-            android:name=".Activities.SplashScreen"
+            android:name=".Activities.FaqActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

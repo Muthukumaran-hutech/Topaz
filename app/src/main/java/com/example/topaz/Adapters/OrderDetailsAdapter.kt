@@ -6,12 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.topaz.R
 
-class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.MyViewHolder>() {
+class OrderDetailsAdapter : RecyclerView.Adapter<OrderDetailsAdapter.MyViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.activity_category_adapter, parent, false)
+            .inflate(R.layout.activity_order_details_adapter, parent, false)
         return MyViewHolder(view)
     }
 
