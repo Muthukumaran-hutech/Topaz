@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="blue">#00ADEF</color>
+    <color name="dark_blue">#054E97</color>
+    <color name="grey_white">#F5F5F5</color>
+    <color name="transperent">#0000ffff</color>
+    <color name="btn_color">#064482</color>
+    <color name="violet">#095198</color>
+    <color name="netural_black">#223263</color>
+    <color name="netural_grey">#9098B1</color>
+    <color name="btn">#064482</color>
+    <color name="primary_blue">#40BFFF</color>
+    <color name="primary_red">#FB7181</color>
+    <color name="inner_border">#E2DFDF</color>
+    <color name="linear_gradient_1">#D5E7F2</color>
+    <color name="linear_gradient_2">#FFFFFF</color>
+    <color name="dd_text_color">#223263</color>
+    <color name="grey">#F6F6F6</color>
+    <color name="buy_btn">#0658A9</color>
+    <color name="price_btn">#074887</color>
+    <color name="gr">#E1E1E1</color>
+    <color name="black_gr">#8A8A8A</color>
+    <color name="white_gr">#F2F2F2</color>
+    <color name="purple">#295A9F</color>
+    <color name="lite_purple">#0185FE</color>
+
+
+
+
+</resources>

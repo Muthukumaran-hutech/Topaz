@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Activities.HomescreenQuotation">
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/blue"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/backarrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/cart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:paddingEnd="15dp"
+        android:src="@drawable/ic_baseline_shopping_cart_24"
+        app:layout_constraintEnd_toEndOf="@+id/textView5"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:paddingEnd="15dp"
+        android:src="@drawable/ic_baseline_notifications_24"
+        app:layout_constraintEnd_toStartOf="@+id/cart"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:paddingEnd="15dp"
+        android:src="@drawable/ic_baseline_search_24"
+        app:layout_constraintEnd_toStartOf="@+id/notification"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="800dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="350dp"
+                android:layout_height="208dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/rectangle_254" />
+
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/wooden_waterproof_plywood"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/quantity"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="150dp"
+                android:layout_marginTop="-15dp"
+                android:text="@string/s_ft_price"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="270dp"
+                android:layout_marginTop="-15dp"
+                android:text="@string/total_value"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/qutyentry"
+                android:layout_width="105dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/grey_white"
+                android:hint="@string/quantity"
+                android:paddingStart="10dp"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/priceentry"
+                android:layout_width="105dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="145dp"
+                android:layout_marginTop="-35dp"
+                android:background="@color/grey_white"
+                android:hint="@string/s_ft_price"
+                android:paddingStart="10dp"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/totalvalue"
+                android:layout_width="105dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="270dp"
+                android:layout_marginTop="-35dp"
+                android:background="@color/grey_white"
+                android:gravity="left"
+                android:hint="@string/total_value_2"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
+                android:text="@string/thickness"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/thickrecycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/size_feet"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="25dp"
+                android:background="@color/grey_white"
+                android:text="8’x4’"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"/>
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="25dp"
+                android:background="@color/grey_white"
+                android:text="7’x4’"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:layout_marginTop="-25dp"
+                android:layout_marginStart="90dp"/>
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="25dp"
+                android:background="@color/grey_white"
+                android:text="6’x4’"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:layout_marginTop="-25dp"
+                android:layout_marginStart="160dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/requirement_details"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"/>
+            
+            <EditText
+                android:layout_width="374dp"
+                android:layout_height="80dp"
+                android:background="@color/grey_white"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:hint="@string/enter_requirement_details"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"/>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/quotationbtn"
+        android:layout_width="374dp"
+        android:layout_height="57dp"
+        android:background="@color/buy_btn"
+        android:text="@string/ask_for_quotation"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

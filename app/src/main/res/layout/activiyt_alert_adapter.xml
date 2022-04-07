@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/catimage"
+        android:layout_width="69dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/doors"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="242dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="20dp"
+        android:background="@color/white"
+        android:text="@string/wooden_waterproof_plywood_sheet_thickness_18_mm"
+        android:textColor="@color/netural_black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/catimage"
+        app:layout_constraintTop_toTopOf="@+id/catimage" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="58dp"
+        android:layout_height="36dp"
+        android:gravity="center"
+        android:text="@string/_59"
+        android:textColor="@color/primary_blue"
+        app:layout_constraintStart_toStartOf="@+id/textView13"
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="66dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/square_feet"
+        android:textColor="@color/netural_black"
+        android:textSize="11sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/textView14"
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+    <TextView
+        android:id="@+id/alertdate"
+        android:layout_width="104dp"
+        android:layout_height="18dp"
+        android:layout_marginEnd="10dp"
+        android:text="@string/february_20_2022"
+        android:textColor="@color/netural_black"
+        android:textSize="11sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView16" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

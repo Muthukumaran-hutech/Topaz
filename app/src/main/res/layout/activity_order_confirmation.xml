@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Activities.OrderConfirmation">
+
+
+    <ImageView
+        android:id="@+id/rectangle_269"
+        android:layout_width="348dp"
+        android:layout_height="700dp"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/rectangle_269"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/eclipse_46"
+        android:layout_width="73dp"
+        android:layout_height="73dp"
+        android:layout_marginStart="155dp"
+        android:layout_marginTop="250dp"
+        android:src="@drawable/ellipse_46"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/tick"
+        android:layout_width="35dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="175dp"
+        android:layout_marginTop="280dp"
+        android:src="@drawable/vector_85"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="125dp"
+        android:layout_marginTop="340dp"
+        android:text="@string/thank_you"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtreuest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="360dp"
+        android:text="@string/your_request_has_been_sent"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/rectangle_269"
+        app:layout_constraintStart_toStartOf="@+id/rectangle_269"
+        app:layout_constraintTop_toTopOf="@+id/rectangle_269" />
+
+    <TextView
+        android:id="@+id/torequest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/to"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/txtreuest"
+        app:layout_constraintTop_toBottomOf="@+id/txtreuest" />
+
+
+    <TextView
+        android:id="@+id/companynm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:text="@string/to"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/torequest"
+        app:layout_constraintTop_toBottomOf="@+id/txtreuest" />
+
+
+    <TextView
+        android:id="@+id/catbasetextview"
+        android:layout_width="match_parent"
+        android:layout_height="77dp"
+        android:background="@color/blue"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/account"
+        android:layout_width="17dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="40dp"
+        android:src="@drawable/account"
+        app:layout_constraintBottom_toBottomOf="@+id/catbasetextview"
+        app:layout_constraintEnd_toEndOf="@+id/catbasetextview"
+        app:layout_constraintTop_toTopOf="@+id/catbasetextview" />
+
+    <TextView
+        android:id="@+id/label1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:text="@string/account"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/catbasetextview" />
+
+    <ImageView
+        android:id="@+id/fav"
+        android:layout_width="30dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="60dp"
+        android:src="@drawable/ic_baseline_favorite_border_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/account"
+        app:layout_constraintTop_toTopOf="@+id/catbasetextview" />
+
+
+    <TextView
+        android:id="@+id/label2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="107dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:text="@string/favourite"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/catbasetextview" />
+
+    <ImageView
+        android:id="@+id/categories"
+        android:layout_width="30dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="75dp"
+        android:src="@drawable/categories"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/fav"
+        app:layout_constraintTop_toTopOf="@+id/catbasetextview" />
+
+    <TextView
+        android:id="@+id/label3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="210dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:text="@string/category"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/catbasetextview" />
+
+    <ImageView
+        android:id="@+id/home"
+        android:layout_width="30dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="50dp"
+        android:src="@drawable/home"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/catbasetextview"
+        app:layout_constraintTop_toTopOf="@+id/catbasetextview" />
+
+
+    <TextView
+        android:id="@+id/label4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="46dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:text="@string/home"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
