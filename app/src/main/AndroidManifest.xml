@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Topaz">
         <activity
+            android:name=".Activities.ChatActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.OrderDetails"
             android:exported="false" />
         <activity
@@ -90,7 +93,7 @@
             android:name=".Activities.OrderConfirmation"
             android:exported="false" />
         <activity
-            android:name=".Activities.HomeScreen"
+            android:name=".Activities.FaqActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.AccountInformation"
@@ -108,7 +111,7 @@
             android:name=".Activities.MyOrders"
             android:exported="false" />
         <activity
-            android:name=".Activities.FaqActivity"
+            android:name=".Activities.HomeScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -55,6 +55,10 @@ class HomeScreen : AppCompatActivity() {
             finish()
         }
 
+        notificationBtn?.setOnClickListener{
+            Toast. makeText(applicationContext," Currently In Process",Toast. LENGTH_SHORT).show()
+        }
+
         homeBtn?.setOnClickListener{
             Toast. makeText(applicationContext,"You Are Currently In Home Page",Toast. LENGTH_SHORT).show()
         }
@@ -63,5 +67,16 @@ class HomeScreen : AppCompatActivity() {
             startActivity(Intent(activity,CategoryActivity::class.java))
             finish()
         }
+
+        myAccountBtn?.setOnClickListener{
+            startActivity(Intent(activity,MyAccount::class.java))
+            finish()
+        }
+
+        faviuriteBtn?.setOnClickListener{
+            startActivity(Intent(activity,MyWishlist::class.java))
+            finish()
+        }
+
     }
 }

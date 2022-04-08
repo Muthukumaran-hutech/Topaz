@@ -107,19 +107,20 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="218dp"
         android:orientation="horizontal"
+        android:gravity="center_vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:layout_width="21dp"
-            android:layout_height="17dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_shopping_cart_grey_24"
             android:layout_marginStart="41dp"/>
 
         <TextView
-            android:layout_width="64dp"
-            android:layout_height="21dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/my_order"
             android:textSize="14sp"
             android:textColor="@color/black"
@@ -147,14 +148,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:layout_width="24dp"
-            android:layout_height="13dp"
-            android:src="@drawable/ic_baseline_shopping_cart_grey_24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/my_address_icon"
             android:layout_marginStart="41dp"/>
 
         <TextView
-            android:layout_width="81dp"
-            android:layout_height="21dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:text="@string/my_address"
             android:textColor="@color/black"
@@ -182,14 +183,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:layout_width="24dp"
-            android:layout_height="21dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_notifications_none_grey_24"
             android:layout_marginStart="41dp"/>
 
         <TextView
-            android:layout_width="88dp"
-            android:layout_height="21dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:text="@string/notifications"
             android:textColor="@color/black"
@@ -218,14 +219,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_help_outline_24"
             android:layout_marginStart="41dp"/>
 
         <TextView
-            android:layout_width="32dp"
-            android:layout_height="21dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:text="@string/help"
             android:textColor="@color/black"
@@ -255,22 +256,28 @@
 
 
         <ImageView
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:src="@drawable/ic_baseline_shopping_cart_grey_24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logout_icon"
             android:layout_marginStart="41dp"/>
 
         <TextView
-            android:layout_width="48dp"
-            android:layout_height="21dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:text="@string/logout"
             android:textColor="@color/primary_red"
             android:textSize="14sp" />
 
-
     </LinearLayout>
 
-
+    <ImageView
+        android:layout_width="382dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="530dp"
+        android:src="@drawable/line_83"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

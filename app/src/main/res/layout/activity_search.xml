@@ -96,7 +96,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:layout_width="242dp"
+        android:layout_width="match_parent"
         android:layout_height="238dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -110,8 +110,8 @@
 
             <ImageView
                 android:id="@+id/imageView6"
-                android:layout_width="242dp"
-                android:layout_height="238dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:src="@drawable/rectangle_272"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -120,100 +120,13 @@
 
             <ImageView
                 android:id="@+id/boxsquare"
-                android:layout_width="88dp"
-                android:layout_height="84dp"
-                android:src="@drawable/vector_127"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/srh"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView6"
                 app:layout_constraintEnd_toEndOf="@+id/imageView6"
                 app:layout_constraintStart_toStartOf="@+id/imageView6"
                 app:layout_constraintTop_toTopOf="@+id/imageView6" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="147dp"
-                android:layout_marginBottom="6dp"
-                android:gravity="right"
-                android:text="@string/fullstop"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toTopOf="@+id/imageView7"
-                app:layout_constraintStart_toStartOf="@+id/imageView6"
-                app:layout_constraintTop_toTopOf="@+id/boxsquare" />
-
-            <ImageView
-                android:id="@+id/imageView7"
-                android:layout_width="88dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:src="@drawable/vector_131"
-                app:layout_constraintEnd_toEndOf="@+id/boxsquare"
-                app:layout_constraintStart_toStartOf="@+id/boxsquare"
-                app:layout_constraintTop_toTopOf="@+id/boxsquare" />
-
-            <ImageView
-                android:layout_width="45dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="88dp"
-                android:layout_marginTop="105dp"
-                android:src="@drawable/vector_130"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginStart="100dp"
-                android:layout_marginTop="115dp"
-                android:src="@drawable/vector_129"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:layout_width="38dp"
-                android:layout_height="38dp"
-                android:layout_marginStart="110dp"
-                android:layout_marginTop="100dp"
-                android:src="@drawable/vector_132"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="9dp"
-                android:layout_marginStart="110dp"
-                android:layout_marginTop="111dp"
-                android:src="@drawable/vector_133"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="120dp"
-                android:layout_marginTop="118dp"
-                android:src="@drawable/vector_134"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="11dp"
-                android:layout_marginStart="117dp"
-                android:layout_marginTop="104dp"
-                android:src="@drawable/vector_135"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="125dp"
-                android:layout_marginTop="140dp"
-                android:src="@drawable/vector_128"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
 
             <TextView
@@ -237,6 +150,7 @@
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="500dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -293,6 +207,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
             <Button
+                android:id="@+id/backhome"
                 android:layout_width="270dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"

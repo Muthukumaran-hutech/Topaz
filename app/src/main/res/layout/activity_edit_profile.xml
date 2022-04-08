@@ -62,6 +62,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/edit_image"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="224dp"
+        android:layout_marginTop="202dp"
+        android:src="@drawable/edit_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:layout_width="76dp"
@@ -248,7 +258,7 @@
         android:layout_marginStart="47dp"
         android:layout_marginTop="800dp"
         android:background="@color/white_gr"
-        android:text="Reset"
+        android:text="@string/reset"
         android:textColor="@color/blue"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -261,7 +271,7 @@
         android:layout_marginStart="217dp"
         android:layout_marginTop="800dp"
         android:background="@color/btn"
-        android:text="Reset"
+        android:text="@string/update"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"

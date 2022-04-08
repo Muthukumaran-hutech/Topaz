@@ -78,7 +78,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cartrecycle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="350dp"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -88,10 +88,10 @@
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_marginBottom="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/chckbtn">
+        app:layout_constraintTop_toBottomOf="@+id/cartrecycle">
 
         <TextView
             android:layout_width="wrap_content"
@@ -195,11 +195,12 @@
         android:id="@+id/chckbtn"
         android:layout_width="375dp"
         android:layout_height="57dp"
+        android:layout_marginBottom="30dp"
         android:background="@color/buy_btn"
+        android:gravity="center"
         android:text="@string/check_out"
         android:textColor="@color/white"
         android:textSize="14sp"
-        android:gravity="center"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
