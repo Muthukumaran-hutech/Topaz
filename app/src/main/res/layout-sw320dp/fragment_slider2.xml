@@ -6,25 +6,24 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
-    tools:context=".Fragments.SliderFragment3">
+    tools:context=".Fragments.SliderFragment2">
 
     <ImageView
-        android:id="@+id/slider3_topaz"
+        android:id="@+id/slider_topaz"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_26sdp"
         android:layout_gravity="center_vertical"
-        android:layout_marginBottom="100dp"
+        android:layout_marginTop="30dp"
         android:src="@drawable/topaz"
-        app:layout_constraintBottom_toTopOf="@+id/imageView13"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView12"
-        android:layout_width="414dp"
-        android:layout_height="458dp"
-        android:layout_marginTop="465dp"
+        android:id="@+id/imageView10"
+        android:layout_width="@dimen/_350sdp"
+        android:layout_height="@dimen/_458sdp"
+        android:layout_marginTop="@dimen/_200sdp"
         android:foregroundGravity="center_vertical"
         android:src="@drawable/rectanglee_270"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,31 +31,29 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView13"
-        android:layout_width="388dp"
-        android:layout_height="399dp"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="214dp"
-        android:layout_marginEnd="13dp"
-        android:src="@drawable/rect_271"
+        android:id="@+id/imageView11"
+        android:layout_width="@dimen/_310sdp"
+        android:layout_height="@dimen/_300sdp"
+        android:layout_marginStart="@dimen/_13sdp"
+        android:layout_marginTop="@dimen/_75sdp"
+        android:layout_marginEnd="@dimen/_13sdp"
+        android:layout_marginBottom="@dimen/_7sdp"
+        android:src="@drawable/rect271"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:layout_width="209dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="103dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="102dp"
         android:gravity="center"
         android:text="@string/best_plywood"
         android:textColor="@color/white"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView13" />
-
+        app:layout_constraintEnd_toEndOf="@+id/imageView11"
+        app:layout_constraintStart_toStartOf="@+id/imageView11"
+        app:layout_constraintTop_toBottomOf="@+id/imageView11" />
 
 
 
