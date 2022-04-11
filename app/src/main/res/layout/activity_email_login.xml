@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white"
-    tools:context=".Activities.LoginActivity">
+    tools:context=".Activities.EmailLogin">
 
     <ImageView
         android:id="@+id/slider_topaz"
@@ -30,7 +28,7 @@
         android:layout_marginTop="317dp"
         android:layout_marginEnd="90dp"
         android:gravity="center_vertical"
-        android:text="@string/mobile_no"
+        android:text="@string/your_email_address"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -55,38 +53,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.hbb20.CountryCodePicker
-        android:id="@+id/countryCodePicker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="47dp"
-        android:layout_marginTop="430dp"
-        android:background="@color/grey_white"
-        app:ccp_textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/phone_no"
-        android:layout_width="200dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="5dp"
+        android:id="@+id/email"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
         android:layout_marginEnd="47dp"
-        android:paddingStart="10dp"
         android:background="@color/grey_white"
-        android:hint="@string/enter_mobile_no"
-        android:inputType="number"
+        android:hint="@string/your_email_address"
+        android:inputType="textEmailAddress"
         android:maxLength="10"
+        android:paddingStart="20dp"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/countryCodePicker"
-        app:layout_constraintTop_toTopOf="@+id/countryCodePicker" />
+        app:layout_constraintBottom_toTopOf="@+id/email_continue_btn"
+        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/continue_btn"
+        android:id="@+id/email_continue_btn"
         android:layout_width="320dp"
         android:layout_height="57dp"
         android:layout_marginStart="47dp"
@@ -99,5 +87,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -77,7 +77,7 @@ class IntroSlider : AppCompatActivity() {
             override fun onPageSelected(position: Int) {
                 if (position == adapter.list.size - 1) {
                     getStarted?.setOnClickListener {
-                        startActivity(Intent(activity, LoginActivity::class.java))
+                        startActivity(Intent(activity, EmailLogin::class.java))
                         finish()
 
                     }

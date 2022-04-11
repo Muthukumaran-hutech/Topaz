@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
@@ -14,6 +14,7 @@
         android:layout_height="54dp"
         android:layout_marginStart="20dp"
         android:background="@color/blue"
+        android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="@string/plywood"
         android:textColor="@color/white"
@@ -21,33 +22,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/veneers" />
 
-    <TextView
-        android:id="@+id/laminates"
-        android:layout_width="132dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/blue"
-        android:gravity="center"
-        android:text="@string/laminates"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toStartOf="@+id/veneers"
-        app:layout_constraintStart_toEndOf="@+id/plywood"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/veneers"
-        android:layout_width="132dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="20dp"
-        android:background="@color/blue"
-        android:gravity="center"
-        android:text="@string/veneers"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@+id/laminates"
-        app:layout_constraintTop_toTopOf="@+id/laminates" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

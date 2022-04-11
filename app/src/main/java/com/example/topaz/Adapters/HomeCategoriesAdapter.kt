@@ -20,7 +20,7 @@ class HomeCategoriesAdapter : RecyclerView.Adapter<HomeCategoriesAdapter.MyViewH
     }
 
     override fun getItemCount(): Int {
-        return 2
+        return 14
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
