@@ -4,9 +4,15 @@
     <string name="best_plywood">Find the Best Plywood
     For your Office</string>
     <string name="get_started">Get Started</string>
+    <string name="sk">
+        <u>Skip</u>
+    </string>
+
     <string name="skip">Skip</string>
     <string name="mobile_no">Enter your mobile number</string>
-    <string name="digit">We will send you the 4 digit verfication number</string>
+    <string name="dig">We will send you the</string>
+    <string name="four"> 4 digit</string>
+    <string name="vernum"> verfication number</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="cont">Continue</string>
@@ -188,6 +194,11 @@
     <string name="reset">Reset</string>
     <string name="your_email_address">Enter your Email Address</string>
     <string name="change_password">Change Password</string>
+    <string name="name_">name</string>
+    <string name="customer_id_">customer id</string>
+    <string name="enter_address_">enter address</string>
+    <string name="enter_mobile_no_">enter mobile no</string>
+    <string name="enter_email_address_">enter email address</string>
 
 
 </resources>

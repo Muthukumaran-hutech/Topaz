@@ -70,11 +70,11 @@
         android:layout_height="25dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="20dp"
-        android:background="@color/grey_white"
+        android:background="@color/white"
         android:gravity="center"
         android:paddingBottom="7dp"
         android:text="@string/minus"
-        android:textColor="@color/black"
+        android:textColor="@color/netural_grey"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/numbercount"
@@ -100,16 +100,25 @@
         android:layout_width="35dp"
         android:layout_height="25dp"
         android:layout_marginEnd="30dp"
-        android:background="@color/grey_white"
+        android:background="@color/white"
         android:gravity="center"
         android:paddingBottom="7dp"
         android:text="@string/add"
-        android:textColor="@color/black"
+        android:textColor="@color/netural_grey"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/numbercount"
         app:layout_constraintTop_toTopOf="@+id/numbercount" />
 
+    <ImageView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:src="@drawable/line_99"
+        android:layout_marginTop="@dimen/_20sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

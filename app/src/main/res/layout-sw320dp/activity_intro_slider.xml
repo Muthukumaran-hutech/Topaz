@@ -33,14 +33,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <Button
+            <TextView
                 android:id="@+id/btn_skip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="@dimen/_8sdp"
                 android:background="@color/transperent"
-                android:text="@string/skip"
+                android:text="@string/sk"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -63,6 +65,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="."
+                    android:textColor="@color/blue"
                     android:textSize="30sp"
                     android:textStyle="bold"
                     android:visibility="visible" />
@@ -73,6 +76,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_16sdp"
                     android:text="."
+                    android:textColor="@color/blue"
                     android:textSize="30sp"
                     android:textStyle="bold"
                     android:visibility="visible" />
@@ -83,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_16sdp"
                     android:text="."
-                    android:textColor="@color/black"
+                    android:textColor="@color/blue"
                     android:textSize="30sp"
                     android:textStyle="bold"
                     android:visibility="visible" />
@@ -99,8 +103,9 @@
                 android:layout_marginStart="@dimen/_47sdp"
                 android:layout_marginEnd="@dimen/_47sdp"
                 android:layout_marginBottom="20dp"
-                android:background="@color/blue"
+                android:background="@drawable/roundedbtnlite"
                 android:gravity="center"
+                android:textAllCaps="false"
                 android:text="@string/get_started"
                 android:textColor="@color/white"
                 android:textSize="14sp"
@@ -115,7 +120,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="20dp"
-                android:layout_marginBottom="@dimen/_6sdp"
+                android:layout_marginBottom="15dp"
                 android:background="@color/transperent"
                 android:src="@drawable/arrow_icon"
                 android:textColor="@color/black"

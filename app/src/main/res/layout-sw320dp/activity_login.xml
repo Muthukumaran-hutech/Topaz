@@ -45,23 +45,51 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="41dp"
-        android:layout_marginTop="@dimen/_180sdp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginTop="234dp"
         android:gravity="center_vertical"
-        android:text="@string/digit"
+        android:text="@string/dig"
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="5dp"
+        android:gravity="center_vertical"
+        android:text="@string/four"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView112"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="5dp"
+        android:gravity="center_vertical"
+        android:text="@string/vernum"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/textView12"
+        app:layout_constraintTop_toTopOf="@+id/textView2" />
+
 
     <com.hbb20.CountryCodePicker
         android:id="@+id/countryCodePicker"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="47dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="@dimen/_220sdp"
-        android:background="@color/grey_white"
+        android:background="@drawable/roundedtext"
+        android:gravity="center"
         app:ccp_textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -69,35 +97,31 @@
     <EditText
         android:id="@+id/phone_no"
         android:layout_width="200dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="47dp"
-        android:paddingStart="10dp"
-        android:background="@color/grey_white"
+        android:layout_height="50dp"
+        android:background="@drawable/roundedtext"
         android:hint="@string/enter_mobile_no"
         android:inputType="number"
         android:maxLength="10"
+        android:paddingStart="10dp"
         android:textColor="@color/black"
-        android:textColorHint="@color/black"
+        android:textColorHint="@color/grey_1"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/countryCodePicker"
         app:layout_constraintTop_toTopOf="@+id/countryCodePicker" />
 
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/continue_btn"
-        android:layout_width="@dimen/_250sdp"
+        android:layout_width="310dp"
         android:layout_height="57dp"
-        android:layout_marginStart="47dp"
         android:layout_marginTop="@dimen/_280sdp"
-        android:layout_marginEnd="47dp"
-        android:background="@color/btn"
+        android:background="@drawable/roundedbtndarkblue"
         android:text="@string/cont"
+        android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/phone_no"
+        app:layout_constraintStart_toStartOf="@+id/countryCodePicker"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

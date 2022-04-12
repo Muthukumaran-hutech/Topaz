@@ -13,7 +13,7 @@
         android:layout_width="132dp"
         android:layout_height="54dp"
         android:layout_marginStart="20dp"
-        android:background="@color/blue"
+        android:background="@drawable/roundedbtnlite"
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="@string/plywood"

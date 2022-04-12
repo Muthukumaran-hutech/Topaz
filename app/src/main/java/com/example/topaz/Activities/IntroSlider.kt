@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
@@ -20,7 +21,7 @@ import com.example.topaz.R
 import java.util.ArrayList
 
 class IntroSlider : AppCompatActivity() {
-    private var skipBtn: Button? = null
+    private var skipBtn: TextView? = null
     lateinit var nextBtn: ImageButton
     lateinit var view_pager: ViewPager
     private var getStarted: Button? = null
@@ -43,6 +44,8 @@ class IntroSlider : AppCompatActivity() {
         skipBtn = findViewById(R.id.btn_skip)
         nextBtn = findViewById(R.id.btn_next)
         view_pager =findViewById(R.id.view_pager)
+
+
 
 
         adapter = myPagerAdapter(supportFragmentManager)
@@ -88,9 +91,9 @@ class IntroSlider : AppCompatActivity() {
                 }
                 when (view_pager.currentItem) {
                     0 -> {
-                        indicator1?.setTextColor(Color.BLUE)
-                        indicator2?.setTextColor(Color.GRAY)
-                        indicator3?.setTextColor(Color.GRAY)
+                       indicator1?.setTextColor(Color.parseColor("#00ADEF"))
+                        indicator2?.setTextColor(Color.parseColor("#FFFFFFFF"))
+                        indicator3?.setTextColor(Color.parseColor("#FFFFFFFF"))
                         indicator1?.visibility = View.VISIBLE
                         indicator2?.visibility = View.VISIBLE
                         indicator3?.visibility = View.VISIBLE
@@ -99,9 +102,9 @@ class IntroSlider : AppCompatActivity() {
                         nextBtn.visibility = View.VISIBLE
                     }
                     1 -> {
-                        indicator1?.setTextColor(Color.GRAY)
-                        indicator2?.setTextColor(Color.BLUE)
-                        indicator3?.setTextColor(Color.GRAY)
+                        indicator1?.setTextColor(Color.parseColor("#FFFFFFFF"))
+                        indicator2?.setTextColor(Color.parseColor("#00ADEF"))
+                        indicator3?.setTextColor(Color.parseColor("#FFFFFFFF"))
                         indicator1?.visibility = View.VISIBLE
                         indicator2?.visibility = View.VISIBLE
                         indicator3?.visibility = View.VISIBLE
@@ -128,8 +131,15 @@ class IntroSlider : AppCompatActivity() {
 
         })
 
+    /*    val timer = object: CountDownTimer(20000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {}
 
+            override fun onFinish() {}
+        }
+        timer.start()*/
     }
+
+
 
     class myPagerAdapter(manager: FragmentManager) : FragmentPagerAdapter(manager) {
 

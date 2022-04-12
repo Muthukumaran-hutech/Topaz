@@ -13,7 +13,7 @@
         android:layout_height="@dimen/_26sdp"
         android:layout_gravity="center_vertical"
         android:layout_marginTop="30dp"
-        android:src="@drawable/topaz"
+        android:src="@drawable/topaz_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,9 +22,9 @@
 
     <ImageView
         android:id="@+id/imageView12"
-        android:layout_width="414dp"
-        android:layout_height="fill_parent"
-        android:layout_marginTop="@dimen/_250sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_300sdp"
         android:foregroundGravity="center_vertical"
         android:src="@drawable/rectanglee_270"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +36,7 @@
         android:layout_width="@dimen/_310sdp"
         android:layout_height="@dimen/_300sdp"
         android:layout_marginStart="@dimen/_13sdp"
-        android:layout_marginTop="@dimen/_75sdp"
+        android:layout_marginTop="@dimen/_110sdp"
         android:layout_marginEnd="@dimen/_13sdp"
         android:src="@drawable/rect_271"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,7 +46,7 @@
     <TextView
         android:layout_width="209dp"
         android:layout_height="48dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="@string/best_plywood"
         android:textColor="@color/white"

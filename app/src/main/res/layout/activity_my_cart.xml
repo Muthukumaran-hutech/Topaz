@@ -141,6 +141,8 @@
             android:textStyle="bold" />
 
 
+
+
         <TextView
             android:id="@+id/priceentry"
             android:layout_width="50dp"
@@ -188,6 +190,15 @@
             android:textStyle="bold" />
 
 
+        <ImageView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:src="@drawable/line_99"
+            android:layout_marginTop="@dimen/_20sdp" />
+
+
+
     </LinearLayout>
 
 
@@ -195,16 +206,21 @@
         android:id="@+id/chckbtn"
         android:layout_width="375dp"
         android:layout_height="57dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="19dp"
         android:layout_marginBottom="30dp"
-        android:background="@color/buy_btn"
+        android:background="@drawable/roundedbtndarkblue"
         android:gravity="center"
         android:text="@string/check_out"
+        android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
