@@ -8,19 +8,31 @@
     android:background="@color/white"
     tools:context=".Activities.AccountInformation">
 
+
     <TextView
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/blue"
-        android:gravity="center"
-        android:text="@string/account_information"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textVie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:background="@color/blue"
+        android:text="@string/account_information"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/imageViewback"
+        app:layout_constraintTop_toTopOf="@+id/imageViewback" />
 
     <ImageView
         android:id="@+id/imageViewback"

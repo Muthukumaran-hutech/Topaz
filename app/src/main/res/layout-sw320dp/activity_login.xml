@@ -86,7 +86,7 @@
         android:id="@+id/countryCodePicker"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="47dp"
         android:layout_marginTop="@dimen/_220sdp"
         android:background="@drawable/roundedtext"
         android:gravity="center"
@@ -98,6 +98,7 @@
         android:id="@+id/phone_no"
         android:layout_width="200dp"
         android:layout_height="50dp"
+        android:layout_marginEnd="47dp"
         android:background="@drawable/roundedtext"
         android:hint="@string/enter_mobile_no"
         android:inputType="number"
@@ -106,6 +107,7 @@
         android:textColor="@color/black"
         android:textColorHint="@color/grey_1"
         android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/countryCodePicker"
         app:layout_constraintTop_toTopOf="@+id/countryCodePicker" />
 

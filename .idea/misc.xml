@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/drawable-v24/indicator_selected.xml" value="0.151" />
+        <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/drawable-v24/indicator_unselected.xml" value="0.151" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/drawable/categories.xml" value="0.1075" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/drawable/ic_baseline_add_shopping_cart_24.xml" value="0.1075" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.1075" />
@@ -42,8 +44,8 @@
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/layout-sw320dp/activity_email_login.xml" value="0.16770833333333332" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/layout-sw320dp/activity_email_otp_verification.xml" value="0.16770833333333332" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/layout-sw320dp/activity_home_screen.xml" value="0.16770833333333332" />
-        <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/layout-sw320dp/activity_intro_slider.xml" value="0.14666666666666667" />
-        <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/layout-sw320dp/activity_login.xml" value="0.22" />
+        <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/layout-sw320dp/activity_intro_slider.xml" value="0.12" />
+        <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/layout-sw320dp/activity_login.xml" value="0.1" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/layout-sw320dp/activity_my_cart.xml" value="0.16770833333333332" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/layout-sw320dp/activity_my_cart_adapter.xml" value="0.16770833333333332" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/layout-sw320dp/activity_my_orders_adapter.xml" value="0.16770833333333332" />

@@ -5,22 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".Fragments.SliderFragment">
-
-    <ImageView
-        android:id="@+id/slider_topaz"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_26sdp"
-        android:layout_gravity="center_vertical"
-        android:layout_marginBottom="@dimen/_100sdp"
-        android:src="@drawable/topaz_name"
-        app:layout_constraintBottom_toTopOf="@+id/imageView4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    android:layout_weight="1"
+    android:background="@color/white">
 
 
-    <ImageView
+<!--    <ImageView
         android:id="@+id/imageView2"
         android:layout_width="@dimen/_414sdp"
         android:layout_height="@dimen/_458sdp"
@@ -30,18 +19,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />-->
 
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="@dimen/_388sdp"
         android:layout_height="@dimen/_399sdp"
         android:layout_marginStart="@dimen/_13sdp"
-        android:layout_marginTop="@dimen/_214sdp"
+        android:layout_marginTop="214dp"
         android:layout_marginEnd="@dimen/_13sdp"
-        android:layout_marginBottom="7dp"
         android:src="@drawable/rectangle_271"
-        app:layout_constraintBottom_toTopOf="@+id/textView24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -51,14 +38,12 @@
         android:layout_width="@dimen/_209sdp"
         android:layout_height="@dimen/_72sdp"
         android:layout_marginStart="@dimen/_103sdp"
-        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="@dimen/_102sdp"
-        android:layout_marginBottom="@dimen/_7sdp"
         android:gravity="center"
         android:text="@string/intro_title_1"
         android:textColor="@color/white"
         android:textSize="@dimen/_16sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />

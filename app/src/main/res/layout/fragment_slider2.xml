@@ -5,22 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
-    tools:context=".Fragments.SliderFragment2">
-
-    <ImageView
-        android:id="@+id/slider2_topaz"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginTop="90dp"
-        android:src="@drawable/topaz_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:layout_weight="1"
+    android:background="@color/white">
 
 
-    <ImageView
+
+
+ <!--   <ImageView
         android:id="@+id/imageView10"
         android:layout_width="wrap_content"
         android:layout_height="450dp"
@@ -29,7 +20,7 @@
         android:src="@drawable/rectanglee_270"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />-->
 
     <ImageView
         android:id="@+id/imageView11"
@@ -37,6 +28,7 @@
         android:layout_height="388dp"
         android:layout_marginStart="13dp"
         android:layout_marginTop="214dp"
+        android:overScrollMode="always"
         android:layout_marginEnd="13dp"
         android:src="@drawable/rect271"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,14 +38,15 @@
     <TextView
         android:layout_width="209dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="674dp"
+        android:forceHasOverlappingRendering="true"
         android:gravity="center"
+        android:layout_marginTop="30dp"
         android:text="@string/best_plywood"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView11"
         app:layout_constraintStart_toStartOf="@+id/imageView11"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView11" />
 
 
 
