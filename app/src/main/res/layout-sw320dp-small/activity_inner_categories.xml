@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".Activities.CategoryActivity">
+    tools:context=".Activities.InnerCategories">
 
-
-    <LinearLayout
+    <TextView
         android:id="@+id/cattextview"
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -18,21 +16,7 @@
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/categories"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/backarrow2"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
@@ -45,14 +29,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/cart"
+    <TextView
+        android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:paddingEnd="15dp"
-        android:src="@drawable/ic_baseline_shopping_cart_24"
-        app:layout_constraintEnd_toEndOf="@+id/cattextview"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="23dp"
+        android:text="@string/plywood_boards"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/backarrow2"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
@@ -65,39 +52,29 @@
         app:layout_constraintEnd_toStartOf="@+id/cart"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <ImageView
-        android:id="@+id/search"
+        android:id="@+id/cart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:paddingEnd="15dp"
-        android:src="@drawable/ic_baseline_search_24"
-        app:layout_constraintEnd_toStartOf="@+id/notification"
+        android:src="@drawable/ic_baseline_shopping_cart_24"
+        app:layout_constraintEnd_toEndOf="@+id/cattextview"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/imageView9"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:src="@drawable/finestquality_baner"
+        android:layout_height="140dp"
+        android:src="@drawable/waterproof_banner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cattextview" />
 
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/catview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
-
-
-
     <TextView
-        android:id="@+id/catbasetextview"
+        android:id="@+id/textView6"
         android:layout_width="match_parent"
         android:layout_height="77dp"
         android:background="@color/blue"
@@ -115,9 +92,9 @@
         android:layout_height="20dp"
         android:layout_marginEnd="40dp"
         android:src="@drawable/user_icon"
-        app:layout_constraintBottom_toBottomOf="@+id/catbasetextview"
-        app:layout_constraintEnd_toEndOf="@+id/catbasetextview"
-        app:layout_constraintTop_toTopOf="@+id/catbasetextview" />
+        app:layout_constraintBottom_toBottomOf="@+id/textView6"
+        app:layout_constraintEnd_toEndOf="@+id/textView6"
+        app:layout_constraintTop_toTopOf="@+id/textView6" />
 
     <TextView
         android:id="@+id/label1"
@@ -130,7 +107,7 @@
         android:textColor="@color/white"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/catbasetextview" />
+        app:layout_constraintEnd_toEndOf="@+id/textView6" />
 
     <ImageView
         android:id="@+id/fav"
@@ -141,7 +118,7 @@
         android:src="@drawable/favourite_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/account"
-        app:layout_constraintTop_toTopOf="@+id/catbasetextview" />
+        app:layout_constraintTop_toTopOf="@+id/textView6" />
 
 
     <TextView
@@ -155,18 +132,18 @@
         android:textColor="@color/white"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/catbasetextview" />
+        app:layout_constraintEnd_toEndOf="@+id/textView6" />
 
     <ImageView
         android:id="@+id/categories"
         android:layout_width="30dp"
         android:layout_height="22dp"
         android:layout_marginStart="20dp"
-        android:layout_marginEnd="75dp"
+        android:layout_marginEnd="70dp"
         android:src="@drawable/category_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/fav"
-        app:layout_constraintTop_toTopOf="@+id/catbasetextview" />
+        app:layout_constraintTop_toTopOf="@+id/textView6" />
 
     <TextView
         android:id="@+id/label3"
@@ -179,7 +156,7 @@
         android:textColor="@color/white"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/catbasetextview" />
+        app:layout_constraintEnd_toEndOf="@+id/textView6" />
 
     <ImageView
         android:id="@+id/home"
@@ -188,8 +165,8 @@
         android:layout_marginStart="50dp"
         android:src="@drawable/home_icon"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/catbasetextview"
-        app:layout_constraintTop_toTopOf="@+id/catbasetextview" />
+        app:layout_constraintStart_toStartOf="@+id/textView6"
+        app:layout_constraintTop_toTopOf="@+id/textView6" />
 
 
     <TextView
@@ -205,6 +182,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/innerrecycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-

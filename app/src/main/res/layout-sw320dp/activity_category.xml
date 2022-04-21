@@ -79,21 +79,11 @@
         android:id="@+id/imageView5"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:src="@drawable/image1"
+        android:src="@drawable/finestquality_baner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cattextview" />
 
-    <TextView
-        android:layout_width="225dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="50dp"
-        android:text="@string/buy_finestquality_plywoods"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cattextview" />
 
 
     <androidx.recyclerview.widget.RecyclerView
