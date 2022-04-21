@@ -30,6 +30,7 @@
         android:layout_height="@dimen/_300sdp"
         android:layout_marginStart="@dimen/_13sdp"
         android:layout_marginTop="70dp"
+        android:background="@color/transperent"
         android:layout_marginEnd="@dimen/_13sdp"
         android:src="@drawable/rectangle_271"
         app:layout_constraintEnd_toEndOf="parent"

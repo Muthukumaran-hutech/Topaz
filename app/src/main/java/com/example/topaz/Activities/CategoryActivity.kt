@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.topaz.Adapters.CategoryAdapter
@@ -43,7 +44,7 @@ class CategoryActivity : AppCompatActivity() {
         categorymainRecyclerView = findViewById(R.id.catview)
         categorymainAdapter = CategoryAdapter()
 
-        categorymainRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
+        categorymainRecyclerView.layoutManager = GridLayoutManager(this, 3)//Count depicts no of elements in row
         categorymainRecyclerView.adapter = categorymainAdapter
 
 

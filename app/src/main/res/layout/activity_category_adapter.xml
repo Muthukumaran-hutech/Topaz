@@ -3,8 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/plwwoodss"
@@ -29,54 +28,6 @@
         app:layout_constraintEnd_toEndOf="@+id/plwwoodss"
         app:layout_constraintStart_toStartOf="@+id/plwwoodss"
         app:layout_constraintTop_toBottomOf="@+id/plwwoodss" />
-
-    <ImageView
-        android:id="@+id/laminatess"
-        android:layout_width="101dp"
-        android:layout_height="102dp"
-        android:layout_marginStart="25dp"
-        android:src="@drawable/laminates"
-        app:layout_constraintStart_toEndOf="@+id/plwwoodss"
-        app:layout_constraintTop_toTopOf="@+id/plwwoodss" />
-
-    <TextView
-        android:id="@+id/laminatesstext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="@string/laminates"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/laminatess"
-        app:layout_constraintStart_toStartOf="@+id/laminatess"
-        app:layout_constraintTop_toBottomOf="@+id/laminatess" />
-
-
-    <ImageView
-        android:id="@+id/veneerss"
-        android:layout_width="101dp"
-        android:layout_height="102dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="20dp"
-        android:src="@drawable/veneers"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/laminatess"
-        app:layout_constraintTop_toTopOf="@+id/laminatess" />
-
-    <TextView
-        android:id="@+id/veneersstext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="@string/veneers"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/veneerss"
-        app:layout_constraintStart_toStartOf="@+id/veneerss"
-        app:layout_constraintTop_toBottomOf="@+id/veneerss" />
-
 
 
 

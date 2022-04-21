@@ -1,74 +1,111 @@
 package com.example.topaz.Activities
 
 import android.app.Activity
+import android.app.AlertDialog
+import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
 import com.example.topaz.R
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.PhoneAuthProvider
+import com.example.topaz.databinding.ActivityLoginBinding
+import com.google.firebase.FirebaseException
+import com.google.firebase.FirebaseTooManyRequestsException
+import com.google.firebase.auth.*
 import com.hbb20.CountryCodePicker
+import java.util.concurrent.TimeUnit
 
 class LoginActivity : AppCompatActivity() {
 
-    private var forceResendingToken: PhoneAuthProvider.ForceResendingToken? = null
+    //dataBinding
+    private lateinit var binding: ActivityLoginBinding
 
+    private var forceResendingToken: PhoneAuthProvider.ForceResendingToken? = null
     private var mcallBacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks? = null
     private var mVerificationId: String? = null
     private lateinit var firebaseAuth: FirebaseAuth
-
-    private var continueBtn: Button? = null
-    private var countryCode: CountryCodePicker? = null
-    private var phoneNo: EditText? = null
     lateinit var activity: Activity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        continueBtn = findViewById(R.id.continue_btn)
-        countryCode = findViewById(R.id.countryCodePicker)
-        phoneNo = findViewById(R.id.phone_no)
-        activity = this
+        phoneFocusListner()
 
-        continueBtn?.setOnClickListener{
-            startActivity(Intent(activity,OtpVerfification::class.java))
-            finish()
+        binding.phoneContinueBtn.setOnClickListener {
+          //  submitForm()
+            var intent = Intent(this, OtpVerfification::class.java)
+            intent.putExtra("countrycode","+91")
+            intent.putExtra("phoneno", binding.phoneNoEditText.text.toString())
+            startActivity(intent)
+           /* startActivity(Intent(activity, OtpVerfification::class.java))
+            finish()*/
         }
 
-/*
-        // show password rules in text view
-        textView.text = "Password minimum length 8"
-        textView.append("\n1 uppercase")
-        textView.append("\n1 number")
-        textView.append("\n1 special character")
-
-
-        // add text changed listener for edit text
-        editText.addTextChangedListener(object: TextWatcher{
-            override fun beforeTextChanged(s: CharSequence?,
-                                           start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?,
-                                       start: Int, before: Int, count: Int) {
-                s?.apply {
-                    // check user input a valid formatted password
-                    if (isValidPassword() && toString().length>=8) {
-                        editText.error == null
-                    }else{
-                        // show error on input invalid password
-                        editText.error = "invalid password."
-                    }
-                }
-            }
-            override fun afterTextChanged(s: Editable?) {
-
-            }
-        })*/
 
     }
+
+    private fun submitForm() {
+        val validPhone = binding.phoneContainer.helperText == null
+        if (validPhone) {
+            startActivity(Intent(activity, OtpVerfification::class.java))
+            finish()
+        } else {
+            inValidForm()
+        }
+    }
+
+    private fun resetForm() {
+        var message = ""
+        if (binding.phoneContainer.helperText == null)
+            message += "\n\nPhone: " + binding.phoneContainer.helperText
+
+        AlertDialog.Builder(this)
+            .setTitle("Form Submitted")
+            .setMessage(message)
+            .setPositiveButton("OK") { _, _ ->
+                binding.phoneNoEditText.text = null
+
+                //  binding.phoneContainer.helperText = getString(R.id.Required)
+            }.show()
+    }
+
+    private fun inValidForm() {
+        var message = "Please Enter a Valid Number"
+        if (binding.phoneContainer.helperText == null)
+            message += "\n\nPhone: " + binding.phoneContainer.helperText
+        AlertDialog.Builder(this)
+            .setTitle("Invalid Number")
+            .setMessage(message)
+            .setPositiveButton("OK") { _, _ ->
+                // do Nothing
+            }.show()
+    }
+
+    private fun phoneFocusListner() {
+        binding.phoneNoEditText.setOnFocusChangeListener { _, focused ->
+            if (!focused) {
+                binding.phoneContainer.helperText = validPhone()
+            }
+        }
+    }
+
+
+    private fun validPhone(): String? {
+        val phoneText = binding.phoneNoEditText.text.toString()
+        if (phoneText.matches(".*[0-9].*".toRegex())) {
+            return "Must Be all Digits"
+        }
+        if (phoneText.length != 10) {
+            return "Must Be 10 Digits"
+        }
+
+        return null
+    }
+
+
 }
