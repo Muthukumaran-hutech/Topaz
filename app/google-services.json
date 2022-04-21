@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "837080339807",
+    "project_id": "topaz-fc73a",
+    "storage_bucket": "topaz-fc73a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:837080339807:android:043534cda08ac3a9a152ea",
+        "android_client_info": {
+          "package_name": "com.example.topaz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "837080339807-2desk63f2tt83gk937nfrjmo42f2h4eg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.topaz",
+            "certificate_hash": "eacadab2aefa758ed8406b9326f206752c6c7db8"
+          }
+        },
+        {
+          "client_id": "837080339807-640u243r6vk6neq2scc3saic2blrjpl4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2OmtPzyyiPOqYlq1GTWSTYzCDdZtdhys"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "837080339807-640u243r6vk6neq2scc3saic2blrjpl4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
