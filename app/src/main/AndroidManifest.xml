@@ -23,9 +23,9 @@
         <activity
             android:name=".Activities.Email_Otp_verification"
             android:exported="false" />
-       <!-- <activity
-            android:name=".Activities.Email_otp_verification"
-            android:exported="false" />-->
+        <!-- <activity
+             android:name=".Activities.Email_otp_verification"
+             android:exported="false" />-->
         <activity
             android:name=".Activities.EmailLogin"
             android:exported="false" />
@@ -65,15 +65,19 @@
         <activity
             android:name=".Activities.IntroSlider"
             android:exported="false" />
+
         <activity
             android:name=".Activities.NewPassword"
             android:exported="false" />
+
         <activity
             android:name=".Activities.MobileNumberChangeOtp"
             android:exported="false" />
+
         <activity
             android:name=".Activities.ChangePhoneNo"
             android:exported="false" />
+
         <activity
             android:name=".Activities.ChangeEmail"
             android:exported="false" />
@@ -84,7 +88,7 @@
             android:name=".Activities.InvoiceDetails"
             android:exported="false" />
         <activity
-            android:name=".Activities.SplashScreen"
+            android:name=".Activities.CategoryActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.MyCart"
@@ -129,7 +133,7 @@
             android:name=".Activities.MyOrders"
             android:exported="false" />
         <activity
-            android:name=".Activities.CategoryActivity"
+            android:name=".Activities.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

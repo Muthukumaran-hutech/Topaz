@@ -32,18 +32,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-
     <ImageView
         android:id="@+id/imageView10"
         android:layout_width="wrap_content"
         android:layout_height="650dp"
-        android:layout_marginTop="350dp"
-        android:weightSum="2"
+        android:layout_marginTop="250dp"
         android:foregroundGravity="center_vertical"
         android:src="@drawable/rectanglee_270"
+        android:weightSum="2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/slider2_topaz" />
 
     <LinearLayout
         android:id="@+id/btn_layout"
