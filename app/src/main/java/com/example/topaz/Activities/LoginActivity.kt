@@ -10,8 +10,10 @@ import android.util.Log
 import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
+import com.example.topaz.BroadcastReciever.SmsBroadcastReceiver
 import com.example.topaz.R
 import com.example.topaz.databinding.ActivityLoginBinding
+import com.google.android.gms.auth.api.phone.SmsRetriever
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
@@ -22,12 +24,12 @@ class LoginActivity : AppCompatActivity() {
 
     //dataBinding
     private lateinit var binding: ActivityLoginBinding
-
     private var forceResendingToken: PhoneAuthProvider.ForceResendingToken? = null
     private var mcallBacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks? = null
     private var mVerificationId: String? = null
     private lateinit var firebaseAuth: FirebaseAuth
     lateinit var activity: Activity
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,17 +39,18 @@ class LoginActivity : AppCompatActivity() {
         phoneFocusListner()
 
         binding.phoneContinueBtn.setOnClickListener {
-          //  submitForm()
+            //  submitForm()
             var intent = Intent(this, OtpVerfification::class.java)
-            intent.putExtra("countrycode","+91")
+            intent.putExtra("countrycode", "+91")
             intent.putExtra("phoneno", binding.phoneNoEditText.text.toString())
             startActivity(intent)
-           /* startActivity(Intent(activity, OtpVerfification::class.java))
-            finish()*/
+            /* startActivity(Intent(activity, OtpVerfification::class.java))
+             finish()*/
         }
 
 
     }
+
 
     private fun submitForm() {
         val validPhone = binding.phoneContainer.helperText == null
@@ -106,6 +109,7 @@ class LoginActivity : AppCompatActivity() {
 
         return null
     }
+
 
 
 }

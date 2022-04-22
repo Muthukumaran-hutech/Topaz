@@ -72,16 +72,17 @@
         android:id="@+id/loggedin_number_text"
         android:layout_width="wrap_content"
         android:layout_height="19dp"
+        android:layout_marginStart="10dp"
         android:text=""
         android:textColor="@color/black"
         android:textSize="14sp"
         android:textStyle="bold"
-        android:layout_marginStart="10dp"
         app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toTopOf="@+id/textView4" />
 
 
     <LinearLayout
+        android:id="@+id/otp_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="329dp"
@@ -91,62 +92,62 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-           android:layout_marginStart="15dp"
-            android:background="@color/gr"
-            android:gravity="center"
-            android:text="5"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-
-        <TextView
+            android:id="@+id/OTP_1"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="15dp"
             android:background="@color/gr"
             android:gravity="center"
-            android:text="5"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/OTP_2"
             android:layout_width="50dp"
             android:layout_height="50dp"
-           android:layout_marginStart="15dp"
+            android:layout_marginStart="15dp"
             android:background="@color/gr"
             android:gravity="center"
-            android:text="5"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/OTP_3"
             android:layout_width="50dp"
             android:layout_height="50dp"
-           android:layout_marginStart="15dp"
+            android:layout_marginStart="15dp"
             android:background="@color/gr"
             android:gravity="center"
-            android:text="0"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/OTP_4"
             android:layout_width="50dp"
             android:layout_height="50dp"
-           android:layout_marginStart="15dp"
+            android:layout_marginStart="15dp"
             android:background="@color/gr"
             android:gravity="center"
-            android:text="8"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/OTP_5"
             android:layout_width="50dp"
             android:layout_height="50dp"
-           android:layout_marginStart="12dp"
+            android:layout_marginStart="15dp"
             android:background="@color/gr"
             android:gravity="center"
-            android:text="5"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/OTP_6"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="12dp"
+            android:background="@color/gr"
+            android:gravity="center"
             android:textColor="@color/black"
             android:textSize="20sp" />
     </LinearLayout>

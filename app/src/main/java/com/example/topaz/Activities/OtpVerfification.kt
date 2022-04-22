@@ -5,12 +5,15 @@ import android.app.Activity
 import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.example.topaz.BroadcastReciever.SmsBroadcastReceiver
 import com.example.topaz.databinding.ActivityOtpVerfificationBinding
+import com.google.android.gms.auth.api.phone.SmsRetriever
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
@@ -18,6 +21,8 @@ import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import java.util.concurrent.TimeUnit
+import java.util.regex.Pattern
+import kotlin.math.log
 
 class OtpVerfification : AppCompatActivity() {
 
@@ -32,6 +37,8 @@ class OtpVerfification : AppCompatActivity() {
     lateinit var activity: Activity
     var ss = ""
     var cs = ""
+    private val REQ_USER_CONSENT = 200
+    var smsBroadcastReceiver: SmsBroadcastReceiver? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,8 +62,8 @@ class OtpVerfification : AppCompatActivity() {
             startActivity(Intent(activity, LoginActivity::class.java))
             finish()
         }
-        
-        binding.loggedinNumberText.setText(cs+ss)
+
+        binding.loggedinNumberText.setText(cs + ss)
 
 
         mcallBacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
@@ -99,21 +106,7 @@ class OtpVerfification : AppCompatActivity() {
                         }
 
                     })
-                /*.addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d(TAG, "signInWithCredential:success")
 
-                        val user = task.result?.user
-                    } else {
-                        // Sign in failed, display a message and update the UI
-                        Log.w(TAG, "signInWithCredential:failure", task.exception)
-                        if (task.exception is FirebaseAuthInvalidCredentialsException) {
-                            // The verification code entered was invalid
-                        }
-                        // Update UI
-                    }
-                }*/
             }
 
             override fun onVerificationFailed(e: FirebaseException) {
@@ -160,8 +153,59 @@ class OtpVerfification : AppCompatActivity() {
 
         }
 
+        startSmartUserConsent()
+    }
+
+
+    private fun startSmartUserConsent() {
+        val client = SmsRetriever.getClient(this)
+        client.startSmsUserConsent(null)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQ_USER_CONSENT) {
+            if (resultCode == RESULT_OK && data != null) {
+                val message = data.getStringExtra(SmsRetriever.EXTRA_SMS_MESSAGE)
+                getOtpFromMessage(message)
+            }
+        }
+    }
+
+    private fun getOtpFromMessage(message: String?) {
+
+        val otpPattern = Pattern.compile("(|^)\\d{6}")
+        val matcher = otpPattern.matcher(message)
+        if (matcher.find()) {
+            //Log.d(TAG, "OTP Recieved:success"+ matcher.group(0))
+            binding.OTP1.setText(matcher.group(0))
+            binding.OTP2.setText(matcher.group(1))
+            binding.OTP3.setText(matcher.group(2))
+            binding.OTP4.setText(matcher.group(3))
+            binding.OTP5.setText(matcher.group(4))
+            binding.OTP6.setText(matcher.group(5))
+        }
 
     }
+
+    private fun registerBroadcastReceiver() {
+        smsBroadcastReceiver = SmsBroadcastReceiver()
+        smsBroadcastReceiver!!.smsBroadcastRecieverListener =
+            object : SmsBroadcastReceiver.smsBroadcasrRecieverListener {
+                override fun onSuccess(intent: Intent?) {
+                    startActivityForResult(intent, REQ_USER_CONSENT)
+                }
+
+                override fun onFailure() {
+
+                }
+
+            }
+        val intentFilter = IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION)
+        registerReceiver(smsBroadcastReceiver, intentFilter)
+
+    }
+
 
     private fun resendOTP() {
         val options = PhoneAuthOptions.newBuilder(firebaseAuth)
@@ -194,14 +238,20 @@ class OtpVerfification : AppCompatActivity() {
                 binding.countdownTimer.visibility = View.GONE
             }
         }.start()
+
+
     }
 
 
+    override fun onStart() {
+        super.onStart()
+        registerBroadcastReceiver()
+    }
 
-
-    // time count down for 30 seconds,
-    // with 1 second as countDown interval
-
+    override fun onStop() {
+        super.onStop()
+        unregisterReceiver(smsBroadcastReceiver)//to stop memory leak after activity closed
+    }
 
 }
 
