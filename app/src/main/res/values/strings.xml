@@ -10,7 +10,7 @@
     <string name="skip">Skip</string>
     <string name="mobile_no">Enter your mobile number</string>
     <string name="dig">We will send you the</string>
-    <string name="four"> 4 digit</string>
+    <string name="six"> 6 digit</string>
     <string name="vernum"> verfication number</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

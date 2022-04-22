@@ -75,7 +75,7 @@ class IntroSlider : AppCompatActivity() {
             }
         })
         binding.btnSkip.setOnClickListener {
-            startActivity(Intent(this, EmailLogin::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
 
@@ -88,7 +88,7 @@ class IntroSlider : AppCompatActivity() {
             if (position < fragmentList.lastIndex) {
                 binding.viewPager.currentItem = position + 1
             } else {
-                startActivity(Intent(this, EmailLogin::class.java))
+                startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             }
         }

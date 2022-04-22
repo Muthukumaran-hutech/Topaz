@@ -61,7 +61,7 @@
         android:layout_gravity="center_vertical"
         android:layout_marginStart="5dp"
         android:gravity="center_vertical"
-        android:text="@string/four"
+        android:text="@string/six"
         android:textColor="@color/black"
         android:textSize="14sp"
         android:textStyle="bold"
