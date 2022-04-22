@@ -85,7 +85,7 @@
 
 
     <com.hbb20.CountryCodePicker
-        android:id="@+id/countryCodePicker"
+        android:id="@+id/country_Code_Picker"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_marginStart="47dp"

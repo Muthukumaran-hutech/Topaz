@@ -10,7 +10,6 @@ import android.util.Log
 import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
-import com.example.topaz.BroadcastReciever.SmsBroadcastReceiver
 import com.example.topaz.R
 import com.example.topaz.databinding.ActivityLoginBinding
 import com.google.android.gms.auth.api.phone.SmsRetriever
@@ -36,10 +35,11 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        phoneFocusListner()
+
 
         binding.phoneContinueBtn.setOnClickListener {
             //  submitForm()
+            phoneFocusListner()
             var intent = Intent(this, OtpVerfification::class.java)
             intent.putExtra("countrycode", "+91")
             intent.putExtra("phoneno", binding.phoneNoEditText.text.toString())

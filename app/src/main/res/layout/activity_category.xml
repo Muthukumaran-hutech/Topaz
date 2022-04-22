@@ -32,11 +32,11 @@
         android:textColor="@color/white"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/backarrow2"
+        app:layout_constraintStart_toStartOf="@+id/category_back_arrow"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/backarrow2"
+        android:id="@+id/category_back_arrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -46,7 +46,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/cart"
+        android:id="@+id/category_cart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -56,23 +56,23 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/notification"
+        android:id="@+id/category_notification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:paddingEnd="15dp"
         android:src="@drawable/ic_baseline_notifications_24"
-        app:layout_constraintEnd_toStartOf="@+id/cart"
+        app:layout_constraintEnd_toStartOf="@+id/category_cart"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/search"
+        android:id="@+id/category_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:paddingEnd="15dp"
         android:src="@drawable/ic_baseline_search_24"
-        app:layout_constraintEnd_toStartOf="@+id/notification"
+        app:layout_constraintEnd_toStartOf="@+id/category_notification"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
@@ -87,7 +87,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/catview"
+        android:id="@+id/category_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"

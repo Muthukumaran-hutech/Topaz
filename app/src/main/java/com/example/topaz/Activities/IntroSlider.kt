@@ -31,7 +31,6 @@ import java.util.ArrayList
 class IntroSlider : AppCompatActivity() {
 
     private lateinit var binding: ActivityIntroSliderBinding
-    lateinit var viewpager: ViewPager2
     lateinit var activity: Activity
     private val fragmentList = ArrayList<Fragment>()
 
@@ -43,6 +42,7 @@ class IntroSlider : AppCompatActivity() {
 
 
         activity = this
+
 
         val adapter = IntroSliderAdapter(this)
         binding.viewPager.adapter = adapter
@@ -80,7 +80,7 @@ class IntroSlider : AppCompatActivity() {
         }
 
         binding.btnNext.setOnClickListener {
-            viewpager.currentItem++
+            binding.viewPager.currentItem++
         }
 
         binding.getStart.setOnClickListener {

@@ -6,12 +6,13 @@ import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.IntentFilter
+import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import com.example.topaz.BroadcastReciever.SmsBroadcastReceiver
 import com.example.topaz.databinding.ActivityOtpVerfificationBinding
 import com.google.android.gms.auth.api.phone.SmsRetriever
 import com.google.android.gms.tasks.OnCompleteListener
@@ -38,7 +39,7 @@ class OtpVerfification : AppCompatActivity() {
     var ss = ""
     var cs = ""
     private val REQ_USER_CONSENT = 200
-    var smsBroadcastReceiver: SmsBroadcastReceiver? = null
+    //var smsBroadcastReceiver: SmsBroadcastReceiver? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -123,6 +124,7 @@ class OtpVerfification : AppCompatActivity() {
                 // Show a message and update the UI
             }
 
+            @RequiresApi(Build.VERSION_CODES.O)
             override fun onCodeSent(
                 verificationId: String,
                 token: PhoneAuthProvider.ForceResendingToken
@@ -135,6 +137,7 @@ class OtpVerfification : AppCompatActivity() {
                 // Save verification ID and resending token so we can use them later
                 mVerificationId = verificationId
                 forceResendingToken = token
+                binding.otpLinearLayout.setAutofillHints(mVerificationId)
             }
         }
         val options = PhoneAuthOptions.newBuilder(firebaseAuth)
@@ -147,22 +150,22 @@ class OtpVerfification : AppCompatActivity() {
         countdownTimer()
 
         binding.resendOtpBtn.setOnClickListener {
-            countdownTimer()
+
             //Resend function
             resendOTP()
 
         }
 
-        startSmartUserConsent()
+        //startSmartUserConsent()
     }
 
 
-    private fun startSmartUserConsent() {
+    /*private fun startSmartUserConsent() {
         val client = SmsRetriever.getClient(this)
         client.startSmsUserConsent(null)
-    }
+    }*/
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    /*override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQ_USER_CONSENT) {
             if (resultCode == RESULT_OK && data != null) {
@@ -171,8 +174,8 @@ class OtpVerfification : AppCompatActivity() {
             }
         }
     }
-
-    private fun getOtpFromMessage(message: String?) {
+*/
+   /* private fun getOtpFromMessage(message: String?) {
 
         val otpPattern = Pattern.compile("(|^)\\d{6}")
         val matcher = otpPattern.matcher(message)
@@ -186,14 +189,14 @@ class OtpVerfification : AppCompatActivity() {
             binding.OTP6.setText(matcher.group(5))
         }
 
-    }
+    }*/
 
-    private fun registerBroadcastReceiver() {
+    /*private fun registerBroadcastReceiver() {
         smsBroadcastReceiver = SmsBroadcastReceiver()
         smsBroadcastReceiver!!.smsBroadcastRecieverListener =
             object : SmsBroadcastReceiver.smsBroadcasrRecieverListener {
                 override fun onSuccess(intent: Intent?) {
-                    startActivityForResult(intent, REQ_USER_CONSENT)
+                    //startActivityForResult(intent, REQ_USER_CONSENT)
                 }
 
                 override fun onFailure() {
@@ -204,18 +207,20 @@ class OtpVerfification : AppCompatActivity() {
         val intentFilter = IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION)
         registerReceiver(smsBroadcastReceiver, intentFilter)
 
-    }
+    }*/
 
 
     private fun resendOTP() {
+
         val options = PhoneAuthOptions.newBuilder(firebaseAuth)
             .setPhoneNumber(cs + ss)       // Phone number to verify
             .setTimeout(120L, TimeUnit.SECONDS) // Timeout and unit
             .setActivity(this)                 // Activity (for callback binding)
             .setCallbacks(mcallBacks!!)
-            .setForceResendingToken(forceResendingToken!!)// OnVerificationStateChangedCallbacks
+          //  .setForceResendingToken(forceResendingToken!!)// OnVerificationStateChangedCallbacks
             .build()
         PhoneAuthProvider.verifyPhoneNumber(options)
+        countdownTimer()
     }
 
     private fun countdownTimer() {
@@ -226,7 +231,23 @@ class OtpVerfification : AppCompatActivity() {
             override fun onTick(millisUntilFinished: Long) {
                 val minutes = millisUntilFinished / 1000 / 60
                 val seconds = millisUntilFinished / 1000 % 60
-                binding.countdownTimer.text = (minutes.toString() + ":" + seconds.toString())
+                if (seconds <10){
+                    binding.countdownTimer.text = ("0"+minutes.toString() + ":" + "0"+seconds.toString())
+                }
+                else{
+                    binding.countdownTimer.text = ("0"+minutes.toString() + ":" + seconds.toString())
+                }
+                binding.countdownTimer.visibility = View.VISIBLE
+                binding.otpNtRecieved.visibility = View.GONE
+                binding.resendOtpBtn.visibility = View.GONE
+
+               /* if (minutes <=1){
+                    binding.countdownTimer.text = ("0"+minutes.toString() + ":" + seconds.toString())
+                }
+                else{
+                    binding.countdownTimer.text = (minutes.toString() + ":" + seconds.toString())
+                }*/
+
             }
 
             // Callback function, fired
@@ -243,7 +264,7 @@ class OtpVerfification : AppCompatActivity() {
     }
 
 
-    override fun onStart() {
+   /* override fun onStart() {
         super.onStart()
         registerBroadcastReceiver()
     }
@@ -251,7 +272,7 @@ class OtpVerfification : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         unregisterReceiver(smsBroadcastReceiver)//to stop memory leak after activity closed
-    }
+    }*/
 
 }
 

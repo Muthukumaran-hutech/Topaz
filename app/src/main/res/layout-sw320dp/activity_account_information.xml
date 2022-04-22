@@ -42,11 +42,11 @@
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/imageViewback"
-                app:layout_constraintTop_toTopOf="@+id/imageViewback" />
+                app:layout_constraintStart_toEndOf="@+id/accout_info_backk_arrow"
+                app:layout_constraintTop_toTopOf="@+id/accout_info_backk_arrow" />
 
             <ImageView
-                android:id="@+id/imageViewback"
+                android:id="@+id/accout_info_backk_arrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -69,7 +69,7 @@
                 app:layout_constraintTop_toTopOf="@+id/textView3" />
 
             <EditText
-                android:id="@+id/user_name"
+                android:id="@+id/account_info_user_name"
                 android:layout_width="320dp"
                 android:layout_height="45dp"
                 android:layout_marginStart="47dp"
@@ -101,7 +101,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/customer_id"
+                android:id="@+id/account_info_customer_id"
                 android:layout_width="320dp"
                 android:layout_height="45dp"
                 android:layout_marginStart="47dp"
@@ -133,7 +133,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/address_line"
+                android:id="@+id/account_info_address_line"
                 android:layout_width="320dp"
                 android:layout_height="45dp"
                 android:layout_marginStart="47dp"
@@ -165,7 +165,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/ph_number"
+                android:id="@+id/account_info_ph_number"
                 android:layout_width="320dp"
                 android:layout_height="45dp"
                 android:layout_marginStart="47dp"
@@ -198,7 +198,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/email_id"
+                android:id="@+id/account_info_email_id"
                 android:layout_width="320dp"
                 android:layout_height="45dp"
                 android:layout_marginStart="47dp"
@@ -217,7 +217,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/update"
+                android:id="@+id/account_info_update_btn"
                 android:layout_width="320dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="47dp"
@@ -233,7 +233,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/sk_ip"
+                android:id="@+id/account_info_skip_btn"
                 android:layout_width="@dimen/_40sdp"
                 android:layout_height="@dimen/_20sdp"
                 android:layout_marginStart="190dp"

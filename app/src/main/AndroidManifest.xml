@@ -21,15 +21,10 @@
         android:roundIcon="@mipmap/topaz_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.Topaz">
-        <activity
-            android:name=".Activities.Email_Otp_verification"
-            android:exported="false" />
         <!-- <activity
              android:name=".Activities.Email_otp_verification"
              android:exported="false" />-->
-        <activity
-            android:name=".Activities.EmailLogin"
-            android:exported="false" />
+
         <activity
             android:name=".Activities.ChatActivity"
             android:exported="false" />
