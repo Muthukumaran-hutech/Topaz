@@ -91,63 +91,88 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/OTP_1"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="20dp"
+            android:inputType="number"
+            android:importantForAutofill="auto"
+            android:clickable="true"
+            android:focusable="true"
+            android:maxLength="1"
             android:background="@color/gr"
             android:gravity="center"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
-        <TextView
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/OTP_2"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="5dp"
             android:background="@color/gr"
+            android:inputType="number"
+            android:clickable="true"
+            android:maxLength="1"
+            android:focusable="true"
             android:gravity="center"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
-        <TextView
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/OTP_3"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="5dp"
             android:background="@color/gr"
+            android:inputType="number"
+            android:maxLength="1"
             android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
-        <TextView
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/OTP_4"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="5dp"
             android:background="@color/gr"
+            android:inputType="number"
+            android:maxLength="1"
+            android:clickable="true"
+            android:focusable="true"
             android:gravity="center"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
-        <TextView
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/OTP_5"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="5dp"
             android:background="@color/gr"
+            android:clickable="true"
+            android:inputType="number"
+            android:maxLength="1"
+            android:focusable="true"
             android:gravity="center"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
-        <TextView
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/OTP_6"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="5dp"
             android:background="@color/gr"
+            android:inputType="number"
             android:gravity="center"
+            android:maxLength="1"
+            android:clickable="true"
+            android:focusable="true"
             android:textColor="@color/black"
             android:textSize="20sp" />
     </LinearLayout>

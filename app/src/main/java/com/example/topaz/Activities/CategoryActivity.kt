@@ -59,7 +59,8 @@ class CategoryActivity : AppCompatActivity() {
         }
 
         binding.categories.setOnClickListener{
-            Toast. makeText(applicationContext,"You Are Currently In Category Page", Toast. LENGTH_SHORT).show()
+            //Do Nothing
+           // Toast. makeText(applicationContext,"You Are Currently In Category Page", Toast. LENGTH_SHORT).show()
         }
 
         binding.account.setOnClickListener{

@@ -38,12 +38,9 @@ class LoginActivity : AppCompatActivity() {
 
 
         binding.phoneContinueBtn.setOnClickListener {
-            //  submitForm()
+              submitForm()
             phoneFocusListner()
-            var intent = Intent(this, OtpVerfification::class.java)
-            intent.putExtra("countrycode", "+91")
-            intent.putExtra("phoneno", binding.phoneNoEditText.text.toString())
-            startActivity(intent)
+
             /* startActivity(Intent(activity, OtpVerfification::class.java))
              finish()*/
         }
@@ -53,10 +50,12 @@ class LoginActivity : AppCompatActivity() {
 
 
     private fun submitForm() {
-        val validPhone = binding.phoneContainer.helperText == null
-        if (validPhone) {
-            startActivity(Intent(activity, OtpVerfification::class.java))
-            finish()
+        val validPhone = binding.phoneNoEditText.text
+        if (validPhone.toString().length==10) {
+            var intent = Intent(this, OtpVerfification::class.java)
+            intent.putExtra("countrycode", "+91")
+            intent.putExtra("phoneno", binding.phoneNoEditText.text.toString())
+            startActivity(intent)
         } else {
             inValidForm()
         }
@@ -79,14 +78,21 @@ class LoginActivity : AppCompatActivity() {
 
     private fun inValidForm() {
         var message = "Please Enter a Valid Number"
-        if (binding.phoneContainer.helperText == null)
-            message += "\n\nPhone: " + binding.phoneContainer.helperText
+        //message += "\n\n " + binding.phoneContainer.helperText
         AlertDialog.Builder(this)
             .setTitle("Invalid Number")
             .setMessage(message)
             .setPositiveButton("OK") { _, _ ->
                 // do Nothing
             }.show()
+        /*if (binding.phoneContainer.helperText.length < 10)
+            message += "\n\nPhone: " + binding.phoneContainer.helperText
+        AlertDialog.Builder(this)
+            .setTitle("Invalid Number")
+            .setMessage(message)
+            .setPositiveButton("OK") { _, _ ->
+                // do Nothing
+            }.show()*/
     }
 
     private fun phoneFocusListner() {

@@ -198,7 +198,7 @@
     <string name="enter_address_">enter address</string>
     <string name="enter_mobile_no_">enter mobile no</string>
     <string name="enter_email_address_">enter email address</string>
-    <string name="required">Required</string>
+    <string name="required">Please Enter 10 digit Mobile Number</string>
 
 
 </resources>

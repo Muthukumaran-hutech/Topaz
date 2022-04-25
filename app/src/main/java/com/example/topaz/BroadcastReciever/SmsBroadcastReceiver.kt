@@ -1,3 +1,4 @@
+/*
 package com.example.topaz.BroadcastReciever
 
 import android.content.BroadcastReceiver
@@ -8,7 +9,7 @@ import com.google.android.gms.common.api.CommonStatusCodes
 import com.google.android.gms.common.api.Status
 
 
-class SmsBroadcastReceiver : BroadcastReceiver() {
+public class SmsBroadcastReceiver : BroadcastReceiver() {
 
     var smsBroadcastRecieverListener: smsBroadcasrRecieverListener? = null
 
@@ -20,9 +21,8 @@ class SmsBroadcastReceiver : BroadcastReceiver() {
 
             when (SmsRetrieverStatus.statusCode) {
                 CommonStatusCodes.SUCCESS -> {
-                    val messageIntent =
-                        extras.getParcelable<Intent>(SmsRetriever.EXTRA_CONSENT_INTENT)
-                    smsBroadcastRecieverListener?.onSuccess(messageIntent)
+                    val consentIntent = extras.getParcelable<Intent>(SmsRetriever.EXTRA_CONSENT_INTENT)
+                    smsBroadcastRecieverListener?.onSuccess(consentIntent)
                 }
                 CommonStatusCodes.TIMEOUT -> {
                     smsBroadcastRecieverListener?.onFailure()
@@ -36,4 +36,4 @@ class SmsBroadcastReceiver : BroadcastReceiver() {
         fun onSuccess(intent: Intent?)
         fun onFailure()
     }
-}
+}*/
