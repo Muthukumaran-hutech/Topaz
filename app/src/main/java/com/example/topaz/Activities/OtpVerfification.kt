@@ -9,6 +9,7 @@ import android.content.IntentFilter
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -45,6 +46,9 @@ class OtpVerfification : AppCompatActivity() {
     private val REQ_USER_CONSENT = 200
 
 
+
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOtpVerfificationBinding.inflate(layoutInflater)
@@ -56,9 +60,14 @@ class OtpVerfification : AppCompatActivity() {
             Log.d("exception", e.toString())
         }
 
+
+
+
         firebaseAuth = Firebase.auth
         activity = this
 
+        binding.appProgressBar.visibility = View.VISIBLE
+        binding.loginBtnPhone.isEnabled = false
         binding.loginBtnPhone.setOnClickListener {
 
             if (binding.OTP1.text.toString().trim().isEmpty()
@@ -72,6 +81,7 @@ class OtpVerfification : AppCompatActivity() {
                 Toast.makeText(applicationContext, "Please Enter The Valid OTP", Toast.LENGTH_LONG)
                     .show()
             } else {
+                binding.appProgressBar.visibility = View.VISIBLE
                 var otpCode =
                     (binding.OTP1.text.toString() + binding.OTP2.text.toString() + binding.OTP3.text.toString()
                             + binding.OTP4.text.toString() + binding.OTP5.text.toString() + binding.OTP6.text.toString())
@@ -100,6 +110,9 @@ class OtpVerfification : AppCompatActivity() {
                 //     user action.
                 Log.d(ContentValues.TAG, "onVerificationCompleted:$credential")
                 //pHONEAUTH
+                binding.appProgressBar.visibility = View.GONE
+                binding.loginBtnPhone.isEnabled = true
+
                 val smscode = credential.smsCode
                 Toast.makeText(applicationContext, smscode, Toast.LENGTH_LONG).show()
                 //getOtpFromMessage(smscode)
@@ -115,8 +128,12 @@ class OtpVerfification : AppCompatActivity() {
                 Log.w(ContentValues.TAG, "onVerificationFailed", e)
 
                 if (e is FirebaseAuthInvalidCredentialsException) {
-                    // Invalid request
+                    //binding.appProgressBar.visibility = View.VISIBLE
+                    Toast.makeText(applicationContext, "Please Enter The Valid OTP", Toast.LENGTH_LONG)
+                        .show()
                 } else if (e is FirebaseTooManyRequestsException) {
+                    binding.appProgressBar.visibility = View.VISIBLE
+                    binding.loginBtnPhone.isEnabled = false
                     Toast.makeText(applicationContext, "Something went wrong Please try again Later", Toast.LENGTH_LONG)
                         .show()
                 }
@@ -137,6 +154,9 @@ class OtpVerfification : AppCompatActivity() {
                 // Save verification ID and resending token so we can use them later
                 mVerificationId = verificationId
                 forceResendingToken = token
+                binding.appProgressBar.visibility = View.GONE
+                binding.loginBtnPhone.isEnabled = true
+                //progressBar()
 
             }
         }
@@ -230,17 +250,26 @@ class OtpVerfification : AppCompatActivity() {
 
     }
 
+    private fun progressBar() {
+
+
+
+
+    }
+
     private fun signInWithPhoneAuthCredential(
         //  credential: PhoneAuthCredential,
         smscode: String
     ) {
+
         val credential = PhoneAuthProvider.getCredential(mVerificationId!!, smscode)
         firebaseAuth.signInWithCredential(credential)
             .addOnCompleteListener(this@OtpVerfification, OnCompleteListener {
 
                 if (it.isSuccessful) {
-                    startActivity(Intent(activity, AccountInformation::class.java))
-                    finish()
+                    var intent = Intent(this, AccountInformation::class.java)
+                    intent.putExtra("phoneno1", ss.toString())
+                    startActivity(intent)
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithCredential:success")
 
@@ -261,7 +290,7 @@ class OtpVerfification : AppCompatActivity() {
 
 
     private fun resendOTP() {
-
+        binding.appProgressBar.visibility = View.VISIBLE
         val options = PhoneAuthOptions.newBuilder(firebaseAuth)
             .setPhoneNumber(cs + ss)       // Phone number to verify
             .setTimeout(120L, TimeUnit.SECONDS) // Timeout and unit
@@ -307,6 +336,7 @@ class OtpVerfification : AppCompatActivity() {
                 binding.countdownTimer.text = binding.otpNtRecieved.toString()
                 binding.otpNtRecieved.visibility = View.VISIBLE
                 binding.resendOtpBtn.visibility = View.VISIBLE
+                binding.appProgressBar.visibility = View.GONE
                 binding.countdownTimer.visibility = View.GONE
             }
         }.start()
