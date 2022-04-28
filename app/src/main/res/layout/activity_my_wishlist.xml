@@ -7,6 +7,41 @@
     android:background="@color/white"
     tools:context=".Activities.MyWishlist">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/wish_list_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <ImageView
+            android:id="@+id/backarrow2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="23dp"
+            android:text="@string/my_wishlist"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/backarrow2"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.appcompat.widget.Toolbar>
+
+<!--
 
     <TextView
         android:id="@+id/cattextview"
@@ -52,17 +87,18 @@
         android:src="@drawable/ic_baseline_shopping_cart_24"
         app:layout_constraintEnd_toEndOf="@+id/cattextview"
         app:layout_constraintTop_toTopOf="parent" />
-
+-->
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/wishlistadapter"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="10dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cattextview" />
+        app:layout_constraintTop_toBottomOf="@+id/wish_list_toolbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

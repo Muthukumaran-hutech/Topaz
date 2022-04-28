@@ -1,9 +1,13 @@
 package com.example.topaz.Activities
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.topaz.Adapters.CategoryAdapter
@@ -29,6 +33,8 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
         setContentView(binding.root)
 
         activity = this
+        setSupportActionBar(binding.catToolbar)
+        supportActionBar?.title = ""
 
 
       //  categorymainAdapter = CategoryAdapter()
@@ -39,24 +45,17 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
         binding.categoryRecyclerView.setHasFixedSize(true)
 
         categoryInnerlist.add(CategoriesModel(R.drawable.plywoodbiards,"PlywoodBoards",""))
-        categoryInnerlist.add(CategoriesModel(R.drawable.pvcboards,"Laminates",""))
-        categoryInnerlist.add(CategoriesModel(R.drawable.face_veneers,"Face Veneers",""))
+        categoryInnerlist.add(CategoriesModel(R.drawable.laminates,"Laminates",""))
+        categoryInnerlist.add(CategoriesModel(R.drawable.veneers,"Veneers",""))
+        categoryInnerlist.add(CategoriesModel(R.drawable.faceveneers,"Face Veneers",""))
+        categoryInnerlist.add(CategoriesModel(R.drawable.mdf,"MDF",""))
+        categoryInnerlist.add(CategoriesModel(R.drawable.doors,"Doors",""))
+        categoryInnerlist.add(CategoriesModel(R.drawable.pvcboards,"PVC Boards",""))
+        categoryInnerlist.add(CategoriesModel(R.drawable.furntureboards,"Furniture Boards",""))
+        categoryInnerlist.add(CategoriesModel(R.drawable.exteria,"Exteria",""))
 
 
-        binding.categorySearch.setOnClickListener{
-            startActivity(Intent(activity,SearchActivity::class.java))
-            finish()
-        }
 
-        binding.categoryCart.setOnClickListener{
-            startActivity(Intent(activity,MyCart::class.java))
-            finish()
-        }
-
-        binding.categoryNotification.setOnClickListener{
-            Toast. makeText(applicationContext," Currently In Process", Toast. LENGTH_SHORT).show()
-
-        }
 
         binding.home.setOnClickListener{
             startActivity(Intent(activity,HomeScreen::class.java))
@@ -90,5 +89,38 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
         finish()
     }
 
+
+    override fun onBackPressed() {
+        //super.onBackPressed()
+        val message = "Are you sure yo want to exit"
+        AlertDialog.Builder(this)
+            .setTitle("Applcation will be logged out ")
+            .setMessage(message)
+            .setPositiveButton("OK") { _, _ ->
+                super.onBackPressed()
+
+                //  binding.phoneContainer.helperText = getString(R.id.Required)
+            }.setNegativeButton("Cancel") { _, _ ->
+                dismissDialog(0)
+                //  binding.phoneContainer.helperText = getString(R.id.Required)
+            }
+            .show()
+    }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.categories_page_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when(item.itemId){
+            R.id.search_bar->  startActivity(Intent(activity,SearchActivity::class.java))
+            R.id.notification_bar->  Toast. makeText(applicationContext," Currently In Process",Toast. LENGTH_SHORT).show()
+            R.id.my_cart->  startActivity(Intent(activity,MyCart::class.java))
+        }
+        return super.onOptionsItemSelected(item)
+
+    }
 
 }

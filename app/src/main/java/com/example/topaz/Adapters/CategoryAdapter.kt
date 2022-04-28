@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.topaz.Activities.CategoryActivity
 import com.example.topaz.Interface.CategoryPageItemClickListner
@@ -32,13 +33,15 @@ class CategoryAdapter(var list2: ArrayList<CategoriesModel>, var categoryPageIte
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var catImage=itemView.findViewById<ImageView>(R.id.plwwoodss)
+        var catName=itemView.findViewById<TextView>(R.id.plwwoodsstext)
 
         fun bindItems(listModel2:List<CategoriesModel>, position: Int, categoryPageItemClickListner1: CategoryPageItemClickListner) {
-            catImage.setImageResource(listModel2.get(position).CateegoryImage)
+            catImage.setImageResource(listModel2[position].CateegoryImage)
+            catName.text = listModel2[position].CateegoryName
 
             catImage.setOnClickListener {
                 //Onclick will trigger the interface in activity
-                categoryPageItemClickListner1.CategoryPageItemClickListner(listModel2.get(position))
+                categoryPageItemClickListner1.CategoryPageItemClickListner(listModel2[position])
             }
         }
 

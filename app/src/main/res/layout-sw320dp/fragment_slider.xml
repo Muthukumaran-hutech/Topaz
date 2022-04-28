@@ -39,7 +39,7 @@
     <TextView
         android:id="@+id/textView24"
         android:layout_width="@dimen/_209sdp"
-        android:layout_height="@dimen/_72sdp"
+        android:layout_height="0dp"
         android:layout_marginStart="@dimen/_103sdp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="@dimen/_102sdp"

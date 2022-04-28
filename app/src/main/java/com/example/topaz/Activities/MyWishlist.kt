@@ -1,9 +1,13 @@
 package com.example.topaz.Activities
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,75 +15,67 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.topaz.Adapters.HomeCategoriesAdapter
 import com.example.topaz.Adapters.MywishlistAdapter
 import com.example.topaz.R
+import com.example.topaz.databinding.ActivityCategoryBinding
+import com.example.topaz.databinding.ActivityMyWishlistBinding
 
 class MyWishlist : AppCompatActivity() {
 
-    private var myCartBtn: ImageView? = null
-    /*private var homeBtn: ImageView? = null
-    private var categoryBtn: ImageView? = null
-    private var faviuriteBtn: ImageView? = null
-    private var myAccountBtn: ImageView? = null*/
-    private var backarrow2: ImageView? = null
+    private lateinit var binding: ActivityMyWishlistBinding
     lateinit var activity: Activity
 
-    private lateinit var wishlistRecyclerView: RecyclerView
     private lateinit var wishlistAdapter: MywishlistAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_my_wishlist)
+        binding = ActivityMyWishlistBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-
-        myCartBtn = findViewById<ImageView>(R.id.cart)
-        /*homeBtn = findViewById<ImageView>(R.id.home)
-        categoryBtn = findViewById<ImageView>(R.id.categories)
-        faviuriteBtn = findViewById<ImageView>(R.id.fav)
-        myAccountBtn = findViewById<ImageView>(R.id.account)*/
-        backarrow2 = findViewById<ImageView>(R.id.backarrow2)
         activity = this
+        setSupportActionBar(binding.wishListToolbar)
+        supportActionBar?.title = ""
 
-
-        wishlistRecyclerView = findViewById(R.id.wishlistadapter)
         wishlistAdapter = MywishlistAdapter()
 
-        wishlistRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
-        wishlistRecyclerView.adapter = wishlistAdapter
+        binding.wishlistadapter.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.wishlistadapter.adapter = wishlistAdapter
 
-
-
-
-
-        myCartBtn?.setOnClickListener{
-            startActivity(Intent(activity,MyCart::class.java))
+        binding.backarrow2.setOnClickListener {
+            startActivity(Intent(activity, HomeScreen::class.java))
             finish()
         }
+    }
 
 
+    override fun onBackPressed() {
+        //super.onBackPressed()
+        val message = "Are you sure yo want to exit"
+        AlertDialog.Builder(this)
+            .setTitle("Applcation will be logged out ")
+            .setMessage(message)
+            .setPositiveButton("OK") { _, _ ->
+                super.onBackPressed()
 
-       /* homeBtn?.setOnClickListener{
-            startActivity(Intent(activity,HomeScreen::class.java))
-            finish()
+                //  binding.phoneContainer.helperText = getString(R.id.Required)
+            }.setNegativeButton("Cancel") { _, _ ->
+                dismissDialog(0)
+                //  binding.phoneContainer.helperText = getString(R.id.Required)
+            }
+            .show()
+    }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.mywishlist_page_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+            R.id.my_cart -> startActivity(Intent(activity, MyCart::class.java))
         }
+        return super.onOptionsItemSelected(item)
 
-        categoryBtn?.setOnClickListener{
-            startActivity(Intent(activity,MyAccount::class.java))
-            finish()
-
-        }
-
-        myAccountBtn?.setOnClickListener{
-            startActivity(Intent(activity,MyAccount::class.java))
-            finish()
-        }
-
-        faviuriteBtn?.setOnClickListener{
-            Toast. makeText(applicationContext,"You Are Currently In Favourites", Toast. LENGTH_SHORT).show()
-        }
-*/
-        backarrow2?.setOnClickListener{
-            startActivity(Intent(activity,HomeScreen::class.java))
-            finish()
-        }
     }
 }

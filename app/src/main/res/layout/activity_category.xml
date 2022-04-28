@@ -8,6 +8,43 @@
     android:background="@color/white"
     tools:context=".Activities.CategoryActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/cat_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/category_back_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/categories"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/category_back_arrow"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+<!--
 
     <LinearLayout
         android:id="@+id/cattextview"
@@ -74,6 +111,7 @@
         android:src="@drawable/ic_baseline_search_24"
         app:layout_constraintEnd_toStartOf="@+id/category_notification"
         app:layout_constraintTop_toTopOf="parent" />
+-->
 
     <ImageView
         android:id="@+id/imageView5"
@@ -82,14 +120,14 @@
         android:src="@drawable/finestquality_baner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cattextview" />
-
+        app:layout_constraintTop_toBottomOf="@+id/cat_toolbar" />
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/category_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/catbasetextview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView5" />

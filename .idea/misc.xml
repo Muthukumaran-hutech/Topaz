@@ -121,7 +121,11 @@
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/layout/fragment_slider3.xml" value="0.14666666666666667" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/layout/search_list_item.xml" value="0.14666666666666667" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/layout/splash_screen.xml" value="0.13690476190476192" />
+        <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/menu/boards_page_menu.xml" value="0.13766566908935443" />
+        <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/menu/categories_page_menu.xml" value="0.1" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/menu/homepagemenu.xml" value="0.13766566908935443" />
+        <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/menu/mywishlist_page_menu.xml" value="0.13766566908935443" />
+        <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/menu/prod_page_menu.xml" value="0.13766566908935443" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.151" />
       </map>
     </option>
