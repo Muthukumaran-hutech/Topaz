@@ -268,8 +268,11 @@ class OtpVerfification : AppCompatActivity() {
 
                 if (it.isSuccessful) {
                     var intent = Intent(this, AccountInformation::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     intent.putExtra("phoneno1", ss.toString())
                     startActivity(intent)
+                    finish()
+
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithCredential:success")
 

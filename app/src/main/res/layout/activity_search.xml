@@ -30,14 +30,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <SearchView
-        android:id="@+id/searchedit"
+        android:id="@+id/search_edit"
         android:layout_width="250dp"
         android:layout_height="45dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
-        android:background="@color/white"
+        android:background="@drawable/rectangle_search_box"
         android:hint="@string/search_"
         android:imeOptions="actionSearch"
+        android:clickable="true"
         android:inputType="text"
         android:paddingStart="20dp"
         android:text=""
@@ -45,7 +46,8 @@
         android:textColorHint="@color/black"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/search_back_arrow"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="true" />
 
     <EditText
         android:id="@+id/searchedit2"
@@ -71,7 +73,7 @@
         android:src="@drawable/xvector"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="@+id/cattextview"
-        app:layout_constraintStart_toEndOf="@+id/searchedit"
+        app:layout_constraintStart_toEndOf="@+id/search_edit"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -85,12 +87,13 @@
         app:layout_constraintTop_toBottomOf="@+id/cattextview" />
 
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/user_search_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:layout_marginStart="16dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView18" />
@@ -103,7 +106,7 @@
         android:src="@drawable/ic_baseline_mic_none_black_24"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/cattextview"
-        app:layout_constraintStart_toEndOf="@+id/searchedit"
+        app:layout_constraintStart_toEndOf="@+id/search_edit"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout

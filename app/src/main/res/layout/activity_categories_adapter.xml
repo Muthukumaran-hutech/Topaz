@@ -9,7 +9,7 @@
 
 
     <TextView
-        android:id="@+id/plywood"
+        android:id="@+id/categoryTitle"
         android:layout_width="132dp"
         android:layout_height="54dp"
         android:layout_marginStart="20dp"

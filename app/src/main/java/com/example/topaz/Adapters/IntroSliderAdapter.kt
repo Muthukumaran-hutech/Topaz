@@ -9,7 +9,7 @@ class IntroSliderAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
         return fragmentList.size
     }
     override fun createFragment(position: Int): Fragment {
-        return fragmentList.get(position)
+        return fragmentList[position]
     }
     fun setFragmentList(list: List<Fragment>) {
         fragmentList.clear()

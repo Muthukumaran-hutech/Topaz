@@ -3,10 +3,10 @@ package com.example.topaz.Activities
 import android.app.Activity
 import android.content.ContentValues
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.topaz.Interface.JsonPlaceholder
 import com.example.topaz.Models.UpdateCustomerInfo
 import com.example.topaz.Models.UpdateUserApiModel
@@ -51,9 +51,9 @@ class AccountInformation : AppCompatActivity() {
 
 
         binding.accountInfoUpdateBtn.setOnClickListener {
-
-            updateuserinfo()
-
+           if (validateUserInfo()){
+               updateuserinfo()
+           }
 
         }
 
@@ -66,6 +66,74 @@ class AccountInformation : AppCompatActivity() {
             }
 
         }*/
+
+    }
+
+    private fun validateUserInfo(): Boolean {
+        val name: String = binding.accountInfoUserName.getText().toString()
+        val custId : String = binding.accountInfoCustomerId.getText().toString()
+        val address : String = binding.accountInfoAddressLine.getText().toString()
+        val phone : String = binding.accountInfoPhNumber.getText().toString()
+        val email : String = binding.accountInfoEmailId.getText().toString()
+        val emailPattern  = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
+        if (name.isEmpty()) {
+            binding.accountInfoUserName.error = "Field cannot be empty"
+            return false
+        } else if (name.length >= 15) {
+            binding.accountInfoUserName.error = "Username too long"
+            return false;
+        }
+        else if(custId.isEmpty()) {
+            binding.accountInfoCustomerId.error = "Field cannot be empty"
+            return false
+        } else if (custId.length <= 4) {
+            binding.accountInfoCustomerId.error = "ustomer Id too short"
+            return false;
+        }
+        else if(address.isEmpty()) {
+            binding.accountInfoAddressLine.error = "Field cannot be empty"
+            return false
+        } else if (address.length <= 5) {
+            binding.accountInfoAddressLine.error = "Address too Short"
+            return false;
+        }
+        else if(phone.isEmpty()) {
+            binding.accountInfoPhNumber.error = "Field cannot be empty"
+            return false
+        } else if (phone.length < 10) {
+            binding.accountInfoPhNumber.error = "Please enter a valid phone no"
+            return false;
+        }
+        else if(email.isEmpty()) {
+            binding.accountInfoEmailId.error = "Field cannot be empty"
+            return false
+        } else if (!email.matches(Regex(emailPattern))) {
+            binding.accountInfoEmailId.error = "Please enter a valid email id"
+            return false;
+        }
+        ///
+        ///
+        ///
+        else {
+            binding.accountInfoUserName.error = null
+            binding.accountInfoCustomerId.error = null
+            binding.accountInfoAddressLine.error = null
+            binding.accountInfoPhNumber.error = null
+            binding.accountInfoEmailId.error = null
+            binding.accountInfoUserName.isEnabled = false
+            binding.accountInfoCustomerId.isEnabled = false
+            binding.accountInfoAddressLine.isEnabled = false
+            binding.accountInfoPhNumber.isEnabled = false
+            binding.accountInfoEmailId.isEnabled = false
+           return true
+        }
+
+
+
+
+
+
+
 
     }
 

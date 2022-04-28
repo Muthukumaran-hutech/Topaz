@@ -22,5 +22,7 @@ class InnerCategories : AppCompatActivity() {
 
         innercategoryRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
         innercategoryRecyclerView.adapter = innercategoryAdapter
+        innercategoryRecyclerView.setHasFixedSize(true)
+
     }
 }

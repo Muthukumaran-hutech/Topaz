@@ -11,15 +11,9 @@ import com.example.topaz.R
 import com.example.topaz.databinding.ActivityAccountInformationBinding.inflate
 import com.example.topaz.databinding.ActivityHomeScreenBinding
 
-lateinit var list: ArrayList<HomeCategoryModel>
-lateinit var homeScreenItemClickListner: HomeScreenItemClickListner
+//lateinit var list: ArrayList<HomeCategoryModel>
+//lateinit var homeScreenItemClickListner: HomeScreenItemClickListner
 class HomeCategoriesAdapter(var list1: ArrayList<HomeCategoryModel>,var homeScreenItemClickListner1: HomeScreenItemClickListner) : RecyclerView.Adapter<HomeCategoriesAdapter.MyViewHolder>() {
-
-    init {
-        list=list1
-        homeScreenItemClickListner1= homeScreenItemClickListner
-
-    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -29,21 +23,24 @@ class HomeCategoriesAdapter(var list1: ArrayList<HomeCategoryModel>,var homeScre
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val data = list[position]
-        holder.bindItems(list,position)
+        val data = list1[position]
+       // holder.imgtitle.text=data.HomeCategoryTitle
+        holder.bindItems(list1,position,homeScreenItemClickListner1)
     }
 
     override fun getItemCount(): Int {
-        return list.count()
+        return list1.count()
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-     var imgtitle=itemView.findViewById<TextView>(R.id.plywood)
+     var imgtitle=itemView.findViewById<TextView>(R.id.categoryTitle)
 
-        fun bindItems(listModel:List<HomeCategoryModel>,position:Int){
+        fun bindItems(listModel:List<HomeCategoryModel>,position:Int,homeScreenItemClickListner1: HomeScreenItemClickListner){
 
+            imgtitle.text=listModel.get(position).HomeCategoryTitle
             imgtitle.setOnClickListener {
-                homeScreenItemClickListner.HomeScreenItemClickListner(listModel.get(position))
+                //Onclick will trigger the interface in activity
+                homeScreenItemClickListner1.HomeScreenItemClickListner(listModel.get(position))
             }
         }
     }

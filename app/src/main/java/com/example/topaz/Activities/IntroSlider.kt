@@ -33,6 +33,7 @@ class IntroSlider : AppCompatActivity() {
     private lateinit var binding: ActivityIntroSliderBinding
     lateinit var activity: Activity
     private val fragmentList = ArrayList<Fragment>()
+    var indicatorLayout : IndicatorLayout? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,8 +52,8 @@ class IntroSlider : AppCompatActivity() {
             listOf( SliderFragment(), SliderFragment2(), SliderFragment3() ) )
 
         adapter.setFragmentList(fragmentList)
-        binding.indicatorLayout?.setIndicatorCount(adapter.itemCount)
-        binding.indicatorLayout?.selectCurrentPosition(0)
+        binding.indicatorLayout?.setIndicatorCount(fragmentList.size)
+
           registerListeners()
     }
 
@@ -61,7 +62,8 @@ class IntroSlider : AppCompatActivity() {
 
 
             override fun onPageSelected(position: Int) {
-                //   indicatorLayout.selectCurrentPosition(position)
+                  //indicatorLayout?.selectCurrentPosition(position)
+                binding.indicatorLayout?.selectCurrentPosition(position)
                 if (position < fragmentList.lastIndex) {
                     binding.btnSkip.visibility = View.VISIBLE
                     binding.btnNext.visibility = View.VISIBLE
@@ -81,6 +83,8 @@ class IntroSlider : AppCompatActivity() {
 
         binding.btnNext.setOnClickListener {
             binding.viewPager.currentItem++
+            //binding.indicatorLayout?.selectCurrentPosition(curre)
+
         }
 
         binding.getStart.setOnClickListener {
