@@ -118,7 +118,7 @@
             android:name=".Activities.FaqActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.AccountInformation"
+            android:name=".Activities.SplashScreen"
             android:exported="false" />
         <activity
             android:name=".Activities.AddAddress"
@@ -133,7 +133,7 @@
             android:name=".Activities.MyOrders"
             android:exported="false" />
         <activity
-            android:name=".Activities.SplashScreen"
+            android:name=".Activities.AccountInformation"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

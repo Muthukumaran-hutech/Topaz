@@ -13,5 +13,5 @@ interface JsonPlaceholder {
    suspend fun updateInfo(@Body jsonObject: JsonObject):UpdateUserApiModel
 */
     @PUT("updatecustomer/CUS001")//Without suspend funaction
-    fun updateInfo(id:String,@Body jsonObject: JsonObject):Call<UpdateUserApiModel>
+    fun updateInfo(@Body jsonObject: JsonObject):Call<UpdateUserApiModel>
 }

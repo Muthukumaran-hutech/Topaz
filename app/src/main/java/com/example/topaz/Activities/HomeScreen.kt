@@ -10,73 +10,90 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.denzcoskun.imageslider.constants.ScaleTypes
+import com.denzcoskun.imageslider.models.SlideModel
 import com.example.topaz.Adapters.HomeCategoriesAdapter
+import com.example.topaz.Adapters.list
+import com.example.topaz.Interface.HomeScreenItemClickListner
+import com.example.topaz.Models.HomeCategoryModel
 import com.example.topaz.R
+import com.example.topaz.databinding.ActivityAccountInformationBinding
+import com.example.topaz.databinding.ActivityHomeScreenBinding
+import java.util.ArrayList
 
-class HomeScreen : AppCompatActivity() {
+class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner {
 
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: HomeCategoriesAdapter
-    private var searchBtn: ImageView? = null
-    private var notificationBtn: ImageView? = null
-    private var myCartBtn: ImageView? = null
-    private var homeBtn: ImageView? = null
-    private var categoryBtn: ImageView? = null
-    private var faviuriteBtn: ImageView? = null
-    private var myAccountBtn: ImageView? = null
+    private lateinit var binding: ActivityHomeScreenBinding
+
+    //private lateinit var adapter: HomeCategoriesAdapter
     lateinit var activity: Activity
+    val imageList = ArrayList<Int>()
+    var slidemodellist= ArrayList<SlideModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home_screen)
+        binding = ActivityHomeScreenBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        searchBtn = findViewById<ImageView>(R.id.search1)
-        notificationBtn = findViewById<ImageView>(R.id.notification1)
-        myCartBtn = findViewById<ImageView>(R.id.cart1)
-        homeBtn = findViewById<ImageView>(R.id.home)
-        categoryBtn = findViewById<ImageView>(R.id.categories)
-        faviuriteBtn = findViewById<ImageView>(R.id.fav)
-        myAccountBtn = findViewById<ImageView>(R.id.account)
-        recyclerView = findViewById(R.id.categories_recyclerview)
-        adapter = HomeCategoriesAdapter()
+        list.add(HomeCategoryModel("","Plywoods"))
+        val adapter:HomeCategoriesAdapter = HomeCategoriesAdapter(list1 = list,this)
         activity = this
+        setSupportActionBar(binding.homeToolbar)
 
 
-        recyclerView.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
-        recyclerView.adapter = adapter
+        binding.homeRecyclerView?.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
+        binding.homeRecyclerView?.adapter = adapter
 
-        searchBtn?.setOnClickListener{
+
+        imageList.add(R.drawable.home_slider_banner)
+        imageList.add(R.drawable.home_slider_banner_2)
+
+
+        //-----------------Slide model list---------------------//
+        slidemodellist.add(SlideModel(imagePath = R.drawable.home_slider_banner))
+        slidemodellist.add(SlideModel(imagePath = R.drawable.home_slider_banner_2))
+
+        binding.homeImageSlider.setImageList(slidemodellist,ScaleTypes.FIT)
+
+     /*   binding.homeSearchBtn.setOnClickListener{
             startActivity(Intent(activity,SearchActivity::class.java))
             finish()
         }
 
-        myCartBtn?.setOnClickListener{
+        binding.homeCartBtn.setOnClickListener{
             startActivity(Intent(activity,MyCart::class.java))
             finish()
         }
 
-        notificationBtn?.setOnClickListener{
+        binding.homeNotificationBtn.setOnClickListener{
             Toast. makeText(applicationContext," Currently In Process",Toast. LENGTH_SHORT).show()
-        }
+        }*/
 
-        homeBtn?.setOnClickListener{
+        binding.home.setOnClickListener{
             Toast. makeText(applicationContext,"You Are Currently In Home Page",Toast. LENGTH_SHORT).show()
         }
 
-        categoryBtn?.setOnClickListener{
+        binding.categories.setOnClickListener{
             startActivity(Intent(activity,CategoryActivity::class.java))
             finish()
         }
 
-        myAccountBtn?.setOnClickListener{
+        binding.account.setOnClickListener{
             startActivity(Intent(activity,MyAccount::class.java))
             finish()
         }
 
-        faviuriteBtn?.setOnClickListener{
+        binding.fav.setOnClickListener{
             startActivity(Intent(activity,MyWishlist::class.java))
             finish()
         }
 
     }
+
+    override fun HomeScreenItemClickListner(homecategory:HomeCategoryModel) {
+        startActivity(Intent(activity,CategoryActivity::class.java))
+        finish()
+    }
+
+
 }

@@ -2,30 +2,20 @@ package com.example.topaz.Activities
 
 import android.app.Activity
 import android.content.ContentValues
-import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import com.example.topaz.Interface.JsonPlaceholder
 import com.example.topaz.Models.UpdateCustomerInfo
 import com.example.topaz.Models.UpdateUserApiModel
-import com.example.topaz.R
 import com.example.topaz.RetrofitApiInstance.UpdateAccountInfoInstance
 import com.example.topaz.databinding.ActivityAccountInformationBinding
-import com.example.topaz.databinding.ActivityLoginBinding
 import com.google.gson.JsonObject
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.math.log
 
 class AccountInformation : AppCompatActivity() {
 
@@ -46,9 +36,9 @@ class AccountInformation : AppCompatActivity() {
         activity = this
 
         binding.accountInfoPhNumber.setText(ss)
-        binding.accountInfoPhNumber.isEnabled = false
-        binding.accountInfoEmailId.isEnabled = false
-        binding.accountInfoCustomerId.isEnabled = false
+        //binding.accountInfoPhNumber.isEnabled = false
+       // binding.accountInfoEmailId.isEnabled = false
+       // binding.accountInfoCustomerId.isEnabled = false
         binding.accountInfoSkipBtn.setOnClickListener {
             startActivity(Intent(activity, HomeScreen::class.java))
             finish()
@@ -101,7 +91,7 @@ class AccountInformation : AppCompatActivity() {
         var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
             .create(JsonPlaceholder::class.java)
 
-        res.updateInfo("CUS001", customerDetails(updateCustomerInfo)).enqueue(object : Callback<UpdateUserApiModel?> {
+        res.updateInfo(customerDetails(updateCustomerInfo)).enqueue(object : Callback<UpdateUserApiModel?> {
             override fun onResponse(
                 call: Call<UpdateUserApiModel?>,
                 response: Response<UpdateUserApiModel?>
