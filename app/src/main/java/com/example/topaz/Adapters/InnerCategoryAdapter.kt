@@ -38,7 +38,7 @@ class InnerCategoryAdapter(var list3: ArrayList<InnerCategoryModelList>, var inn
 
             innerCatImage.setOnClickListener {
                 //Onclick will trigger the interface in activity
-                innerCategoryItemClickListner1.InnerCategoryItemClickListner(listModel3.get(position))
+                innerCategoryItemClickListner1.InnerCategoryItemClickListner(listModel3[position])
             }
         }
 
