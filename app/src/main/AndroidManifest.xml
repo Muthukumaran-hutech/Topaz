@@ -89,7 +89,7 @@
             android:name=".Activities.InvoiceDetails"
             android:exported="false" />
         <activity
-            android:name=".Activities.HomeScreen"
+            android:name=".Activities.SplashScreen"
             android:exported="false" />
         <activity
             android:name=".Activities.MyCart"
@@ -134,7 +134,7 @@
             android:name=".Activities.MyOrders"
             android:exported="false" />
         <activity
-            android:name=".Activities.SplashScreen"
+            android:name=".Activities.HomeScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
