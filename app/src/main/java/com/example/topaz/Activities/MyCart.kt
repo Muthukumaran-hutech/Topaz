@@ -1,6 +1,7 @@
 package com.example.topaz.Activities
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -44,12 +45,12 @@ class MyCart : AppCompatActivity() {
 
         searchBtn?.setOnClickListener{
             startActivity(Intent(activity,SearchActivity::class.java))
-            finish()
+
         }
 
         myCartBtn?.setOnClickListener{
             startActivity(Intent(activity,MyCart::class.java))
-            finish()
+
         }
 
         notificationBtn?.setOnClickListener{
@@ -58,8 +59,25 @@ class MyCart : AppCompatActivity() {
         }
 
         backarrow?.setOnClickListener{
-            startActivity(Intent(activity,HomeScreen::class.java))
-            finish()
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+           finish()
         }
+    }
+
+    override fun onBackPressed() {
+        //super.onBackPressed()
+        val message = "Are you sure yo want to exit"
+        AlertDialog.Builder(this)
+            .setTitle("Applcation will be logged out ")
+            .setMessage(message)
+            .setPositiveButton("OK") { _, _ ->
+                super.onBackPressed()
+
+                //  binding.phoneContainer.helperText = getString(R.id.Required)
+            }.setNegativeButton("Cancel") { _, _ ->
+                //dismissDialog(0)
+                //  binding.phoneContainer.helperText = getString(R.id.Required)
+            }
+            .show()
     }
 }

@@ -42,8 +42,7 @@ class InnerCategories : AppCompatActivity(), InnerCategoryItemClickListner {
         binding.innerrecycler.setHasFixedSize(true)
 
         binding.backarrow2.setOnClickListener {
-            startActivity(Intent(activity, CategoryActivity::class.java))
-            finish()
+            startActivity(Intent(activity,CategoryActivity::class.java))
         }
 
 
@@ -58,25 +57,9 @@ class InnerCategories : AppCompatActivity(), InnerCategoryItemClickListner {
 
     override fun InnerCategoryItemClickListner(Innercategories: InnerCategoryModelList) {
         startActivity(Intent(activity, ProductDetails::class.java))
-        finish()
     }
 
-    override fun onBackPressed() {
-        //super.onBackPressed()
-        val message = "Are you sure yo want to exit"
-        AlertDialog.Builder(this)
-            .setTitle("Applcation will be logged out ")
-            .setMessage(message)
-            .setPositiveButton("OK") { _, _ ->
-                super.onBackPressed()
 
-                //  binding.phoneContainer.helperText = getString(R.id.Required)
-            }.setNegativeButton("Cancel") { _, _ ->
-                dismissDialog(0)
-                //  binding.phoneContainer.helperText = getString(R.id.Required)
-            }
-            .show()
-    }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.boards_page_menu, menu)

@@ -62,7 +62,7 @@ class IntroSlider : AppCompatActivity() {
 
 
             override fun onPageSelected(position: Int) {
-                  //indicatorLayout?.selectCurrentPosition(position)
+                  indicatorLayout?.selectCurrentPosition(position)
                 binding.indicatorLayout?.selectCurrentPosition(position)
                 if (position < fragmentList.lastIndex) {
                     binding.btnSkip.visibility = View.VISIBLE
@@ -83,7 +83,7 @@ class IntroSlider : AppCompatActivity() {
 
         binding.btnNext.setOnClickListener {
             binding.viewPager.currentItem++
-            //binding.indicatorLayout?.selectCurrentPosition(curre)
+           binding.indicatorLayout?.selectCurrentPosition( binding.viewPager.currentItem++)
 
         }
 

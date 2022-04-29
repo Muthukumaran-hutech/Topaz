@@ -59,7 +59,7 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
 
         binding.home.setOnClickListener{
             startActivity(Intent(activity,HomeScreen::class.java))
-            finish()
+
 
         }
 
@@ -70,23 +70,23 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
 
         binding.account.setOnClickListener{
             startActivity(Intent(activity,MyAccount::class.java))
-            finish()
+
         }
 
         binding.fav.setOnClickListener{
             startActivity(Intent(activity,MyWishlist::class.java))
-            finish()
+
         }
 
         binding.categoryBackArrow.setOnClickListener{
             startActivity(Intent(activity,HomeScreen::class.java))
-            finish()
+
         }
     }
 
     override fun CategoryPageItemClickListner(categories: CategoriesModel) {
         startActivity(Intent(activity, InnerCategories::class.java))
-        finish()
+
     }
 
 
@@ -101,7 +101,7 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
 
                 //  binding.phoneContainer.helperText = getString(R.id.Required)
             }.setNegativeButton("Cancel") { _, _ ->
-                dismissDialog(0)
+                //dismissDialog(0)
                 //  binding.phoneContainer.helperText = getString(R.id.Required)
             }
             .show()

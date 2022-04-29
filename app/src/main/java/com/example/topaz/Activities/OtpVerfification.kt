@@ -114,7 +114,7 @@ class OtpVerfification : AppCompatActivity() {
                 binding.loginBtnPhone.isEnabled = true
 
                 val smscode = credential.smsCode
-                Toast.makeText(applicationContext, smscode, Toast.LENGTH_LONG).show()
+               // Toast.makeText(applicationContext, smscode, Toast.LENGTH_LONG).show()
                 //getOtpFromMessage(smscode)
 
                 //

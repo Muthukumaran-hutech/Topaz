@@ -209,73 +209,30 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-
-
-    <TextView
-        android:layout_width="76dp"
-        android:layout_height="21dp"
-        android:layout_marginStart="47dp"
-        android:layout_marginTop="663dp"
-        android:text="@string/password"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/pwd_change"
-        android:layout_width="280dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="47dp"
-        android:layout_marginTop="688dp"
-        android:background="@color/white_gr"
-        android:inputType="textPassword"
-        android:paddingStart="20dp"
-        android:text="......."
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/change3"
-        android:layout_width="53dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="705dp"
-        android:layout_marginEnd="20dp"
-        android:text="@string/change"
-        android:textColor="@color/purple"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/pwd_change"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/reset"
         android:layout_width="150dp"
         android:layout_height="60dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="800dp"
+        android:layout_marginTop="30dp"
         android:background="@color/white_gr"
         android:text="@string/reset"
         android:textColor="@color/blue"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/phone_no_change" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/update"
         android:layout_width="150dp"
         android:layout_height="60dp"
         android:layout_marginStart="200dp"
-        android:layout_marginTop="800dp"
         android:background="@color/btn"
         android:text="@string/update"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/reset" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

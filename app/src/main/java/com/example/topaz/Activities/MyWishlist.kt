@@ -41,28 +41,13 @@ class MyWishlist : AppCompatActivity() {
         binding.wishlistadapter.adapter = wishlistAdapter
 
         binding.backarrow2.setOnClickListener {
-            startActivity(Intent(activity, HomeScreen::class.java))
+           // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             finish()
         }
     }
 
 
-    override fun onBackPressed() {
-        //super.onBackPressed()
-        val message = "Are you sure yo want to exit"
-        AlertDialog.Builder(this)
-            .setTitle("Applcation will be logged out ")
-            .setMessage(message)
-            .setPositiveButton("OK") { _, _ ->
-                super.onBackPressed()
 
-                //  binding.phoneContainer.helperText = getString(R.id.Required)
-            }.setNegativeButton("Cancel") { _, _ ->
-                dismissDialog(0)
-                //  binding.phoneContainer.helperText = getString(R.id.Required)
-            }
-            .show()
-    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater

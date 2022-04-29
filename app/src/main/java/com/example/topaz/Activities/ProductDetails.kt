@@ -37,7 +37,7 @@ class ProductDetails : AppCompatActivity() {
 
         binding.productBackArrow.setOnClickListener{
             startActivity(Intent(activity,InnerCategories::class.java))
-            finish()
+
         }
 
         imageList.add(R.drawable.home_slider_banner)
@@ -85,7 +85,7 @@ class ProductDetails : AppCompatActivity() {
 
                 //  binding.phoneContainer.helperText = getString(R.id.Required)
             }.setNegativeButton("Cancel") { _, _ ->
-                dismissDialog(0)
+                //dismissDialog(0)
                 //  binding.phoneContainer.helperText = getString(R.id.Required)
             }
             .show()

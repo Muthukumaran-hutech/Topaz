@@ -83,17 +83,17 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner {
 
         binding.categories.setOnClickListener {
             startActivity(Intent(activity, CategoryActivity::class.java))
-            finish()
+            //finish()
         }
 
         binding.account.setOnClickListener {
             startActivity(Intent(activity, MyAccount::class.java))
-            finish()
+            //finish()
         }
 
         binding.fav.setOnClickListener {
             startActivity(Intent(activity, MyWishlist::class.java))
-            finish()
+            //finish()
         }
 
     }
@@ -109,7 +109,7 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner {
 
                 //  binding.phoneContainer.helperText = getString(R.id.Required)
             }.setNegativeButton("Cancel") { _, _ ->
-                dismissDialog(0)
+               // dismissDialog(0)
                 //  binding.phoneContainer.helperText = getString(R.id.Required)
             }
             .show()

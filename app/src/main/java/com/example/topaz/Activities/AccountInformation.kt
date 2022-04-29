@@ -79,7 +79,7 @@ class AccountInformation : AppCompatActivity() {
         if (name.isEmpty()) {
             binding.accountInfoUserName.error = "Field cannot be empty"
             return false
-        } else if (name.length >= 15) {
+        } else if (name.length >= 50) {
             binding.accountInfoUserName.error = "Username too long"
             return false;
         }
