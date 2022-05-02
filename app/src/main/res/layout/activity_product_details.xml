@@ -102,15 +102,27 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/whislist_prod_details" />
 
+
+            <ProgressBar
+                android:id="@+id/app_progress_bar_3"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/product_specification_desc"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/product_image_slider" />
             <TextView
-                android:id="@+id/textView22"
+                android:id="@+id/wood_material_name"
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="30dp"
                 android:paddingStart="10dp"
-                android:text="@string/body_shape"
+                android:text=""
                 android:textColor="@color/dd_text_color"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -127,7 +139,7 @@
                 android:text="@string/_59"
                 android:textColor="@color/primary_blue"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView22" />
+                app:layout_constraintTop_toBottomOf="@+id/wood_material_name" />
 
             <TextView
                 android:id="@+id/textView16"
@@ -140,7 +152,7 @@
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/textView14"
-                app:layout_constraintTop_toBottomOf="@+id/textView22" />
+                app:layout_constraintTop_toBottomOf="@+id/wood_material_name" />
 
             <TextView
                 android:id="@+id/textView15"
@@ -204,6 +216,7 @@
 
 
                 <TextView
+                    android:id="@+id/product_specification_size"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:layout_marginStart="210dp"
@@ -211,7 +224,7 @@
                     android:background="@color/transperent"
                     android:gravity="left"
                     android:paddingStart="10dp"
-                    android:text="8' x 4'"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -236,6 +249,7 @@
 
 
                 <TextView
+                    android:id="@+id/product_specification_thickness"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:layout_marginStart="210dp"
@@ -243,7 +257,7 @@
                     android:background="@color/transperent"
                     android:gravity="left"
                     android:paddingStart="10dp"
-                    android:text="18 mm"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -268,6 +282,7 @@
 
 
                 <TextView
+                    android:id="@+id/product_specification_brand"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:layout_marginStart="210dp"
@@ -275,7 +290,7 @@
                     android:background="@color/transperent"
                     android:gravity="left"
                     android:paddingStart="10dp"
-                    android:text="Brand"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -300,6 +315,7 @@
 
 
                 <TextView
+                    android:id="@+id/product_specification_wood_type"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:layout_marginStart="210dp"
@@ -307,7 +323,7 @@
                     android:background="@color/transperent"
                     android:gravity="left"
                     android:paddingStart="10dp"
-                    android:text="@string/hardwood"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -362,13 +378,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/productlinear" />
 
             <TextView
+                android:id="@+id/product_specification_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:background="@color/transperent"
                 android:gravity="left"
                 android:paddingStart="10dp"
-                android:text="@string/desc1_"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"

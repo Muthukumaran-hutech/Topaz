@@ -1,4 +1,4 @@
-package com.example.topaz.Models
+package com.example.topaz.ApiModels
 
 import com.google.gson.annotations.SerializedName
 

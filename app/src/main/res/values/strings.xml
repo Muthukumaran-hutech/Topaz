@@ -193,11 +193,11 @@
     <string name="reset">Reset</string>
     <string name="your_email_address">Enter your Email Address</string>
     <string name="change_password">Change Password</string>
-    <string name="name_">name</string>
-    <string name="customer_id_">customer id</string>
-    <string name="enter_address_">enter address</string>
-    <string name="enter_mobile_no_">enter mobile no</string>
-    <string name="enter_email_address_">enter email address</string>
+    <string name="name_">Enter name</string>
+    <string name="customer_id_">Enter customer id</string>
+    <string name="enter_address_">Enter address</string>
+    <string name="enter_mobile_no_">Enter phone no</string>
+    <string name="enter_email_address_">Enter email address</string>
     <string name="required">Please Enter 10 digit Mobile Number</string>
 
 

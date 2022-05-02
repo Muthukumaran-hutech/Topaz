@@ -33,10 +33,10 @@
             android:name=".Activities.ChatActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.SplashScreen"
+            android:name=".Activities.ProductDetails"
             android:exported="false" />
         <activity
-            android:name=".Activities.ProductDetails"
+            android:name=".Activities.HomeScreen"
             android:exported="false" />
         <activity
             android:name=".Activities.MyCartNew"
@@ -89,7 +89,7 @@
             android:name=".Activities.InvoiceDetails"
             android:exported="false" />
         <activity
-            android:name=".Activities.HomeScreen"
+            android:name=".Activities.OrderDetails"
             android:exported="false" />
         <activity
             android:name=".Activities.MyCart"
@@ -134,7 +134,7 @@
             android:name=".Activities.MyOrders"
             android:exported="false" />
         <activity
-            android:name=".Activities.OrderDetails"
+            android:name=".Activities.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,13 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--  res/drawable/rounded_edittext.xml -->
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle"
-    android:padding="10dp">
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="132dp"
+    android:height="54dp"
+    android:viewportWidth="132"
+    android:viewportHeight="54"
+    >
 
-    <solid android:color="#00ADEF" />
-    <corners
-        android:bottomRightRadius="5dp"
-        android:bottomLeftRadius="5dp"
-        android:topLeftRadius="5dp"
-        android:topRightRadius="5dp" />
-</shape>
+    <group>
+
+        <clip-path
+            android:pathData="M4 0H128C130.209 0 132 1.79086 132 4V50C132 52.2091 130.209 54 128 54H4C1.79086 54 0 52.2091 0 50V4C0 1.79086 1.79086 0 4 0Z"
+            />
+
+        <path
+            android:pathData="M0 0V54H132V0"
+            android:fillColor="#47A5E1"
+            />
+
+    </group>
+
+</vector>

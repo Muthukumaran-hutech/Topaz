@@ -110,22 +110,8 @@
         android:textColorHint="@color/grey_1"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/countryCodePicker"
-        app:layout_constraintTop_toTopOf="@+id/countryCodePicker" />
+        app:layout_constraintTop_toTopOf="@+id/country_Code_Picker" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/phone_container"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        android:layout_marginHorizontal="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingStart="10dp"
-        android:textSize="14sp"
-        android:visibility="gone"
-        app:helperText="@string/required"
-        app:helperTextTextColor="@color/red"
-        app:layout_constraintStart_toStartOf="@+id/countryCodePicker"
-        app:layout_constraintTop_toBottomOf="@+id/countryCodePicker" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/phone_continue_btn"
@@ -138,6 +124,6 @@
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/phone_no_edit_text"
-        app:layout_constraintStart_toStartOf="@+id/countryCodePicker"
+        app:layout_constraintStart_toStartOf="@+id/country_Code_Picker"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

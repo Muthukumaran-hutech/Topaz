@@ -39,7 +39,7 @@ class LoginActivity : AppCompatActivity() {
 
         binding.phoneContinueBtn.setOnClickListener {
               submitForm()
-            phoneFocusListner()
+           // phoneFocusListner()
 
             /* startActivity(Intent(activity, OtpVerfification::class.java))
              finish()*/
@@ -61,20 +61,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun resetForm() {
-        var message = ""
-        if (binding.phoneContainer.helperText == null)
-            message += "\n\nPhone: " + binding.phoneContainer.helperText
 
-        AlertDialog.Builder(this)
-            .setTitle("Form Submitted")
-            .setMessage(message)
-            .setPositiveButton("OK") { _, _ ->
-                binding.phoneNoEditText.text = null
-
-                //  binding.phoneContainer.helperText = getString(R.id.Required)
-            }.show()
-    }
 
     private fun inValidForm() {
         var message = "Please Enter a Valid Number"
@@ -98,7 +85,7 @@ class LoginActivity : AppCompatActivity() {
     private fun phoneFocusListner() {
         binding.phoneNoEditText.setOnFocusChangeListener { _, focused ->
             if (!focused) {
-                binding.phoneContainer.helperText = validPhone()
+             //   binding.phoneContainer.helperText = validPhone()
             }
         }
     }

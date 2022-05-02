@@ -1,16 +1,20 @@
 package com.example.topaz.Adapters
 
+import android.graphics.BitmapFactory
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.topaz.Activities.CategoryActivity
 import com.example.topaz.Interface.CategoryPageItemClickListner
 import com.example.topaz.Models.CategoriesModel
-import com.example.topaz.Models.HomeCategoryModel
 import com.example.topaz.R
+import java.lang.Byte.decode
+import java.util.*
+import kotlin.collections.ArrayList
+
 
 class CategoryAdapter(var list2: ArrayList<CategoriesModel>, var categoryPageItemClickListner1: CategoryPageItemClickListner) : RecyclerView.Adapter<CategoryAdapter.MyViewHolder>() {
 
@@ -36,8 +40,14 @@ class CategoryAdapter(var list2: ArrayList<CategoriesModel>, var categoryPageIte
         var catName=itemView.findViewById<TextView>(R.id.plwwoodsstext)
 
         fun bindItems(listModel2:List<CategoriesModel>, position: Int, categoryPageItemClickListner1: CategoryPageItemClickListner) {
-            catImage.setImageResource(listModel2[position].CateegoryImage)
+          ///catImage.setImageResource(listModel2[position].CateegoryImage)
             catName.text = listModel2[position].CateegoryName
+
+            //----------Write the logic----------------
+
+            val decodedString: ByteArray = Base64.decode(listModel2.get(position).CateegoryImage,Base64.DEFAULT)
+            val bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+           catImage.setImageBitmap(bitmap)
 
             catImage.setOnClickListener {
                 //Onclick will trigger the interface in activity

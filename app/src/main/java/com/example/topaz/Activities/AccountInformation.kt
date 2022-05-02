@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.topaz.Interface.JsonPlaceholder
 import com.example.topaz.Models.UpdateCustomerInfo
-import com.example.topaz.Models.UpdateUserApiModel
+import com.example.topaz.ApiModels.UpdateUserApiModel
 import com.example.topaz.RetrofitApiInstance.UpdateAccountInfoInstance
 import com.example.topaz.databinding.ActivityAccountInformationBinding
 import com.google.gson.JsonObject

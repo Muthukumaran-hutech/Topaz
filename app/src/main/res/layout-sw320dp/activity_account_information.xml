@@ -59,13 +59,12 @@
                 android:id="@+id/cust_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="47dp"
                 android:layout_marginTop="120dp"
                 android:text="@string/customer_name"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/account_info_user_name"
                 app:layout_constraintTop_toTopOf="@+id/textView3" />
 
             <EditText
@@ -91,13 +90,12 @@
                 android:id="@+id/cust_id"
                 android:layout_width="89dp"
                 android:layout_height="21dp"
-                android:layout_marginStart="47dp"
                 android:layout_marginTop="215dp"
                 android:text="@string/customer_id"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/account_info_customer_id"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
@@ -124,13 +122,12 @@
                 android:id="@+id/address"
                 android:layout_width="88dp"
                 android:layout_height="21dp"
-                android:layout_marginStart="47dp"
                 android:layout_marginTop="305dp"
                 android:text="@string/address_line"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/account_info_address_line"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
@@ -156,13 +153,12 @@
                 android:id="@+id/ph_no"
                 android:layout_width="105dp"
                 android:layout_height="21dp"
-                android:layout_marginStart="47dp"
                 android:layout_marginTop="395dp"
                 android:text="@string/phone_number"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/account_info_ph_number"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
@@ -190,13 +186,12 @@
                 android:id="@+id/email"
                 android:layout_width="102dp"
                 android:layout_height="21dp"
-                android:layout_marginStart="47dp"
                 android:layout_marginTop="485dp"
                 android:text="@string/email_address"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/account_info_email_id"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
