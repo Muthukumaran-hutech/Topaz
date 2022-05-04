@@ -124,7 +124,7 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner {
 
         when(item.itemId){
         R.id.search_bar->  startActivity(Intent(activity,SearchActivity::class.java))
-            R.id.notification_bar->  Toast. makeText(applicationContext," Currently In Process",Toast. LENGTH_SHORT).show()
+            R.id.notification_bar->  startActivity(Intent(activity,Notifications::class.java))
             R.id.my_cart->  startActivity(Intent(activity,MyCart::class.java))
         }
         return super.onOptionsItemSelected(item)

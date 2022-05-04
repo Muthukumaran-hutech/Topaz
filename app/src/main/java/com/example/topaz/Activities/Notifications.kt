@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -11,63 +12,57 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.example.topaz.Adapters.HomeCategoriesAdapter
-import com.example.topaz.Adapters.SubAdapter.AlertAdapter
+import com.example.topaz.Adapters.IntroSliderAdapter
+import com.example.topaz.Adapters.NotificationAdapter
 import com.example.topaz.Fragments.*
 import com.example.topaz.R
+import com.example.topaz.databinding.ActivityIntroSliderBinding
+import com.example.topaz.databinding.ActivityNotificationsBinding
+import com.google.android.material.tabs.TabLayoutMediator
 import java.util.ArrayList
 
 class Notifications : AppCompatActivity() {
 
-    val alertFragment = NotificationAlertFragment()
-    val notificationFragment2 = NotificationOfferFragment()
-    lateinit var adapter: AlertAdapter
+
+    private lateinit var binding: ActivityNotificationsBinding
     lateinit var activity: Activity
-    lateinit var view_pager2: ViewPager
+    private val notifyList = ArrayList<Fragment>()
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_notifications)
+        binding = ActivityNotificationsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        view_pager2 =findViewById(R.id.view_pager2)
-        activity = this
-
-
-
-
-
-    /*    view_pager2?.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {
-
-            }
-
-            override fun onPageSelected(position: Int) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onPageScrollStateChanged(state: Int) {
-                TODO("Not yet implemented")
-            }
-
-
-            class myPagerAdapter(manager: FragmentManager) : FragmentPagerAdapter(manager) {
-
-                val list: MutableList<Fragment> = ArrayList()
-
-
-                override fun getCount(): Int {
-                    return list.size
-                }
-
-                override fun getItem(position: Int): Fragment {
-                    return list[position]
-                }
-
-            }
+        binding.notificationsBackArrow.setOnClickListener{
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            finish()
         }
-*/
+
+        activity = this
+        val adapter = NotificationAdapter(this)
+       // binding.tabLayout.setupWithViewPager(binding.viewPager2)
+
+        binding.viewPager2.adapter = adapter
+
+        notifyList.addAll(
+
+            listOf( AlertFragment(), FragmentOffers() ) )
+        adapter.setNotificationList(notifyList)
+        TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->
+            if(position==0) {
+                tab.text = "Alert"
+            }
+            else{
+                tab.text = "Offer"
+            }
+        }.attach()
+        //binding.indicatorLayout?.setIndicatorCount(notifyList.size)
+
+
+
     }
+
 }

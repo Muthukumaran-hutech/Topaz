@@ -1,6 +1,7 @@
 package com.example.topaz.Interface
 
 import com.example.topaz.ApiModels.CategoryListApiModel
+import com.example.topaz.ApiModels.OffersListApiModel
 import com.example.topaz.ApiModels.ProductDetailsListApiModel
 import com.example.topaz.ApiModels.UpdateUserApiModel
 import com.google.gson.JsonObject
@@ -22,6 +23,10 @@ interface JsonPlaceholder {
 
     @GET("viewProduct")
     fun  viewProduct():Call<List<ProductDetailsListApiModel>>
+
+
+    @GET("offers/get")
+    fun  viewOffers():Call<List<OffersListApiModel>>
 
 
 }
