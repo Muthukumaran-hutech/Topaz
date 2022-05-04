@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/transperent">
 
     <ImageView
         android:id="@+id/search_icon"
@@ -22,8 +23,6 @@
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:background="@color/white"
-        android:hint="@string/search_products"
         android:gravity="start"
         android:paddingTop="10dp"
         android:textColor="@color/black"

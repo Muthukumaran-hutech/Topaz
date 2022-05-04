@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
 
 
@@ -107,7 +108,7 @@
             android:name=".Activities.MyWishlist"
             android:exported="false" />
         <activity
-            android:name=".Activities.SearchActivity"
+            android:name=".Activities.SplashScreen"
             android:exported="false" />
         <activity
             android:name=".Activities.CategoryActivity"
@@ -134,7 +135,7 @@
             android:name=".Activities.MyOrders"
             android:exported="false" />
         <activity
-            android:name=".Activities.SplashScreen"
+            android:name=".Activities.SearchActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -22,4 +22,6 @@ interface JsonPlaceholder {
 
     @GET("viewProduct")
     fun  viewProduct():Call<List<ProductDetailsListApiModel>>
+
+
 }

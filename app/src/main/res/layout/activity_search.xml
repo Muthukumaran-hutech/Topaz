@@ -11,7 +11,6 @@
         android:id="@+id/cattextview"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/white"
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="16sp"
@@ -31,23 +30,20 @@
 
     <SearchView
         android:id="@+id/search_edit"
-        android:layout_width="250dp"
+        android:layout_width="0dp"
         android:layout_height="45dp"
+        android:layout_marginHorizontal="16dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="50dp"
+        android:theme="@style/ThemeOverlay.SearchView"
         android:background="@drawable/rectangle_search_box"
-        android:hint="@string/search_"
-        android:imeOptions="actionSearch"
-        android:clickable="true"
-        android:inputType="text"
-        android:paddingStart="20dp"
-        android:text=""
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
+        android:iconifiedByDefault="false"
+        android:queryHint="@string/search_"
         android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/cattextview"
         app:layout_constraintStart_toEndOf="@+id/search_back_arrow"
-        app:layout_constraintTop_toTopOf="parent"
-        android:focusable="true" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/searchedit2"
@@ -65,7 +61,7 @@
         app:layout_constraintStart_toEndOf="@+id/search_back_arrow"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+   <!-- <ImageView
         android:id="@+id/wrong"
         android:layout_width="13dp"
         android:layout_height="13dp"
@@ -75,12 +71,13 @@
         app:layout_constraintEnd_toEndOf="@+id/cattextview"
         app:layout_constraintStart_toEndOf="@+id/search_edit"
         app:layout_constraintTop_toTopOf="parent" />
-
+-->
     <TextView
-        android:id="@+id/textView18"
+        android:id="@+id/search_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:textColor="@color/black"
         android:layout_marginTop="10dp"
         android:text="@string/_0_result"
         app:layout_constraintStart_toStartOf="parent"
@@ -96,15 +93,17 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView18" />
+        app:layout_constraintTop_toBottomOf="@+id/search_result" />
 
     <ImageView
-        android:id="@+id/mic"
+        android:id="@+id/search_mic"
         android:layout_width="25dp"
         android:layout_height="23dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
         android:src="@drawable/ic_baseline_mic_none_black_24"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="@+id/cattextview"
         app:layout_constraintStart_toEndOf="@+id/search_edit"
         app:layout_constraintTop_toTopOf="parent" />

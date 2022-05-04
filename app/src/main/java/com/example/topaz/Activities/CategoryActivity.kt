@@ -112,10 +112,7 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
                         )
                         categoryInnerlist.add(categoryModel)
                     }
-                    binding.categoryRecyclerView.layoutManager = GridLayoutManager(
-                        this@CategoryActivity,
-                        3
-                    )//Count depicts no of elements in row
+                    binding.categoryRecyclerView.layoutManager = GridLayoutManager(this@CategoryActivity, 3)//Count depicts no of elements in row
                     var categoryAdapter = CategoryAdapter(categoryInnerlist, this@CategoryActivity)
                     binding.categoryRecyclerView.adapter = categoryAdapter
                     binding.categoryRecyclerView.setHasFixedSize(true)

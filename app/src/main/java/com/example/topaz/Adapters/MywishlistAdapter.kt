@@ -6,7 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.topaz.R
 
-class MywishlistAdapter  : RecyclerView.Adapter<MywishlistAdapter.MyViewHolder>() {
+class
+MywishlistAdapter  : RecyclerView.Adapter<MywishlistAdapter.MyViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
