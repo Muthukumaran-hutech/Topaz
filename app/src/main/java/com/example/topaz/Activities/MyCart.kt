@@ -54,7 +54,7 @@ class MyCart : AppCompatActivity() {
         }
 
         notificationBtn?.setOnClickListener{
-            Toast. makeText(applicationContext," Currently In Process", Toast. LENGTH_SHORT).show()
+            startActivity(Intent(activity,Notifications::class.java))
 
         }
 
