@@ -48,7 +48,7 @@
         android:layout_height="0dp"
         android:background="@color/white"
         android:fillViewport="true"
-        app:layout_constraintBottom_toTopOf="@+id/price"
+        app:layout_constraintBottom_toTopOf="@+id/get_a_price"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/prod_details_toolbar">
@@ -411,11 +411,12 @@
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/price"
+        android:id="@+id/get_a_price"
         android:layout_width="180dp"
         android:layout_height="58dp"
         android:background="@color/price_btn"
         android:text="@string/get_a_price"
+        android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="14sp"
         android:textStyle="bold"
@@ -424,16 +425,17 @@
         app:layout_constraintTop_toTopOf="@+id/textView6" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/buynow"
+        android:id="@+id/buy_now"
         android:layout_width="180dp"
         android:layout_height="58dp"
         android:background="@color/buy_btn"
         android:text="@string/buy_now"
+        android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/price"
+        app:layout_constraintStart_toEndOf="@+id/get_a_price"
         app:layout_constraintTop_toTopOf="@+id/textView6" />
 
     <ImageView

@@ -1,14 +1,11 @@
 package com.example.topaz.Interface
 
-import com.example.topaz.ApiModels.CategoryListApiModel
-import com.example.topaz.ApiModels.OffersListApiModel
-import com.example.topaz.ApiModels.ProductDetailsListApiModel
-import com.example.topaz.ApiModels.UpdateUserApiModel
+import com.example.topaz.ApiModels.*
 import com.google.gson.JsonObject
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.PUT
+import retrofit2.http.*
 
 interface JsonPlaceholder {
     /*@PUT("updatecustomer/CUS001")//With using suspend function
@@ -27,6 +24,12 @@ interface JsonPlaceholder {
 
     @GET("offers/get")
     fun  viewOffers():Call<List<OffersListApiModel>>
+
+
+    @POST("customerdetails")
+    @Multipart
+    fun checkIfCustomerExists(@Part("primaryPhonenumber") requestBody: RequestBody):Call<CheckUserApiModel>
+
 
 
 }

@@ -2,6 +2,7 @@ package com.example.topaz.Activities
 
 import android.app.Activity
 import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -24,6 +25,7 @@ class AccountInformation : AppCompatActivity() {
     var ss = ""
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAccountInformationBinding.inflate(layoutInflater)
@@ -35,10 +37,24 @@ class AccountInformation : AppCompatActivity() {
         }
         activity = this
 
+        val sharedPreference =  getSharedPreferences("CUSTOMER_DATA", Context.MODE_PRIVATE)
+        var custName = sharedPreference.getString("customerName","")
+        var custId = sharedPreference.getString("customercode","")
+        var custAddress = sharedPreference.getString("addressLine","")
+        var custPhoneno = sharedPreference.getString("primaryPhonenumber","")
+        var custEmailId = sharedPreference.getString("customercode","")
+        //set the edittext
+
+        binding.accountInfoUserName.setText(custName.toString())
+        binding.accountInfoCustomerId.setText(custId.toString())
+        binding.accountInfoAddressLine.setText(custAddress.toString())
+        binding.accountInfoPhNumber.setText(custPhoneno.toString())
+        binding.accountInfoEmailId.setText(custEmailId.toString())
+
         binding.accountInfoPhNumber.setText(ss)
-        //binding.accountInfoPhNumber.isEnabled = false
-       // binding.accountInfoEmailId.isEnabled = false
-       // binding.accountInfoCustomerId.isEnabled = false
+        binding.accountInfoPhNumber.isEnabled = false
+        binding.accountInfoEmailId.isEnabled = false
+        binding.accountInfoCustomerId.isEnabled = false
         binding.accountInfoSkipBtn.setOnClickListener {
             startActivity(Intent(activity, HomeScreen::class.java))
             finish()

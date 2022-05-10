@@ -75,6 +75,13 @@ class ProductDetails : AppCompatActivity() {
                 .show()
         }
 
+        binding.getAPrice.setOnClickListener {
+            startActivity(Intent(activity,ProductQuotation::class.java))
+        }
+
+        binding.buyNow.setOnClickListener {
+            startActivity(Intent(activity,MyCart::class.java))
+        }
         binding.shareProdDetails.setOnClickListener {
             Toast.makeText(applicationContext, "Will be placed with Google Playstore Link", Toast.LENGTH_SHORT)
                 .show()

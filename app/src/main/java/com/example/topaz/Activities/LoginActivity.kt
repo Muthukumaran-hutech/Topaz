@@ -3,21 +3,25 @@ package com.example.topaz.Activities
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.util.Patterns
-import android.widget.Button
-import android.widget.EditText
-import com.example.topaz.R
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.topaz.ApiModels.CheckUserApiModel
+import com.example.topaz.Interface.JsonPlaceholder
+import com.example.topaz.RetrofitApiInstance.UpdateAccountInfoInstance
 import com.example.topaz.databinding.ActivityLoginBinding
-import com.google.android.gms.auth.api.phone.SmsRetriever
-import com.google.firebase.FirebaseException
-import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
-import com.hbb20.CountryCodePicker
-import java.util.concurrent.TimeUnit
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -38,14 +42,65 @@ class LoginActivity : AppCompatActivity() {
 
 
         binding.phoneContinueBtn.setOnClickListener {
-              submitForm()
-           // phoneFocusListner()
+            checkUserApiCall()
 
-            /* startActivity(Intent(activity, OtpVerfification::class.java))
-             finish()*/
+
         }
 
 
+    }
+
+    private fun checkUserApiCall() {
+        var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
+            .create(JsonPlaceholder::class.java)
+
+        val body: RequestBody = binding.phoneNoEditText.text.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+        val requestBodyMap: MutableMap<String, RequestBody> = HashMap()
+        requestBodyMap["primaryPhonenumber"] = body
+
+
+       res.checkIfCustomerExists(requestBody = body).enqueue(object : Callback<CheckUserApiModel?> {
+           override fun onResponse(
+               call: Call<CheckUserApiModel?>,
+               response: Response<CheckUserApiModel?>
+           ) {
+
+               if(response.isSuccessful){
+                   response.body()?.let { saveServerData(it) }
+
+                   submitForm()
+
+               }
+               else{
+                   val message = "This is not a Registerd number"
+                   AlertDialog.Builder(this@LoginActivity)
+                       .setTitle("Please contact your Administrator ")
+                       .setMessage(message)
+                       .setPositiveButton("OK") { _, _ ->
+
+                       }.show()
+               }
+
+           }
+
+           override fun onFailure(call: Call<CheckUserApiModel?>, t: Throwable) {
+               Toast. makeText(applicationContext,"Something Went Wronng Please Try Again Later", Toast.LENGTH_LONG).show()
+           }
+       })
+    }
+
+    private fun saveServerData(checkUserApiModel: CheckUserApiModel) {
+        val sharedPreference =  getSharedPreferences("CUSTOMER_DATA", Context.MODE_PRIVATE)
+        val editor = sharedPreference.edit()
+        editor.putString("customercode",checkUserApiModel.customercode)
+        editor.putString("customerName",checkUserApiModel.customerName)
+        editor.putString("primaryPhonenumber",checkUserApiModel.primaryPhonenumber)
+        editor.putString("email",checkUserApiModel.email)
+        editor.putString("addressLine",checkUserApiModel.addressLine)
+        // editor.putString("secondaryPhonenumber","")
+        //editor.putString("city",checkUserApiModel.city)
+        //editor.putLong("l",100L)
+        editor.apply()
     }
 
 
@@ -72,14 +127,7 @@ class LoginActivity : AppCompatActivity() {
             .setPositiveButton("OK") { _, _ ->
                 // do Nothing
             }.show()
-        /*if (binding.phoneContainer.helperText.length < 10)
-            message += "\n\nPhone: " + binding.phoneContainer.helperText
-        AlertDialog.Builder(this)
-            .setTitle("Invalid Number")
-            .setMessage(message)
-            .setPositiveButton("OK") { _, _ ->
-                // do Nothing
-            }.show()*/
+
     }
 
     private fun phoneFocusListner() {
