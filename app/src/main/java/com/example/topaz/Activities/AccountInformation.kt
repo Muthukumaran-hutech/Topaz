@@ -42,7 +42,7 @@ class AccountInformation : AppCompatActivity() {
         var custId = sharedPreference.getString("customercode","")
         var custAddress = sharedPreference.getString("addressLine","")
         var custPhoneno = sharedPreference.getString("primaryPhonenumber","")
-        var custEmailId = sharedPreference.getString("customercode","")
+        var custEmailId = sharedPreference.getString("email","")
         //set the edittext
 
         binding.accountInfoUserName.setText(custName.toString())

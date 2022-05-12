@@ -24,7 +24,6 @@ import com.example.topaz.Fragments.SliderFragment2
 import com.example.topaz.Fragments.SliderFragment3
 import com.example.topaz.R
 import com.example.topaz.databinding.ActivityIntroSliderBinding
-import com.example.topaz.databinding.ActivityOtpVerfificationBinding
 import java.util.ArrayList
 
 
@@ -52,7 +51,7 @@ class IntroSlider : AppCompatActivity() {
             listOf( SliderFragment(), SliderFragment2(), SliderFragment3() ) )
 
         adapter.setFragmentList(fragmentList)
-        binding.indicatorLayout?.setIndicatorCount(fragmentList.size)
+        binding.indicatorLayout.setIndicatorCount(fragmentList.size)
 
           registerListeners()
     }
@@ -63,7 +62,7 @@ class IntroSlider : AppCompatActivity() {
 
             override fun onPageSelected(position: Int) {
                   indicatorLayout?.selectCurrentPosition(position)
-                binding.indicatorLayout?.selectCurrentPosition(position)
+                binding.indicatorLayout.selectCurrentPosition(position)
                 if (position < fragmentList.lastIndex) {
                     binding.btnSkip.visibility = View.VISIBLE
                     binding.btnNext.visibility = View.VISIBLE

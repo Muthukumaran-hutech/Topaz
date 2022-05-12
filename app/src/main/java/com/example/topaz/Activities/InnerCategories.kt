@@ -48,7 +48,7 @@ class InnerCategories : AppCompatActivity(), InnerCategoryItemClickListner {
 
         inerCategorylist.add(InnerCategoryModelList(R.drawable.plywoodbiards,"Wooden Waterproof Plywood Sheet, Thickness: 18 mm\n","₹59/ ","Square Feet","₹ 84","24% Off"))
         inerCategorylist.add(InnerCategoryModelList(R.drawable.pvcboards,"Waterproof Brown Plywood, Thickness: 4 - 25 mm","₹59/ ","Square Feet","₹ 84","24% Off"))
-        inerCategorylist.add(InnerCategoryModelList(R.drawable.face_veneers,"Gurjan Waterproof Gurjan Plywood, Thickness: 15mm,","₹59/ ","Square Feet","₹ 84","24% Off"))
+        //inerCategorylist.add(InnerCategoryModelList(R.drawable.face_veneers,"Gurjan Waterproof Gurjan Plywood, Thickness: 15mm,","₹59/ ","Square Feet","₹ 84","24% Off"))
 
 
     }

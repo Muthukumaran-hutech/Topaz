@@ -9,7 +9,7 @@
     tools:context=".Activities.Notifications">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/cat_toolbar"
+        android:id="@+id/edit_address_toolbar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="@color/blue">

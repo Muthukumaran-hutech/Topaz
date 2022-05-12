@@ -72,7 +72,7 @@ class AccountDetails {
     public var accountid: Int = 0
 
     @SerializedName("accountNumber")
-    public var accountNumber: Int = 0
+    public var accountNumber: String = ""
 
     @SerializedName("ifscCode")
     public var ifscCode: String = ""

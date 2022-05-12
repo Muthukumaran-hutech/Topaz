@@ -6,12 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:weightSum="2"
     tools:context=".Activities.IntroSlider">
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_40sdp"
         android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_70sdp"
         android:src="@drawable/topaz_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,8 +34,8 @@
     <ImageView
         android:id="@+id/imageView10"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/_570sdp"
-        android:layout_marginTop="@dimen/_190sdp"
+        android:layout_height="@dimen/_550sdp"
+        android:layout_marginTop="@dimen/_150sdp"
         android:foregroundGravity="center_vertical"
         android:src="@drawable/rectanglee_270"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,17 +77,18 @@
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/_50sdp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
                 android:layout_marginStart="@dimen/_170sdp"
                 android:layout_marginEnd="@dimen/_70sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 app:layout_constraintEnd_toStartOf="@+id/btn_next"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <com.example.topaz.Activities.IndicatorLayout
+               <!-- <com.example.topaz.Activities.IndicatorLayout
                     android:id="@+id/indicator_Layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -94,18 +97,34 @@
                     android:layout_marginTop="@dimen/_15sdp"
                     android:orientation="horizontal"
                     app:indicatorCount="3"
-                    app:layout_constraintBottom_toBottomOf="@+id/btn_layout" />
+                    app:layout_constraintBottom_toBottomOf="@+id/btn_layout" />-->
 
             </LinearLayout>
+
+            <com.example.topaz.Activities.IndicatorLayout
+                android:id="@+id/indicator_Layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="90dp"
+                android:layout_marginRight="10dp"
+                android:orientation="horizontal"
+
+                app:indicatorCount="3"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn_next"
+                app:layout_constraintLeft_toRightOf="@id/btn_skip"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/get_start"
-                android:layout_width="@dimen/_320sdp"
-                android:layout_height="@dimen/_60sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
                 android:layout_marginStart="@dimen/_47sdp"
                 android:layout_marginEnd="@dimen/_47sdp"
-                android:layout_marginBottom="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
                 android:background="@drawable/roundedbtnlite"
                 android:gravity="center"
                 android:textAllCaps="false"

@@ -8,7 +8,7 @@
     android:background="@color/white"
     tools:context=".Activities.CategoryActivity">
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/cat_toolbar"
+        android:id="@+id/edit_address_toolbar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="@color/blue"
@@ -114,9 +114,10 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:src="@drawable/finestquality_baner"
+        android:layout_marginTop="-10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cat_toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_address_toolbar" />
 
     <ProgressBar
         android:id="@+id/app_progress_bar_2"

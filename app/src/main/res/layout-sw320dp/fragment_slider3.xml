@@ -14,7 +14,7 @@
       android:id="@+id/imageView"
       android:layout_width="@dimen/_350sdp"
       android:layout_height="@dimen/_458sdp"
-      android:layout_marginTop="400dp"
+      android:layout_marginTop="@dimen/_170sdp"
       android:foregroundGravity="center_vertical"
       android:src="@drawable/rectanglee_270"
       app:layout_constraintBottom_toBottomOf="parent"
@@ -25,20 +25,20 @@
 
   <ImageView
       android:id="@+id/imageView7"
-      android:layout_width="@dimen/_310sdp"
-      android:layout_height="@dimen/_300sdp"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/_250sdp"
       android:layout_marginStart="@dimen/_13sdp"
-      android:layout_marginTop="150dp"
       android:layout_marginEnd="@dimen/_13sdp"
-      android:src="@drawable/rect_271"
+      android:layout_marginTop="5dp"
+      android:src="@drawable/slide_3"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
-      android:layout_width="209dp"
-      android:layout_height="0dp"
-      android:layout_marginTop="30dp"
+      android:layout_width="@dimen/_200sdp"
+      android:layout_height="@dimen/_40sdp"
+      android:layout_marginTop="@dimen/_10sdp"
       android:gravity="center"
       android:text="@string/best_plywood"
       android:textColor="@color/white"

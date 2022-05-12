@@ -6,24 +6,30 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import com.example.topaz.R
+import com.example.topaz.databinding.ActivityCategoryBinding
+import com.example.topaz.databinding.ActivityEditAddAddressBinding
 
 class EditAddAddress : AppCompatActivity() {
 
-    private var backarrow1: ImageView? = null
+    private lateinit var binding: ActivityEditAddAddressBinding
+
     lateinit var activity: Activity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit_add_address)
+        binding = ActivityEditAddAddressBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
 
-        backarrow1 = findViewById<ImageView>(R.id.backarrow1)
+        activity = this
+        setSupportActionBar(binding.editAddressToolbar)
+        supportActionBar?.title = ""
         activity = this
 
 
 
-        backarrow1?.setOnClickListener{
-            startActivity(Intent(activity,MyAccount::class.java))
+        binding.categoryBackArrow.setOnClickListener{
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             finish()
         }
     }
