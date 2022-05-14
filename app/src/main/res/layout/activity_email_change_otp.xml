@@ -40,7 +40,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-
     </androidx.appcompat.widget.Toolbar>
 
 
@@ -77,43 +76,92 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="60dp"
-             android:background="@color/white_gr"
-            android:gravity="center"
-            android:text="5"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-
-        <TextView
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/otp_001"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="20dp"
-             android:background="@color/white_gr"
+            android:background="@color/white_gr"
             android:gravity="center"
-            android:text="0"
+            android:clickable="true"
+            android:focusable="true"
+            android:inputType="number"
+            android:maxLength="1"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="20sp" />
 
-        <TextView
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/otp_002"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="20dp"
-             android:background="@color/white_gr"
+            android:layout_marginStart="10dp"
+            android:background="@color/white_gr"
             android:gravity="center"
-            android:text="8"
+            android:clickable="true"
+            android:focusable="true"
+            android:inputType="number"
+            android:maxLength="1"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
-        <TextView
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/otp_003"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="20dp"
-             android:background="@color/white_gr"
+            android:layout_marginStart="10dp"
+            android:background="@color/white_gr"
             android:gravity="center"
-            android:text="5"
+            android:clickable="true"
+            android:focusable="true"
+            android:inputType="number"
+            android:maxLength="1"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/otp_004"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:background="@color/white_gr"
+            android:gravity="center"
+            android:text=""
+            android:clickable="true"
+            android:focusable="true"
+            android:inputType="number"
+            android:maxLength="1"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/otp_005"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:background="@color/white_gr"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:inputType="number"
+            android:maxLength="1"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/otp_006"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:background="@color/white_gr"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:inputType="number"
+            android:maxLength="1"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="20sp" />
     </LinearLayout>
@@ -125,9 +173,9 @@
         android:layout_height="wrap_content"
         android:indeterminate="true"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/confirmemailotp"
-        app:layout_constraintEnd_toEndOf="@+id/confirmemailotp"
-        app:layout_constraintStart_toStartOf="@+id/confirmemailotp"
+        app:layout_constraintBottom_toTopOf="@+id/confirm_email_otp_2"
+        app:layout_constraintEnd_toEndOf="@+id/confirm_email_otp_2"
+        app:layout_constraintStart_toStartOf="@+id/confirm_email_otp_2"
         app:layout_constraintTop_toBottomOf="@+id/otplinear" />
 
 
@@ -169,7 +217,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/confirmemailotp"
+        android:id="@+id/confirm_email_otp_2"
         android:layout_width="320dp"
         android:layout_height="60dp"
         android:layout_marginStart="47dp"
@@ -181,8 +229,6 @@
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

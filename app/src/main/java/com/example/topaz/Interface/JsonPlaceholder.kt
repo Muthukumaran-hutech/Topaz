@@ -37,7 +37,12 @@ interface JsonPlaceholder {
     @Multipart//Without suspend function
     fun verifyOldEmailOtp(@Part("emailOtp")requestBody: RequestBody):Call<ChangeEmailOtpVerifyApiModel>
 
-   /* @PUT("update/customer/email/{email}")
-    fun verifyNewEmail(@Path("email")emailOtp:String, @Body jsonObject: JsonObject) : Call<VerifyNewEmailApiModel>
-*/
+    @PUT("update/customer/email/{emailOtp}")
+    @Multipart
+    fun verifyNewEmail(@Path("emailOtp")emailOtp:String, @Part("email") requestBody: RequestBody) : Call<VerifyNewEmailApiModel>
+
+    @PUT("verify/customer/update/otp")
+    @Multipart//Without suspend function
+    fun verifyNewEmailOtp(@Part("emailOtp")requestBody: RequestBody):Call<ChangeNewEmailOtpApiModel>
+
 }

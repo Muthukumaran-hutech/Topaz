@@ -2,7 +2,7 @@ package com.example.topaz.ApiModels
 
 import com.google.gson.annotations.SerializedName
 
-class VerifyNewEmailApiModel {
+class ChangeNewEmailOtpApiModel {
 
     @SerializedName("status")
     public var status: Int = 0

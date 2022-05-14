@@ -30,6 +30,7 @@ import retrofit2.Response
 import java.util.concurrent.TimeUnit
 
 private lateinit var binding: ActivityChangeOldEmailOtpBinding
+
 class ChangeOldEmailOtp : AppCompatActivity() {
     lateinit var activity: Activity
 
@@ -56,18 +57,14 @@ class ChangeOldEmailOtp : AppCompatActivity() {
             } else {
                 binding.appProgressBar.visibility = View.VISIBLE
                 binding.appProgressBar.visibility = View.VISIBLE
-                var otpCode =
-                    (binding.otp01.text.toString() + binding.otp02.text.toString() + binding.otp03.text.toString()
-                            + binding.otp04.text.toString() + binding.otp05.text.toString() + binding.otp06.text.toString())
-                signInWithPhoneAuthCredential(otpCode)
-                startActivity(Intent(activity,EmailChangeOtp::class.java))
-                finish()
+
+                checkUserApiCall()
             }
 
         }
         countdownTimer()
         binding.confirmEmailOtp.setOnClickListener {
-            checkUserApiCall()
+
         }
         binding.otp01.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
@@ -157,23 +154,37 @@ class ChangeOldEmailOtp : AppCompatActivity() {
         val requestBodyMap: MutableMap<String, RequestBody> = HashMap()
         requestBodyMap["emailOtp"] = body
 
-        res.verifyOldEmailOtp(requestBody = body).enqueue(object : Callback<ChangeEmailOtpVerifyApiModel?> {
-            override fun onResponse(
-                call: Call<ChangeEmailOtpVerifyApiModel?>,
-                response: Response<ChangeEmailOtpVerifyApiModel?>
-            ) {
-                if (response.isSuccessful){
-                    Toast.makeText(
-                        applicationContext,
-                        "Email Verified Sucessfully",
-                        Toast.LENGTH_LONG
-                    )
-                        .show()
+        res.verifyOldEmailOtp(requestBody = body)
+            .enqueue(object : Callback<ChangeEmailOtpVerifyApiModel?> {
+                override fun onResponse(
+                    call: Call<ChangeEmailOtpVerifyApiModel?>,
+                    response: Response<ChangeEmailOtpVerifyApiModel?>
+                ) {
+                    if (response.isSuccessful) {
+                        Toast.makeText(
+                            applicationContext,
+                            "Email Verified Sucessfully",
+                            Toast.LENGTH_LONG
+                        )
+                            .show()
 
 
-                    startActivity(Intent(activity, ChangeEmail::class.java))
-                    finish()
-                }else{
+                        //val intent = Intent(this, ChangeEmail::class.java)
+                        val intent = Intent(this@ChangeOldEmailOtp, ChangeEmail::class.java)
+                        intent.putExtra("emailOtp", recievedOtp)
+                        startActivity(intent)
+                    } else {
+                        Toast.makeText(
+                            applicationContext,
+                            "Something Went Wrong User Details Not updated",
+                            Toast.LENGTH_LONG
+                        )
+                            .show()
+
+                    }
+                }
+
+                override fun onFailure(call: Call<ChangeEmailOtpVerifyApiModel?>, t: Throwable) {
                     Toast.makeText(
                         applicationContext,
                         "Something Went Wrong User Details Not updated",
@@ -182,30 +193,16 @@ class ChangeOldEmailOtp : AppCompatActivity() {
                         .show()
 
                 }
-            }
-
-            override fun onFailure(call: Call<ChangeEmailOtpVerifyApiModel?>, t: Throwable) {
-                Toast.makeText(
-                    applicationContext,
-                    "Something Went Wrong User Details Not updated",
-                    Toast.LENGTH_LONG
-                )
-                    .show()
-
-            }
-        })
+            })
 
     }
 
-    private fun signInWithPhoneAuthCredential(otpCode: String) {
 
-    }
-
-   /* private fun createOTPRequestParams(emailot: String):JsonObject{
-        var jsonObject=JsonObject()
-        jsonObject.addProperty("",emailot)
-        return Jsonoject().addProperty("","")
-    }*/
+    /* private fun createOTPRequestParams(emailot: String):JsonObject{
+         var jsonObject=JsonObject()
+         jsonObject.addProperty("",emailot)
+         return Jsonoject().addProperty("","")
+     }*/
 
 
     private fun resendOTP() {

@@ -66,6 +66,7 @@ class ChangeOldEmail : AppCompatActivity() {
             ) {
                 if (response.isSuccessful){
                     Log.d("Update Res:", response.body()!!.email)
+
                     startActivity(Intent(activity, ChangeOldEmailOtp::class.java))
                 }else{
                     Log.d("Update Res on failure:", response.body()!!.email)
