@@ -6,22 +6,31 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import com.example.topaz.R
+import com.example.topaz.databinding.ActivityCategoryBinding
+import com.example.topaz.databinding.ActivityChangeEmailBinding
 
 class ChangeEmail : AppCompatActivity() {
 
-    private var backarrow1: ImageView? = null
+    private lateinit var binding: ActivityChangeEmailBinding
     lateinit var activity: Activity
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_change_email)
+        binding = ActivityChangeEmailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        backarrow1 = findViewById<ImageView>(R.id.backarrow1)
+
         activity = this
 
 
-        backarrow1?.setOnClickListener{
-            startActivity(Intent(activity,EditProfile::class.java))
+        binding.categoryBackArrow.setOnClickListener{
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             finish()
+        }
+
+        binding.sendOtp.setOnClickListener{
+            startActivity(Intent(activity, ChangeOldEmailOtp::class.java))
         }
     }
 }

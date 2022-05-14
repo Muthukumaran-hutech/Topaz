@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".Activities.EmailChangeOtp">
+    tools:context=".Activities.ChangeOldEmailOtp">
+
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/edit_address_toolbar"
@@ -38,7 +39,6 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/category_back_arrow"
             app:layout_constraintTop_toTopOf="parent" />
-
 
 
     </androidx.appcompat.widget.Toolbar>
@@ -77,45 +77,101 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/otp_01"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="60dp"
-             android:background="@color/white_gr"
+            android:layout_marginStart="30dp"
+            android:background="@color/white_gr"
+            android:clickable="true"
+            android:focusable="true"
             android:gravity="center"
-            android:text="5"
+            android:inputType="number"
+            android:maxLength="1"
+            android:text=""
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            tools:ignore="TextViewEdits"/>
 
-        <TextView
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/otp_02"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="20dp"
-             android:background="@color/white_gr"
+            android:layout_marginStart="10dp"
+            android:background="@color/white_gr"
+            android:clickable="true"
+            android:focusable="true"
             android:gravity="center"
-            android:text="0"
+            android:inputType="number"
+            android:maxLength="1"
+            android:text=""
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            tools:ignore="TextViewEdits"/>
 
-        <TextView
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/otp_03"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="20dp"
-             android:background="@color/white_gr"
+            android:layout_marginStart="10dp"
+            android:background="@color/white_gr"
+            android:clickable="true"
+            android:focusable="true"
             android:gravity="center"
-            android:text="8"
+            android:inputType="number"
+            android:maxLength="1"
+            android:text=""
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            tools:ignore="TextViewEdits"/>
 
-        <TextView
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/otp_04"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="20dp"
-             android:background="@color/white_gr"
+            android:layout_marginStart="10dp"
+            android:background="@color/white_gr"
+            android:clickable="true"
+            android:focusable="true"
             android:gravity="center"
-            android:text="5"
+            android:inputType="number"
+            android:maxLength="1"
+            android:text=""
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            tools:ignore="TextViewEdits"/>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/otp_05"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:background="@color/white_gr"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            tools:ignore="TextViewEdits" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/otp_06"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:background="@color/white_gr"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxLength="1"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            tools:ignore="TextViewEdits" />
     </LinearLayout>
 
     <ProgressBar
@@ -125,11 +181,10 @@
         android:layout_height="wrap_content"
         android:indeterminate="true"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/confirmemailotp"
-        app:layout_constraintEnd_toEndOf="@+id/confirmemailotp"
-        app:layout_constraintStart_toStartOf="@+id/confirmemailotp"
+        app:layout_constraintBottom_toTopOf="@+id/confirm_email_otp"
+        app:layout_constraintEnd_toEndOf="@+id/confirm_email_otp"
+        app:layout_constraintStart_toStartOf="@+id/confirm_email_otp"
         app:layout_constraintTop_toBottomOf="@+id/otplinear" />
-
 
     <TextView
         android:id="@+id/timer"
@@ -169,7 +224,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/confirmemailotp"
+        android:id="@+id/confirm_email_otp"
         android:layout_width="320dp"
         android:layout_height="60dp"
         android:layout_marginStart="47dp"
@@ -181,8 +236,6 @@
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

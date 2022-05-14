@@ -174,8 +174,9 @@ class AccountInformation : AppCompatActivity() {
 
         var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
             .create(JsonPlaceholder::class.java)
-
-        res.updateInfo(customerDetails(updateCustomerInfo)).enqueue(object : Callback<UpdateUserApiModel?> {
+        val sharedPreference =  getSharedPreferences("CUSTOMER_DATA", Context.MODE_PRIVATE)
+        var custId=sharedPreference.getString("customercode","")
+        res.updateInfo(custId!!,customerDetails(updateCustomerInfo)).enqueue(object : Callback<UpdateUserApiModel?> {
             override fun onResponse(
                 call: Call<UpdateUserApiModel?>,
                 response: Response<UpdateUserApiModel?>

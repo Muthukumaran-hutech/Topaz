@@ -32,6 +32,7 @@ class LoginActivity : AppCompatActivity() {
     private var mVerificationId: String? = null
     private lateinit var firebaseAuth: FirebaseAuth
     lateinit var activity: Activity
+    var isEnabled=true
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +43,12 @@ class LoginActivity : AppCompatActivity() {
 
 
         binding.phoneContinueBtn.setOnClickListener {
-            checkUserApiCall()
+
+
+            if(isEnabled) {
+                checkUserApiCall()
+                isEnabled = false
+            }
 
 
         }
@@ -79,12 +85,15 @@ class LoginActivity : AppCompatActivity() {
                        .setPositiveButton("OK") { _, _ ->
 
                        }.show()
+
+                   isEnabled=true
                }
 
            }
 
            override fun onFailure(call: Call<CheckUserApiModel?>, t: Throwable) {
                Toast. makeText(applicationContext,"Something Went Wronng Please Try Again Later", Toast.LENGTH_LONG).show()
+               isEnabled=true
            }
        })
     }
@@ -97,6 +106,7 @@ class LoginActivity : AppCompatActivity() {
         editor.putString("primaryPhonenumber",checkUserApiModel.primaryPhonenumber)
         editor.putString("email",checkUserApiModel.email)
         editor.putString("addressLine",checkUserApiModel.addressLine)
+        editor.putString("isUserLoggedIn","true")
         // editor.putString("secondaryPhonenumber","")
         //editor.putString("city",checkUserApiModel.city)
         //editor.putLong("l",100L)

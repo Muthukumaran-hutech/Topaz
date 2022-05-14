@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".Activities.ChangeEmail">
+    tools:context=".Activities.ChangeOldEmail">
+
 
 
     <androidx.appcompat.widget.Toolbar
@@ -50,7 +50,7 @@
         android:layout_height="21dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="155dp"
-        android:text="@string/enter_new_email_address"
+        android:text="@string/enter_registered_email_address"
         android:textColor="@color/black"
         android:textSize="14sp"
         android:textStyle="bold"
@@ -67,8 +67,9 @@
         android:inputType="textEmailAddress"
         android:textColor="@color/black"
         android:background="@color/white_gr"
-        android:hint="@string/enter_new_email_addresss"
+        android:hint="@string/enter_registered_email_address_2"
         android:paddingStart="17dp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -81,12 +82,13 @@
         android:layout_marginTop="254dp"
         android:layout_marginEnd="47dp"
         android:background="@color/buy_btn"
-        android:text="@string/send_otp_for_verifications"
         android:textAllCaps="false"
+        android:text="@string/send_otp_for_verifications"
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

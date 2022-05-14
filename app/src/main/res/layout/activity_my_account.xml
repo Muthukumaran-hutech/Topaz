@@ -61,7 +61,7 @@
         android:layout_height="22dp"
         android:layout_marginStart="105dp"
         android:layout_marginTop="124dp"
-        android:text="Manoj  Kumar"
+        android:text=""
         android:textColor="@color/black"
         android:textSize="14sp"
         android:textStyle="bold"
@@ -69,19 +69,19 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/editemail"
+        android:id="@+id/edite_profile_mail"
         android:layout_width="wrap_content"
         android:layout_height="22dp"
         android:layout_marginStart="105dp"
         android:layout_marginTop="151dp"
-        android:text="manojkuamr@gmail.com"
+        android:text=""
         android:textColor="@color/blue"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/editemailicon"
+        android:id="@+id/edit_email_icon"
         android:layout_width="14dp"
         android:layout_height="14dp"
         android:layout_marginStart="10dp"
@@ -89,7 +89,7 @@
         android:src="@drawable/ic_baseline_edit_24"
         android:textColor="@color/blue"
         android:textSize="14sp"
-        app:layout_constraintStart_toEndOf="@+id/editemail"
+        app:layout_constraintStart_toEndOf="@+id/edite_profile_mail"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
@@ -245,7 +245,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <LinearLayout
-        android:id="@+id/logoutprofile"
+        android:id="@+id/logout_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="490dp"

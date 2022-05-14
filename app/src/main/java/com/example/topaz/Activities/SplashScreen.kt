@@ -1,5 +1,6 @@
 package com.example.topaz.Activities
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -20,9 +21,20 @@ class SplashScreen : AppCompatActivity() {
         topazImage = findViewById(R.id.topaz)
         handler = Handler()
         handler.postDelayed({
-            val intent = Intent(this, IntroSlider::class.java)
-            startActivity(intent)
-            finish()
+            val sharedPreference =  getSharedPreferences("CUSTOMER_DATA", Context.MODE_PRIVATE)
+
+           if( sharedPreference.getString("isUserLoggedIn","").toString()=="true") {
+
+
+               val intent = Intent(this, HomeScreen::class.java)
+               startActivity(intent)
+               finish()
+           }
+            else{
+               val intent = Intent(this, IntroSlider::class.java)
+               startActivity(intent)
+               finish()
+           }
         },3000)  //Delaying 3 seconds to open IntroPage
 
 

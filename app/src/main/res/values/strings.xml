@@ -199,6 +199,10 @@
     <string name="enter_mobile_no_">Enter phone no</string>
     <string name="enter_email_address_">Enter email address</string>
     <string name="required">Please Enter 10 digit Mobile Number</string>
+    <string name="enter_registered_email_address">Enter Registered Email Address</string>
+    <string name="enter_registered_email_address_2">Enter registered email address</string>
+    <string name="otp_sent_to_the_email_address">OTP sent to the email address</string>
+    <string name="otp_verifications">OTP Verifications</string>
 
 
 </resources>

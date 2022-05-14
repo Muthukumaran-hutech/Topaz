@@ -11,8 +11,8 @@ interface JsonPlaceholder {
     /*@PUT("updatecustomer/CUS001")//With using suspend function
    suspend fun updateInfo(@Body jsonObject: JsonObject):UpdateUserApiModel
 */
-    @PUT("updatecustomer/CUS001")//Without suspend function
-    fun updateInfo(@Body jsonObject: JsonObject):Call<UpdateUserApiModel>
+    @PUT("updatecustomer/{customerId}")//Without suspend function
+    fun updateInfo( @Path("customerId") custId:String,@Body jsonObject: JsonObject):Call<UpdateUserApiModel>
 
 
     @GET("viewCategory")
@@ -30,6 +30,14 @@ interface JsonPlaceholder {
     @Multipart
     fun checkIfCustomerExists(@Part("primaryPhonenumber") requestBody: RequestBody):Call<CheckUserApiModel>
 
+    @PUT("send/otp/{customerId}")//Without suspend function
+    fun verifyOldEmail(@Path("customerId") customerID:String, @Body jsonObject: JsonObject):Call<ChangeEmailOtpApiModel>
 
+    @PUT("verify/customer/otp")
+    @Multipart//Without suspend function
+    fun verifyOldEmailOtp(@Part("emailOtp")requestBody: RequestBody):Call<ChangeEmailOtpVerifyApiModel>
 
+   /* @PUT("update/customer/email/{email}")
+    fun verifyNewEmail(@Path("email")emailOtp:String, @Body jsonObject: JsonObject) : Call<VerifyNewEmailApiModel>
+*/
 }
