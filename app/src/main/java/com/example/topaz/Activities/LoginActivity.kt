@@ -106,6 +106,7 @@ class LoginActivity : AppCompatActivity() {
         editor.putString("primaryPhonenumber",checkUserApiModel.primaryPhonenumber)
         editor.putString("email",checkUserApiModel.email)
         editor.putString("addressLine",checkUserApiModel.addressLine)
+        editor.putString("addressLine",checkUserApiModel.city)
         editor.putString("isUserLoggedIn","true")
         // editor.putString("secondaryPhonenumber","")
         //editor.putString("city",checkUserApiModel.city)

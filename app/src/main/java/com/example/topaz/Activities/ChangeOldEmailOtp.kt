@@ -63,9 +63,7 @@ class ChangeOldEmailOtp : AppCompatActivity() {
 
         }
         countdownTimer()
-        binding.confirmEmailOtp.setOnClickListener {
 
-        }
         binding.otp01.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
             }

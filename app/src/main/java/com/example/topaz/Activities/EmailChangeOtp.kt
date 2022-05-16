@@ -157,6 +157,7 @@ class EmailChangeOtp : AppCompatActivity() {
                 ) {
                     if (response.isSuccessful) {
                         Log.d(TAG, "onResponse: Success " + response.body().toString())
+                        startActivity(Intent(activity, EditProfile::class.java))
                         Toast.makeText(
                             applicationContext,
                             "Email Verified Sucessfully",

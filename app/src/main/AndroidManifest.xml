@@ -68,7 +68,7 @@
             android:name=".Activities.EditProfile"
             android:exported="false" />
         <activity
-            android:name=".Activities.SplashScreen"
+            android:name=".Activities.MyAccount"
             android:exported="false" />
         <activity
             android:name=".Activities.IntroSlider"
@@ -137,7 +137,7 @@
             android:name=".Activities.MyOrders"
             android:exported="false" />
         <activity
-            android:name=".Activities.MyAccount"
+            android:name=".Activities.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

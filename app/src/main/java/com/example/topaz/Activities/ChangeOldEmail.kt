@@ -1,6 +1,7 @@
 package com.example.topaz.Activities
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
@@ -66,8 +67,16 @@ class ChangeOldEmail : AppCompatActivity() {
             ) {
                 if (response.isSuccessful){
                     Log.d("Update Res:", response.body()!!.email)
+                    var message = "Otp Sent to the registered EmailId"
+                    //message += "\n\n " + binding.phoneContainer.helperText
+                    AlertDialog.Builder(this@ChangeOldEmail)
+                        .setTitle("")
+                        .setMessage(message)
+                        .setPositiveButton("Ok") { _, _ ->
+                            startActivity(Intent(activity, ChangeOldEmailOtp::class.java))
+                            finish()
+                        }.show()
 
-                    startActivity(Intent(activity, ChangeOldEmailOtp::class.java))
                 }else{
                     Log.d("Update Res on failure:", response.body()!!.email)
                 }
