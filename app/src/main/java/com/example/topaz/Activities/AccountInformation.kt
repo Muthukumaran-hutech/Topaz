@@ -38,11 +38,11 @@ class AccountInformation : AppCompatActivity() {
         activity = this
 
         val sharedPreference =  getSharedPreferences("CUSTOMER_DATA", Context.MODE_PRIVATE)
-        var custName = sharedPreference.getString("customerName","")
-        var custId = sharedPreference.getString("customercode","")
-        var custAddress = sharedPreference.getString("addressLine","")
-        var custPhoneno = sharedPreference.getString("primaryPhonenumber","")
-        var custEmailId = sharedPreference.getString("email","")
+        val custName = sharedPreference.getString("customerName","")
+        val custId = sharedPreference.getString("customercode","")
+        val custAddress = sharedPreference.getString("addressLine","")
+        val custPhoneno = sharedPreference.getString("primaryPhonenumber","")
+        val custEmailId = sharedPreference.getString("email","")
         //set the edittext
 
         binding.accountInfoUserName.setText(custName.toString())
@@ -162,7 +162,7 @@ class AccountInformation : AppCompatActivity() {
         var accountEmailId = binding.accountInfoEmailId.text
         var updateCustomerInfo=UpdateCustomerInfo(
             customerName = accountName.toString(),
-            customerId = "CUS001",
+            customerId = accountId.toString(),
             customerAddress = accountAddress.toString(),
             customerPhoneNo = accountPhoneNo,
             customerEmailAddress = accountEmailId.toString()
@@ -190,8 +190,7 @@ class AccountInformation : AppCompatActivity() {
                         Toast.LENGTH_LONG
                     )
                         .show()
-                    startActivity(Intent(activity, HomeScreen::class.java))
-                    finish()
+
                     Log.d("Update Res:", response.body()!!.message)
                 }
             }

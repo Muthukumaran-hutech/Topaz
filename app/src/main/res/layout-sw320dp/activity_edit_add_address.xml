@@ -217,6 +217,7 @@
         android:background="@drawable/roundedtext"
         android:hint="@string/pincode"
         android:paddingStart="20dp"
+        android:maxLength="6"
         android:layout_marginTop="10dp"
         android:textColor="@color/black"
         android:textColorHint="@color/grey_1"

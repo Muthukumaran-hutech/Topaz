@@ -82,4 +82,10 @@ interface JsonPlaceholder {
                               @Part("phoneotp") requestBody: RequestBody
     ): Call<OldPhoneApiModel>
 
+    @PUT("updatecustomer/{customerId}")//Without suspend function
+    fun saveAddress(
+        @Path("customerId") custId: String,
+        @Body jsonObject: JsonObject
+    ): Call<UpdateUserApiModel>
+
 }
