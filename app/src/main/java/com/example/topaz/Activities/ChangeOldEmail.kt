@@ -44,10 +44,7 @@ class ChangeOldEmail : AppCompatActivity() {
             finish()
         }
 
-        binding.sendOtp.setOnClickListener{
-            startActivity(Intent(activity, ChangeOldEmailOtp::class.java))
 
-        }
 
 
         binding.sendOtp.setOnClickListener {

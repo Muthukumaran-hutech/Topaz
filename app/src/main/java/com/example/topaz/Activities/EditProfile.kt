@@ -3,15 +3,13 @@ package com.example.topaz.Activities
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.topaz.R
 import com.example.topaz.databinding.ActivityEditProfileBinding
-import com.example.topaz.databinding.ActivityLoginBinding
 
 class EditProfile : AppCompatActivity() {
 
@@ -22,6 +20,7 @@ class EditProfile : AppCompatActivity() {
     private var change_Email: TextView? = null
     private var change_Phoneno: TextView? = null
     private var change_Pwd: TextView? = null
+    val REQUEST_CODE = 100
     lateinit var activity: Activity
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,10 +29,10 @@ class EditProfile : AppCompatActivity() {
         setContentView(binding.root)
 
         activity = this
-        val sharedPreference =  getSharedPreferences("CUSTOMER_DATA", Context.MODE_PRIVATE)
-        var custName = sharedPreference.getString("customerName","")
-        var custEmailId = sharedPreference.getString("email","")
-        var custPhoneno = sharedPreference.getString("primaryPhonenumber","")
+        val sharedPreference = getSharedPreferences("CUSTOMER_DATA", Context.MODE_PRIVATE)
+        var custName = sharedPreference.getString("customerName", "")
+        var custEmailId = sharedPreference.getString("email", "")
+        var custPhoneno = sharedPreference.getString("primaryPhonenumber", "")
 
         profile_change = findViewById<ImageView>(R.id.edit_image)
 
@@ -47,30 +46,53 @@ class EditProfile : AppCompatActivity() {
         binding.emailIdChange.isEnabled = false
         binding.phoneNoChange.isEnabled = false
 
-        profile_change?.setOnClickListener{
-            Toast. makeText(applicationContext," Currently In process ", Toast. LENGTH_SHORT).show()
+        profile_change?.setOnClickListener {
+            Toast.makeText(applicationContext, " Currently In process ", Toast.LENGTH_SHORT).show()
 
         }
 
+        binding.editImage.setOnClickListener {
+            openGalleryForImage()
+        }
 
-        binding.change1.setOnClickListener{
-            startActivity(Intent(activity,ChangeOldEmail::class.java))
+        binding.change1.setOnClickListener {
+            startActivity(Intent(activity, ChangeOldEmail::class.java))
             finish()
         }
 
-        binding.change2.setOnClickListener{
-            startActivity(Intent(activity,ChangeOldPhoneNumber::class.java))
+        binding.change2.setOnClickListener {
+            startActivity(Intent(activity, ChangeOldPhoneNumber::class.java))
             finish()
         }
 
-        change_Pwd?.setOnClickListener{
-            startActivity(Intent(activity,NewPassword::class.java))
+        binding.resetBtn.setOnClickListener {
+            val intent = Intent(this, EditProfile::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent)
+        }
+
+        change_Pwd?.setOnClickListener {
+            startActivity(Intent(activity, NewPassword::class.java))
             finish()
         }
 
-        backarrow1?.setOnClickListener{
-            startActivity(Intent(activity,MyAccount::class.java))
+        backarrow1?.setOnClickListener {
+            startActivity(Intent(activity, MyAccount::class.java))
             finish()
+        }
+    }
+
+    private fun openGalleryForImage() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+
+        startActivityForResult(intent, REQUEST_CODE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE) {
+            binding.editProfileImage.setImageURI(data?.data) // handle chosen image
         }
     }
 }

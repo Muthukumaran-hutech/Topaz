@@ -55,7 +55,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/changephone"
+        android:id="@+id/change_phone_mobile"
         android:layout_width="320dp"
         android:layout_height="45dp"
         android:layout_marginStart="47dp"
@@ -64,24 +64,25 @@
         android:inputType="number"
         android:maxLength="10"
         android:textSize="14sp"
-        android:background="@color/white_gr"
-        android:hint="@string/enter_new_email_addresss"
+        android:hint="@string/enter_new_phone_number_21"
         android:paddingStart="17dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/change_mobile_no"
         android:layout_width="320dp"
         android:layout_height="60dp"
         android:layout_marginTop="273dp"
         android:background="@color/btn"
         android:gravity="center"
         android:text="@string/send_otp_for_verifications"
+        android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/changephone"
-        app:layout_constraintStart_toStartOf="@+id/changephone"
+        app:layout_constraintEnd_toEndOf="@+id/change_phone_mobile"
+        app:layout_constraintStart_toStartOf="@+id/change_phone_mobile"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

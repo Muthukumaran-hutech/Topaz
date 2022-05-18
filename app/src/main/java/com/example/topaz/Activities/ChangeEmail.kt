@@ -34,11 +34,11 @@ class ChangeEmail : AppCompatActivity() {
         binding = ActivityChangeEmailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-mail = intent.getStringExtra("emailOtp").toString()
+        mail = intent.getStringExtra("emailOtp").toString()
         activity = this
 
 
-        binding.categoryBackArrow.setOnClickListener{
+        binding.categoryBackArrow.setOnClickListener {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             finish()
         }
@@ -55,26 +55,27 @@ mail = intent.getStringExtra("emailOtp").toString()
         var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
             .create(JsonPlaceholder::class.java)
 
-        val body: RequestBody = binding.changeEmail.text.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+        val body: RequestBody =
+            binding.changeEmail.text.toString().toRequestBody("text/plain".toMediaTypeOrNull())
         val requestBodyMap: MutableMap<String, RequestBody> = HashMap()
         requestBodyMap["email"] = body
 
-        res.verifyNewEmail(mail,body).enqueue(object : Callback<VerifyNewEmailApiModel?> {
+        res.verifyNewEmail(mail, body).enqueue(object : Callback<VerifyNewEmailApiModel?> {
             override fun onResponse(
                 call: Call<VerifyNewEmailApiModel?>,
                 response: Response<VerifyNewEmailApiModel?>
             ) {
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
                     var message = "Otp Sent to the entered EmailId"
                     //message += "\n\n " + binding.phoneContainer.helperText
                     AlertDialog.Builder(this@ChangeEmail)
                         .setTitle("")
                         .setMessage(message)
                         .setPositiveButton("Ok") { _, _ ->
-                            startActivity(Intent(activity,EmailChangeOtp::class.java))
+                            startActivity(Intent(activity, EmailChangeOtp::class.java))
                             finish()
                         }.show()
-                }else{
+                } else {
                     Toast.makeText(
                         applicationContext,
                         "Something Went Wrong",

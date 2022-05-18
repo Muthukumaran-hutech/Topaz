@@ -26,7 +26,6 @@
     <string name="address_line">Address Line</string>
     <string name="enter_address">Enter Address</string>
     <string name="phone_number">Phone Number</string>
-    <string name="enter_phone_number">Enter Phone Number</string>
     <string name="enter_email_address">Enter Email Address</string>
     <string name="email_address">Email Address</string>
     <string name="account">Account</string>
@@ -102,7 +101,6 @@
     <string name="login">Login</string>
     <string name="change_email_id">Change Email ID</string>
     <string name="enter_otp_to_change_email_address">Enter OTP to Change Email address</string>
-    <string name="otp_sent_to_the_phone_number">OTP sent to the phone number</string>
     <string name="confirm_otp">Confirm OTP</string>
     <string name="enter_new_email_address">Enter New Email Address</string>
     <string name="enter_new_email_addresss">Enter new email address</string>
@@ -203,6 +201,11 @@
     <string name="enter_registered_email_address_2">Enter registered email address</string>
     <string name="otp_sent_to_the_email_address">OTP sent to the email address</string>
     <string name="otp_verifications">OTP Verifications</string>
+    <string name="enter_phone_number">Enter Phone Number</string>
+    <string name="enter_phone_number__">Enter phone number</string>
+    <string name="enter_otp_to_change_phone_number_1">Enter OTP to change Phone Number</string>
+    <string name="otp_sent_to_the_phone_number____">OTP sent to the phone number</string>
+    <string name="enter_new_phone_number_21">Enter new phone number</string>
 
 
 </resources>

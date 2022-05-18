@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <supports-screens
         android:anyDensity="true"
@@ -23,6 +24,12 @@
         android:roundIcon="@mipmap/topaz_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.Topaz">
+        <activity
+            android:name=".Activities.ChangeNewPhoneOtp"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.ChangeOldphoneOtp"
+            android:exported="false" />
         <activity
             android:name=".Activities.ChangeOldPhoneNumber"
             android:exported="false" />

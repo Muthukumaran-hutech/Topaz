@@ -12,53 +12,49 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.topaz.Adapters.MyCartAdapter
 import com.example.topaz.Adapters.ProductQuotationAdapter
 import com.example.topaz.R
+import com.example.topaz.databinding.ActivityEditProfileBinding
+import com.example.topaz.databinding.ActivityMyCartBinding
 
 class MyCart : AppCompatActivity() {
 
-    private var searchBtn: ImageView? = null
-    private var notificationBtn: ImageView? = null
-    private var myCartBtn: ImageView? = null
-    private var backarrow: ImageView? = null
+    private lateinit var binding: ActivityMyCartBinding
     lateinit var activity: Activity
-
-    private lateinit var cartRecyclerView: RecyclerView
     private lateinit var cartAdapter: MyCartAdapter
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_my_cart)
+        binding = ActivityMyCartBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        searchBtn = findViewById<ImageView>(R.id.search)
-        notificationBtn = findViewById<ImageView>(R.id.notification)
-        myCartBtn = findViewById<ImageView>(R.id.cart)
-        backarrow = findViewById<ImageView>(R.id.backarrow)
+
         activity = this
 
-
-
-        cartRecyclerView = findViewById(R.id.cartrecycle)
         cartAdapter = MyCartAdapter()
 
-        cartRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
-        cartRecyclerView.adapter = cartAdapter
+        binding.cartrecycle.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
+        binding.cartrecycle.adapter = cartAdapter
 
 
 
-        searchBtn?.setOnClickListener{
+
+
+        binding.search.setOnClickListener{
             startActivity(Intent(activity,SearchActivity::class.java))
 
         }
 
-        myCartBtn?.setOnClickListener{
+      /*  myCartBtn?.setOnClickListener{
             startActivity(Intent(activity,MyCart::class.java))
 
-        }
+        }*/
 
-        notificationBtn?.setOnClickListener{
+        binding.notification.setOnClickListener{
             startActivity(Intent(activity,Notifications::class.java))
 
         }
 
-        backarrow?.setOnClickListener{
+        binding.backarrow.setOnClickListener{
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
            finish()
         }

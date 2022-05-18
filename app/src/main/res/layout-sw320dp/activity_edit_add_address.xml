@@ -84,7 +84,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
     <EditText
-        android:id="@+id/nameaddress"
+        android:id="@+id/name_address"
         android:layout_width="280dp"
         android:layout_height="45dp"
         android:layout_marginStart="48dp"
@@ -109,7 +109,7 @@
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameaddress" />
+        app:layout_constraintTop_toBottomOf="@+id/name_address" />
 
     <EditText
         android:id="@+id/phone_no_change"

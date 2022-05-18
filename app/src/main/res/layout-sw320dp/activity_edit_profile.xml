@@ -210,7 +210,7 @@
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/reset"
+        android:id="@+id/reset_btn"
         android:layout_width="150dp"
         android:layout_height="60dp"
         android:layout_marginStart="30dp"
@@ -232,7 +232,7 @@
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/reset" />
+        app:layout_constraintTop_toTopOf="@+id/reset_btn" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
