@@ -4,8 +4,6 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.ContentValues.TAG
 import android.content.Intent
-import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -13,21 +11,20 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import androidx.core.app.ShareCompat
+import androidx.appcompat.app.AppCompatActivity
+
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
-import com.example.topaz.ApiModels.CategoryListApiModel
 import com.example.topaz.ApiModels.ProductDetailsListApiModel
 import com.example.topaz.Interface.JsonPlaceholder
-import com.example.topaz.Models.CategoriesModel
 import com.example.topaz.Models.ProductDetailsModel
 import com.example.topaz.R
 import com.example.topaz.RetrofitApiInstance.UpdateAccountInfoInstance
-import com.example.topaz.databinding.ActivityCategoryBinding
 import com.example.topaz.databinding.ActivityProductDetailsBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 
 class ProductDetails : AppCompatActivity() {
 
@@ -51,6 +48,7 @@ class ProductDetails : AppCompatActivity() {
             startActivity(Intent(activity,InnerCategories::class.java))
 
         }
+        var rupees = getString(R.string.Rs)+binding.textView14.text + getString(R.string.slash)
 
         imageList.add(R.drawable.home_slider_banner)
         imageList.add(R.drawable.home_slider_banner_2)
@@ -76,6 +74,7 @@ class ProductDetails : AppCompatActivity() {
         }
 
         binding.getAPrice.setOnClickListener {
+            sendUserData()
             startActivity(Intent(activity,ProductQuotation::class.java))
         }
 
@@ -92,6 +91,10 @@ class ProductDetails : AppCompatActivity() {
                 .setText("http://play.google.com/store/apps/details?id=" + activity.getPackageName())
                 .startChooser();*/
         }
+    }
+
+    private fun sendUserData() {
+
     }
 
     private fun onApiCallProductDetails() {
@@ -121,7 +124,10 @@ class ProductDetails : AppCompatActivity() {
                         productList.add(product)
                     }
                     //set detAILS...........
+                    var rupees = getString(R.string.Rs)+binding.textView14.text /*+ getString(R.string.slash)*/
+
                     binding.woodMaterialName.text=productList.get(0).ProductTitle
+                    binding.textView14.text= rupees+ productList.get(0).ProductPrice + "/"
                     binding.productSpecificationSize.text=productList.get(0).ProductSize
                     binding.productSpecificationThickness.text=productList.get(0).ProductThickness
                     binding.productSpecificationBrand.text=productList.get(0).ProductBrand

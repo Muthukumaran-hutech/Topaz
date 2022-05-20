@@ -113,6 +113,16 @@
                 android:text="@string/what_grade_of_plywood_is_recommended_for_green_buildings"
                 android:visibility="visible" />
 
+            <TextView
+                android:id="@+id/q2ans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="27dp"
+                android:layout_marginEnd="20dp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/q3"
                 android:layout_width="match_parent"
@@ -129,6 +139,16 @@
                 android:drawableEnd="@drawable/pls"
                 android:text="@string/how_to_recognise_fake_plywood_brand"
                 android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/q3ans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="27dp"
+                android:layout_marginEnd="20dp"
+                android:text="@string/q3ans"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/q4"
@@ -147,6 +167,15 @@
                 android:text="@string/what_is_natural_forest_timber"
                 android:visibility="visible" />
 
+            <TextView
+                android:id="@+id/q4ans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="27dp"
+                android:layout_marginEnd="20dp"
+                android:text="@string/q4ans"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/q5"
                 android:layout_width="match_parent"
@@ -181,6 +210,16 @@
                 android:text="@string/how_to_check_if_it_is_gurjan"
                 android:visibility="visible" />
 
+            <TextView
+                android:id="@+id/q6ans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="27dp"
+                android:layout_marginEnd="20dp"
+                android:text="@string/gurjan"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/q7"
                 android:layout_width="match_parent"
@@ -197,6 +236,16 @@
                 android:drawableEnd="@drawable/pls"
                 android:text="@string/does_using_gurjan_make_ply_better"
                 android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/q7ans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="27dp"
+                android:layout_marginEnd="20dp"
+                android:text="@string/gur_ply"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/q8"
@@ -231,6 +280,17 @@
                 android:drawableEnd="@drawable/pls"
                 android:text="@string/where_to_get_quality_of_plywood_checked"
                 android:visibility="visible" />
+
+
+            <TextView
+                android:id="@+id/q9ans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="27dp"
+                android:layout_marginEnd="20dp"
+                android:text="@string/ply_check"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
 
 
         </LinearLayout>

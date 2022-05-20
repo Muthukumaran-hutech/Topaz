@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".Activities.CategoryActivity">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/edit_address_toolbar"
         android:layout_width="match_parent"

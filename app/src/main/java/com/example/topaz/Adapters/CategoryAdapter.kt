@@ -1,5 +1,6 @@
 package com.example.topaz.Adapters
 
+import android.content.Context
 import android.graphics.BitmapFactory
 import android.util.Base64
 import android.view.LayoutInflater
@@ -8,15 +9,16 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.topaz.Interface.CategoryPageItemClickListner
 import com.example.topaz.Models.CategoriesModel
 import com.example.topaz.R
-import java.lang.Byte.decode
 import java.util.*
 import kotlin.collections.ArrayList
 
 
-class CategoryAdapter(var list2: ArrayList<CategoriesModel>, var categoryPageItemClickListner1: CategoryPageItemClickListner) : RecyclerView.Adapter<CategoryAdapter.MyViewHolder>() {
+class CategoryAdapter(var list2: ArrayList<CategoriesModel>, var categoryPageItemClickListner1: CategoryPageItemClickListner,var context:Context) : RecyclerView.Adapter<CategoryAdapter.MyViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -27,7 +29,7 @@ class CategoryAdapter(var list2: ArrayList<CategoriesModel>, var categoryPageIte
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val data = list2[position]
-        holder.bindItems(list2,position,categoryPageItemClickListner1)
+        holder.bindItems(list2,position,categoryPageItemClickListner1,context)
 
     }
 
@@ -39,7 +41,12 @@ class CategoryAdapter(var list2: ArrayList<CategoriesModel>, var categoryPageIte
         var catImage=itemView.findViewById<ImageView>(R.id.plwwoodss)
         var catName=itemView.findViewById<TextView>(R.id.plwwoodsstext)
 
-        fun bindItems(listModel2:List<CategoriesModel>, position: Int, categoryPageItemClickListner1: CategoryPageItemClickListner) {
+        fun bindItems(
+            listModel2: List<CategoriesModel>,
+            position: Int,
+            categoryPageItemClickListner1: CategoryPageItemClickListner,
+            context: Context
+        ) {
           ///catImage.setImageResource(listModel2[position].CateegoryImage)
             catName.text = listModel2[position].CateegoryName
 
@@ -47,7 +54,15 @@ class CategoryAdapter(var list2: ArrayList<CategoriesModel>, var categoryPageIte
 
             val decodedString: ByteArray = Base64.decode(listModel2.get(position).CateegoryImage,Base64.DEFAULT)
             val bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
-           catImage.setImageBitmap(bitmap)
+           /* if (listModel2.get(position).CateegoryImage.isEmpty()){*/
+
+
+                Glide.with(context)
+                    .applyDefaultRequestOptions(RequestOptions().placeholder(R.drawable.ic_baseline_image_24).error(R.drawable.ic_baseline_image_24))
+                    .load(bitmap)
+                    .into(catImage)
+                //catImage.setImageResource(R.drawable.ic_baseline_image_24)
+            /*}*/
 
             catImage.setOnClickListener {
                 //Onclick will trigger the interface in activity

@@ -84,7 +84,7 @@ interface JsonPlaceholder {
 
     @PUT("updatecustomer/{customerId}")//Without suspend function
     fun saveAddress(
-        @Path("customerId") custId: String,
+        @Path("customerId") customerId: String,
         @Body jsonObject: JsonObject
     ): Call<UpdateUserApiModel>
 

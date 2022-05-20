@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ContentValues
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Build
@@ -60,6 +61,8 @@ class OtpVerfification : AppCompatActivity() {
             Log.d("exception", e.toString())
         }
 
+        val sharedPreference =  getSharedPreferences("CUSTOMER_DATA", Context.MODE_PRIVATE)
+        val editor = sharedPreference.edit()
 
 
 
@@ -112,7 +115,7 @@ class OtpVerfification : AppCompatActivity() {
                 //pHONEAUTH
                 binding.appProgressBar.visibility = View.GONE
                 binding.loginBtnPhone.isEnabled = true
-
+                editor.putString("isUserLoggedIn","true").apply()
                 val smscode = credential.smsCode
                // Toast.makeText(applicationContext, smscode, Toast.LENGTH_LONG).show()
                 //getOtpFromMessage(smscode)
@@ -131,11 +134,13 @@ class OtpVerfification : AppCompatActivity() {
                     //binding.appProgressBar.visibility = View.VISIBLE
                     Toast.makeText(applicationContext, "Please Enter The Valid OTP", Toast.LENGTH_LONG)
                         .show()
+                    editor.putString("isUserLoggedIn","false").apply()
                 } else if (e is FirebaseTooManyRequestsException) {
                     binding.appProgressBar.visibility = View.VISIBLE
                     binding.loginBtnPhone.isEnabled = false
                     Toast.makeText(applicationContext, "Something went wrong Please try again Later", Toast.LENGTH_LONG)
                         .show()
+                    editor.putString("isUserLoggedIn","false").apply()
                 }
 
                 // Show a message and update the UI

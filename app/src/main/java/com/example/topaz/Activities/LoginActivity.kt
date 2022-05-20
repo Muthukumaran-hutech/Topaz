@@ -42,6 +42,7 @@ class LoginActivity : AppCompatActivity() {
 
 
 
+
         binding.phoneContinueBtn.setOnClickListener {
 
 
@@ -108,7 +109,6 @@ class LoginActivity : AppCompatActivity() {
         editor.putString("addressLine",checkUserApiModel.addressLine)
         editor.putString("addressLine",checkUserApiModel.city)
         editor.putString("state", checkUserApiModel.state.toString())
-        editor.putString("isUserLoggedIn","true")
         // editor.putString("secondaryPhonenumber","")
         editor.putString("city",checkUserApiModel.city)
         //editor.putLong("l",100L)

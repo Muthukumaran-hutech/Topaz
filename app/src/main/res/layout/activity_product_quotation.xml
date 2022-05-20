@@ -57,6 +57,7 @@
 
 
             <TextView
+                android:id="@+id/wood_material_name"
                 android:layout_width="270dp"
                 android:layout_height="46dp"
                 android:layout_marginStart="150dp"

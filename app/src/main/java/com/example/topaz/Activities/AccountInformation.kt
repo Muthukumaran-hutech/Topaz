@@ -191,6 +191,9 @@ class AccountInformation : AppCompatActivity() {
                     )
                         .show()
 
+                    startActivity(Intent(activity, HomeScreen::class.java))
+                    finish()
+
                     Log.d("Update Res:", response.body()!!.message)
                 }
             }

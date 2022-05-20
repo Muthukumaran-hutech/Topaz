@@ -1,6 +1,7 @@
 package com.example.topaz.Activities
 
 import android.app.Activity
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -12,7 +13,9 @@ import com.example.topaz.Interface.JsonPlaceholder
 import com.example.topaz.Models.SaveAddressModel
 import com.example.topaz.RetrofitApiInstance.UpdateAccountInfoInstance
 import com.example.topaz.databinding.ActivityEditAddAddressBinding
+import com.google.gson.Gson
 import com.google.gson.JsonObject
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -39,7 +42,7 @@ class EditAddAddress : AppCompatActivity() {
         var custId = sharedPreference.getString("customercode", "")
         var custAddress = sharedPreference.getString("addressLine", "")
         var custPhoneno = sharedPreference.getString("primaryPhonenumber", "")
-        //var custEmailId = sharedPreference.getString("email", "")
+        var custEmailId = sharedPreference.getString("email", "")
         var custCity = sharedPreference.getString("city", "")
         var custState = sharedPreference.getString("state", "")
 
@@ -56,7 +59,7 @@ class EditAddAddress : AppCompatActivity() {
             finish()*/
         }
 
-        binding.saveAddressBtn?.setOnClickListener {
+        binding.saveAddressBtn.setOnClickListener {
             updateuserinfo()
         }
 
@@ -104,8 +107,9 @@ class EditAddAddress : AppCompatActivity() {
                         .show()
                     startActivity(Intent(activity, MyAccount::class.java))
                     finish()
-                }else{
-                    Log.d("Update Res fail:", response.body()!!.message)
+                }
+                else{
+                 //  Log.d("Update Res fail:", response.body()!!.message)
                 }
 
             }
@@ -118,7 +122,19 @@ class EditAddAddress : AppCompatActivity() {
     }
 }
 
+
+
 private  fun customerDetails(saveAddressModel: SaveAddressModel): JsonObject {
+    var json2 = JsonObject()
+   // json2.addproperty("stateName","Karnataka")
+    json2.addProperty("stateName",saveAddressModel.stateName)
+    var countryjson= JsonObject()
+    countryjson.addProperty("countryName","")
+    var accountdetails=JsonObject()
+    accountdetails.addProperty("accountNumber","")
+    accountdetails.addProperty("ifscCode","")
+    accountdetails.addProperty("branchName","")
+    accountdetails.addProperty("upiNumber","")
     val json = JsonObject()
     try{
         json.addProperty("customerName",  saveAddressModel.customerName)
@@ -126,11 +142,52 @@ private  fun customerDetails(saveAddressModel: SaveAddressModel): JsonObject {
         json.addProperty("addressLine",  saveAddressModel.addressLine)
         json.addProperty("zipcode",  saveAddressModel.zipcode)
         json.addProperty("city",  saveAddressModel.city)
-        json.addProperty("stateName",  saveAddressModel.stateName)
+        //json.addProperty("state",  json2)
+        json.add("state", Gson().toJsonTree(json2))
+        json.add("country",Gson().toJsonTree(countryjson))
+        json.add("accountdetails",Gson().toJsonTree(accountdetails))
+        json.addProperty("email","muthuking58@gmail.com")
+        json.addProperty("secondaryPhonenumber",0)
 
+        Log.d(TAG, "customerDetails: json check "+ json.toString())
     }catch (e: Exception) {
     }
 
     return json
 
 }
+/*
+
+private  fun customerDetails(saveAddressModel: SaveAddressModel): JsonObject {
+    var json2 = JsonObject()
+    // json2.addproperty("stateName","Karnataka")
+    json2.addProperty("stateName","karnataka")
+    var countryjson= JSONObject()
+    countryjson.addProperty("countryName","India")
+    var accountdetails=JSONObject()
+    accountdetails.addProperty("accountNumber","dsds")
+    accountdetails.addProperty("ifscCode","sds")
+    accountdetails.addProperty("branchName","sds")
+    accountdetails.addProperty("upiNumber","dsdsd")
+    val json = JsonObject()
+    try{
+        json.addProperty("customerName",  saveAddressModel.customerName)
+        json.addProperty("primaryPhonenumber", saveAddressModel.primaryPhonenumber)
+        json.addProperty("addressLine",  saveAddressModel.addressLine)
+        json.addProperty("zipcode","")
+        json.addProperty("city",  saveAddressModel.city)
+        json.addProperty("state",  json2.toString())
+        json.addProperty("country",countryjson.toString())
+        json.addProperty("accountdetails","accountdetails.toString())
+    }catch (e: Exception) {
+    }
+    return json
+}
+
+
+*/
+
+
+
+
+

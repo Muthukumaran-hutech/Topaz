@@ -24,6 +24,7 @@
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/drawable/roundedbtndarkblue.xml" value="0.151" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/drawable/roundedbtnlite.xml" value="0.151" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/drawable/roundedtext.xml" value="0.10666666666666667" />
+        <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/drawable/strike_through.xml" value="0.136" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/layout-large/activity_intro_slider.xml" value="0.13766566908935443" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/layout-large/fragment_slider.xml" value="0.13766566908935443" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/layout-large/fragment_slider2.xml" value="0.13766566908935443" />
@@ -65,7 +66,7 @@
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/layout-sw320dp/fragment_slider.xml" value="0.13766566908935443" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/layout-sw320dp/fragment_slider2.xml" value="0.16770833333333332" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/layout-sw320dp/fragment_slider3.xml" value="0.14666666666666667" />
-        <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/layout-sw360dp/activity_intro_slider.xml" value="0.2925311203319502" />
+        <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/layout-sw360dp/activity_intro_slider.xml" value="0.14666666666666667" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/layout-sw360dp/fragment_slider.xml" value="0.16770833333333332" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/layout-sw480dp/activity_intro_slider.xml" value="0.12578125" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/layout-sw480dp/fragment_slider.xml" value="0.1" />
@@ -124,7 +125,7 @@
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/layout/activity_order_summary_adapter.xml" value="0.13760683760683762" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/layout/activity_otp_verfification.xml" value="0.16666666666666666" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/layout/activity_payments.xml" value="0.13760683760683762" />
-        <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/layout/activity_product_details.xml" value="0.14666666666666667" />
+        <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/layout/activity_product_details.xml" value="0.22" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/layout/activity_product_quotation.xml" value="0.16666666666666666" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/layout/activity_product_quotation_adapter.xml" value="0.13760683760683762" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/layout/activity_search.xml" value="0.14666666666666667" />

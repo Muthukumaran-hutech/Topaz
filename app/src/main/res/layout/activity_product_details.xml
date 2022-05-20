@@ -131,12 +131,14 @@
 
             <TextView
                 android:id="@+id/textView14"
-                android:layout_width="58dp"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
-                android:text="@string/_59"
+                android:text=""
+                android:textSize="22sp"
+                android:textStyle="bold"
                 android:textColor="@color/primary_blue"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/wood_material_name" />
@@ -148,6 +150,7 @@
                 android:layout_gravity="left"
                 android:layout_marginTop="30dp"
                 android:text="@string/square_feet"
+                android:layout_marginLeft="@dimen/_10sdp"
                 android:textColor="@color/netural_black"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -159,9 +162,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:paddingStart="10dp"
+                android:paddingStart="0dp"
                 android:text="@string/_84"
                 android:textColor="@color/black"
+                android:background="@drawable/strike_through"
                 app:layout_constraintStart_toStartOf="@+id/textView14"
                 app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
@@ -382,12 +386,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:layout_marginBottom="@dimen/_30sdp"
                 android:background="@color/transperent"
                 android:gravity="left"
                 android:paddingStart="10dp"
                 android:text=""
                 android:textColor="@color/black"
                 android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/productdesc" />
 
