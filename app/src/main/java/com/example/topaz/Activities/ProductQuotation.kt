@@ -1,11 +1,14 @@
 package com.example.topaz.Activities
 
 import android.app.Activity
+import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -13,14 +16,17 @@ import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.topaz.Adapters.FeetAdapter
 import com.example.topaz.Adapters.ProductQuotationAdapter
-import com.example.topaz.Models.FeetModel
-import com.example.topaz.Models.ProductDetailsModel
-import com.example.topaz.Models.ProductQuotationsModel
-import com.example.topaz.Models.ThicknessModel
+import com.example.topaz.ApiModels.QuotationApiModel
+import com.example.topaz.Interface.JsonPlaceholder
+import com.example.topaz.Models.*
 import com.example.topaz.R
+import com.example.topaz.RetrofitApiInstance.UpdateAccountInfoInstance
 import com.example.topaz.databinding.ActivityProductQuotationBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import kotlinx.android.synthetic.main.activity_product_quotation.*
+import com.google.gson.JsonObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ProductQuotation : AppCompatActivity() {
 
@@ -81,6 +87,10 @@ class ProductQuotation : AppCompatActivity() {
             dialog.show()
         }
 
+        binding.quotationbtn.setOnClickListener {
+            onApiCall()
+        }
+
         binding.qutyentry.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
 
@@ -134,8 +144,39 @@ class ProductQuotation : AppCompatActivity() {
         }
     }
 
+    private fun onApiCall() {
+        var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
+            .create(JsonPlaceholder::class.java)
+        val sharedPreference =  getSharedPreferences("CUSTOMER_DATA", Context.MODE_PRIVATE)
+        var custId=sharedPreference.getString("customercode","")
 
+        res.askQotation(custId!!,customerDetails(updateCustomerInfo())).enqueue(object : Callback<QuotationApiModel?> {
+            override fun onResponse(
+                call: Call<QuotationApiModel?>,
+                response: Response<QuotationApiModel?>
+            ) {
+                if (response.isSuccessful){
+                    Log.d(TAG, "onResponse quotation sucess: " + response.body().toString())
+                }else{
+                    Log.d(TAG, "onResponse quotation fail: " + response.body().toString())
+                }
+            }
 
+            override fun onFailure(call: Call<QuotationApiModel?>, t: Throwable) {
+                Log.d(TAG, "onResponse quotation Failure: " + t.message)
+            }
+        })
+    }
+
+    private fun updateCustomerInfo() {
+
+    }
+
+    private fun customerDetails(askQuotationModel: Unit): JsonObject {
+        val json = JsonObject()
+
+        return json
+    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater
