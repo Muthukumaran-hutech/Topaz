@@ -75,7 +75,19 @@ class ProductDetails : AppCompatActivity() {
 
         binding.getAPrice.setOnClickListener {
             sendUserData()
-            startActivity(Intent(activity,ProductQuotation::class.java))
+            var intent=Intent(activity,ProductQuotation::class.java)
+            var productDetailsModel1=ProductDetailsModel(
+                "",
+                productList.get(0).ProductTitle,
+                productList.get(0).ProductPrice,
+                productList.get(0).ProductSize,
+                productList.get(0).ProductThickness,
+                productList.get(0).ProductBrand,
+                productList.get(0).ProductWoodType,
+                //productList.get(0).ProductImage
+            )
+            intent.putExtra("extra_item", productDetailsModel1)
+            startActivity(intent)
         }
 
         binding.buyNow.setOnClickListener {

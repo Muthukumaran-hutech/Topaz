@@ -1,5 +1,9 @@
 package com.example.topaz.Models
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+
 class ProductQuotationsModel (
     var ProductImage: String = "",
     var ProductTitle: String = "",
@@ -9,5 +13,4 @@ class ProductQuotationsModel (
     var ProductBrand: String = "",
     var ProductWoodType: String = "",
     // var ProductSupplier: String = "",
-    var ProductDescription: String = "",
-        )
+    var ProductDescription: String = "")

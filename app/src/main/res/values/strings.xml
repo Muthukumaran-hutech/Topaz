@@ -217,4 +217,6 @@
     <string name="Rs">\u20B9</string>
     <string name="slash">/</string>
 
+    <string name="confirm">Confirm</string>
+
 </resources>
