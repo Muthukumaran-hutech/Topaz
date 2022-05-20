@@ -11,23 +11,27 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.topaz.Adapters.FeetAdapter
 import com.example.topaz.Adapters.ProductQuotationAdapter
-import com.example.topaz.Interface.ProductThicknessItemClickListner
+import com.example.topaz.Models.FeetModel
 import com.example.topaz.Models.ProductDetailsModel
 import com.example.topaz.Models.ProductQuotationsModel
 import com.example.topaz.Models.ThicknessModel
 import com.example.topaz.R
 import com.example.topaz.databinding.ActivityProductQuotationBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import kotlinx.android.synthetic.main.activity_product_quotation.*
 
 class ProductQuotation : AppCompatActivity() {
 
 
     private lateinit var binding: ActivityProductQuotationBinding
     private lateinit var productAdapter: ProductQuotationAdapter
+    private lateinit var feetAdapter: FeetAdapter
     lateinit var activity: Activity
     var productList = ArrayList<ProductQuotationsModel>()
     var thickness_list = ArrayList<ThicknessModel>()
+    var feet_list = ArrayList<FeetModel>()
     //lateinit var btnShowBottomSheet: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +45,7 @@ class ProductQuotation : AppCompatActivity() {
 
         // onApiCallProductDetails()
         productAdapter = ProductQuotationAdapter(thickness_list)
+        feetAdapter = FeetAdapter(feet_list)
 
         val item = intent.getParcelableExtra<ProductDetailsModel>("extra_item")
         var img = item?.ProductImage
@@ -53,6 +58,8 @@ class ProductQuotation : AppCompatActivity() {
 
         //Log.d(TAG, "onCreate: "+title)
         binding.priceentry.setText(price)
+        binding.woodMaterialName.setText(title)
+        binding.thic1.setText(thickness)
         binding.priceentry.isEnabled = false
         binding.totalvalue.isEnabled = false
 
@@ -102,6 +109,7 @@ class ProductQuotation : AppCompatActivity() {
             }
         })
 
+        //thickness adapter
         thickness_list.add(ThicknessModel(thickness.toString()))
         productAdapter = ProductQuotationAdapter(thickness_list)
         binding.productQuotqtionRecycler.layoutManager =
@@ -110,60 +118,23 @@ class ProductQuotation : AppCompatActivity() {
         binding.productQuotqtionRecycler.adapter = productAdapter
 
 
+
+        //Feet Adapter
+
+        feet_list.add(FeetModel(size.toString()))
+        feetAdapter = FeetAdapter(feet_list)
+        binding.feetRecyclyer.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.feetRecyclyer.adapter = feetAdapter
+
+
         binding.productQuotationBackArrow.setOnClickListener {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             finish()
         }
     }
 
-    /* private fun onApiCallProductDetails() {
-         var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
-             .create(JsonPlaceholder::class.java)
 
-
-         res.viewProduct().enqueue(object : Callback<List<ProductDetailsListApiModel>?> {
-             override fun onResponse(
-                 call: Call<List<ProductDetailsListApiModel>?>,
-                 response: Response<List<ProductDetailsListApiModel>?>
-             ) {
-                 if (response.isSuccessful) {
-                //     binding.appProgressBar3.visibility = View.GONE
-
-                     for(productlist in response.body()!!){
-                         var product= ProductQuotationsModel(
-                             "",
-                             productlist.productTitle,
-                             productlist.price.toString(),
-                             productlist.size,
-                             productlist.thickness,
-                             productlist.brand,
-                             productlist.woodType,
-                             productlist.discription
-                         )
-                         productList.add(product)
-                     }
-                     //set detAILS...........
-                     binding.woodMaterialName.text=productList.get(0).ProductTitle
-                     binding.qutyentry.text=productList.get(0)
-                     binding.priceentry.text=productList.get(0).ProductThickness
-                     binding.productSpecificationBrand.text=productList.get(0).ProductBrand
-                     binding.productSpecificationWoodType.text=productList.get(0).ProductWoodType
-                     binding.productSpecificationDesc.text=productList.get(0).ProductDescription
-                     Log.d(ContentValues.TAG, "onResponseProduct: "+ response.body()?.get(0)?.discription)
-                 }else{
-                     Log.d(ContentValues.TAG, "OnFailure: "+ response.body()?.get(0)?.discription)
-                 }
-             }
-
-             override fun onFailure(call: Call<List<ProductDetailsListApiModel>?>, t: Throwable) {
-              //   binding.appProgressBar3.visibility = View.VISIBLE
-                 Toast. makeText(applicationContext," Something Went Wrong Please Try Again Later",
-                     Toast. LENGTH_LONG).show()
-
-             }
-
-         })
-     }*/
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

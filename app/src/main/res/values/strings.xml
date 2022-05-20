@@ -65,6 +65,7 @@
     <string name="specifications">Specifications</string>
     <string name="size">Size</string>
     <string name="thickness">Thickness</string>
+    <string name="thickness_">Thickness:</string>
     <string name="wood_type">Wood Type</string>
     <string name="hardwood">Hardwood</string>
     <string name="supplier">Supplier</string>
