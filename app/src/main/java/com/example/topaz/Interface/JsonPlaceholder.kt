@@ -89,8 +89,8 @@ interface JsonPlaceholder {
     ): Call<UpdateUserApiModel>
 
     @POST("getPrice/onOrder")
-    fun askQotation(@Path("customerId") customerId: String,
-                    @Body jsonObject: JsonObject
+    fun askQotation(
+        @Body jsonObject: JsonObject
     ): Call<QuotationApiModel>
 
 }

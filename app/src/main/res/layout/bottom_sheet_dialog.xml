@@ -37,12 +37,12 @@
             android:layout_below="@+id/idTVCourseName"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:paddingStart="@dimen/_15sdp"
             android:layout_marginStart="@dimen/_40sdp"
             android:layout_marginTop="@dimen/_15sdp"
             android:layout_marginEnd="@dimen/_50sdp"
             android:background="@drawable/bottom_sheet"
             android:inputType="number"
+            android:paddingStart="@dimen/_15sdp"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -59,8 +59,8 @@
             android:background="@drawable/bck_color_btn"
             android:text="@string/confirm"
             android:textAllCaps="false"
-            android:textSize="16sp"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:textSize="16sp" />
 
     </RelativeLayout>
 

@@ -69,7 +69,6 @@
     <string name="wood_type">Wood Type</string>
     <string name="hardwood">Hardwood</string>
     <string name="supplier">Supplier</string>
-    <string name="gold_wood_industries">Gold Wood Industries</string>
     <string name="description">Description</string>
     <string name="desc1_">Kitply BWR Plywood is a premium grade boiling water resistant plywood . it is manufactured with wider core and panel and bonded with high grade PF resin to resist in a high moisture environment.</string>
     <string name="get_a_price">Get a Price</string>
@@ -219,5 +218,6 @@
     <string name="slash">/</string>
 
     <string name="confirm">Confirm</string>
+    <string name="gold_wood_industries_">Gold Wood Industries</string>
 
 </resources>

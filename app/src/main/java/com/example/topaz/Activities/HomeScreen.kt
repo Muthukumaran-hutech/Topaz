@@ -3,7 +3,9 @@ package com.example.topaz.Activities
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.content.Intent
+import android.icu.util.Calendar
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -32,6 +34,8 @@ import com.example.topaz.databinding.ActivityHomeScreenBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.collections.ArrayList
 
 class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner,ArrivalsPageItemClickListner {
@@ -138,7 +142,20 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner,ArrivalsPageI
                             arrivalsModels.categoryid,
                             arrivalsModels.createdDate
                         )
+
+
                         arrival_list.add(arrivalsModels)
+                        try {
+                            var simpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSZ",
+                                Locale.getDefault())
+                            var arivalDate = simpleDateFormat.parse(arrival_list.get(0).ArrivalCreatedDate)
+                            var currentDate = java.util.Calendar.getInstance().time
+
+                            var dateDifference = currentDate.time - arivalDate.time
+                            Log.d(TAG, "get Time: "+dateDifference)
+                        } catch (e: Exception) {
+                            Log.d(TAG, "get Time: fail "+e)
+                        }
                     }
                     //arrivals Adapter
 

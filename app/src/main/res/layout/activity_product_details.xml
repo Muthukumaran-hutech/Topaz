@@ -359,7 +359,7 @@
                     android:background="@color/transperent"
                     android:gravity="left"
                     android:paddingStart="10dp"
-                    android:text="@string/gold_wood_industries"
+                    android:text="@string/gold_wood_industries_"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 

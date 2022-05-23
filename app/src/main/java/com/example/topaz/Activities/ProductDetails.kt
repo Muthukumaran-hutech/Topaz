@@ -77,6 +77,7 @@ class ProductDetails : AppCompatActivity() {
             sendUserData()
             var intent=Intent(activity,ProductQuotation::class.java)
             var productDetailsModel1=ProductDetailsModel(
+                productList.get(0).ProductId,
                 "",
                 productList.get(0).ProductTitle,
                 productList.get(0).ProductPrice,
@@ -124,6 +125,7 @@ class ProductDetails : AppCompatActivity() {
 
                     for(productlist in response.body()!!){
                         var product=ProductDetailsModel(
+                            productlist.productid,
                             "",
                             productlist.productTitle,
                             productlist.price.toString(),
