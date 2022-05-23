@@ -6,24 +6,34 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import com.example.topaz.R
+import com.example.topaz.databinding.ActivityAccountInformationBinding
+import com.example.topaz.databinding.ActivityFaqBinding
 
 class FaqActivity : AppCompatActivity() {
 
-    private var backarrow: ImageView? = null
+    private lateinit var binding: ActivityFaqBinding
+
+
     lateinit var activity: Activity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_faq)
+        binding = ActivityFaqBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
 
-        backarrow = findViewById<ImageView>(R.id.backarrow)
         activity = this
 
+        binding.q1.setOnClickListener {
+
+        }
 
 
-        backarrow?.setOnClickListener{
+
+        binding.backarrow.setOnClickListener{
             startActivity(Intent(activity,MyAccount::class.java))
             finish()
         }
+
+
     }
 }

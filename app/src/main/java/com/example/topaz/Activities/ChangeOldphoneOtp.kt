@@ -29,6 +29,8 @@ import retrofit2.Response
 class ChangeOldphoneOtp : AppCompatActivity() {
     lateinit var activity: Activity
     private lateinit var binding: ActivityChangeOldphoneOtpBinding
+    var custId = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,10 +38,14 @@ class ChangeOldphoneOtp : AppCompatActivity() {
         setContentView(binding.root)
 
         activity = this
+        binding.resendOtp2.setOnClickListener {
+            checkUserApiCall(custId)
+            countdownTimer()
+        }
 
 
         val sharedPreference =  getSharedPreferences("CUSTOMER_DATA", Context.MODE_PRIVATE)
-        var custId=sharedPreference.getString("customercode","")
+        custId= sharedPreference.getString("customercode","").toString()
         var custPhoneno = sharedPreference.getString("primaryPhonenumber","")
 
 
@@ -59,7 +65,8 @@ class ChangeOldphoneOtp : AppCompatActivity() {
                 binding.appProgressBar.visibility = View.VISIBLE
                 binding.appProgressBar.visibility = View.VISIBLE
 
-                checkUserApiCall(custId!!)
+                checkUserApiCall(custId)
+
             }
 
         }

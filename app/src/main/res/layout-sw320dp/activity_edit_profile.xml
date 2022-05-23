@@ -52,7 +52,7 @@
 
 
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/edit_profile_image"
             android:layout_width="96dp"
             android:layout_height="96dp"
@@ -87,7 +87,7 @@
 
     <EditText
         android:id="@+id/first_name"
-        android:layout_width="280dp"
+        android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginStart="47dp"
         android:layout_marginTop="303dp"
@@ -115,16 +115,18 @@
 
     <EditText
         android:id="@+id/last_name"
-        android:layout_width="280dp"
+        android:layout_width="match_parent"
         android:layout_height="45dp"
+        android:layout_marginStart="47dp"
         android:layout_marginTop="399dp"
+        android:layout_marginEnd="47dp"
         android:background="@color/white_gr"
         android:paddingStart="20dp"
         android:text=""
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/first_name"
-        app:layout_constraintStart_toStartOf="@+id/first_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -141,16 +143,18 @@
 
     <EditText
         android:id="@+id/email_id_change"
-        android:layout_width="280dp"
+        android:layout_width="match_parent"
         android:layout_height="45dp"
+        android:layout_marginStart="47dp"
         android:layout_marginTop="495dp"
+        android:layout_marginEnd="47dp"
         android:background="@color/white_gr"
         android:paddingStart="20dp"
         android:text=""
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/first_name"
-        app:layout_constraintStart_toStartOf="@+id/first_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -183,16 +187,18 @@
 
     <EditText
         android:id="@+id/phone_no_change"
-        android:layout_width="280dp"
+        android:layout_width="match_parent"
         android:layout_height="45dp"
+        android:layout_marginStart="47dp"
         android:layout_marginTop="592dp"
+        android:layout_marginEnd="47dp"
         android:background="@color/white_gr"
         android:paddingStart="20dp"
         android:text=""
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/first_name"
-        app:layout_constraintStart_toStartOf="@+id/first_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -213,7 +219,7 @@
         android:id="@+id/reset_btn"
         android:layout_width="150dp"
         android:layout_height="60dp"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="47dp"
         android:layout_marginTop="30dp"
         android:background="@color/white_gr"
         android:text="@string/reset"
@@ -226,12 +232,14 @@
         android:id="@+id/update"
         android:layout_width="150dp"
         android:layout_height="60dp"
-        android:layout_marginStart="200dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="47dp"
         android:background="@color/btn"
         android:text="@string/update"
         android:textColor="@color/white"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/reset_btn"
         app:layout_constraintTop_toTopOf="@+id/reset_btn" />
 
 

@@ -3,6 +3,7 @@ package com.example.topaz.Activities
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,6 +15,7 @@ import android.view.View
 import android.widget.Toast
 import com.example.topaz.ApiModels.ChangeNewEmailOtpApiModel
 import com.example.topaz.Interface.JsonPlaceholder
+import com.example.topaz.Models.ProductDetailsModel
 import com.example.topaz.R
 import com.example.topaz.RetrofitApiInstance.UpdateAccountInfoInstance
 import com.example.topaz.databinding.ActivityChangeOldEmailBinding
@@ -32,6 +34,7 @@ private lateinit var binding: ActivityEmailChangeOtpBinding
 
 class EmailChangeOtp : AppCompatActivity() {
     lateinit var activity: Activity
+    var emailChange = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +42,16 @@ class EmailChangeOtp : AppCompatActivity() {
         setContentView(binding.root)
 
         activity = this
+
+        val item = intent.getStringExtra("extra_email")
+        if (item != null) {
+            emailChange =item
+        }
+
+        binding.resendOtp2.setOnClickListener {
+            checkUserApiCall()
+            countdownTimer()
+        }
 
         binding.otp001.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
@@ -156,14 +169,20 @@ class EmailChangeOtp : AppCompatActivity() {
                     response: Response<ChangeNewEmailOtpApiModel?>
                 ) {
                     if (response.isSuccessful) {
+                        val sharedPreference =  getSharedPreferences("CUSTOMER_DATA", Context.MODE_PRIVATE)
+                        val editor = sharedPreference.edit()
+                        editor.putString("email",emailChange).apply()
                         Log.d(TAG, "onResponse: Success " + response.body().toString())
                         startActivity(Intent(activity, EditProfile::class.java))
+                        finish()
                         Toast.makeText(
                             applicationContext,
                             "Email Verified Sucessfully",
                             Toast.LENGTH_LONG
                         )
                             .show()
+
+
                     } else {
                         Log.d(TAG, "onResponse: Fail " + response.body().toString())
                         Toast.makeText(
@@ -198,7 +217,7 @@ class EmailChangeOtp : AppCompatActivity() {
 
     private fun resendOTP() {
         binding.appProgressBar.visibility = View.VISIBLE
-        countdownTimer()
+
     }
 
     private fun countdownTimer() {

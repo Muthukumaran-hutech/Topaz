@@ -72,7 +72,9 @@ class ChangeEmail : AppCompatActivity() {
                         .setTitle("")
                         .setMessage(message)
                         .setPositiveButton("Ok") { _, _ ->
-                            startActivity(Intent(activity, EmailChangeOtp::class.java))
+                            var intent=Intent(activity,EmailChangeOtp::class.java)
+                            intent.putExtra("extra_email",binding.changeEmail.text.toString() )
+                            startActivity(intent)
                             finish()
                         }.show()
                 } else {

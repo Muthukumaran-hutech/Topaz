@@ -80,7 +80,7 @@ interface JsonPlaceholder {
     @Multipart
     fun verifyNewPhoneOtp( @Path("customerId") customerID: String,
                               @Part("phoneotp") requestBody: RequestBody
-    ): Call<OldPhoneApiModel>
+    ): Call<ChangeNewEmailOtpApiModel>
 
     @PUT("updatecustomer/{customerId}")//Without suspend function
     fun saveAddress(

@@ -41,6 +41,11 @@ class ChangeOldEmailOtp : AppCompatActivity() {
 
         activity = this
 
+        binding.resendOtp2.setOnClickListener {
+            checkUserApiCall()
+            countdownTimer()
+        }
+
 
         binding.confirmEmailOtp.setOnClickListener {
 
@@ -172,6 +177,7 @@ class ChangeOldEmailOtp : AppCompatActivity() {
                         val intent = Intent(this@ChangeOldEmailOtp, ChangeEmail::class.java)
                         intent.putExtra("emailOtp", recievedOtp)
                         startActivity(intent)
+                        finish()
                     } else {
                         Toast.makeText(
                             applicationContext,

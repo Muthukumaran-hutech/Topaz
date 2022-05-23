@@ -61,13 +61,13 @@ class ProductQuotation : AppCompatActivity() {
 
         val item = intent.getParcelableExtra<ProductDetailsModel>("extra_item")
         id = item?.ProductId!!
-        var img = item?.ProductImage
-        var title = item?.ProductTitle
-        var price = item?.ProductPrice
-        var size = item?.ProductSize
-        var thickness = item?.ProductThickness
-        var brand = item?.ProductBrand
-        var woodType = item?.ProductWoodType
+        var img = item.ProductImage
+        var title = item.ProductTitle
+        var price = item.ProductPrice
+        var size = item.ProductSize
+        var thickness = item.ProductThickness
+        var brand = item.ProductBrand
+        var woodType = item.ProductWoodType
 
         //Log.d(TAG, "onCreate: "+title)
         binding.priceentry.setText(price)

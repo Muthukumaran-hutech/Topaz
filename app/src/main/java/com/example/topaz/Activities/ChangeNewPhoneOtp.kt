@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -13,6 +14,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.example.topaz.ApiModels.ChangeNewEmailOtpApiModel
 import com.example.topaz.ApiModels.OldPhoneApiModel
 import com.example.topaz.Interface.JsonPlaceholder
 import com.example.topaz.R
@@ -29,6 +31,9 @@ import retrofit2.Response
 class ChangeNewPhoneOtp : AppCompatActivity() {
     private lateinit var binding: ActivityChangeNewPhoneOtpBinding
     lateinit var activity: Activity
+    var phoneChange = ""
+    lateinit var sharedPreference : SharedPreferences
+    var custId = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,8 +42,18 @@ class ChangeNewPhoneOtp : AppCompatActivity() {
         setContentView(binding.root)
 
         activity = this
-        val sharedPreference =  getSharedPreferences("CUSTOMER_DATA", Context.MODE_PRIVATE)
-        var custId=sharedPreference.getString("customercode","")
+
+        val item = intent.getStringExtra("extra_mobile")
+        if (item != null) {
+            phoneChange =item
+        }
+
+        binding.resendOtp2.setOnClickListener {
+            checkUserApiCall(custId)
+            countdownTimer()
+        }
+        sharedPreference =  getSharedPreferences("CUSTOMER_DATA", Context.MODE_PRIVATE)
+        custId= sharedPreference.getString("customercode","").toString()
 
         binding.confirmPhoneOtp2.setOnClickListener {
 
@@ -56,7 +71,8 @@ class ChangeNewPhoneOtp : AppCompatActivity() {
                 binding.appProgressBar.visibility = View.VISIBLE
                 binding.appProgressBar.visibility = View.VISIBLE
 
-                checkUserApiCall(custId!!)
+                checkUserApiCall(custId)
+
             }
 
         }
@@ -193,13 +209,17 @@ class ChangeNewPhoneOtp : AppCompatActivity() {
         val requestBodyMap: MutableMap<String, RequestBody> = HashMap()
         requestBodyMap["phoneotp"] = body
 
-        res.verifyNewPhoneOtp(custId,body).enqueue(object : Callback<OldPhoneApiModel?> {
+        res.verifyNewPhoneOtp(custId,body).enqueue(object : Callback<ChangeNewEmailOtpApiModel?> {
             override fun onResponse(
-                call: Call<OldPhoneApiModel?>,
-                response: Response<OldPhoneApiModel?>
+                call: Call<ChangeNewEmailOtpApiModel?>,
+                response: Response<ChangeNewEmailOtpApiModel?>
             ) {
                 if (response.isSuccessful){
                     Log.d(ContentValues.TAG, "onResponse otp succes phone: "+ response.body().toString())
+                    val editor = sharedPreference.edit()
+                    editor.putString("primaryPhonenumber",phoneChange).apply()
+                    Log.d(ContentValues.TAG, "onResponse: Success " + response.body().toString())
+                    binding.appProgressBar.visibility = View.GONE
                     startActivity(Intent(activity, EditProfile::class.java))
                     finish()
                 }else{
@@ -207,7 +227,7 @@ class ChangeNewPhoneOtp : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<OldPhoneApiModel?>, t: Throwable) {
+            override fun onFailure(call: Call<ChangeNewEmailOtpApiModel?>, t: Throwable) {
                 Log.d(ContentValues.TAG, "onResponse otp failure phone: "+ t.message)
             }
         })

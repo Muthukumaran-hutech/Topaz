@@ -1,6 +1,7 @@
 package com.example.topaz.Activities
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Context
@@ -71,8 +72,18 @@ class ChangeOldPhoneNumber : AppCompatActivity() {
             ) {
                 if (response.isSuccessful){
                     Log.d(TAG, "onResponse succes phone: "+ response.body().toString())
-                    startActivity(Intent(activity, ChangeOldphoneOtp::class.java))
-                    finish()
+                    var message = "Otp Sent to the entered Registered Mobile Number"
+                    AlertDialog.Builder(this@ChangeOldPhoneNumber)
+                        .setTitle("")
+                        .setMessage(message)
+                        .setPositiveButton("Ok") { _, _ ->
+                            var intent=Intent(activity,ChangeOldphoneOtp::class.java)
+                            intent.putExtra("extra_mobile", binding.changePhone.text.toString() )
+                            startActivity(intent)
+                            finish()
+                        }.show()
+
+
                 }else{
                     Log.d(TAG, "onResponse Fail phone: "+ response.body().toString())
                 }

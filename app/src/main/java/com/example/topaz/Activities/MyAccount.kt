@@ -61,14 +61,14 @@ class MyAccount : AppCompatActivity() {
 
 
 
-        profile_image?.setOnClickListener{
+       /* profile_image?.setOnClickListener{
             startActivity(Intent(activity,EditProfile::class.java))
             finish()
-        }
+        }*/
 
 
         editemailicon?.setOnClickListener{
-            startActivity(Intent(activity,ChangeEmail::class.java))
+            startActivity(Intent(activity,EditProfile::class.java))
             finish()
         }
 
@@ -83,9 +83,8 @@ class MyAccount : AppCompatActivity() {
         }
 
         notificationsprofile?.setOnClickListener{
-            Toast. makeText(applicationContext," Currently In process ", Toast. LENGTH_SHORT).show()
-           /* startActivity(Intent(activity,MyCart::class.java))
-            finish()*/
+            startActivity(Intent(activity,Notifications::class.java))
+            finish()
         }
 
         helpprofile?.setOnClickListener{

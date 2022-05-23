@@ -1,6 +1,7 @@
 package com.example.topaz.Activities
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
@@ -8,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
+import android.widget.Toast
 import com.example.topaz.ApiModels.OldPhoneApiModel
 import com.example.topaz.Interface.JsonPlaceholder
 import com.example.topaz.R
@@ -65,14 +67,28 @@ class ChangePhoneNo : AppCompatActivity() {
             ) {
                 if (response.isSuccessful){
                     Log.d(ContentValues.TAG, "onResponse new success phone: "+ response.body().toString())
-                    startActivity(Intent(activity, ChangeNewPhoneOtp::class.java))
-                    finish()
+                    var message = "Otp Sent to the entered Mobile Number"
+                    //message += "\n\n " + binding.phoneContainer.helperText
+                    AlertDialog.Builder(this@ChangePhoneNo)
+                        .setTitle("")
+                        .setMessage(message)
+                        .setPositiveButton("Ok") { _, _ ->
+                            var intent=Intent(activity,ChangeNewPhoneOtp::class.java)
+                            intent.putExtra("extra_mobile", binding.changePhoneMobile.text.toString() )
+                            startActivity(intent)
+                            finish()
+                        }.show()
+
                 }else{
+                    Toast.makeText(applicationContext, "Something went Wrong", Toast.LENGTH_LONG)
+                        .show()
                     Log.d(ContentValues.TAG, "onResponse new fail phone: "+ response.body().toString())
                 }
             }
 
             override fun onFailure(call: Call<OldPhoneApiModel?>, t: Throwable) {
+                Toast.makeText(applicationContext, "Something went Wrong please try again Later", Toast.LENGTH_LONG)
+                    .show()
                 Log.d(ContentValues.TAG, "onResponse new Failure phone: "+ t.message)
             }
         })

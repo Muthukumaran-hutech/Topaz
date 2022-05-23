@@ -92,6 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="27dp"
                 android:layout_marginEnd="20dp"
+                android:visibility="gone"
                 android:text="@string/century_ply_uses_good_quality_raw_material_and_also_has_rigorous_quality_checks_at_every_stage_to_verify_that_the_best_product_is_going_to_the_market"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
