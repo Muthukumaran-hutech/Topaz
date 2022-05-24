@@ -88,6 +88,19 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/product_image_slider" />
+            <ImageView
+                android:id="@+id/whislist_prod_details_1"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="330dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="25dp"
+                android:background="@color/white"
+                android:visibility="gone"
+                android:src="@drawable/ic_baseline_favorite_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/product_image_slider" />
 
             <ImageView
                 android:id="@+id/share_prod_details"

@@ -76,6 +76,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
     <ImageView
+        android:id="@+id/heart"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="20dp"
@@ -83,6 +84,18 @@
         android:src="@drawable/ic_baseline_favorite_24"
         app:layout_constraintStart_toEndOf="@+id/textView17"
         app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+    <ImageView
+        android:id="@+id/heart2"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:visibility="gone"
+        android:src="@drawable/ic_baseline_favorite_border_black_24"
+        app:layout_constraintStart_toEndOf="@+id/textView17"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
 
     <ImageView
         android:layout_width="match_parent"

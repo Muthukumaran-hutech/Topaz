@@ -3,6 +3,7 @@ package com.example.topaz.Activities
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -17,10 +18,14 @@ import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.example.topaz.ApiModels.ProductDetailsListApiModel
 import com.example.topaz.Interface.JsonPlaceholder
+import com.example.topaz.Models.DetailsFirebaseModel
 import com.example.topaz.Models.ProductDetailsModel
+import com.example.topaz.Models.UpdateCustomerInfo
 import com.example.topaz.R
 import com.example.topaz.RetrofitApiInstance.UpdateAccountInfoInstance
 import com.example.topaz.databinding.ActivityProductDetailsBinding
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,7 +37,10 @@ class ProductDetails : AppCompatActivity() {
     lateinit var activity: Activity
     val imageList = ArrayList<Int>()
     var slidemodellist = ArrayList<SlideModel>()
-   var productList = ArrayList<ProductDetailsModel>()
+    var productList = ArrayList<ProductDetailsModel>()
+
+
+    private lateinit var database: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,11 +52,11 @@ class ProductDetails : AppCompatActivity() {
         setSupportActionBar(binding.prodDetailsToolbar)
         supportActionBar?.title = ""
 
-        binding.productBackArrow.setOnClickListener{
-            startActivity(Intent(activity,InnerCategories::class.java))
+        binding.productBackArrow.setOnClickListener {
+            startActivity(Intent(activity, InnerCategories::class.java))
 
         }
-        var rupees = getString(R.string.Rs)+binding.textView14.text + getString(R.string.slash)
+        var rupees = getString(R.string.Rs) + binding.textView14.text + getString(R.string.slash)
 
         imageList.add(R.drawable.home_slider_banner)
         imageList.add(R.drawable.home_slider_banner_2)
@@ -68,15 +76,36 @@ class ProductDetails : AppCompatActivity() {
 
         onApiCallProductDetails()
 
+        val sharedPreference =  getSharedPreferences("CUSTOMER_DATA", Context.MODE_PRIVATE)
+        val custId = sharedPreference.getString("customercode","")
+
+
         binding.whislistProdDetails.setOnClickListener {
-            Toast.makeText(applicationContext, "Will be added to wishlist Shortly", Toast.LENGTH_SHORT)
-                .show()
+            var detailsFirebaseModel = DetailsFirebaseModel(
+                custId = custId.toString(),
+                productImage = "",
+                productid = productList.get(0).ProductId.toInt(),
+                productTitle =  productList.get(0).ProductTitle.toString(),
+                thickness = productList.get(0).ProductThickness,
+                price = productList.get(0).ProductPrice.toInt(),
+                productDiscountId = "",
+                addedToWishList = true
+            )
+
+            //creating database and child to fire base
+            database = FirebaseDatabase.getInstance().getReference("WhishList")
+            database.child(custId.toString()).child(productList.get(0).ProductId.toInt().toString()).setValue(detailsFirebaseModel)
+
+            Toast.makeText(
+                applicationContext, " Product Added To WishList",
+                Toast.LENGTH_LONG
+            ).show()
         }
 
         binding.getAPrice.setOnClickListener {
             sendUserData()
-            var intent=Intent(activity,ProductQuotation::class.java)
-            var productDetailsModel1=ProductDetailsModel(
+            var intent = Intent(activity, ProductQuotation::class.java)
+            var productDetailsModel1 = ProductDetailsModel(
                 productList.get(0).ProductId,
                 "",
                 productList.get(0).ProductTitle,
@@ -92,10 +121,14 @@ class ProductDetails : AppCompatActivity() {
         }
 
         binding.buyNow.setOnClickListener {
-            startActivity(Intent(activity,MyCart::class.java))
+            startActivity(Intent(activity, MyCart::class.java))
         }
         binding.shareProdDetails.setOnClickListener {
-            Toast.makeText(applicationContext, "Will be placed with Google Playstore Link", Toast.LENGTH_SHORT)
+            Toast.makeText(
+                applicationContext,
+                "Will be placed with Google Playstore Link",
+                Toast.LENGTH_SHORT
+            )
                 .show()
             //should pass the google playstorelink
             /*ShareCompat.IntentBuilder.from(activity)
@@ -115,7 +148,7 @@ class ProductDetails : AppCompatActivity() {
             .create(JsonPlaceholder::class.java)
 
 
-        res.viewProduct().enqueue(object : Callback<List<ProductDetailsListApiModel>?>{
+        res.viewProduct().enqueue(object : Callback<List<ProductDetailsListApiModel>?> {
             override fun onResponse(
                 call: Call<List<ProductDetailsListApiModel>?>,
                 response: Response<List<ProductDetailsListApiModel>?>
@@ -123,8 +156,8 @@ class ProductDetails : AppCompatActivity() {
                 if (response.isSuccessful) {
                     binding.appProgressBar3.visibility = View.GONE
 
-                    for(productlist in response.body()!!){
-                        var product=ProductDetailsModel(
+                    for (productlist in response.body()!!) {
+                        var product = ProductDetailsModel(
                             productlist.productid,
                             "",
                             productlist.productTitle,
@@ -138,25 +171,28 @@ class ProductDetails : AppCompatActivity() {
                         productList.add(product)
                     }
                     //set detAILS...........
-                    var rupees = getString(R.string.Rs)+binding.textView14.text /*+ getString(R.string.slash)*/
+                    var rupees =
+                        getString(R.string.Rs) + binding.textView14.text /*+ getString(R.string.slash)*/
 
-                    binding.woodMaterialName.text=productList.get(0).ProductTitle
-                    binding.textView14.text= rupees+ productList.get(0).ProductPrice + "/"
-                    binding.productSpecificationSize.text=productList.get(0).ProductSize
-                    binding.productSpecificationThickness.text=productList.get(0).ProductThickness
-                    binding.productSpecificationBrand.text=productList.get(0).ProductBrand
-                    binding.productSpecificationWoodType.text=productList.get(0).ProductWoodType
-                    binding.productSpecificationDesc.text=productList.get(0).ProductDescription
-                    Log.d(TAG, "onResponseProduct: "+ response.body()?.get(0)?.discription)
-                }else{
-                    Log.d(TAG, "OnFailure: "+ response.body()?.get(0)?.discription)
+                    binding.woodMaterialName.text = productList.get(0).ProductTitle
+                    binding.textView14.text = rupees + productList.get(0).ProductPrice + "/"
+                    binding.productSpecificationSize.text = productList.get(0).ProductSize
+                    binding.productSpecificationThickness.text = productList.get(0).ProductThickness
+                    binding.productSpecificationBrand.text = productList.get(0).ProductBrand
+                    binding.productSpecificationWoodType.text = productList.get(0).ProductWoodType
+                    binding.productSpecificationDesc.text = productList.get(0).ProductDescription
+                    Log.d(TAG, "onResponseProduct: " + response.body()?.get(0)?.discription)
+                } else {
+                    Log.d(TAG, "OnFailure: " + response.body()?.get(0)?.discription)
                 }
             }
 
             override fun onFailure(call: Call<List<ProductDetailsListApiModel>?>, t: Throwable) {
                 binding.appProgressBar3.visibility = View.VISIBLE
-                Toast. makeText(applicationContext," Something Went Wrong Please Try Again Later",
-                    Toast. LENGTH_LONG).show()
+                Toast.makeText(
+                    applicationContext, " Something Went Wrong Please Try Again Later",
+                    Toast.LENGTH_LONG
+                ).show()
 
             }
 
@@ -180,6 +216,7 @@ class ProductDetails : AppCompatActivity() {
             }
             .show()
     }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.prod_page_menu, menu)
@@ -188,10 +225,10 @@ class ProductDetails : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        when(item.itemId){
-            R.id.search_bar->  startActivity(Intent(activity,SearchActivity::class.java))
-            R.id.notification_bar->  startActivity(Intent(activity,Notifications::class.java))
-            R.id.my_cart->  startActivity(Intent(activity,MyCart::class.java))
+        when (item.itemId) {
+            R.id.search_bar -> startActivity(Intent(activity, SearchActivity::class.java))
+            R.id.notification_bar -> startActivity(Intent(activity, Notifications::class.java))
+            R.id.my_cart -> startActivity(Intent(activity, MyCart::class.java))
         }
         return super.onOptionsItemSelected(item)
 

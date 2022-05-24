@@ -13,6 +13,8 @@ import com.example.topaz.Models.UpdateCustomerInfo
 import com.example.topaz.ApiModels.UpdateUserApiModel
 import com.example.topaz.RetrofitApiInstance.UpdateAccountInfoInstance
 import com.example.topaz.databinding.ActivityAccountInformationBinding
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -23,6 +25,8 @@ class AccountInformation : AppCompatActivity() {
     private lateinit var binding: ActivityAccountInformationBinding
     lateinit var activity: Activity
     var ss = ""
+    private lateinit var database:DatabaseReference
+
 
 
 
@@ -44,6 +48,19 @@ class AccountInformation : AppCompatActivity() {
         val custPhoneno = sharedPreference.getString("primaryPhonenumber","")
         val custEmailId = sharedPreference.getString("email","")
         //set the edittext
+
+        var updateCustomerInfo1 = UpdateCustomerInfo(
+            customerName = custName.toString(),
+            customerId = custId.toString(),
+            customerPhoneNo = custPhoneno!!,
+            customerEmailAddress = custEmailId.toString()
+        )
+
+        //creating database and child to fire base
+        database = FirebaseDatabase.getInstance().getReference("Users")
+        database.child(custId.toString()).setValue(updateCustomerInfo1)
+
+
 
         binding.accountInfoUserName.setText(custName.toString())
         binding.accountInfoCustomerId.setText(custId.toString())

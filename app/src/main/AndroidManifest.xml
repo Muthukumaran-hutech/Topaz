@@ -48,7 +48,7 @@
             android:name=".Activities.ChatActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.ProductDetails"
+            android:name=".Activities.SplashScreen"
             android:exported="false" />
         <activity
             android:name=".Activities.SearchActivity"
@@ -144,7 +144,7 @@
             android:name=".Activities.MyOrders"
             android:exported="false" />
         <activity
-            android:name=".Activities.SplashScreen"
+            android:name=".Activities.ProductDetails"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
