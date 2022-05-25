@@ -47,8 +47,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cart_recycle"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cart_list_toolbar" />
@@ -57,10 +57,11 @@
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_height="245dp"
+        android:layout_marginBottom="20dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/cart_recycle">
+        app:layout_constraintBottom_toTopOf="@+id/chckbtn"
+        tools:layout_editor_absoluteX="3dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -108,8 +109,6 @@
             android:textColor="@color/black"
             android:textSize="14sp"
             android:textStyle="bold" />
-
-
 
 
         <TextView
@@ -163,9 +162,8 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="20dp"
-            android:src="@drawable/line_99"
-            android:layout_marginTop="@dimen/_20sdp" />
-
+            android:layout_marginTop="@dimen/_20sdp"
+            android:src="@drawable/line_99" />
 
 
     </LinearLayout>
@@ -176,7 +174,6 @@
         android:layout_width="375dp"
         android:layout_height="57dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
         android:layout_marginEnd="19dp"
         android:layout_marginBottom="30dp"
         android:background="@drawable/roundedbtndarkblue"
@@ -188,8 +185,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

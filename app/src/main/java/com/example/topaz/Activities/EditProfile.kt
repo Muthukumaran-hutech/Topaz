@@ -10,18 +10,15 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.topaz.R
 import com.example.topaz.databinding.ActivityEditProfileBinding
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class EditProfile : AppCompatActivity() {
 
     private lateinit var binding: ActivityEditProfileBinding
-
-    private var backarrow1: ImageView? = null
-    private var profile_change: ImageView? = null
-    private var change_Email: TextView? = null
-    private var change_Phoneno: TextView? = null
-    private var change_Pwd: TextView? = null
     val REQUEST_CODE = 100
     lateinit var activity: Activity
+    private lateinit var database: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,9 +31,7 @@ class EditProfile : AppCompatActivity() {
         var custEmailId = sharedPreference.getString("email", "")
         var custPhoneno = sharedPreference.getString("primaryPhonenumber", "")
 
-        profile_change = findViewById<ImageView>(R.id.edit_image)
 
-        backarrow1 = findViewById<ImageView>(R.id.backarrow1)
 
         binding.emailIdChange.setText(custEmailId)
         binding.phoneNoChange.setText(custPhoneno)
@@ -46,10 +41,7 @@ class EditProfile : AppCompatActivity() {
         binding.emailIdChange.isEnabled = false
         binding.phoneNoChange.isEnabled = false
 
-        profile_change?.setOnClickListener {
-            Toast.makeText(applicationContext, " Currently In process ", Toast.LENGTH_SHORT).show()
 
-        }
 
         binding.editImage.setOnClickListener {
             openGalleryForImage()
@@ -71,18 +63,17 @@ class EditProfile : AppCompatActivity() {
             startActivity(intent)
         }
 
-        change_Pwd?.setOnClickListener {
-            startActivity(Intent(activity, NewPassword::class.java))
-            finish()
-        }
 
-        backarrow1?.setOnClickListener {
+
+        binding.backarrow1.setOnClickListener {
             startActivity(Intent(activity, MyAccount::class.java))
             finish()
         }
     }
 
     private fun openGalleryForImage() {
+
+        database = FirebaseDatabase.getInstance().getReference("Profile")
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
 

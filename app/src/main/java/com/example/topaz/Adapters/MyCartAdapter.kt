@@ -6,6 +6,8 @@ import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -18,8 +20,11 @@ import com.example.topaz.Models.CartProductList
 import com.example.topaz.R
 import java.util.ArrayList
 
-class MyCartAdapter(var cartData: ArrayList<CartProductList>, var myCartItemClickListner: MyCartItemClickListner,var context: Context) : RecyclerView.Adapter<MyCartAdapter.MyViewHolder>() {
-
+class MyCartAdapter(
+    var cartData: ArrayList<CartProductList>,
+    var myCartItemClickListner: MyCartItemClickListner,
+    var context: Context
+) : RecyclerView.Adapter<MyCartAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -27,9 +32,39 @@ class MyCartAdapter(var cartData: ArrayList<CartProductList>, var myCartItemClic
         return MyViewHolder(view)
     }
 
+
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val data = cartData[position]
-        holder.bindItems(cartData,position,myCartItemClickListner,context)
+        holder.bindItems(cartData, position, myCartItemClickListner, context)
+
+        holder.number.isEnabled = false
+        holder.plus.setOnClickListener {
+            if (cartData.get(position).quantity.isNotEmpty()) {
+                if (cartData.get(position).quantity.toInt() >= 1) {
+                    var qnty = cartData.get(position).quantity.toInt()
+                    qnty++
+                    holder.number.setText(qnty)
+                    notifyDataSetChanged()
+                } else {
+                    //doNothing
+                }
+            }
+        }
+        holder.minus.setOnClickListener {
+            if (cartData.get(position).quantity.isNotEmpty()) {
+                if (cartData.get(position).quantity.toInt() >= 1) {
+                    var qnt = cartData.get(position).quantity.toInt()
+                    qnt--
+                    holder.number.setText(qnt)
+                    notifyDataSetChanged()
+
+                } else {
+                    //doNothing
+                }
+            }
+
+
+        }
     }
 
     override fun getItemCount(): Int {
@@ -38,10 +73,14 @@ class MyCartAdapter(var cartData: ArrayList<CartProductList>, var myCartItemClic
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        var cartImage=itemView.findViewById<ImageView>(R.id.catimage)
-        var cartTitle=itemView.findViewById<TextView>(R.id.textView13)
-        var cartRupees=itemView.findViewById<TextView>(R.id.textView14).toString()
-        var cartDelete=itemView.findViewById<ImageView>(R.id.textView15)
+        var cartImage = itemView.findViewById<ImageView>(R.id.catimage)
+        var cartTitle = itemView.findViewById<TextView>(R.id.textView13)
+        var cartRupees = itemView.findViewById<TextView>(R.id.pri).toString()
+        var cartDelete = itemView.findViewById<ImageView>(R.id.textView15)
+        var minus = itemView.findViewById<Button>(R.id.minusbtn)
+        var plus = itemView.findViewById<Button>(R.id.plusbtn)
+        var number = itemView.findViewById<EditText>(R.id.numbercount)
+
 
         fun bindItems(
             cartData: ArrayList<CartProductList>,
@@ -50,12 +89,16 @@ class MyCartAdapter(var cartData: ArrayList<CartProductList>, var myCartItemClic
             context: Context
         ) {
             cartTitle.text = cartData[position].product_title
-            cartRupees = cartData[position].price.toInt().toString()
-            val decodedString: ByteArray = Base64.decode(cartData.get(position).cartImage, Base64.DEFAULT)
+            cartRupees = cartData[position].price
+            val decodedString: ByteArray =
+                Base64.decode(cartData.get(position).cartImage, Base64.DEFAULT)
             val bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
 
             Glide.with(context)
-                .applyDefaultRequestOptions(RequestOptions().placeholder(R.drawable.ic_baseline_image_24).error(R.drawable.ic_baseline_image_24))
+                .applyDefaultRequestOptions(
+                    RequestOptions().placeholder(R.drawable.ic_baseline_image_24)
+                        .error(R.drawable.ic_baseline_image_24)
+                )
                 .load(bitmap)
                 .into(cartImage)
             cartDelete.setOnClickListener {

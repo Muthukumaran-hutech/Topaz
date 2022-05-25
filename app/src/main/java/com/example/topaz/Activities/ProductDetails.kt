@@ -75,7 +75,7 @@ class ProductDetails : AppCompatActivity() {
             var cartListItems = CartList(
                 custId = custId,
                 cartId = cart_id.toString(),
-                isCartActive = true,
+                cartActive = true
                 //    product_list = cartProductListItem
 
             )

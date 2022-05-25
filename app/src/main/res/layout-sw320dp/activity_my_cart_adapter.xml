@@ -22,8 +22,9 @@
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
         android:background="@color/white"
-        android:text="@string/wooden_waterproof_plywood_sheet_thickness_18_mm"
+        android:text=""
         android:textColor="@color/netural_black"
         android:textSize="14sp"
         android:textStyle="bold"
@@ -31,12 +32,14 @@
         app:layout_constraintTop_toTopOf="@+id/catimage" />
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/pri"
         android:layout_width="58dp"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:text="@string/_59"
+        android:text=""
+        android:textStyle="bold"
+        android:textSize="16sp"
         android:textColor="@color/primary_blue"
         app:layout_constraintStart_toStartOf="@+id/textView13"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
@@ -51,7 +54,7 @@
         android:textColor="@color/netural_black"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/textView14"
+        app:layout_constraintStart_toEndOf="@+id/pri"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
     <ImageView
@@ -60,9 +63,9 @@
         android:layout_height="25dp"
         android:layout_marginTop="10dp"
        android:src="@drawable/ic_baseline_delete_outline_24"
-        app:layout_constraintEnd_toEndOf="@+id/textView14"
-        app:layout_constraintStart_toStartOf="@+id/textView14"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+        app:layout_constraintEnd_toEndOf="@+id/pri"
+        app:layout_constraintStart_toStartOf="@+id/pri"
+        app:layout_constraintTop_toBottomOf="@+id/pri" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/minusbtn"
@@ -70,25 +73,25 @@
         android:layout_height="25dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="20dp"
-        android:background="@color/white"
+        android:background="@drawable/minus_border"
         android:gravity="center"
         android:paddingBottom="7dp"
         android:text="@string/minus"
         android:textColor="@color/netural_grey"
-        android:textSize="16sp"
+        android:textSize="15dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/numbercount"
         app:layout_constraintStart_toEndOf="@+id/textView15"
         app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
 
-    <TextView
+    <EditText
         android:id="@+id/numbercount"
         android:layout_width="40dp"
         android:layout_height="25dp"
-        android:background="@color/grey_white"
+        android:background="@color/neutal_light"
         android:gravity="center"
-        android:hint="1"
+        android:text="1"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/plusbtn"
@@ -100,12 +103,12 @@
         android:layout_width="35dp"
         android:layout_height="25dp"
         android:layout_marginEnd="30dp"
-        android:background="@color/white"
+        android:background="@drawable/minus_border"
         android:gravity="center"
         android:paddingBottom="7dp"
         android:text="@string/add"
         android:textColor="@color/netural_grey"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/numbercount"
