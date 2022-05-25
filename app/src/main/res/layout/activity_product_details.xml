@@ -440,7 +440,7 @@
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/home"
+        app:layout_constraintStart_toEndOf="@+id/add_to_cart"
         app:layout_constraintTop_toTopOf="@+id/textView6" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -458,7 +458,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView6" />
 
     <ImageView
-        android:id="@+id/home"
+        android:id="@+id/add_to_cart"
         android:layout_width="38dp"
         android:layout_height="28dp"
         android:layout_marginStart="10dp"

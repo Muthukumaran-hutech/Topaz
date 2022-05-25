@@ -18,14 +18,14 @@ import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.example.topaz.ApiModels.ProductDetailsListApiModel
 import com.example.topaz.Interface.JsonPlaceholder
-import com.example.topaz.Models.DetailsFirebaseModel
-import com.example.topaz.Models.ProductDetailsModel
-import com.example.topaz.Models.UpdateCustomerInfo
+import com.example.topaz.Models.*
 import com.example.topaz.R
 import com.example.topaz.RetrofitApiInstance.UpdateAccountInfoInstance
 import com.example.topaz.databinding.ActivityProductDetailsBinding
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.android.synthetic.main.activity_account_information.*
+import kotlinx.android.synthetic.main.activity_my_orders.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -33,11 +33,15 @@ import retrofit2.Response
 
 class ProductDetails : AppCompatActivity() {
 
+    private lateinit var database1: DatabaseReference
     private lateinit var binding: ActivityProductDetailsBinding
     lateinit var activity: Activity
     val imageList = ArrayList<Int>()
     var slidemodellist = ArrayList<SlideModel>()
     var productList = ArrayList<ProductDetailsModel>()
+    var cartItemList = ArrayList<CartList>()
+    var cartProductListItem = ArrayList<CartProductList>()
+    var custId = ""
 
 
     private lateinit var database: DatabaseReference
@@ -47,6 +51,9 @@ class ProductDetails : AppCompatActivity() {
         binding = ActivityProductDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val sharedPreference = getSharedPreferences("CUSTOMER_DATA", Context.MODE_PRIVATE)
+        custId = sharedPreference.getString("customercode", "").toString()
+
         activity = this
         binding.prodScrollView.isFillViewport = true
         setSupportActionBar(binding.prodDetailsToolbar)
@@ -55,6 +62,47 @@ class ProductDetails : AppCompatActivity() {
         binding.productBackArrow.setOnClickListener {
             startActivity(Intent(activity, InnerCategories::class.java))
 
+        }
+
+        binding.addToCart.setOnClickListener {
+
+
+            database = FirebaseDatabase.getInstance().getReference("MyCart")
+            database1 = FirebaseDatabase.getInstance().getReference("MyCartProducts")
+
+            //Check if Cart exists, if exists then update the items to that cart else create a new cart item
+            var cart_id = database.child(custId).push().key
+            var cartListItems = CartList(
+                custId = custId,
+                cartId = cart_id.toString(),
+                isCartActive = true,
+                //    product_list = cartProductListItem
+
+            )
+            cartProductListItem.add(
+                CartProductList(
+                    product_title = productList.get(0).ProductTitle,
+                    cartImage = "",
+                    price = productList.get(0).ProductPrice,
+                    isActive = true,
+                    product_id = productList.get(0).ProductId.toString(),
+                    cart_id = cart_id.toString()
+                )
+            )
+            //------------------------------------Cart creation------------------------------------------
+            database.child(custId.toString()).child(cart_id.toString())
+                .setValue(cartListItems)
+
+
+           //------------------------------------Cart insertion------------------------------------------
+            database1.child(cart_id.toString()).child("Products")
+                .child(cartProductListItem.get(0).product_id)
+                .setValue(cartProductListItem.get(0))//Inserting products into Cart
+
+            Toast.makeText(
+                applicationContext, " Product Added To MyCart",
+                Toast.LENGTH_LONG
+            ).show()
         }
         var rupees = getString(R.string.Rs) + binding.textView14.text + getString(R.string.slash)
 
@@ -76,8 +124,7 @@ class ProductDetails : AppCompatActivity() {
 
         onApiCallProductDetails()
 
-        val sharedPreference =  getSharedPreferences("CUSTOMER_DATA", Context.MODE_PRIVATE)
-        val custId = sharedPreference.getString("customercode","")
+
 
 
         binding.whislistProdDetails.setOnClickListener {
@@ -85,7 +132,7 @@ class ProductDetails : AppCompatActivity() {
                 custId = custId.toString(),
                 productImage = "",
                 productid = productList.get(0).ProductId.toInt(),
-                productTitle =  productList.get(0).ProductTitle.toString(),
+                productTitle = productList.get(0).ProductTitle.toString(),
                 thickness = productList.get(0).ProductThickness,
                 price = productList.get(0).ProductPrice.toInt(),
                 productDiscountId = "",
@@ -94,7 +141,8 @@ class ProductDetails : AppCompatActivity() {
 
             //creating database and child to fire base
             database = FirebaseDatabase.getInstance().getReference("WhishList")
-            database.child(custId.toString()).child(productList.get(0).ProductId.toInt().toString()).setValue(detailsFirebaseModel)
+            database.child(custId.toString()).child(productList.get(0).ProductId.toInt().toString())
+                .setValue(detailsFirebaseModel)
 
             Toast.makeText(
                 applicationContext, " Product Added To WishList",
@@ -233,5 +281,6 @@ class ProductDetails : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
 
     }
+
 
 }
