@@ -15,7 +15,7 @@ class CategoryListApiModel {
     public var tags: ArrayList<Tags> = ArrayList<Tags>()
 
     @SerializedName("subcategory")
-    public var subcategory: ArrayList<SubCategory> = ArrayList<SubCategory>()
+    public var subcategory1: ArrayList<SubCategory> = ArrayList<SubCategory>()
 
     @SerializedName("discription")
     public var discription: String = ""
@@ -41,6 +41,8 @@ class Tags {
 
 class CategoryImage {
 
+
+
     public var imageId : Int = 0
     public var categoryid : String = ""
     public var imagepath : String =""
@@ -52,6 +54,24 @@ class CategoryImage {
 
 class SubCategory {
 
+    @SerializedName("subid")
+    public var subid: String = ""
+
+    @SerializedName("subcategory")
+    public var subcategory: String = ""
+
+    @SerializedName("categoryid")
+    public var categoryid: String = ""
+
+    @SerializedName("categoryName")
+    public var categoryName: String = ""
+
+
+
+    /*public var subid : String = ""
     public var subcategory : String = ""
+    public var categoryid : String = ""
+    public var categoryName : String = ""
+*/
 
 }

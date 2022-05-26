@@ -191,7 +191,7 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner,ArrivalsPageI
     }
 
     override fun ArrivalsPageItemClickListner(arrivals : ArrivalsModels){
-        startActivity(Intent(activity, InnerCategories::class.java))
+        startActivity(Intent(activity, CategoryActivity::class.java))
     }
 
    /* override fun ArrivalsPageItemClickListner(arrivals: ArrivalsModels){

@@ -1,7 +1,6 @@
 package com.example.topaz.Activities
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
@@ -16,7 +15,6 @@ import com.example.topaz.Interface.IncreementDecreementItemClickListner
 import com.example.topaz.Interface.MyCartItemClickListner
 import com.example.topaz.Models.CartList
 import com.example.topaz.Models.CartProductList
-import com.example.topaz.Models.ProductDetailsModel
 import com.example.topaz.Models.ProductQuotationsModel
 import com.example.topaz.databinding.ActivityMyCartBinding
 import com.google.firebase.database.*
@@ -147,12 +145,12 @@ class MyCart : AppCompatActivity(), MyCartItemClickListner,IncreementDecreementI
 
 
 
-    override fun MyCartItemClickListner(data: CartProductList) {
+    override fun MyCartItemClickListner(data: CartProductList, position: Int) {
 
         if (cartData.size == 1) {
             database.child(custId).child(data.cart_id).child("cartActive").setValue(false)
             cartData.remove(data)
-            cartAdapter.notifyItemRemoved(0)
+            cartAdapter.notifyItemRemoved(position)
             database1.child(data.cart_id).child("Products").child(data.product_id).child("active").setValue(false)
 
             binding.linearLayout3.visibility = View.GONE
@@ -162,6 +160,14 @@ class MyCart : AppCompatActivity(), MyCartItemClickListner,IncreementDecreementI
 
         } else {
             //Write a function which changes the status of the product in MyCrtProducts
+            cartData.remove(data)
+            cartAdapter.notifyItemRemoved(position)
+            database1.child(data.cart_id).child("Products").child(data.product_id).child("active").setValue(false)
+
+            binding.linearLayout3.visibility = View.GONE
+            binding.chckbtn.visibility = View.GONE
+            binding.cartRecycle.visibility = View.GONE
+            binding.cartEmpty.visibility = View.VISIBLE
         }
 
         Toast.makeText(this, "Removed from the MyCart", Toast.LENGTH_LONG).show()

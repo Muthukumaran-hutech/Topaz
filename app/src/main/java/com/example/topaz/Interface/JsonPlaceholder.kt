@@ -21,8 +21,11 @@ interface JsonPlaceholder {
     @GET("viewCategory")
     fun viewCategory(): Call<List<CategoryListApiModel>>
 
-    @GET("viewProduct")
-    fun viewProduct(): Call<List<ProductDetailsListApiModel>>
+    @GET("viewProdcutBySubCategoryId/{subid}")
+    fun subCategory( @Path("subid") subid: String): Call<List<SubCategoryApiModel>>
+
+    @GET("viewProduct/{subid}")
+    fun viewProduct(@Path("subid") subid: String): Call<List<ProductDetailsListApiModel>>
 
 
     @GET("offers/get")

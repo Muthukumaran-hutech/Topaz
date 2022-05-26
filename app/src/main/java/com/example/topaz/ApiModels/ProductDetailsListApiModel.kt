@@ -55,8 +55,6 @@ class ProductDetailsListApiModel {
     @SerializedName("currency")
     public var currency: String = ""
 
-    @SerializedName("productImage")
-    public var productImage: String = ""
 
     @SerializedName("discription")
     public var discription: String = ""
@@ -69,7 +67,7 @@ class ProductDetailsListApiModel {
 
 
     @SerializedName("productimage")
-    public var productimage: ProductImage = ProductImage()
+    public var Productimage2: ProductImage2 = ProductImage2()
 
     @SerializedName("active")
     public var active: Boolean = true
@@ -79,7 +77,7 @@ class ProductDetailsListApiModel {
 
 }
 
-class ProductImage {
+class ProductImage2 {
     public var imageId: Int = 0
     public var productid: Int = 0
     public var imagepath: String = ""

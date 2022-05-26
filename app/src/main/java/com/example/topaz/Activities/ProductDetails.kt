@@ -6,7 +6,6 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
@@ -24,8 +23,6 @@ import com.example.topaz.R
 import com.example.topaz.RetrofitApiInstance.UpdateAccountInfoInstance
 import com.example.topaz.databinding.ActivityProductDetailsBinding
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.activity_account_information.*
-import kotlinx.android.synthetic.main.activity_my_orders.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -42,6 +39,7 @@ class ProductDetails : AppCompatActivity() {
     var cartItemList = ArrayList<CartList>()
     var cartProductListItem = ArrayList<CartProductList>()
     var custId = ""
+    var subid = ""
 
 
     private lateinit var database: DatabaseReference
@@ -53,6 +51,13 @@ class ProductDetails : AppCompatActivity() {
 
         val sharedPreference = getSharedPreferences("CUSTOMER_DATA", Context.MODE_PRIVATE)
         custId = sharedPreference.getString("customercode", "").toString()
+
+        val item = intent.getStringExtra("inner_sunid")
+        subid = item!!
+
+        binding.getAPrice.isEnabled = false
+        binding.buyNow.isEnabled = false
+        binding.addToCart.isEnabled = false
 
         activity = this
         binding.prodScrollView.isFillViewport = true
@@ -79,12 +84,6 @@ class ProductDetails : AppCompatActivity() {
 
 
         //-----------------Slide model list---------------------//
-        slidemodellist.add(SlideModel(imagePath = R.drawable.rectangle_2544))
-        slidemodellist.add(SlideModel(imagePath = R.drawable.rectangle_2544))
-        slidemodellist.add(SlideModel(imagePath = R.drawable.rectangle_2544))
-        slidemodellist.add(SlideModel(imagePath = R.drawable.rectangle_2544))
-        slidemodellist.add(SlideModel(imagePath = R.drawable.rectangle_2544))
-        slidemodellist.add(SlideModel(imagePath = R.drawable.rectangle_2544))
 
         binding.productImageSlider.setImageList(slidemodellist, ScaleTypes.FIT)
 
@@ -98,7 +97,7 @@ class ProductDetails : AppCompatActivity() {
         binding.whislistProdDetails.setOnClickListener {
             var detailsFirebaseModel = DetailsFirebaseModel(
                 custId = custId.toString(),
-                productImage = "",
+                productImage = productList.get(0).productImage,
                 productid = productList.get(0).ProductId.toInt(),
                 productTitle = productList.get(0).ProductTitle.toString(),
                 thickness = productList.get(0).ProductThickness,
@@ -123,7 +122,7 @@ class ProductDetails : AppCompatActivity() {
             var intent = Intent(activity, ProductQuotation::class.java)
             var productDetailsModel1 = ProductDetailsModel(
                 productList.get(0).ProductId,
-                "",
+                productList.get(0).productImage,
                 productList.get(0).ProductTitle,
                 productList.get(0).ProductPrice,
                 productList.get(0).ProductSize,
@@ -192,7 +191,7 @@ class ProductDetails : AppCompatActivity() {
                     cartProductListItem.add(
                         CartProductList(
                             product_title = productList.get(0).ProductTitle,
-                            cartImage = "",
+                            cartImage = productList.get(0).productImage,
                             price = productList.get(0).ProductPrice,
                             isActive = true,
                             product_id = productList.get(0).ProductId.toString(),
@@ -231,7 +230,7 @@ class ProductDetails : AppCompatActivity() {
             .create(JsonPlaceholder::class.java)
 
 
-        res.viewProduct().enqueue(object : Callback<List<ProductDetailsListApiModel>?> {
+        res.viewProduct(subid).enqueue(object : Callback<List<ProductDetailsListApiModel>?> {
             override fun onResponse(
                 call: Call<List<ProductDetailsListApiModel>?>,
                 response: Response<List<ProductDetailsListApiModel>?>
@@ -242,7 +241,7 @@ class ProductDetails : AppCompatActivity() {
                     for (productlist in response.body()!!) {
                         var product = ProductDetailsModel(
                             productlist.productid,
-                            "",
+                            productlist.Productimage2.imagebyte,
                             productlist.productTitle,
                             productlist.price.toString(),
                             productlist.size,
@@ -265,13 +264,30 @@ class ProductDetails : AppCompatActivity() {
                     binding.productSpecificationWoodType.text = productList.get(0).ProductWoodType
                     binding.productSpecificationDesc.text = productList.get(0).ProductDescription
                     Log.d(TAG, "onResponseProduct: " + response.body()?.get(0)?.discription)
+
+                    binding.getAPrice.isEnabled = true
+                    binding.buyNow.isEnabled = true
+                    binding.addToCart.isEnabled = true
+
                 } else {
+                    val message = "SERVER ERROR "
+                    AlertDialog.Builder(this@ProductDetails)
+                        .setTitle("Something went wrong ")
+                        .setMessage(message)
+                        .setCancelable(false)
+                        .setPositiveButton("OK") { _, _ ->
+                            finish()
+
+                            //  binding.phoneContainer.helperText = getString(R.id.Required)
+                        }
+                        .show()
+
                     Log.d(TAG, "OnFailure: " + response.body()?.get(0)?.discription)
                 }
             }
 
             override fun onFailure(call: Call<List<ProductDetailsListApiModel>?>, t: Throwable) {
-                binding.appProgressBar3.visibility = View.VISIBLE
+               // binding.appProgressBar3.visibility = View.VISIBLE
                 Toast.makeText(
                     applicationContext, " Something Went Wrong Please Try Again Later",
                     Toast.LENGTH_LONG

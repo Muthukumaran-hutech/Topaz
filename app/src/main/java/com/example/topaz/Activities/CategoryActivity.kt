@@ -108,7 +108,9 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
                         var categoryModel = CategoriesModel(
                             categorylist.categoryimage.imagebyte,
                             categorylist.categoryName,
-                            categorylist.categoryid
+                            categorylist.categoryid,
+                            categorylist.subcategory1.get(0).subid
+
                         )
                         categoryInnerlist.add(categoryModel)
                     }
@@ -143,12 +145,14 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
     }
 
     override fun CategoryPageItemClickListner(categories: CategoriesModel) {
-        startActivity(Intent(activity, InnerCategories::class.java))
+        var intent =Intent(activity, InnerCategories::class.java)
+        intent.putExtra("cat_id", categories.CateegorySubId)
+        startActivity(intent)
 
     }
 
 
-    override fun onBackPressed() {
+   /* override fun onBackPressed() {
         //super.onBackPressed()
         val message = "Are you sure yo want to exit"
         AlertDialog.Builder(this)
@@ -163,7 +167,7 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
                 //  binding.phoneContainer.helperText = getString(R.id.Required)
             }
             .show()
-    }
+    }*/
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater

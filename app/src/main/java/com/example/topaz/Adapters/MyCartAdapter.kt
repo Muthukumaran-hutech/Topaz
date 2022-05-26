@@ -14,10 +14,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.topaz.Activities.MyCart
 import com.example.topaz.Interface.IncreementDecreementItemClickListner
 import com.example.topaz.Interface.MyCartItemClickListner
-import com.example.topaz.Models.CartList
 import com.example.topaz.Models.CartProductList
 import com.example.topaz.R
 import java.util.ArrayList
@@ -140,7 +138,7 @@ class MyCartAdapter(
                     .setTitle("")
                     .setMessage(message)
                     .setPositiveButton("OK") { _, _ ->
-                        myCartItemClickListner.MyCartItemClickListner(cartData[position])
+                        myCartItemClickListner.MyCartItemClickListner(cartData[position],position)
 
                         //  binding.phoneContainer.helperText = getString(R.id.Required)
                     }.setNegativeButton("Cancel") { _, _ ->

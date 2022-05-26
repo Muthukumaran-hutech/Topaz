@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.topaz.Interface.URIPathHelper
 import com.example.topaz.R
 import com.example.topaz.databinding.ActivityEditProfileBinding
 import com.google.firebase.database.DatabaseReference
@@ -77,13 +78,16 @@ class EditProfile : AppCompatActivity() {
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
 
+
         startActivityForResult(intent, REQUEST_CODE)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE) {
-            binding.editProfileImage.setImageURI(data?.data) // handle chosen image
+            binding.editProfileImage.setImageURI(data?.data)
+            val uriPathHelper = URIPathHelper()
+         //   val filePath = uriPathHelper.getPath(this,)// handle chosen image
         }
     }
 }

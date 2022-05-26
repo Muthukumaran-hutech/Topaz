@@ -23,6 +23,9 @@
         android:roundIcon="@mipmap/topaz_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.Topaz">
+
+
+
         <activity
             android:name=".Activities.ChangeNewPhoneOtp"
             android:exported="false" />

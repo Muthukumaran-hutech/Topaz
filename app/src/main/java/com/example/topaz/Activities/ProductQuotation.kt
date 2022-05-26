@@ -61,7 +61,7 @@ class ProductQuotation : AppCompatActivity() {
 
         val item = intent.getParcelableExtra<ProductDetailsModel>("extra_item")
         id = item?.ProductId!!
-        var img = item.ProductImage
+        var img = item.productImage
         var title = item.ProductTitle
         var price = item.ProductPrice
         var size = item.ProductSize
