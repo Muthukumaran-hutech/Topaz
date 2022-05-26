@@ -1,5 +1,6 @@
 package com.example.topaz.Adapters
 
+import android.app.AlertDialog
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.util.Base64
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.topaz.Activities.MyCart
+import com.example.topaz.Interface.IncreementDecreementItemClickListner
 import com.example.topaz.Interface.MyCartItemClickListner
 import com.example.topaz.Models.CartList
 import com.example.topaz.Models.CartProductList
@@ -23,8 +25,11 @@ import java.util.ArrayList
 class MyCartAdapter(
     var cartData: ArrayList<CartProductList>,
     var myCartItemClickListner: MyCartItemClickListner,
-    var context: Context
+    var context: Context,
+    var increementDecreementItemClickListner: IncreementDecreementItemClickListner
 ) : RecyclerView.Adapter<MyCartAdapter.MyViewHolder>() {
+
+    var quantity = 1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -38,30 +43,57 @@ class MyCartAdapter(
         holder.bindItems(cartData, position, myCartItemClickListner, context)
 
         holder.number.isEnabled = false
+        if (cartData.get(position).quantity.isEmpty()){
+            quantity = 1
+        }
+        else{
+            quantity=cartData.get(position).quantity.toInt()
+            holder.number.setText(cartData.get(position).quantity.toString())
+        }
         holder.plus.setOnClickListener {
+
             if (cartData.get(position).quantity.isNotEmpty()) {
                 if (cartData.get(position).quantity.toInt() >= 1) {
-                    var qnty = cartData.get(position).quantity.toInt()
-                    qnty++
-                    holder.number.setText(qnty)
-                    notifyDataSetChanged()
+                    //var qnty = cartData.get(position).quantity.toInt()
+                    quantity++
+                    holder.number.setText(quantity.toString())
+
                 } else {
                     //doNothing
                 }
+            }else{
+                quantity++
+                holder.number.setText(quantity.toString())
             }
+            increementDecreementItemClickListner.IncreementDecreementItemClickListner(cartData.get(position),quantity)
         }
         holder.minus.setOnClickListener {
             if (cartData.get(position).quantity.isNotEmpty()) {
                 if (cartData.get(position).quantity.toInt() >= 1) {
-                    var qnt = cartData.get(position).quantity.toInt()
-                    qnt--
-                    holder.number.setText(qnt)
-                    notifyDataSetChanged()
+                    //var qnt = cartData.get(position).quantity.toInt()
+                    quantity--
+                    if (quantity>0){
+                        holder.number.setText(quantity.toString())
+                    }else{
+                        quantity=1
+                    }
+
 
                 } else {
                     //doNothing
                 }
             }
+            else{
+
+                quantity--
+                if (quantity>0){
+                    holder.number.setText(quantity.toString())
+                }else{
+                    quantity=1
+                }
+
+            }
+            increementDecreementItemClickListner.IncreementDecreementItemClickListner(cartData.get(position),quantity)
 
 
         }
@@ -75,7 +107,7 @@ class MyCartAdapter(
 
         var cartImage = itemView.findViewById<ImageView>(R.id.catimage)
         var cartTitle = itemView.findViewById<TextView>(R.id.textView13)
-        var cartRupees = itemView.findViewById<TextView>(R.id.pri).toString()
+        var cartRupees = itemView.findViewById<TextView>(R.id.pri)
         var cartDelete = itemView.findViewById<ImageView>(R.id.textView15)
         var minus = itemView.findViewById<Button>(R.id.minusbtn)
         var plus = itemView.findViewById<Button>(R.id.plusbtn)
@@ -89,7 +121,8 @@ class MyCartAdapter(
             context: Context
         ) {
             cartTitle.text = cartData[position].product_title
-            cartRupees = cartData[position].price
+            cartRupees.text =  cartData[position].price
+            //var rupees = getString(R.string.Rs) + binding.textView14.text + getString(R.string.slash)
             val decodedString: ByteArray =
                 Base64.decode(cartData.get(position).cartImage, Base64.DEFAULT)
             val bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
@@ -102,7 +135,19 @@ class MyCartAdapter(
                 .load(bitmap)
                 .into(cartImage)
             cartDelete.setOnClickListener {
-                myCartItemClickListner.MyCartItemClickListner(cartData[position])
+                val message = "Are you sure yo want to Delete Cart Item"
+                AlertDialog.Builder(context)
+                    .setTitle("")
+                    .setMessage(message)
+                    .setPositiveButton("OK") { _, _ ->
+                        myCartItemClickListner.MyCartItemClickListner(cartData[position])
+
+                        //  binding.phoneContainer.helperText = getString(R.id.Required)
+                    }.setNegativeButton("Cancel") { _, _ ->
+                        //dismissDialog(0)
+                        //  binding.phoneContainer.helperText = getString(R.id.Required)
+                    }
+                    .show()
             }
 
         }

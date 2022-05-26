@@ -6,6 +6,7 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
@@ -22,8 +23,7 @@ import com.example.topaz.Models.*
 import com.example.topaz.R
 import com.example.topaz.RetrofitApiInstance.UpdateAccountInfoInstance
 import com.example.topaz.databinding.ActivityProductDetailsBinding
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_account_information.*
 import kotlinx.android.synthetic.main.activity_my_orders.*
 import retrofit2.Call
@@ -65,44 +65,12 @@ class ProductDetails : AppCompatActivity() {
         }
 
         binding.addToCart.setOnClickListener {
-
-
             database = FirebaseDatabase.getInstance().getReference("MyCart")
             database1 = FirebaseDatabase.getInstance().getReference("MyCartProducts")
 
             //Check if Cart exists, if exists then update the items to that cart else create a new cart item
-            var cart_id = database.child(custId).push().key
-            var cartListItems = CartList(
-                custId = custId,
-                cartId = cart_id.toString(),
-                cartActive = true
-                //    product_list = cartProductListItem
+            checkIfActiveCartExists()
 
-            )
-            cartProductListItem.add(
-                CartProductList(
-                    product_title = productList.get(0).ProductTitle,
-                    cartImage = "",
-                    price = productList.get(0).ProductPrice,
-                    isActive = true,
-                    product_id = productList.get(0).ProductId.toString(),
-                    cart_id = cart_id.toString()
-                )
-            )
-            //------------------------------------Cart creation------------------------------------------
-            database.child(custId.toString()).child(cart_id.toString())
-                .setValue(cartListItems)
-
-
-           //------------------------------------Cart insertion------------------------------------------
-            database1.child(cart_id.toString()).child("Products")
-                .child(cartProductListItem.get(0).product_id)
-                .setValue(cartProductListItem.get(0))//Inserting products into Cart
-
-            Toast.makeText(
-                applicationContext, " Product Added To MyCart",
-                Toast.LENGTH_LONG
-            ).show()
         }
         var rupees = getString(R.string.Rs) + binding.textView14.text + getString(R.string.slash)
 
@@ -187,6 +155,73 @@ class ProductDetails : AppCompatActivity() {
         }
     }
 
+    private fun checkIfActiveCartExists() {
+        var activecartquery = database.child(custId).orderByChild("cartActive").equalTo(true)
+        activecartquery.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                if (snapshot.exists()) {
+                    for (snap: DataSnapshot in snapshot.children) {
+                        Log.d(TAG, "datafound: " + snap)
+                        val cart_id = snap.getValue(CartList ::class.java)
+                        cartProductListItem.add(
+                            CartProductList(
+                                product_title = productList.get(0).ProductTitle,
+                                cartImage = "",
+                                price = productList.get(0).ProductPrice,
+                                isActive = true,
+                                product_id = productList.get(0).ProductId.toString(),
+                                cart_id = cart_id!!.cartId.toString()
+                            )
+                        )
+                        database1.child(cart_id!!.cartId).child("Products")
+                            .child(cartProductListItem.get(0).product_id)
+                            .setValue(cartProductListItem.get(0))//
+
+                    }
+                } else {
+                    Log.d(TAG, "data not found: " + snapshot)
+                    var cart_id = database.child(custId).push().key
+                    var cartListItems = CartList(
+                        custId = custId,
+                        cartId = cart_id.toString(),
+                        cartActive = true
+                        //    product_list = cartProductListItem
+
+                    )
+                    cartProductListItem.add(
+                        CartProductList(
+                            product_title = productList.get(0).ProductTitle,
+                            cartImage = "",
+                            price = productList.get(0).ProductPrice,
+                            isActive = true,
+                            product_id = productList.get(0).ProductId.toString(),
+                            cart_id = cart_id.toString()
+                        )
+                    )
+                    //------------------------------------Cart creation------------------------------------------
+                    database.child(custId.toString()).child(cart_id.toString())
+                        .setValue(cartListItems)
+
+
+                    //------------------------------------Cart insertion------------------------------------------
+                    database1.child(cart_id.toString()).child("Products")
+                        .child(cartProductListItem.get(0).product_id)
+                        .setValue(cartProductListItem.get(0))//Inserting products into Cart
+
+                    Toast.makeText(
+                        applicationContext, " Product Added To MyCart",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+    }
+
     private fun sendUserData() {
 
     }
@@ -248,22 +283,22 @@ class ProductDetails : AppCompatActivity() {
     }
 
 
-    override fun onBackPressed() {
-        //super.onBackPressed()
-        val message = "Are you sure yo want to exit"
-        AlertDialog.Builder(this)
-            .setTitle("Applcation will be logged out ")
-            .setMessage(message)
-            .setPositiveButton("OK") { _, _ ->
-                super.onBackPressed()
+    /* override fun onBackPressed() {
+         //super.onBackPressed()
+         val message = "Are you sure yo want to exit"
+         AlertDialog.Builder(this)
+             .setTitle("Applcation will be logged out ")
+             .setMessage(message)
+             .setPositiveButton("OK") { _, _ ->
+                 super.onBackPressed()
 
-                //  binding.phoneContainer.helperText = getString(R.id.Required)
-            }.setNegativeButton("Cancel") { _, _ ->
-                //dismissDialog(0)
-                //  binding.phoneContainer.helperText = getString(R.id.Required)
-            }
-            .show()
-    }
+                 //  binding.phoneContainer.helperText = getString(R.id.Required)
+             }.setNegativeButton("Cancel") { _, _ ->
+                 //dismissDialog(0)
+                 //  binding.phoneContainer.helperText = getString(R.id.Required)
+             }
+             .show()
+     }*/
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater
