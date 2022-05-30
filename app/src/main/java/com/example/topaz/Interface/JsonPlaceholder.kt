@@ -31,6 +31,9 @@ interface JsonPlaceholder {
     @GET("offers/get")
     fun viewOffers(): Call<List<OffersListApiModel>>
 
+    @GET("orderlist/ORD001")
+    fun alertNotify():Call<AlertApiModel>
+
 
     @POST("customerdetails")
     @Multipart

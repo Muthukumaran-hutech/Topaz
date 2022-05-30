@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/alertimage"
+            android:layout_width="70dp"
+            android:layout_height="69dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/rrrr"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/alerttext"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:background="@color/white"
+            android:text="@string/wooden_waterproof_plywood_sheet_thickness_18_mm"
+            android:textColor="@color/netural_black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/alertimage"
+            app:layout_constraintTop_toTopOf="@+id/alertimage" />
+
+        <TextView
+            android:id="@+id/alertprice"
+            android:layout_width="58dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="@string/_59"
+            android:textColor="@color/primary_blue"
+            app:layout_constraintStart_toStartOf="@+id/alerttext"
+            app:layout_constraintTop_toBottomOf="@+id/alerttext" />
+
+        <TextView
+            android:id="@+id/square_feet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/square_feet"
+            android:textColor="@color/netural_black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/alertprice"
+            app:layout_constraintTop_toBottomOf="@+id/alerttext" />
+
+
+        <TextView
+            android:id="@+id/dt_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="February 20 2022"
+            android:textColor="@color/dt_grey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/square_feet"
+            app:layout_constraintTop_toTopOf="@+id/square_feet" />
+
+
+        <ImageView
+            android:id="@+id/imageView12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/line_83"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/alertprice" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</FrameLayout>
