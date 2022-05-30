@@ -22,13 +22,14 @@
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
         android:background="@color/white"
         android:text="@string/wooden_waterproof_plywood_sheet_thickness_18_mm"
         android:textColor="@color/netural_black"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/innercatimage"
-        app:layout_constraintTop_toTopOf="@+id/innercatimage" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView44"
@@ -42,13 +43,13 @@
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
 
-
     <TextView
         android:id="@+id/textView14"
-        android:layout_width="58dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="@string/_59"
+        android:text=""
         android:textColor="@color/primary_blue"
         app:layout_constraintStart_toStartOf="@+id/textView13"
         app:layout_constraintTop_toBottomOf="@+id/textView44" />
@@ -58,19 +59,19 @@
         android:layout_width="117dp"
         android:layout_height="20dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginTop="8dp"
         android:text="@string/square_feet"
         android:textColor="@color/netural_black"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/textView14"
-        app:layout_constraintTop_toTopOf="@+id/textView14" />
+        app:layout_constraintTop_toBottomOf="@+id/textView44" />
 
     <TextView
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="4dp"
         android:text="@string/_84"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/textView14"
@@ -82,7 +83,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="3dp"
         android:text="24% Off"
         android:textColor="@color/primary_red"
         app:layout_constraintStart_toEndOf="@+id/textView15"

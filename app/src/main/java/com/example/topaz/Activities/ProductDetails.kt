@@ -5,7 +5,11 @@ import android.app.AlertDialog
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
@@ -13,6 +17,8 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
@@ -33,13 +39,14 @@ class ProductDetails : AppCompatActivity() {
     private lateinit var database1: DatabaseReference
     private lateinit var binding: ActivityProductDetailsBinding
     lateinit var activity: Activity
-    val imageList = ArrayList<Int>()
+    val imageList = ArrayList<Bitmap>()
     var slidemodellist = ArrayList<SlideModel>()
     var productList = ArrayList<ProductDetailsModel>()
     var cartItemList = ArrayList<CartList>()
     var cartProductListItem = ArrayList<CartProductList>()
     var custId = ""
-    var subid = ""
+    var productId = ""
+    var product = ProductDetailsListApiModel()
 
 
     private lateinit var database: DatabaseReference
@@ -53,7 +60,7 @@ class ProductDetails : AppCompatActivity() {
         custId = sharedPreference.getString("customercode", "").toString()
 
         val item = intent.getStringExtra("inner_sunid")
-        subid = item!!
+        productId = item!!
 
         binding.getAPrice.isEnabled = false
         binding.buyNow.isEnabled = false
@@ -79,12 +86,28 @@ class ProductDetails : AppCompatActivity() {
         }
         var rupees = getString(R.string.Rs) + binding.textView14.text + getString(R.string.slash)
 
-        imageList.add(R.drawable.home_slider_banner)
-        imageList.add(R.drawable.home_slider_banner_2)
+
+       /* val decodedString: ByteArray = Base64.decode(
+            product.Productimage2.imagepath,
+            Base64.DEFAULT
+        )
+        val bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+        imageList.add(bitmap)
+
+        binding.productImage.setImageBitmap(bitmap)*/
+        //  var imageDrawable = binding.productImage.drawable
+
+        /*   Glide.with(context)
+               .applyDefaultRequestOptions(RequestOptions().placeholder(R.drawable.ic_baseline_image_24).error(R.drawable.ic_baseline_image_24))
+               .load(bitmap)
+               .into(catImage)*/
+
+        slidemodellist.add(SlideModel(R.drawable.ic_baseline_image_24))
 
 
         //-----------------Slide model list---------------------//
 
+        //slidemodellist.add(SlideModel(imageDrawable, scaleType = ScaleTypes.FIT ))
         binding.productImageSlider.setImageList(slidemodellist, ScaleTypes.FIT)
 
         binding.appProgressBar3.visibility = View.VISIBLE
@@ -97,18 +120,18 @@ class ProductDetails : AppCompatActivity() {
         binding.whislistProdDetails.setOnClickListener {
             var detailsFirebaseModel = DetailsFirebaseModel(
                 custId = custId.toString(),
-                productImage = productList.get(0).productImage,
-                productid = productList.get(0).ProductId.toInt(),
-                productTitle = productList.get(0).ProductTitle.toString(),
-                thickness = productList.get(0).ProductThickness,
-                price = productList.get(0).ProductPrice.toInt(),
+                productImage = product.Productimage2.imagepath,
+                productid = product.productid,
+                productTitle = product.productTitle,
+                thickness = product.thickness,
+                price = product.price,
                 productDiscountId = "",
                 addedToWishList = true
             )
 
             //creating database and child to fire base
             database = FirebaseDatabase.getInstance().getReference("WhishList")
-            database.child(custId.toString()).child(productList.get(0).ProductId.toInt().toString())
+            database.child(custId.toString()).child(product.productid.toString())
                 .setValue(detailsFirebaseModel)
 
             Toast.makeText(
@@ -121,14 +144,14 @@ class ProductDetails : AppCompatActivity() {
             sendUserData()
             var intent = Intent(activity, ProductQuotation::class.java)
             var productDetailsModel1 = ProductDetailsModel(
-                productList.get(0).ProductId,
-                productList.get(0).productImage,
-                productList.get(0).ProductTitle,
-                productList.get(0).ProductPrice,
-                productList.get(0).ProductSize,
-                productList.get(0).ProductThickness,
-                productList.get(0).ProductBrand,
-                productList.get(0).ProductWoodType,
+                product.productid,
+                product.Productimage2.imagepath,
+                product.productTitle,
+                product.price.toString(),
+                product.size,
+                product.thickness,
+                product.brand,
+                product.woodType,
                 //productList.get(0).ProductImage
             )
             intent.putExtra("extra_item", productDetailsModel1)
@@ -139,18 +162,10 @@ class ProductDetails : AppCompatActivity() {
             startActivity(Intent(activity, MyCart::class.java))
         }
         binding.shareProdDetails.setOnClickListener {
-            Toast.makeText(
-                applicationContext,
-                "Will be placed with Google Playstore Link",
-                Toast.LENGTH_SHORT
-            )
-                .show()
-            //should pass the google playstorelink
-            /*ShareCompat.IntentBuilder.from(activity)
-                .setType("text/plain")
-                .setChooserTitle("Chooser title")
-                .setText("http://play.google.com/store/apps/details?id=" + activity.getPackageName())
-                .startChooser();*/
+            product.productid
+            product.Productimage2.imagepath
+            product.productTitle
+            product.price
         }
     }
 
@@ -162,14 +177,14 @@ class ProductDetails : AppCompatActivity() {
                 if (snapshot.exists()) {
                     for (snap: DataSnapshot in snapshot.children) {
                         Log.d(TAG, "datafound: " + snap)
-                        val cart_id = snap.getValue(CartList ::class.java)
+                        val cart_id = snap.getValue(CartList::class.java)
                         cartProductListItem.add(
                             CartProductList(
-                                product_title = productList.get(0).ProductTitle,
-                                cartImage = "",
-                                price = productList.get(0).ProductPrice,
+                                product_title = product.productTitle,
+                                cartImage = product.Productimage2.imagepath,
+                                price = product.price.toString(),
                                 isActive = true,
-                                product_id = productList.get(0).ProductId.toString(),
+                                product_id = product.productid.toString(),
                                 cart_id = cart_id!!.cartId.toString()
                             )
                         )
@@ -190,11 +205,11 @@ class ProductDetails : AppCompatActivity() {
                     )
                     cartProductListItem.add(
                         CartProductList(
-                            product_title = productList.get(0).ProductTitle,
-                            cartImage = productList.get(0).productImage,
-                            price = productList.get(0).ProductPrice,
+                            product_title = product.productTitle,
+                            cartImage = product.Productimage2.imagepath,
+                            price = product.price.toString(),
                             isActive = true,
-                            product_id = productList.get(0).ProductId.toString(),
+                            product_id = product.productid.toString(),
                             cart_id = cart_id.toString()
                         )
                     )
@@ -230,15 +245,17 @@ class ProductDetails : AppCompatActivity() {
             .create(JsonPlaceholder::class.java)
 
 
-        res.viewProduct(subid).enqueue(object : Callback<List<ProductDetailsListApiModel>?> {
+        res.viewProduct(productId).enqueue(object : Callback<ProductDetailsListApiModel> {
             override fun onResponse(
-                call: Call<List<ProductDetailsListApiModel>?>,
-                response: Response<List<ProductDetailsListApiModel>?>
+                call: Call<ProductDetailsListApiModel>,
+                response: Response<ProductDetailsListApiModel>
             ) {
                 if (response.isSuccessful) {
                     binding.appProgressBar3.visibility = View.GONE
 
-                    for (productlist in response.body()!!) {
+                    product = response.body()!!
+
+                    /*for (productlist in response.body()!!) {
                         var product = ProductDetailsModel(
                             productlist.productid,
                             productlist.Productimage2.imagebyte,
@@ -251,19 +268,19 @@ class ProductDetails : AppCompatActivity() {
                             productlist.discription
                         )
                         productList.add(product)
-                    }
+                    }*/
                     //set detAILS...........
                     var rupees =
                         getString(R.string.Rs) + binding.textView14.text /*+ getString(R.string.slash)*/
 
-                    binding.woodMaterialName.text = productList.get(0).ProductTitle
-                    binding.textView14.text = rupees + productList.get(0).ProductPrice + "/"
-                    binding.productSpecificationSize.text = productList.get(0).ProductSize
-                    binding.productSpecificationThickness.text = productList.get(0).ProductThickness
-                    binding.productSpecificationBrand.text = productList.get(0).ProductBrand
-                    binding.productSpecificationWoodType.text = productList.get(0).ProductWoodType
-                    binding.productSpecificationDesc.text = productList.get(0).ProductDescription
-                    Log.d(TAG, "onResponseProduct: " + response.body()?.get(0)?.discription)
+                    binding.woodMaterialName.text = product?.productTitle
+                    binding.textView14.text = rupees + product?.price + "/"
+                    binding.productSpecificationSize.text = product?.size
+                    binding.productSpecificationThickness.text = product?.thickness
+                    binding.productSpecificationBrand.text = product?.brand
+                    binding.productSpecificationWoodType.text = product?.woodType
+                    binding.productSpecificationDesc.text = product?.discription
+                    // Log.d(TAG, "onResponseProduct: " + response.body()?.get(0)?.discription)
 
                     binding.getAPrice.isEnabled = true
                     binding.buyNow.isEnabled = true
@@ -282,12 +299,12 @@ class ProductDetails : AppCompatActivity() {
                         }
                         .show()
 
-                    Log.d(TAG, "OnFailure: " + response.body()?.get(0)?.discription)
+                    //  Log.d(TAG, "OnFailure: " + response.body()?.get(0)?.discription)
                 }
             }
 
-            override fun onFailure(call: Call<List<ProductDetailsListApiModel>?>, t: Throwable) {
-               // binding.appProgressBar3.visibility = View.VISIBLE
+            override fun onFailure(call: Call<ProductDetailsListApiModel>, t: Throwable) {
+                // binding.appProgressBar3.visibility = View.VISIBLE
                 Toast.makeText(
                     applicationContext, " Something Went Wrong Please Try Again Later",
                     Toast.LENGTH_LONG

@@ -17,8 +17,6 @@ import com.example.topaz.Models.DetailsFirebaseModel
 import com.example.topaz.R
 import com.example.topaz.databinding.ActivityMyWishlistBinding
 import com.google.firebase.database.*
-import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_account_information.*
 
 class MyWishlist : AppCompatActivity(), WishListItemClickListner {
 
@@ -27,6 +25,7 @@ class MyWishlist : AppCompatActivity(), WishListItemClickListner {
     var wishData = java.util.ArrayList<DetailsFirebaseModel>()
     private lateinit var database: DatabaseReference
     var custId = ""
+    private lateinit var wishlistAdapter : MywishlistAdapter
 
     //private lateinit var wishlistAdapter: MywishlistAdapter
 
@@ -61,7 +60,7 @@ class MyWishlist : AppCompatActivity(), WishListItemClickListner {
         var query = database.child(custId).orderByChild("addedToWishList").equalTo(true)
         query.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-
+                wishData.clear()
                 if (snapshot.exists()) {
 
                     for (snap: DataSnapshot in snapshot.children) {
@@ -74,10 +73,13 @@ class MyWishlist : AppCompatActivity(), WishListItemClickListner {
 
                     //Set data to recyclerview
 
-                    val wishlistAdapter =
+                     wishlistAdapter =
                         MywishlistAdapter(wishData, this@MyWishlist, this@MyWishlist)
                     binding.wishlistRecycler.adapter = wishlistAdapter
                     binding.wishlistRecycler.setHasFixedSize(true)
+
+                }else{
+
                 }
 
             }
@@ -105,9 +107,10 @@ class MyWishlist : AppCompatActivity(), WishListItemClickListner {
     }
 
 
-    override fun WishListItemClickListner(data: DetailsFirebaseModel) {
-        database.child(custId).child(data.productid.toString()).child("addedToWishList").setValue(false)
+    override fun WishListItemClickListner(data: DetailsFirebaseModel, position: Int) {
         wishData.remove(data)
+        wishlistAdapter.notifyItemRemoved(position)
+        database.child(custId).child(data.productid.toString()).child("addedToWishList").setValue(false)
         Toast.makeText(this,"Removed from the wishlist",Toast.LENGTH_LONG).show()
     }
 }

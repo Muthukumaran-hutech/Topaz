@@ -2,7 +2,6 @@ package com.example.topaz.Interface
 
 import com.example.topaz.ApiModels.*
 import com.google.gson.JsonObject
-import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -21,18 +20,21 @@ interface JsonPlaceholder {
     @GET("viewCategory")
     fun viewCategory(): Call<List<CategoryListApiModel>>
 
+    @GET("all/advertisementlist")
+    fun viewAdvertisement(): Call<List<AdvertisementApiModel>>
+
     @GET("viewProdcutBySubCategoryId/{subid}")
     fun subCategory( @Path("subid") subid: String): Call<List<SubCategoryApiModel>>
 
-    @GET("viewProduct/{subid}")
-    fun viewProduct(@Path("subid") subid: String): Call<List<ProductDetailsListApiModel>>
+    @GET("viewProductDetails/{productId}")
+    fun viewProduct(@Path("productId") productId: String): Call<ProductDetailsListApiModel>
 
 
     @GET("offers/get")
     fun viewOffers(): Call<List<OffersListApiModel>>
 
-    @GET("orderlist/ORD001")
-    fun alertNotify():Call<AlertApiModel>
+    @GET("myorder/ORD001")
+    fun alertNotify():Call<List<AlertApiModel>>
 
 
     @POST("customerdetails")

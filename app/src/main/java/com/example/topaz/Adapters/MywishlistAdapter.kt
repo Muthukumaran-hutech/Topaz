@@ -11,7 +11,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.topaz.Activities.MyWishlist
 import com.example.topaz.Interface.WishListItemClickListner
 import com.example.topaz.Models.DetailsFirebaseModel
 import com.example.topaz.R
@@ -65,7 +64,7 @@ MywishlistAdapter(
                 .into(wishImage)
 
             fav.setOnClickListener {
-                wishListItemClickListner.WishListItemClickListner(wishData[position])
+                wishListItemClickListner.WishListItemClickListner(wishData[position],position)
             }
 
         }

@@ -5,6 +5,7 @@ class InnerCategoryModelList(
     var InnerCateegoryTitle: String = "",
     var InnerCateegoryPrice: String = "",
     var InnerCateegoryhickness: String = "",
-    var InnerCateegorySubId: String = ""
+    var InnerCateegorySubId: String = "",
+    var InnerCateegoryProductId: String = ""
 
 )

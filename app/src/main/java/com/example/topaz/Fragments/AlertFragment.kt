@@ -22,7 +22,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class AlertFragment : Fragment(),NotifyAlertItemClickListner{
+class AlertFragment : Fragment(), NotifyAlertItemClickListner {
     lateinit var progressBar: ProgressBar
     lateinit var alertRecycle: RecyclerView
     var offerAlertlist = java.util.ArrayList<NotifyAlertModel>()
@@ -54,40 +54,48 @@ class AlertFragment : Fragment(),NotifyAlertItemClickListner{
         var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
             .create(JsonPlaceholder::class.java)
 
-        res.alertNotify().enqueue(object : Callback<AlertApiModel?> {
+        res.alertNotify().enqueue(object : Callback<List<AlertApiModel>?> {
             override fun onResponse(
-                call: Call<AlertApiModel?>,
-                response: Response<AlertApiModel?>
+                call: Call<List<AlertApiModel>?>,
+                response: Response<List<AlertApiModel>?>
             ) {
-                if (response.isSuccessful){
-                   // Log.d(TAG, "alert success: "+response.body())
+
+                if (response.isSuccessful) {
+                    // Log.d(TAG, "alert success: "+response.body())
                     progressBar.visibility = View.GONE
-                   /* var img = response.body()?.customer?.customerName
-                    var title = response.body()?.customer?.customercode
-                    var thickness = response.body()?.orderid
-                    var price = response.body()?.orderstatus?.statusid
-                    var date = response.body()?.createdDate*/
+                    for (alertOffers in response.body()!!) {
+                        var alertModel = NotifyAlertModel(
+                            alertOffers.customer.orderItems.get(0).product.categoryType.categoryimage.imagebyte,
+                            alertOffers.customer.orderItems.get(0).product.productTitle,
+                            alertOffers.customer.orderItems.get(0).price.toString(),
+                            alertOffers.customer.orderItems.get(0).thickness,
+                            alertOffers.customer.orderItems.get(0).product.categoryType.categoryimage.creationTime
+                        )
+
+                        offerAlertlist.add(alertModel)
+
+                        alertRecycle.layoutManager =
+                            LinearLayoutManager(context)//Count depicts no of elements in row
+                        val alertAdapter =
+                            NotifyAlertAdapter(
+                                offerAlertlist,
+                                this@AlertFragment,
+                                this@AlertFragment
+                            )
+                        alertRecycle.adapter = alertAdapter
+                        alertRecycle.setHasFixedSize(true)
+                    }
 
 
-                    alertRecycle.layoutManager = LinearLayoutManager(context)//Count depicts no of elements in row
-                    val alertAdapter = NotifyAlertAdapter(offerAlertlist,this@AlertFragment,this@AlertFragment)
-                    alertRecycle.adapter = alertAdapter
-                    alertRecycle.setHasFixedSize(true)
-
-
-
-
-                }else{
-                    Log.d(TAG, "alert fail: "+response.body())
                 }
+
             }
 
-            override fun onFailure(call: Call<AlertApiModel?>, t: Throwable) {
-                Log.d(TAG, "alert failure: "+t.message)
+            override fun onFailure(call: Call<List<AlertApiModel>?>, t: Throwable) {
+
             }
         })
     }
-
 
 
     override fun NotifyAlertItemClickListner(data: NotifyAlertModel) {

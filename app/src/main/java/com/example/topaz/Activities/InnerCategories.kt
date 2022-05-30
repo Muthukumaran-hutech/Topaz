@@ -84,7 +84,8 @@ class InnerCategories : AppCompatActivity(), InnerCategoryItemClickListner {
                             innercategorylist.productTitle,
                             innercategorylist.price.toString(),
                             innercategorylist.thickness,
-                            innercategorylist.subcategory.subid.toString()
+                            innercategorylist.subcategory.subid.toString(),
+                            innercategorylist.productid.toString()
 
                         )
                         inerCategorylist.add(innerCategoryModelList)
@@ -125,7 +126,7 @@ class InnerCategories : AppCompatActivity(), InnerCategoryItemClickListner {
 
     override fun InnerCategoryItemClickListner(Innercategories: InnerCategoryModelList) {
         val intent = Intent(activity, ProductDetails::class.java)
-        intent.putExtra("inner_sunid",Innercategories.InnerCateegorySubId)
+        intent.putExtra("inner_sunid",Innercategories.InnerCateegoryProductId)
         startActivity(intent)
     }
 
