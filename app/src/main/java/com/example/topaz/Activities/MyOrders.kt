@@ -1,59 +1,97 @@
 package com.example.topaz.Activities
 
 import android.app.Activity
+import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageView
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.topaz.Adapters.MyCartAdapter
 import com.example.topaz.Adapters.MyOrdersAdapter
-import com.example.topaz.R
+import com.example.topaz.ApiModels.ViewOrderApimodel
+import com.example.topaz.Interface.JsonPlaceholder
+import com.example.topaz.Interface.OrderItemClickListner
+import com.example.topaz.Models.OrderModels
+import com.example.topaz.RetrofitApiInstance.UpdateAccountInfoInstance
+import com.example.topaz.databinding.ActivityMyOrdersBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class MyOrders : AppCompatActivity() {
+class MyOrders : AppCompatActivity(), OrderItemClickListner {
 
-
-    private var backarrow: ImageView? = null
-    private var myCartBtn: ImageView? = null
-    private var searchBtn: ImageView? = null
+    private lateinit var binding: ActivityMyOrdersBinding
     lateinit var activity: Activity
 
-    private lateinit var ordersRecyclerView: RecyclerView
-    private lateinit var ordersAdapter: MyOrdersAdapter
+
+    var custId = ""
+    var orderListItem = java.util.ArrayList<OrderModels>()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_my_orders)
+        binding = ActivityMyOrdersBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
+        val sharedPreference = getSharedPreferences("CUSTOMER_DATA", Context.MODE_PRIVATE)
+        custId = sharedPreference.getString("customercode", "").toString()
 
-        backarrow = findViewById<ImageView>(R.id.backarrow)
-        myCartBtn = findViewById<ImageView>(R.id.cart)
-        searchBtn = findViewById<ImageView>(R.id.search)
         activity = this
+        setSupportActionBar(binding.orderToolbar)
+        supportActionBar?.title = ""
+        onOrderApiCall(custId)
 
 
-        ordersRecyclerView = findViewById(R.id.ordersrecycler)
-        ordersAdapter = MyOrdersAdapter()
 
-        ordersRecyclerView.layoutManager =
+
+        binding.ordersrecycler.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        ordersRecyclerView.adapter = ordersAdapter
 
 
-        searchBtn?.setOnClickListener{
-            startActivity(Intent(activity,SearchActivity::class.java))
-            finish()
-        }
-
-        myCartBtn?.setOnClickListener{
-            startActivity(Intent(activity,MyCart::class.java))
-            finish()
-        }
-
-
-        backarrow?.setOnClickListener {
+        binding.categoryBackArrow.setOnClickListener {
             startActivity(Intent(activity, MyAccount::class.java))
             finish()
         }
+    }
+
+    private fun onOrderApiCall(custId: String) {
+
+        var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
+            .create(JsonPlaceholder::class.java)
+
+        res.viewOders(custId).enqueue(object : Callback<List<ViewOrderApimodel>?> {
+            override fun onResponse(
+                call: Call<List<ViewOrderApimodel>?>,
+                response: Response<List<ViewOrderApimodel>?>
+            ) {
+                if (response.isSuccessful) {
+                    Log.d(TAG, "Onorder success: " + response.body())
+                    for (orderList in response.body()!!) {
+                        var odList = OrderModels(
+                            orderList.orderstatus.status,
+                            orderList.orderid,
+                            orderList.createdDate
+                        )
+                        orderListItem.add(odList)
+                    }
+
+                    var ordersAdapter = MyOrdersAdapter(orderListItem, this@MyOrders, this@MyOrders)
+                    binding.ordersrecycler.adapter = ordersAdapter
+                } else {
+                    Log.d(TAG, "Onorder Fail: " + response.body())
+                }
+            }
+
+            override fun onFailure(call: Call<List<ViewOrderApimodel>?>, t: Throwable) {
+                Log.d(TAG, "Onorder Failure: " + t.message)
+            }
+        })
+
+
+    }
+
+    override fun OrderItemClickListner(data: OrderModels) {
+//for future use
     }
 }

@@ -21,13 +21,13 @@ import com.denzcoskun.imageslider.models.SlideModel
 import com.example.topaz.Adapters.ArrivalsAdapter
 import com.example.topaz.Adapters.CategoryAdapter
 import com.example.topaz.Adapters.HomeCategoriesAdapter
+import com.example.topaz.ApiModels.AdvertisementApiModel
 import com.example.topaz.ApiModels.ArrivalsPageItemClickListner
 import com.example.topaz.ApiModels.CategoryListApiModel
+import com.example.topaz.ApiModels.ProductDetailsListApiModel
 import com.example.topaz.Interface.HomeScreenItemClickListner
 import com.example.topaz.Interface.JsonPlaceholder
-import com.example.topaz.Models.ArrivalsModels
-import com.example.topaz.Models.CategoriesModel
-import com.example.topaz.Models.HomeCategoryModel
+import com.example.topaz.Models.*
 import com.example.topaz.R
 import com.example.topaz.RetrofitApiInstance.UpdateAccountInfoInstance
 import com.example.topaz.databinding.ActivityHomeScreenBinding
@@ -38,17 +38,19 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner,ArrivalsPageItemClickListner {
+class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPageItemClickListner {
 
     private lateinit var binding: ActivityHomeScreenBinding
 
-   // private lateinit var arrivalAdapter: ArrivalsAdapter
+    // private lateinit var arrivalAdapter: ArrivalsAdapter
 
     lateinit var activity: Activity
     val imageList = ArrayList<Int>()
     var slidemodellist = ArrayList<SlideModel>()
-    var categorylist= java.util.ArrayList<HomeCategoryModel>()
+    var categorylist = java.util.ArrayList<HomeCategoryModel>()
     var arrival_list = ArrayList<ArrivalsModels>()
+    var product = AddModels()
+    var addlist = java.util.ArrayList<AddModels>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,25 +67,24 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner,ArrivalsPageI
         binding.homeRecyclerView?.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         //------------Category API--------------------
-        categorylist.add(HomeCategoryModel("","Plywood"))
-        categorylist.add(HomeCategoryModel("","Laminates"))
-        categorylist.add(HomeCategoryModel("","Veneers"))
-        var homeCategoriesAdapter= HomeCategoriesAdapter(categorylist,this)
-        binding.homeRecyclerView?.adapter=homeCategoriesAdapter
+        categorylist.add(HomeCategoryModel("", "Plywood"))
+        categorylist.add(HomeCategoryModel("", "Laminates"))
+        categorylist.add(HomeCategoryModel("", "Veneers"))
+        var homeCategoriesAdapter = HomeCategoriesAdapter(categorylist, this)
+        binding.homeRecyclerView?.adapter = homeCategoriesAdapter
         //binding.homeRecyclerView?.adapter = adapter
 
+        onAddvertisementCall()
 
-        imageList.add(R.drawable.home_slider_banner)
-        imageList.add(R.drawable.home_slider_banner_2)
+        /*  imageList.add(R.drawable.home_slider_banner)
+          imageList.add(R.drawable.home_slider_banner_2)*/
 
 
         //-----------------Slide model list---------------------//
-        slidemodellist.add(SlideModel(imagePath = R.drawable.home_slider_banner))
-        slidemodellist.add(SlideModel(imagePath = R.drawable.home_slider_banner_2))
+        /* slidemodellist.add(SlideModel(imagePath = R.drawable.home_slider_banner))
+         slidemodellist.add(SlideModel(imagePath = R.drawable.home_slider_banner_2))*/
 
-        binding.homeImageSlider.setImageList(slidemodellist, ScaleTypes.FIT)
-
-
+        // binding.homeImageSlider.setImageList(slidemodellist, ScaleTypes.FIT)
 
 
         onApiCall()
@@ -124,6 +125,39 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner,ArrivalsPageI
 
     }
 
+    private fun onAddvertisementCall() {
+        var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
+            .create(JsonPlaceholder::class.java)
+
+        res.viewAdvertisement().enqueue(object : Callback<List<AdvertisementApiModel>?> {
+            override fun onResponse(
+                call: Call<List<AdvertisementApiModel>?>,
+                response: Response<List<AdvertisementApiModel>?>
+            ) {
+                if (response.isSuccessful) {
+                    Log.d(TAG, "add success: " + response.body())
+
+                    for (addvertisement in response.body()!!) {
+                        var addModel = AddModels(
+                            addvertisement.advertismentImage.imagepath,
+                            addvertisement.title
+                        )
+                        addlist.add(addModel)
+                    }
+
+                } else {
+                    Log.d(TAG, "add fail: " + response.body())
+                }
+
+            }
+
+            override fun onFailure(call: Call<List<AdvertisementApiModel>?>, t: Throwable) {
+                Log.d(TAG, "add Failure: " + t.message)
+            }
+        })
+
+    }
+
     private fun onApiCall() {
         var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
             .create(JsonPlaceholder::class.java)
@@ -146,35 +180,45 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner,ArrivalsPageI
 
                         arrival_list.add(arrivalsModels)
                         try {
-                            var simpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSZ",
-                                Locale.getDefault())
-                            var arivalDate = simpleDateFormat.parse(arrival_list.get(0).ArrivalCreatedDate)
+                            var simpleDateFormat = SimpleDateFormat(
+                                "yyyy-MM-dd HH:mm:ss.SSSZ",
+                                Locale.getDefault()
+                            )
+                            var arivalDate =
+                                simpleDateFormat.parse(arrival_list.get(0).ArrivalCreatedDate)
                             var currentDate = java.util.Calendar.getInstance().time
 
                             var dateDifference = currentDate.time - arivalDate.time
-                            Log.d(TAG, "get Time: "+dateDifference)
+                            Log.d(TAG, "get Time: " + dateDifference)
                         } catch (e: Exception) {
-                            Log.d(TAG, "get Time: fail "+e)
+                            Log.d(TAG, "get Time: fail " + e)
                         }
                     }
                     //arrivals Adapter
 
                     binding.arrivalsRecycler.layoutManager = GridLayoutManager(this@HomeScreen, 2)
-                    val arrivalAdapter = ArrivalsAdapter(arrival_list,this@HomeScreen,this@HomeScreen)
+                    val arrivalAdapter =
+                        ArrivalsAdapter(arrival_list, this@HomeScreen, this@HomeScreen)
                     binding.arrivalsRecycler.adapter = arrivalAdapter
                     binding.arrivalsRecycler.setHasFixedSize(true)
 
                     Log.d(
                         ContentValues.TAG,
-                        "onResponse: arrival Success" + response.body()?.get(0)?.tags?.get(0)?.tags.toString()
+                        "onResponse: arrival Success" + response.body()
+                            ?.get(0)?.tags?.get(0)?.tags.toString()
                     )
                 } else {
                     binding.appProgressBar2?.visibility = View.VISIBLE
-                    Toast. makeText(applicationContext,"Something Went Wronng Please Try Again Later", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        applicationContext,
+                        "Something Went Wronng Please Try Again Later",
+                        Toast.LENGTH_LONG
+                    ).show()
 
                     Log.d(
                         ContentValues.TAG,
-                        "onResponse: arrival Fail: " + response.body()?.get(0)?.tags?.get(0)?.tags.toString()
+                        "onResponse: arrival Fail: " + response.body()
+                            ?.get(0)?.tags?.get(0)?.tags.toString()
                     )
                 }
 
@@ -187,17 +231,16 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner,ArrivalsPageI
         })
 
 
-
     }
 
-    override fun ArrivalsPageItemClickListner(arrivals : ArrivalsModels){
+    override fun ArrivalsPageItemClickListner(arrivals: ArrivalsModels) {
         startActivity(Intent(activity, CategoryActivity::class.java))
     }
 
-   /* override fun ArrivalsPageItemClickListner(arrivals: ArrivalsModels){
-        startActivity(Intent(activity, InnerCategories::class.java))
-    }
- */
+    /* override fun ArrivalsPageItemClickListner(arrivals: ArrivalsModels){
+         startActivity(Intent(activity, InnerCategories::class.java))
+     }
+  */
 
     override fun onBackPressed() {
         //super.onBackPressed()
@@ -210,13 +253,11 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner,ArrivalsPageI
 
                 //  binding.phoneContainer.helperText = getString(R.id.Required)
             }.setNegativeButton("Cancel") { _, _ ->
-               // dismissDialog(0)
+                // dismissDialog(0)
                 //  binding.phoneContainer.helperText = getString(R.id.Required)
             }
             .show()
     }
-
-
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -227,14 +268,15 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner,ArrivalsPageI
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        when(item.itemId){
-        R.id.search_bar->  startActivity(Intent(activity,SearchActivity::class.java))
-            R.id.notification_bar->  startActivity(Intent(activity,Notifications::class.java))
-            R.id.my_cart->  startActivity(Intent(activity,MyCart::class.java))
+        when (item.itemId) {
+            R.id.search_bar -> startActivity(Intent(activity, SearchActivity::class.java))
+            R.id.notification_bar -> startActivity(Intent(activity, Notifications::class.java))
+            R.id.my_cart -> startActivity(Intent(activity, MyCart::class.java))
         }
         return super.onOptionsItemSelected(item)
 
     }
+
     override fun HomeScreenItemClickListner(homecategory: HomeCategoryModel) {
         startActivity(Intent(activity, CategoryActivity::class.java))
         finish()

@@ -7,6 +7,8 @@
     android:layout_height="wrap_content">
 
 
+
+
     <TextView
         android:id="@+id/qutrequest"
         android:layout_width="wrap_content"
@@ -67,11 +69,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Order ID: PO210528BLEC01025"
+        android:text="Order ID:"
         android:textColor="@color/black"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/qutrequest"
+        app:layout_constraintTop_toBottomOf="@+id/qutrequest" />
+
+    <TextView
+        android:id="@+id/oderi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/orderid"
         app:layout_constraintTop_toBottomOf="@+id/qutrequest" />
 
 
@@ -80,10 +95,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Date and Time: 28/05/2021  3:21 PM"
+        android:text="Date and Time:"
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@+id/orderid"
+        app:layout_constraintTop_toBottomOf="@+id/orderid" />
+
+    <TextView
+        android:id="@+id/te"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text=""
+        android:layout_marginStart="@dimen/_10sdp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/dtandtime"
         app:layout_constraintTop_toBottomOf="@+id/orderid" />
 
     <TextView

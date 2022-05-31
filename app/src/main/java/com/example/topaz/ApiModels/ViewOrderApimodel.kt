@@ -2,46 +2,32 @@ package com.example.topaz.ApiModels
 
 import com.google.gson.annotations.SerializedName
 
-class AdvertisementApiModel {
+class ViewOrderApimodel {
 
+    @SerializedName("orderid")
+    public var orderid: String = ""
 
-    @SerializedName("advertisementid")
-    public var advertisementid: Int = 0
+    @SerializedName("createdDate")
+    public var createdDate: String = ""
 
-    @SerializedName("title")
-    public var title: String = ""
+    @SerializedName("amountwithtax")
+    public var amountwithtax: Double = .0
 
-    @SerializedName("discription")
-    public var discription: String = ""
+    @SerializedName("amountwithouttax")
+    public var amountwithouttax: Double = .0
 
-    @SerializedName("selectcustomers")
-    public var selectcustomers: ArrayList<Addcust> = ArrayList<Addcust>()
+    @SerializedName("orderTax")
+    public var orderTax: TaX = TaX()
 
-    @SerializedName("advertismentImage")
-    public var advertismentImage : Addverse = Addverse()
+    @SerializedName("orderstatus")
+    public var orderstatus: OrdrSts = OrdrSts()
 
-}
-
-class Addverse {
-    @SerializedName("imageId")
-    public var imageId: Int = 0
-
-    @SerializedName("advertisementid")
-    public var advertisementid: Long = 0
-
-    @SerializedName("imagepath")
-    public var imagepath: String = ""
-
-    @SerializedName("imagebyte")
-    public var imagebyte: String = ""
-
-    @SerializedName("creationTime")
-    public var creationTime: String = ""
-
+    @SerializedName("customer")
+    public var customer: CUsDls = CUsDls()
 
 }
 
-class Addcust {
+class CUsDls {
 
     @SerializedName("customercode")
     public var customercode: String = ""
@@ -49,11 +35,11 @@ class Addcust {
     @SerializedName("customerName")
     public var customerName: String = ""
 
-  /*  @SerializedName("primaryPhonenumber")
+    @SerializedName("primaryPhonenumber")
     public var primaryPhonenumber: String = ""
 
     @SerializedName("secondaryPhonenumber")
-    public var secondaryPhonenumber: Int = 0*/
+    public var secondaryPhonenumber: String = ""
 
     @SerializedName("email")
     public var email: String = ""
@@ -64,18 +50,19 @@ class Addcust {
     @SerializedName("city")
     public var city: String = ""
 
+    //
+
     @SerializedName("state")
-    public var state: CitySt = CitySt()
+    public var state: STSDls = STSDls()
 
     @SerializedName("country")
-    public var country: CnNm = CnNm()
-
+    public var country: CNRYDls = CNRYDls()
 
     @SerializedName("zipcode")
     public var zipcode: Long = 0
 
     @SerializedName("accountdetails")
-    public var accountdetails: Acdtl = Acdtl()
+    public var accountdetails: ACDls = ACDls()
 
     @SerializedName("emailOtp")
     public var emailOtp: String = ""
@@ -107,14 +94,12 @@ class Addcust {
 
 
 
-
-
 }
 
-class Acdtl {
+class ACDls {
 
     @SerializedName("accountid")
-    public var accountid: Long = 0
+    public var accountid: Int = 0
 
     @SerializedName("accountNumber")
     public var accountNumber: String = ""
@@ -130,27 +115,55 @@ class Acdtl {
 
 }
 
-class CnNm {
+class CNRYDls {
     @SerializedName("countryName")
     public var countryName: String = ""
 
 }
 
-class CitySt {
-
+class STSDls {
     @SerializedName("stateId")
-    public var stateId: Long = 0
+    public var stateId: Int = 0
 
     @SerializedName("stateName")
     public var stateName: String = ""
 
     @SerializedName("country")
-    public var country: Cnry = Cnry()
+    public var country: CNmes = CNmes()
 
 }
 
-class Cnry {
+class CNmes {
+
     @SerializedName("countryName")
     public var countryName: String = ""
+
+}
+
+class OrdrSts {
+    @SerializedName("statusid")
+    public var statusid: Long = 0
+
+    @SerializedName("status")
+    public var status: String = ""
+
+}
+
+class TaX {
+
+    @SerializedName("ordertaxid")
+    public var ordertaxid: Long = 0
+
+    @SerializedName("orderid")
+    public var orderid: String = ""
+
+    @SerializedName("taxtype")
+    public var taxtype: String = ""
+
+    @SerializedName("taxpercentage")
+    public var taxpercentage: String = ""
+
+    @SerializedName("taxamount")
+    public var taxamount: Double = .0
 
 }

@@ -36,6 +36,9 @@ interface JsonPlaceholder {
     @GET("myorder/ORD001")
     fun alertNotify():Call<List<AlertApiModel>>
 
+    @GET("myorder/{customerId}")
+    fun viewOders(@Path("customerId") customerId: String):Call<List<ViewOrderApimodel>>
+
 
     @POST("customerdetails")
     @Multipart

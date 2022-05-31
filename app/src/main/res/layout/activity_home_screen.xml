@@ -50,6 +50,18 @@
                 tools:ignore="MissingConstraints" />
 
             <TextView
+                android:id="@+id/add_text"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_marginBottom="30dp"
+                android:background="@color/white"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/home_image_slider"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+            <TextView
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
