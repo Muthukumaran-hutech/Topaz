@@ -7,12 +7,16 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.topaz.Adapters.MyOrdersAdapter
 import com.example.topaz.ApiModels.ViewOrderApimodel
 import com.example.topaz.Interface.JsonPlaceholder
 import com.example.topaz.Interface.OrderItemClickListner
 import com.example.topaz.Models.OrderModels
+import com.example.topaz.R
 import com.example.topaz.RetrofitApiInstance.UpdateAccountInfoInstance
 import com.example.topaz.databinding.ActivityMyOrdersBinding
 import retrofit2.Call
@@ -88,6 +92,22 @@ class MyOrders : AppCompatActivity(), OrderItemClickListner {
             }
         })
 
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.orders_toolbar, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+            R.id.search_bar -> startActivity(Intent(activity, SearchActivity::class.java))
+            R.id.my_cart -> startActivity(Intent(activity, MyCart::class.java))
+        }
+        return super.onOptionsItemSelected(item)
 
     }
 
