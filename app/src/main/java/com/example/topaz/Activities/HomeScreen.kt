@@ -84,7 +84,7 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
         /* slidemodellist.add(SlideModel(imagePath = R.drawable.home_slider_banner))
          slidemodellist.add(SlideModel(imagePath = R.drawable.home_slider_banner_2))*/
 
-        // binding.homeImageSlider.setImageList(slidemodellist, ScaleTypes.FIT)
+         binding.homeImageSlider.setImageList(slidemodellist, ScaleTypes.FIT)
 
 
         onApiCall()

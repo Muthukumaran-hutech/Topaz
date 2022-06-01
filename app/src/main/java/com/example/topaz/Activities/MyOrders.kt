@@ -76,7 +76,9 @@ class MyOrders : AppCompatActivity(), OrderItemClickListner {
                             orderList.orderstatus.status,
                             orderList.orderid,
                             orderList.createdDate
+
                         )
+                     //   Log.d(TAG, "qty: "+orderList.orderItems[0].quantity.toString())
                         orderListItem.add(odList)
                     }
 

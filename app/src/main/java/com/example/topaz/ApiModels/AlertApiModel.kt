@@ -22,7 +22,7 @@ class AlertApiModel {
     public var orderTax: String = ""
 
     @SerializedName("orderstatus")
-    public var orderstatus: Ostat = Ostat()
+    public var orderstatus: Ostat1 = Ostat1()
 
     @SerializedName("customer")
     public var customer: Cdet = Cdet()
@@ -31,11 +31,11 @@ class AlertApiModel {
     public var paymentmode: String = ""
 
     @SerializedName("orderItems")
-    public var orderItems: ArrayList<ItmOrdr> = ArrayList<ItmOrdr>()
+    public var orderItems: ArrayList<ItmOrdr1> = ArrayList<ItmOrdr1>()
 
 }
 
-class ItmOrdr {
+class ItmOrdr1 {
 
     @SerializedName("orderItemId")
     public var orderItemId: Long = 0
@@ -120,7 +120,7 @@ class ItmOrdr {
     public var createdDate: String = ""
 
     @SerializedName("productimage")
-    public var productimage: PIM = PIM()
+    public var productimage: PIM1 = PIM1()
 
     @SerializedName("manufacturerCode")
     public var manufacturerCode: Boolean = true
@@ -246,7 +246,7 @@ class STDLC {
     public var stateName: String = ""
 
     @SerializedName("country")
-    public var country: CntrynmE = CntrynmE()
+    public var country: CntrynmE123 = CntrynmE123()
 
     @SerializedName("countryName")
     public var countryName: String = ""
@@ -286,13 +286,13 @@ class STDLC {
 
 }
 
-class CntrynmE {
+class CntrynmE123 {
     @SerializedName("countryName")
     public var countryName: String = ""
 
 }
 
-class PIM {
+class PIM1 {
     @SerializedName("imageId")
     public var imageId: Long = 0
 
@@ -334,7 +334,7 @@ class CType {
     public var categoryName: String = ""
 
     @SerializedName("tags")
-    public var tags: ArrayList<TS> = ArrayList<TS>()
+    public var tags: ArrayList<TS1> = ArrayList<TS1>()
 
     @SerializedName("subcategory")
     public var subcategory: ArrayList<SUCTy> = ArrayList<SUCTy>()
@@ -396,7 +396,7 @@ class SUCTy {
 
 }
 
-class TS {
+class TS1 {
     @SerializedName("tags")
     public var tags: String = ""
 
@@ -425,16 +425,16 @@ class Cdet {
     public var city: String = ""
 
     @SerializedName("state")
-    public var state: Statedt = Statedt()
+    public var state: Statedt3 = Statedt3()
 
     @SerializedName("country")
-    public var country: Cnty = Cnty()
+    public var country: Cnty1 = Cnty1()
 
     @SerializedName("zipcode")
     public var zipcode: Long = 0
 
     @SerializedName("accountdetails")
-    public var accountdetails: Accdet = Accdet()
+    public var accountdetails: Accdet1 = Accdet1()
 
     @SerializedName("emailOtp")
     public var emailOtp: String = ""
@@ -494,7 +494,7 @@ class PRISTS {
 
 }
 
-class Accdet {
+class Accdet1 {
 
     @SerializedName("accountid")
     public var accountid: Int = 0
@@ -569,7 +569,7 @@ class ctaType {
     public var categoryName: String = ""
 
     @SerializedName("tags")
-    public var tags: ArrayList<tas> = ArrayList<tas>()
+    public var tags: ArrayList<tas1> = ArrayList<tas1>()
 
     @SerializedName("subcategory")
     public var subcategory: ArrayList<Subct> = ArrayList<Subct>()
@@ -635,18 +635,18 @@ class Subct {
 
 }
 
-class tas {
+class tas1 {
     @SerializedName("tags")
     public var tags: String = ""
 
 }
 
-class Cnty {
+class Cnty1 {
     @SerializedName("countryName")
     public var countryName: String = ""
 }
 
-class Statedt {
+class Statedt3 {
     @SerializedName("stateId")
     public var stateId: Int = 0
 
@@ -654,15 +654,15 @@ class Statedt {
     public var stateName: String = ""
 
     @SerializedName("country")
-    public var country: Cntrynm = Cntrynm()
+    public var country: Cntrynm2 = Cntrynm2()
 }
 
-class Cntrynm {
+class Cntrynm2 {
     @SerializedName("countryName")
     public var countryName: String = ""
 }
 
-class Ostat {
+class Ostat1 {
     @SerializedName("statusid")
     public var statusid: Int = 0
 
@@ -670,3 +670,4 @@ class Ostat {
     public var status: String = ""
 
 }
+

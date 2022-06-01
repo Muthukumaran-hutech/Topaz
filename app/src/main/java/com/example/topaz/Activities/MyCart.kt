@@ -40,7 +40,7 @@ class MyCart : AppCompatActivity(), MyCartItemClickListner,IncreementDecreementI
         binding.linearLayout3.visibility = View.GONE
         binding.chckbtn.visibility = View.GONE
         binding.cartRecycle.visibility = View.GONE
-        binding.cartEmpty.visibility = View.VISIBLE
+        //binding.cartEmpty.visibility = View.VISIBLE
 
      /*val price =   binding.priceentry.setText(cartData.get(0).price)
       binding.discountentry.setText("")
