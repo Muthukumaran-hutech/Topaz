@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/order_background"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -117,14 +118,14 @@
         android:id="@+id/unit"
         android:layout_width="48dp"
         android:layout_height="50dp"
-        android:layout_marginStart="110dp"
+        android:layout_marginEnd="70dp"
         android:background="@color/white_gr"
         android:gravity="center"
         android:text="114 UNIT"
         android:textColor="@color/black"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/qutrequest"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/qutrequest" />
 
     <ImageView
@@ -132,6 +133,7 @@
         android:layout_height="18dp"
         android:layout_marginStart="10dp"
         android:src="@drawable/vector_msg"
+        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@+id/unit"
         app:layout_constraintTop_toTopOf="@+id/unit" />
 

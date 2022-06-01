@@ -36,6 +36,7 @@ class MyOrdersAdapter(var orderListItem: ArrayList<OrderModels>, var orderItemCl
         var status=itemView.findViewById<TextView>(R.id.qutrequest)
         var orderId=itemView.findViewById<TextView>(R.id.oderi)
         var date=itemView.findViewById<TextView>(R.id.te)
+        var quantity=itemView.findViewById<TextView>(R.id.unit)
 
         fun bindItems(
             orderListItem: ArrayList<OrderModels>,
@@ -46,6 +47,7 @@ class MyOrdersAdapter(var orderListItem: ArrayList<OrderModels>, var orderItemCl
             status.text = orderListItem[position].QuotationStatus
             orderId.text = orderListItem[position].quotationID
             date.text = orderListItem[position].quotationDate
+            quantity.text = orderListItem[position].quotationquantity.toString()
         }
 
      /*   .setOnClickListener {

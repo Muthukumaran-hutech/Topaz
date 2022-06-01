@@ -29,6 +29,7 @@
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/drawable/ic_baseline_shopping_cart_24.xml" value="0.1075" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/drawable/minus_border.xml" value="0.136" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/drawable/offers_border.xml" value="0.128" />
+        <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/drawable/order_background.xml" value="0.1415" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/drawable/rectangle_search_box.xml" value="0.128" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/drawable/roundedbtndarkblue.xml" value="0.151" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/drawable/roundedbtnlite.xml" value="0.151" />
@@ -158,6 +159,7 @@
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/menu/categories_page_menu.xml" value="0.1" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/menu/homepagemenu.xml" value="0.13766566908935443" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/menu/mywishlist_page_menu.xml" value="0.13766566908935443" />
+        <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/menu/orders_toolbar.xml" value="0.1368106028217187" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/menu/prod_page_menu.xml" value="0.13766566908935443" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/menu/product_quotation_menu.xml" value="0.13766566908935443" />
         <entry key="..\:/TopazAndroid/Topaz/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.151" />
