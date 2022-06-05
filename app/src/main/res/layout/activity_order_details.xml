@@ -117,7 +117,7 @@
                 android:layout_marginStart="136dp"
                 android:layout_marginTop="-100dp"
                 android:gravity="right"
-                android:text="24-Jan-2022"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
@@ -128,7 +128,7 @@
                 android:layout_marginStart="136dp"
                 android:layout_marginTop="22dp"
                 android:gravity="right"
-                android:text="PO210528BLEC01024"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
@@ -140,7 +140,7 @@
                 android:layout_marginStart="136dp"
                 android:layout_marginTop="20dp"
                 android:gravity="right"
-                android:text="₹ 1888"
+                android:text=""
                 android:textColor="@color/blue"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -323,19 +323,18 @@
             app:layout_constraintTop_toBottomOf="@+id/shipaddr" />
 
 
-        <TextView
-            android:id="@+id/shipingad"
-            android:layout_width="287dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="21dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="106dp"
-            android:text="#3,Kanaka Nagar Main Road,Opposite B.S.R.Residency,, R.T.Nagar Post,Bangalore, Bengaluru, Karnataka 560032"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/shipingname" />
+            <TextView
+                android:id="@+id/shipingad"
+                android:layout_width="287dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="80dp"
+                android:text="#3,Kanaka Nagar Main Road,Opposite B.S.R.Residency,, R.T.Nagar Post,Bangalore, Bengaluru, Karnataka 560032"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/shipingname"
+                app:layout_constraintTop_toBottomOf="@+id/shipingname" />
 
         <ImageView
             android:id="@+id/iig2"

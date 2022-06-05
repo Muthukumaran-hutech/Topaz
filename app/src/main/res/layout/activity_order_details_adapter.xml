@@ -8,38 +8,37 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/catimage"
+        android:id="@+id/or_image"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
-        android:src="@drawable/doors"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/title"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:background="@color/white"
-        android:text="@string/wooden_waterproof_plywood_sheet_thickness_18_mm"
+        android:text=""
         android:textColor="@color/netural_black"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/catimage"
-        app:layout_constraintTop_toTopOf="@+id/catimage" />
+        app:layout_constraintStart_toEndOf="@+id/or_image"
+        app:layout_constraintTop_toTopOf="@+id/or_image" />
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/pri"
         android:layout_width="58dp"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:text="@string/_59"
+        android:text=""
         android:textColor="@color/primary_blue"
-        app:layout_constraintStart_toStartOf="@+id/textView13"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+        app:layout_constraintStart_toStartOf="@+id/title"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <TextView
         android:id="@+id/textView16"
@@ -51,8 +50,8 @@
         android:textColor="@color/netural_black"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/textView14"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+        app:layout_constraintStart_toEndOf="@+id/pri"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
 
 

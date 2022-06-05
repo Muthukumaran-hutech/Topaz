@@ -63,8 +63,8 @@ class ItmOrdr {
     public var manufacturerconversation: String = ""
 
     @SerializedName("product")
-    public var product: PROD1 = PROD1()
-    ///
+    public var productRRR : PROD10 ? = PROD10()
+
 
     @SerializedName("minOrderQty")
     public var minOrderQty: Long = 0
@@ -121,7 +121,7 @@ class ItmOrdr {
     public var createdDate: String = ""
 
     @SerializedName("productimage")
-    public var productimage: PIM = PIM()
+    public var productimage212: PIM = PIM()
 
     @SerializedName("manufacturerCode")
     public var manufacturerCode: Boolean = true
@@ -311,13 +311,13 @@ class PIM {
 
 }
 
-class PROD1 {
+class PROD10 {
 
     @SerializedName("productid")
     public var productid: Long = 0
 
     @SerializedName("productTitle")
-    public var productTitle: String = ""
+    public var productTitle: String  = ""
 
     @SerializedName("categoryType")
     public var categoryType: CType1 = CType1()
@@ -467,8 +467,8 @@ class Cdet21 {
     @SerializedName("paymentmode")
     public var paymentmode: String = ""
 
-    @SerializedName("orderItems")
-    public var orderItems: ArrayList<ItemCat121> = ArrayList<ItemCat121>()
+   /* @SerializedName("orderItems")
+    public var orderItems: ArrayList<ItemCat121> = ArrayList<ItemCat121>()*/
 
     @SerializedName("paymentstatus")
     public var paymentstatus: String = ""
@@ -542,24 +542,24 @@ class ItemCat121 {
     @SerializedName("manufacturerconversation")
     public var manufacturerconversation: String = ""
 
-    @SerializedName("product")
-    public var product: pro1 = pro1()
+   /* @SerializedName("product")
+    public var product: pro1 = pro1()*/
 
 }
-
+/*
 class pro1 {
 
     @SerializedName("productid")
     public var productid: Int = 0
 
-    @SerializedName("productTitle")
+   *//* @SerializedName("productTitle")
     public var productTitle: String = ""
-
+*//*
     @SerializedName("categoryType")
     public var categoryType: ctaType20 = ctaType20()
 
 
-}
+}*/
 
 class ctaType20 {
 

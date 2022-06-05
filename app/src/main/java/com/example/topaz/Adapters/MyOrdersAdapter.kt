@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -37,6 +38,8 @@ class MyOrdersAdapter(var orderListItem: ArrayList<OrderModels>, var orderItemCl
         var orderId=itemView.findViewById<TextView>(R.id.oderi)
         var date=itemView.findViewById<TextView>(R.id.te)
         var quantity=itemView.findViewById<TextView>(R.id.unit)
+        var buttonView = itemView.findViewById<Button>(R.id.detailsbtn)
+
 
         fun bindItems(
             orderListItem: ArrayList<OrderModels>,
@@ -48,12 +51,20 @@ class MyOrdersAdapter(var orderListItem: ArrayList<OrderModels>, var orderItemCl
             orderId.text = orderListItem[position].quotationID
             date.text = orderListItem[position].quotationDate
             quantity.text = orderListItem[position].quotationquantity.toString()
+
+
+            buttonView.setOnClickListener {
+                orderItemClickListner.OrderItemClickListner(orderListItem[position])
+            }
+
         }
 
-     /*   .setOnClickListener {
+      /*  buttonView.setOnClickListener {
             //Onclick will trigger the interface in activity
             orderItemClickListner.OrderItemClickListner(orderListItem[position])
         }*/
+
+
 
     }
 }
