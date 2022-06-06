@@ -254,9 +254,9 @@ class STDLC {
     @SerializedName("zipcode")
     public var zipcode: Long = 0
 
-    @SerializedName("accountdetails")
+   /* @SerializedName("accountdetails")
     public var accountdetails: Accdet = Accdet()
-
+*/
     @SerializedName("emailOtp")
     public var emailOtp: String = ""
 

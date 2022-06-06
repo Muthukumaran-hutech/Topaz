@@ -58,7 +58,7 @@ class OrderDetailsAdapter(
             val decodedString: ByteArray = Base64.decode(orderListItem.get(position).image,
                 Base64.DEFAULT)
             val bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
-            /* if (listModel2.get(position).CateegoryImage.isEmpty()){*/
+
 
 
             Glide.with(context)
