@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.graphics.Bitmap
 import android.icu.util.Calendar
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -51,6 +52,7 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
     var arrival_list = ArrayList<ArrivalsModels>()
     var product = AddModels()
     var addlist = java.util.ArrayList<AddModels>()
+    var bitmap = java.util.ArrayList<Bitmap>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,6 +64,9 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
         activity = this
         setSupportActionBar(binding.homeToolbar)
         supportActionBar?.title = ""
+
+        binding.scrl.isEnabled = false
+      //  binding.viewFliper.addView(b)
 
 
         binding.homeRecyclerView?.layoutManager =
@@ -76,32 +81,12 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
 
         onAddvertisementCall()
 
-        /*  imageList.add(R.drawable.home_slider_banner)
-          imageList.add(R.drawable.home_slider_banner_2)*/
-
-
-        //-----------------Slide model list---------------------//
-        /* slidemodellist.add(SlideModel(imagePath = R.drawable.home_slider_banner))
-         slidemodellist.add(SlideModel(imagePath = R.drawable.home_slider_banner_2))*/
 
          binding.homeImageSlider.setImageList(slidemodellist, ScaleTypes.FIT)
 
 
         onApiCall()
 
-        /*   binding.homeSearchBtn.setOnClickListener{
-               startActivity(Intent(activity,SearchActivity::class.java))
-               finish()
-           }
-
-           binding.homeCartBtn.setOnClickListener{
-               startActivity(Intent(activity,MyCart::class.java))
-               finish()
-           }
-
-           binding.homeNotificationBtn.setOnClickListener{
-               Toast. makeText(applicationContext," Currently In Process",Toast. LENGTH_SHORT).show()
-           }*/
 
         binding.home.setOnClickListener {
             Toast.makeText(applicationContext, "You Are Currently In Home Page", Toast.LENGTH_SHORT)

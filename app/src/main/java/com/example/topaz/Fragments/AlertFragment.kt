@@ -1,6 +1,7 @@
 package com.example.topaz.Fragments
 
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -17,6 +18,7 @@ import com.example.topaz.Interface.NotifyAlertItemClickListner
 import com.example.topaz.Models.NotifyAlertModel
 import com.example.topaz.R
 import com.example.topaz.RetrofitApiInstance.UpdateAccountInfoInstance
+import kotlinx.android.synthetic.main.activity_account_information.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,6 +28,7 @@ class AlertFragment : Fragment(), NotifyAlertItemClickListner {
     lateinit var progressBar: ProgressBar
     lateinit var alertRecycle: RecyclerView
     var offerAlertlist = java.util.ArrayList<NotifyAlertModel>()
+    var custId = ""
 
 
     override fun onCreateView(
@@ -34,6 +37,8 @@ class AlertFragment : Fragment(), NotifyAlertItemClickListner {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_alert, container, false)
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,10 +46,15 @@ class AlertFragment : Fragment(), NotifyAlertItemClickListner {
         initViews(view)
         onOfferApiCall(view)
         progressBar.visibility = View.VISIBLE
+      //  val  preferences = this.activity?.getSharedPreferences("CUSTOMER_DATA", Context.MODE_PRIVATE)
+
+
     }
 
     private fun initViews(view: View) {
 
+        val sharedPreference =  this.activity?.getSharedPreferences("CUSTOMER_DATA", Context.MODE_PRIVATE)
+        custId = sharedPreference?.getString("customercode","").toString()
 
         progressBar = view.findViewById(R.id.app_progress_bar_2)
         alertRecycle = view.findViewById(R.id.notify_alert_recycler_view)
@@ -54,22 +64,23 @@ class AlertFragment : Fragment(), NotifyAlertItemClickListner {
         var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
             .create(JsonPlaceholder::class.java)
 
-        res.alertNotify().enqueue(object : Callback<List<AlertApiModel>?> {
+        res.alertNotify(custId).enqueue(object : Callback<List<AlertApiModel>?> {
             override fun onResponse(
                 call: Call<List<AlertApiModel>?>,
                 response: Response<List<AlertApiModel>?>
             ) {
 
                 if (response.isSuccessful) {
-                    // Log.d(TAG, "alert success: "+response.body())
+                     Log.d(TAG, "alert success: "+response.body())
                     progressBar.visibility = View.GONE
                     for (alertOffers in response.body()!!) {
+                        Log.d(TAG, "alert success size: "+ alertOffers.orderItems.size)
                         var alertModel = NotifyAlertModel(
-                            alertOffers.customer.orderItems.get(0).product.categoryType.categoryimage.imagebyte,
-                            alertOffers.customer.orderItems.get(0).product.productTitle,
-                            alertOffers.customer.orderItems.get(0).price.toString(),
-                            alertOffers.customer.orderItems.get(0).thickness,
-                            alertOffers.customer.orderItems.get(0).product.categoryType.categoryimage.creationTime
+                            alertOffers.orderItems.get(0).product.categoryType.categoryimage.imagebyte,
+                            alertOffers.orderItems.get(0).product.productTitle,
+                            alertOffers.orderItems.get(0).price.toString(),
+                            alertOffers.orderItems.get(0).thickness,
+                            alertOffers.orderItems.get(0).product.categoryType.categoryimage.creationTime
                         )
 
                         offerAlertlist.add(alertModel)
@@ -87,19 +98,21 @@ class AlertFragment : Fragment(), NotifyAlertItemClickListner {
                     }
 
 
+                }else{
+                    Log.d(TAG, "alert Fail: "+response.body())
                 }
 
             }
 
             override fun onFailure(call: Call<List<AlertApiModel>?>, t: Throwable) {
-
+                Log.d(TAG, "alert Failure: "+t.message)
             }
         })
     }
 
 
     override fun NotifyAlertItemClickListner(data: NotifyAlertModel) {
-
+//do nothing
     }
 
 

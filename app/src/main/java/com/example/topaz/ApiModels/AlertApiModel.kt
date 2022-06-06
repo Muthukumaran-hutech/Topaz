@@ -19,7 +19,7 @@ class AlertApiModel {
     public var amountwithouttax: Double = .0
 
     @SerializedName("orderTax")
-    public var orderTax: String = ""
+    public var orderTax: ooordd = ooordd()
 
     @SerializedName("orderstatus")
     public var orderstatus: Ostat1 = Ostat1()
@@ -32,6 +32,24 @@ class AlertApiModel {
 
     @SerializedName("orderItems")
     public var orderItems: ArrayList<ItmOrdr1> = ArrayList<ItmOrdr1>()
+
+}
+
+class ooordd {
+    @SerializedName("ordertaxid")
+    public var ordertaxid: Int = 0
+
+    @SerializedName("orderid")
+    public var orderid: String = ""
+
+    @SerializedName("taxtype")
+    public var taxtype: String = ""
+
+    @SerializedName("taxpercentage")
+    public var taxpercentage: String = ""
+
+    @SerializedName("taxamount")
+    public var taxamount: Double = .0
 
 }
 
@@ -463,23 +481,6 @@ class Cdet {
     @SerializedName("phonestatus")
     public var phonestatus: String = ""
 
-    @SerializedName("paymentmode")
-    public var paymentmode: String = ""
-
-    @SerializedName("orderItems")
-    public var orderItems: ArrayList<ItemCat> = ArrayList<ItemCat>()
-
-    @SerializedName("paymentstatus")
-    public var paymentstatus: String = ""
-
-    @SerializedName("prioritystatus")
-    public var prioritystatus: PRISTS = PRISTS()
-
-    @SerializedName("manufacturerCode")
-    public var manufacturerCode: String = ""
-
-    @SerializedName("shippinghandling")
-    public var shippinghandling: Double = .0
 
 
 }

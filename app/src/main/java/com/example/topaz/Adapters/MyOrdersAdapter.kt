@@ -55,6 +55,23 @@ class MyOrdersAdapter(
             date.text = orderListItem[position].quotationDate
             quantity.text = orderListItem[position].quotationquantity.toString()
 
+            if (status.text =="Order Placed"){
+                status.getResources().getColor(R.color.black)
+            }
+
+            if (status.text =="Qutation Requested"){
+                status.getResources().getColor(R.color.blue)
+            }
+
+            if (status.text =="Quotation Received"){
+                status.getResources().getColor(R.color.green)
+            }
+
+
+            if (status.text =="Order Cancelled"){
+                status.getResources().getColor(R.color.red)
+            }
+
 
 
 

@@ -23,12 +23,16 @@ interface JsonPlaceholder {
     @GET("all/advertisementlist")
     fun viewAdvertisement(): Call<List<AdvertisementApiModel>>
 
+
+
     @GET("viewProdcutBySubCategoryId/{subid}")
     fun subCategory( @Path("subid") subid: String): Call<List<SubCategoryApiModel>>
 
     @GET("viewProductDetails/{productId}")
     fun viewProduct(@Path("productId") productId: String): Call<ProductDetailsListApiModel>
 
+    @GET("viewProducts")
+    fun viewProductList(): Call<ProductDetailsListApiModel>
 
     @GET("offers/get")
     fun viewOffers(): Call<List<OffersListApiModel>>
@@ -36,8 +40,8 @@ interface JsonPlaceholder {
  /*   @GET("myorder/ORD001")
     fun alertNotify():Call<List<ViewOrderApimodel>>*/
 
-    @GET("myorder/ORD001")
-    fun alertNotify():Call<List<AlertApiModel>>
+    @GET("myorder/{customerId}")
+    fun alertNotify(@Path("customerId") customerId: String):Call<List<AlertApiModel>>
 
     @GET("myorder/{customerId}")
     fun viewOders(@Path("customerId") customerId: String):Call<List<ViewOrderApimodel>>
