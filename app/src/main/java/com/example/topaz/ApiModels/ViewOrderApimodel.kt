@@ -672,3 +672,21 @@ class Ostat {
 
 }
 
+class TaX {
+
+    @SerializedName("ordertaxid")
+    public var ordertaxid: Long = 0
+
+    @SerializedName("orderid")
+    public var orderid: String = ""
+
+    @SerializedName("taxtype")
+    public var taxtype: String = ""
+
+    @SerializedName("taxpercentage")
+    public var taxpercentage: String = ""
+
+    @SerializedName("taxamount")
+    public var taxamount: Double = .0
+
+}
