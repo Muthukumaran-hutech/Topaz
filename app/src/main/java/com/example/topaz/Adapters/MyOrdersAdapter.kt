@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +14,11 @@ import com.example.topaz.Models.OrderModels
 import com.example.topaz.R
 import java.util.ArrayList
 
-class MyOrdersAdapter(var orderListItem: ArrayList<OrderModels>, var orderItemClickListner: OrderItemClickListner,var context: Context) : RecyclerView.Adapter<MyOrdersAdapter.MyViewHolder>() {
+class MyOrdersAdapter(
+    var orderListItem: ArrayList<OrderModels>,
+    var orderItemClickListner: OrderItemClickListner,
+    var context: Context
+) : RecyclerView.Adapter<MyOrdersAdapter.MyViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -24,7 +29,7 @@ class MyOrdersAdapter(var orderListItem: ArrayList<OrderModels>, var orderItemCl
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val data = orderListItem[position]
-        holder.bindItems(orderListItem,position,orderItemClickListner,context)
+        holder.bindItems(orderListItem, position, orderItemClickListner, context)
     }
 
     override fun getItemCount(): Int {
@@ -33,9 +38,11 @@ class MyOrdersAdapter(var orderListItem: ArrayList<OrderModels>, var orderItemCl
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        var status=itemView.findViewById<TextView>(R.id.qutrequest)
-        var orderId=itemView.findViewById<TextView>(R.id.oderi)
-        var date=itemView.findViewById<TextView>(R.id.te)
+        var status = itemView.findViewById<TextView>(R.id.qutrequest)
+        var orderId = itemView.findViewById<TextView>(R.id.oderi)
+        var date = itemView.findViewById<TextView>(R.id.te)
+        var quantity = itemView.findViewById<TextView>(R.id.unit)
+        var buttonView = itemView.findViewById<Button>(R.id.detailsbtn)
 
         fun bindItems(
             orderListItem: ArrayList<OrderModels>,
@@ -46,12 +53,17 @@ class MyOrdersAdapter(var orderListItem: ArrayList<OrderModels>, var orderItemCl
             status.text = orderListItem[position].QuotationStatus
             orderId.text = orderListItem[position].quotationID
             date.text = orderListItem[position].quotationDate
+            quantity.text = orderListItem[position].quotationquantity.toString()
+
+
+
+
+            buttonView.setOnClickListener {
+                orderItemClickListner.OrderItemClickListner(orderListItem[position])
+            }
+
         }
 
-     /*   .setOnClickListener {
-            //Onclick will trigger the interface in activity
-            orderItemClickListner.OrderItemClickListner(orderListItem[position])
-        }*/
 
     }
 }

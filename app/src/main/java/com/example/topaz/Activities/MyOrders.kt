@@ -72,15 +72,38 @@ class MyOrders : AppCompatActivity(), OrderItemClickListner {
                 if (response.isSuccessful) {
                     Log.d(TAG, "Onorder success: " + response.body())
                     for (orderList in response.body()!!) {
-                        var odList = OrderModels(
+                        /* var odList = OrderModels(
                             orderList.orderstatus.status,
                             orderList.orderid,
                             orderList.createdDate
                         )
                         orderListItem.add(odList)
+                    }*/
+
+
+//                        Log.d(TAG, "Onorder success2: " + orderList.orderItems.get(0).product.productTitle)
+                        var odList = OrderModels(
+                            "",
+                            orderList.orderstatus.status,
+                            orderList.orderid,
+                            orderList.createdDate,
+                            orderList.orderItems.get(0).quantity,
+                            orderList.orderItems.get(0).thickness,
+                            orderList.orderItems.get(0).sqFeetPrice,
+                            orderList.orderItems.get(0).productRRR?.productTitle.toString(),
+                            orderList.paymentmode,
+                            orderList.customer.addressLine
+
+                        )
+                        //   Log.d(TAG, "qty: "+orderList.orderItems[0].quantity.toString())
+                        orderListItem.add(odList)
+
+
+                        Log.d(TAG, "Onorder success2: " + orderList.orderItems.size)
                     }
 
-                    var ordersAdapter = MyOrdersAdapter(orderListItem, this@MyOrders, this@MyOrders)
+                   /* var ordersAdapter = MyOrdersAdapter(orderListItem, this@MyOrders, this@MyOrders)*/
+                    val ordersAdapter = MyOrdersAdapter(orderListItem, this@MyOrders, this@MyOrders)
                     binding.ordersrecycler.adapter = ordersAdapter
                 } else {
                     Log.d(TAG, "Onorder Fail: " + response.body())
@@ -112,6 +135,19 @@ class MyOrders : AppCompatActivity(), OrderItemClickListner {
     }
 
     override fun OrderItemClickListner(data: OrderModels) {
+
+        var intent =Intent(activity, OrderDetails::class.java)
+        intent.putExtra("QuotationStatus",data.QuotationStatus)
+        intent.putExtra("quotationID",data.quotationID)
+        intent.putExtra("quotationDate",data.quotationDate)
+        intent.putExtra("quotationquantity",data.quotationquantity)
+        intent.putExtra("quotationThickness",data.quotationThickness)
+        intent.putExtra("quotationSqftPrice",data.quotationSqftPrice)
+        intent.putExtra("quotationTitle",data.quotationTitle)
+        intent.putExtra("quotationPaymentMode",data.quotationPaymentMode)
+        intent.putExtra("quotationAddressLine",data.quotationAddressLine)
+        startActivity(intent)
+        //Log.d(TAG, "OrderItemClickListner: "+ data.quotationThickness)
 //for future use
     }
 }

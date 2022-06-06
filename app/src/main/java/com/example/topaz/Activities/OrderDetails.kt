@@ -37,6 +37,8 @@ class OrderDetails : AppCompatActivity(), OrdDetPageItemclickListner {
         val QpMode = intent.getStringExtra("quotationPaymentMode")
         val Qaddrs = intent.getStringExtra("quotationAddressLine")
 
+        orderListItem2.add(OrderModels(Qtitle.toString(),Qthickness.toString(),QsqftPr.toString()))
+
         binding.discountentry2.setText(Qdt)
         binding.deliverychargesentry2.setText(QiD)
         binding.totalamtentry2.setText(QsqftPr)

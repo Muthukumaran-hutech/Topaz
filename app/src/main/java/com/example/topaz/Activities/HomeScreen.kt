@@ -135,7 +135,7 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
                 response: Response<List<AdvertisementApiModel>?>
             ) {
                 if (response.isSuccessful) {
-                    Log.d(TAG, "add success: " + response.body())
+                    Log.d(TAG, "add success advertisement: " + response.body()?.get(0)?.advertisementid)
 
                     for (addvertisement in response.body()!!) {
                         var addModel = AddModels(
@@ -146,13 +146,13 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
                     }
 
                 } else {
-                    Log.d(TAG, "add fail: " + response.body())
+                    Log.d(TAG, "add fail advertisement: " + response.body())
                 }
 
             }
 
             override fun onFailure(call: Call<List<AdvertisementApiModel>?>, t: Throwable) {
-                Log.d(TAG, "add Failure: " + t.message)
+                Log.d(TAG, "add Failure advertisement: " + t.message)
             }
         })
 
