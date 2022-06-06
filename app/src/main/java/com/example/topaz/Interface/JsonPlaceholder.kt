@@ -16,9 +16,13 @@ interface JsonPlaceholder {
         @Body jsonObject: JsonObject
     ): Call<UpdateUserApiModel>
 
-
+// for home page
     @GET("viewCategory")
     fun viewCategory(): Call<List<CategoryListApiModel>>
+
+    // for category page
+    @GET("viewCategory/{CategoryID}")
+    fun viewCategoryItems( @Path("CategoryID") catId: String): Call<List<CategoryListApiModel>>
 
     @GET("all/advertisementlist")
     fun viewAdvertisement(): Call<List<AdvertisementApiModel>>

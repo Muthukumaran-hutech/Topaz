@@ -24,6 +24,7 @@ import com.example.topaz.R
 import com.example.topaz.RetrofitApiInstance.UpdateAccountInfoInstance
 import com.example.topaz.databinding.ActivityCategoryBinding
 import com.example.topaz.databinding.ActivityLoginBinding
+import kotlinx.android.synthetic.main.activity_account_information.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,35 +37,21 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
     //private lateinit var categorymainAdapter: CategoryAdapter
     lateinit var activity: Activity
     var categoryInnerlist = java.util.ArrayList<CategoriesModel>()
-
+    var catId = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCategoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        catId = intent.getStringExtra("cat__iD").toString()
+
         activity = this
         setSupportActionBar(binding.catToolbar)
         supportActionBar?.title = ""
 
-
-        //  categorymainAdapter = CategoryAdapter()
-
         binding.appProgressBar2.visibility = View.VISIBLE
         categoryApiCall()
-
-        /*  categoryInnerlist.add(CategoriesModel(R.drawable.plywoodbiards,"PlywoodBoards",""))
-          categoryInnerlist.add(CategoriesModel(R.drawable.laminates,"Laminates",""))
-          categoryInnerlist.add(CategoriesModel(R.drawable.veneers,"Veneers",""))
-          categoryInnerlist.add(CategoriesModel(R.drawable.faceveneers,"Face Veneers",""))
-          categoryInnerlist.add(CategoriesModel(R.drawable.mdf,"MDF",""))
-          categoryInnerlist.add(CategoriesModel(R.drawable.doors,"Doors",""))
-          categoryInnerlist.add(CategoriesModel(R.drawable.pvcboards,"PVC Boards",""))
-          categoryInnerlist.add(CategoriesModel(R.drawable.furntureboards,"Furniture Boards",""))
-          categoryInnerlist.add(CategoriesModel(R.drawable.exteria,"Exteria",""))*/
-
-
-
 
         binding.home.setOnClickListener {
             startActivity(Intent(activity, HomeScreen::class.java))
@@ -96,8 +83,11 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
     private fun categoryApiCall() {
         var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
             .create(JsonPlaceholder::class.java)
-
-        res.viewCategory().enqueue(object : Callback<List<CategoryListApiModel>?> {
+        Log.d(
+            TAG,
+            "catId: " + catId
+        )
+        res.viewCategoryItems(catId).enqueue(object : Callback<List<CategoryListApiModel>?> {
             override fun onResponse(
                 call: Call<List<CategoryListApiModel>?>,
                 response: Response<List<CategoryListApiModel>?>
@@ -105,17 +95,28 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
                 if (response.isSuccessful) {
                     binding.appProgressBar2.visibility = View.GONE
                     for (categorylist in response.body()!!) {
-                        var categoryModel = CategoriesModel(
-                            categorylist.categoryimage.imagebyte,
-                            categorylist.categoryName,
-                            categorylist.categoryid,
-                            categorylist.subcategory1.get(0).subid
 
-                        )
-                        categoryInnerlist.add(categoryModel)
+                        if (categorylist.active == true) {
+                            var categoryModel = CategoriesModel(
+                                categorylist.categoryimage.imagebyte,
+                                categorylist.categoryName,
+                                categorylist.categoryid,
+                                categorylist.subcategory1.get(0).subid
+
+                            )
+                            categoryInnerlist.add(categoryModel)
+                        }
+
                     }
-                    binding.categoryRecyclerView.layoutManager = GridLayoutManager(this@CategoryActivity, 3)//Count depicts no of elements in row
-                    var categoryAdapter = CategoryAdapter(categoryInnerlist, this@CategoryActivity,this@CategoryActivity)
+                    binding.categoryRecyclerView.layoutManager = GridLayoutManager(
+                        this@CategoryActivity,
+                        3
+                    )//Count depicts no of elements in row
+                    var categoryAdapter = CategoryAdapter(
+                        categoryInnerlist,
+                        this@CategoryActivity,
+                        this@CategoryActivity
+                    )
                     binding.categoryRecyclerView.adapter = categoryAdapter
                     binding.categoryRecyclerView.setHasFixedSize(true)
 
@@ -125,7 +126,11 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
                     )
                 } else {
                     binding.appProgressBar2.visibility = View.VISIBLE
-                    Toast. makeText(applicationContext,"Something Went Wronng Please Try Again Later", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        applicationContext,
+                        "Something Went Wronng Please Try Again Later",
+                        Toast.LENGTH_LONG
+                    ).show()
 
                     Log.d(
                         TAG,
@@ -137,37 +142,43 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
             }
 
             override fun onFailure(call: Call<List<CategoryListApiModel>?>, t: Throwable) {
-                Log.d(TAG, "onResponse: " + t.message)
+                Toast.makeText(
+                    applicationContext,
+                    "Something Went Wronng Please Try Again Later",
+                    Toast.LENGTH_LONG
+                ).show()
             }
-        })
+        }
+
+        )
 
 
     }
 
     override fun CategoryPageItemClickListner(categories: CategoriesModel) {
-        var intent =Intent(activity, InnerCategories::class.java)
+        var intent = Intent(activity, InnerCategories::class.java)
         intent.putExtra("cat_id", categories.CateegorySubId)
         startActivity(intent)
 
     }
 
 
-   /* override fun onBackPressed() {
-        //super.onBackPressed()
-        val message = "Are you sure yo want to exit"
-        AlertDialog.Builder(this)
-            .setTitle("Applcation will be logged out ")
-            .setMessage(message)
-            .setPositiveButton("OK") { _, _ ->
-                super.onBackPressed()
+    /* override fun onBackPressed() {
+         //super.onBackPressed()
+         val message = "Are you sure yo want to exit"
+         AlertDialog.Builder(this)
+             .setTitle("Applcation will be logged out ")
+             .setMessage(message)
+             .setPositiveButton("OK") { _, _ ->
+                 super.onBackPressed()
 
-                //  binding.phoneContainer.helperText = getString(R.id.Required)
-            }.setNegativeButton("Cancel") { _, _ ->
-                //dismissDialog(0)
-                //  binding.phoneContainer.helperText = getString(R.id.Required)
-            }
-            .show()
-    }*/
+                 //  binding.phoneContainer.helperText = getString(R.id.Required)
+             }.setNegativeButton("Cancel") { _, _ ->
+                 //dismissDialog(0)
+                 //  binding.phoneContainer.helperText = getString(R.id.Required)
+             }
+             .show()
+     }*/
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater

@@ -4,19 +4,25 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.ContentValues
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.icu.util.Calendar
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.example.topaz.Adapters.ArrivalsAdapter
@@ -50,6 +56,7 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
     var slidemodellist = ArrayList<SlideModel>()
     var categorylist = java.util.ArrayList<HomeCategoryModel>()
     var arrival_list = ArrayList<ArrivalsModels>()
+    var catSubModels = ArrayList<SubCatListModels>()
     var product = AddModels()
     var addlist = java.util.ArrayList<AddModels>()
     var bitmap = java.util.ArrayList<Bitmap>()
@@ -66,17 +73,16 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
         supportActionBar?.title = ""
 
         binding.scrl.isEnabled = false
-      //  binding.viewFliper.addView(b)
+
 
 
         binding.homeRecyclerView?.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         //------------Category API--------------------
-        categorylist.add(HomeCategoryModel("", "Plywood"))
+       /* categorylist.add(HomeCategoryModel("", "Plywood"))
         categorylist.add(HomeCategoryModel("", "Laminates"))
-        categorylist.add(HomeCategoryModel("", "Veneers"))
-        var homeCategoriesAdapter = HomeCategoriesAdapter(categorylist, this)
-        binding.homeRecyclerView?.adapter = homeCategoriesAdapter
+        categorylist.add(HomeCategoryModel("", "Veneers"))*/
+
         //binding.homeRecyclerView?.adapter = adapter
 
         onAddvertisementCall()
@@ -86,6 +92,7 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
 
 
         onApiCall()
+        onApicallcat()
 
 
         binding.home.setOnClickListener {
@@ -110,6 +117,68 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
 
     }
 
+
+    //cat slide
+    private fun onApicallcat() {
+        var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
+            .create(JsonPlaceholder::class.java)
+
+        res.viewCategory().enqueue(object : Callback<List<CategoryListApiModel>?> {
+            override fun onResponse(
+                call: Call<List<CategoryListApiModel>?>,
+                response: Response<List<CategoryListApiModel>?>
+            ) {
+                if (response.isSuccessful) {
+                    binding.appProgressBar2?.visibility = View.GONE
+                    for (subCatListModels in response.body()!!) {
+                        val subCatListModels = SubCatListModels(
+                           // subCatListModels.categoryimage.imagebyte,
+                            "",
+                            subCatListModels.categoryName,
+                            subCatListModels.categoryid
+                        )
+
+
+                        catSubModels.add(subCatListModels)
+                    }
+                    //arrivals Adapter
+
+                    var homeCategoriesAdapter = HomeCategoriesAdapter(catSubModels, this@HomeScreen)
+                    binding.homeRecyclerView?.adapter = homeCategoriesAdapter
+                    binding.homeRecyclerView?.setHasFixedSize(true)
+
+                    Log.d(
+                        ContentValues.TAG,
+                        "onResponse: arrival Success" + response.body()
+                            ?.get(0)?.tags?.get(0)?.tags.toString()
+                    )
+                } else {
+                    binding.appProgressBar2?.visibility = View.VISIBLE
+                    Toast.makeText(
+                        applicationContext,
+                        "Something Went Wronng Please Try Again Later",
+                        Toast.LENGTH_LONG
+                    ).show()
+
+                    Log.d(
+                        ContentValues.TAG,
+                        "onResponse: arrival Fail: " + response.body()
+                            ?.get(0)?.tags?.get(0)?.tags.toString()
+                    )
+                }
+
+
+            }
+
+            override fun onFailure(call: Call<List<CategoryListApiModel>?>, t: Throwable) {
+                Log.d(ContentValues.TAG, "onResponse: arrival failure: " + t.message)
+            }
+        })
+
+
+
+    }
+
     private fun onAddvertisementCall() {
         var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
             .create(JsonPlaceholder::class.java)
@@ -123,11 +192,30 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
                     Log.d(TAG, "add success advertisement: " + response.body()?.get(0)?.advertisementid)
 
                     for (addvertisement in response.body()!!) {
-                        var addModel = AddModels(
-                            addvertisement.advertismentImage.imagepath,
+                        val addModel = AddModels(
+                            addvertisement.advertismentImage.imagebyte,
                             addvertisement.title
                         )
+                        var decodedString: ByteArray = Base64.decode(
+
+                            addvertisement.advertismentImage.imagebyte,
+                            Base64.DEFAULT)
+
+                        val bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
                         addlist.add(addModel)
+                        val imageview = ImageView(activity)
+                        imageview.setImageBitmap(bitmap)
+                        binding.viewFliper.addView(imageview)
+                        binding.viewFliper.flipInterval = 5000
+                        binding.viewFliper.isAutoStart = true
+
+                        Glide.with(activity)
+                            .applyDefaultRequestOptions(RequestOptions().placeholder(R.drawable.ic_baseline_image_24).error(R.drawable.ic_baseline_image_24))
+                            .load(bitmap)
+                            .into(imageview)
+
+
+
                     }
 
                 } else {
@@ -262,9 +350,11 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
 
     }
 
-    override fun HomeScreenItemClickListner(homecategory: HomeCategoryModel) {
-        startActivity(Intent(activity, CategoryActivity::class.java))
-        finish()
+    override fun HomeScreenItemClickListner(homecategory: SubCatListModels) {
+
+        var intent =Intent(activity, CategoryActivity::class.java)
+        intent.putExtra("cat__iD",homecategory.catID)
+        startActivity(intent)
     }
 
 
