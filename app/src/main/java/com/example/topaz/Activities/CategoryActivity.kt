@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.topaz.Adapters.CategoryAdapter
 import com.example.topaz.ApiModels.CategoryListApiModel
+import com.example.topaz.ApiModels.SubCategoryListApiModel
 import com.example.topaz.ApiModels.UpdateUserApiModel
 import com.example.topaz.Interface.CategoryPageItemClickListner
 import com.example.topaz.Interface.JsonPlaceholder
@@ -38,6 +39,7 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
     lateinit var activity: Activity
     var categoryInnerlist = java.util.ArrayList<CategoriesModel>()
     var catId = ""
+    var categoryName ="";
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +47,7 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
         setContentView(binding.root)
 
         catId = intent.getStringExtra("cat__iD").toString()
+        categoryName = intent.getStringExtra("category_name") as String
 
         activity = this
         setSupportActionBar(binding.catToolbar)
@@ -81,13 +84,71 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
     }
 
     private fun categoryApiCall() {
-        var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
+        val res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
             .create(JsonPlaceholder::class.java)
         Log.d(
             TAG,
             "catId: " + catId
         )
-        res.viewCategoryItems(catId).enqueue(object : Callback<List<CategoryListApiModel>?> {
+
+        res.getSubcategoryList(categoryName).enqueue(object : Callback<List<SubCategoryListApiModel>?> {
+            override fun onResponse(
+                call: Call<List<SubCategoryListApiModel>?>,
+                response: Response<List<SubCategoryListApiModel>?>
+            ) {
+
+                  if(response.isSuccessful){
+                      binding.appProgressBar2.visibility = View.GONE
+                      for(categorylist in response.body()!!){
+
+                          val categoryModel = CategoriesModel(
+                              "",
+                              categorylist.subcategoryname,
+                              "",
+                              categorylist.subid
+
+                          )
+                          categoryInnerlist.add(categoryModel)
+                          binding.categoryRecyclerView.layoutManager = GridLayoutManager(
+                              this@CategoryActivity,
+                              3
+                          )//Count depicts no of elements in row
+                          var categoryAdapter = CategoryAdapter(
+                              categoryInnerlist,
+                              this@CategoryActivity,
+                              this@CategoryActivity
+                          )
+                          binding.categoryRecyclerView.adapter = categoryAdapter
+                          binding.categoryRecyclerView.setHasFixedSize(true)
+
+
+
+                      }
+                  }
+                  else {
+                      binding.appProgressBar2.visibility = View.VISIBLE
+                      Toast.makeText(
+                          applicationContext,
+                          "Something Went Wrong Please Try Again Later",
+                          Toast.LENGTH_LONG
+                      ).show()
+
+                  }
+
+
+            }
+
+            override fun onFailure(call: Call<List<SubCategoryListApiModel>?>, t: Throwable) {
+                binding.appProgressBar2.visibility = View.GONE
+                Toast.makeText(
+                    applicationContext,
+                    "Something Went Wrong Please Try Again Later",
+                    Toast.LENGTH_LONG
+                ).show()
+
+            }
+        })
+       /* res.viewCategoryItems(catId).enqueue(object : Callback<List<CategoryListApiModel>?> {
             override fun onResponse(
                 call: Call<List<CategoryListApiModel>?>,
                 response: Response<List<CategoryListApiModel>?>
@@ -97,7 +158,7 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
                     for (categorylist in response.body()!!) {
 
                         if (categorylist.active == true) {
-                            var categoryModel = CategoriesModel(
+                            val categoryModel = CategoriesModel(
                                 categorylist.categoryimage.imagebyte,
                                 categorylist.categoryName,
                                 categorylist.categoryid,
@@ -128,7 +189,7 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
                     binding.appProgressBar2.visibility = View.VISIBLE
                     Toast.makeText(
                         applicationContext,
-                        "Something Went Wronng Please Try Again Later",
+                        "Something Went Wrong Please Try Again Later",
                         Toast.LENGTH_LONG
                     ).show()
 
@@ -151,7 +212,7 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
         }
 
         )
-
+*/
 
     }
 

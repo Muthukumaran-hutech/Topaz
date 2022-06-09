@@ -1,7 +1,8 @@
 package com.example.topaz.Models
 
 class SubCatListModels (
-        var catIcon: String = "",
+        var isCategoryClicked: Boolean=false,
         var catTitle: String = "",
-        var catID: String = ""
+        var catID: String = "",
+
         )

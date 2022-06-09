@@ -4,5 +4,5 @@ import com.example.topaz.Models.HomeCategoryModel
 import com.example.topaz.Models.SubCatListModels
 
 interface HomeScreenItemClickListner {
-    fun HomeScreenItemClickListner(data:SubCatListModels)
+    fun HomeScreenItemClickListner(data: SubCatListModels, position: Int)
 }

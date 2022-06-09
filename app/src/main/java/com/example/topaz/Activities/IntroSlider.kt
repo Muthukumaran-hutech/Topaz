@@ -81,9 +81,10 @@ class IntroSlider : AppCompatActivity() {
         }
 
         binding.btnNext.setOnClickListener {
+            var count=0;
             //binding.viewPager.currentItem++
-            var count=binding.viewPager.currentItem++
-            binding.indicatorLayout.selectCurrentPosition(count)
+            binding.viewPager.currentItem++
+            binding.indicatorLayout.selectCurrentPosition(++count)
 
         }
 

@@ -89,14 +89,15 @@
         android:layout_marginTop="@dimen/_220sdp"
         android:layout_marginEnd="27dp"
         android:orientation="horizontal"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/OTP_1"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_marginStart="5dp"
             android:autofillHints="smsOTPCode"
             android:background="@color/gr"
@@ -111,8 +112,8 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/OTP_2"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_marginStart="5dp"
             android:autofillHints="smsOTPCode"
             android:background="@color/gr"
@@ -127,8 +128,8 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/OTP_3"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_marginStart="5dp"
             android:autofillHints="smsOTPCode"
             android:background="@color/gr"
@@ -143,8 +144,8 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/OTP_4"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_marginStart="5dp"
             android:autofillHints="smsOTPCode"
             android:background="@color/gr"
@@ -159,8 +160,8 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/OTP_5"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_marginStart="5dp"
             android:autofillHints="smsOTPCode"
             android:background="@color/gr"
@@ -175,8 +176,8 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/OTP_6"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_marginStart="5dp"
             android:autofillHints="smsOTPCode"
             android:background="@color/gr"

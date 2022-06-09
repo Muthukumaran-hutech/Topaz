@@ -115,4 +115,10 @@ interface JsonPlaceholder {
         @Body jsonObject: JsonObject
     ): Call<QuotationApiModel>
 
+    //Get subcategory
+    @GET("getSubCategoryByCategoryName/{categoryName}")
+   public fun getSubcategoryList(@Path("categoryName") categoryName:String):Call<List<SubCategoryListApiModel>>
+
+
+
 }
