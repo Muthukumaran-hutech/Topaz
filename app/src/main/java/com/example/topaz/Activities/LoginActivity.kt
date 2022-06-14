@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.topaz.ApiModels.CheckUserApiModel
@@ -46,7 +47,8 @@ class LoginActivity : AppCompatActivity() {
         binding.phoneContinueBtn.setOnClickListener {
 
 
-            if(isEnabled) {
+            if(isEnabled&&validatePhoneNumber()) {
+                binding.loginProgress?.visibility=View.VISIBLE
                 checkUserApiCall()
                 isEnabled = false
             }
@@ -73,12 +75,14 @@ class LoginActivity : AppCompatActivity() {
            ) {
 
                if(response.isSuccessful){
+                   binding.loginProgress?.visibility=View.GONE
                    response.body()?.let { saveServerData(it) }
 
                    submitForm()
 
                }
                else{
+                   binding.loginProgress?.visibility=View.GONE
                    val message = "This is not a Registerd number"
                    AlertDialog.Builder(this@LoginActivity)
                        .setTitle("Please contact your Administrator ")
@@ -93,7 +97,8 @@ class LoginActivity : AppCompatActivity() {
            }
 
            override fun onFailure(call: Call<CheckUserApiModel?>, t: Throwable) {
-               Toast. makeText(applicationContext,"Something Went Wronng Please Try Again Later", Toast.LENGTH_LONG).show()
+               binding.loginProgress?.visibility=View.GONE
+               Toast. makeText(applicationContext,"Something Went Wrong Please Try Again Later", Toast.LENGTH_LONG).show()
                isEnabled=true
            }
        })
@@ -161,6 +166,21 @@ class LoginActivity : AppCompatActivity() {
         }
 
         return null
+    }
+
+    private fun validatePhoneNumber():Boolean{
+        var isvalid=true
+        if(binding.phoneNoEditText.text.toString().isEmpty()){
+            isvalid=false
+            Toast.makeText(this,"Phone number cannot be empty",Toast.LENGTH_LONG).show()
+        }
+        else if(binding.phoneNoEditText.text.length<10){
+            isvalid=false
+            Toast.makeText(this,"Enter a valid phone number",Toast.LENGTH_LONG).show()
+        }
+
+
+        return isvalid
     }
 
 

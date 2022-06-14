@@ -16,6 +16,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.GridLayoutManager
@@ -28,12 +29,16 @@ import com.example.topaz.Adapters.HomeSliderAdapter
 import com.example.topaz.ApiModels.AdvertisementApiModel
 import com.example.topaz.ApiModels.ArrivalsPageItemClickListner
 import com.example.topaz.ApiModels.CategoryListApiModel
+import com.example.topaz.ApiModels.ProductDetailsListApiModel
 import com.example.topaz.Interface.HomeScreenItemClickListner
 import com.example.topaz.Interface.JsonPlaceholder
 import com.example.topaz.Models.*
 import com.example.topaz.R
 import com.example.topaz.RetrofitApiInstance.UpdateAccountInfoInstance
+import com.example.topaz.Utility.Util
 import com.example.topaz.databinding.ActivityHomeScreenBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -57,6 +62,7 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
     var addlist = java.util.ArrayList<AddModels>()
     var bitmap = java.util.ArrayList<Bitmap>()
     lateinit var homeCategoriesAdapter:HomeCategoriesAdapter
+    lateinit var bottomnav:BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -92,31 +98,60 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
         onApicallcat()
 
 
-        binding.home.setOnClickListener {
+        /*binding.home?.setOnClickListener {
             Toast.makeText(applicationContext, "You Are Currently In Home Page", Toast.LENGTH_SHORT)
                 .show()
         }
 
-        binding.categories.setOnClickListener {
+        binding.categories?.setOnClickListener {
             startActivity(Intent(activity, CategoryActivity::class.java))
             //finish()
         }
 
-        binding.account.setOnClickListener {
+        binding.account?.setOnClickListener {
             startActivity(Intent(activity, MyAccount::class.java))
             //finish()
         }
 
-        binding.fav.setOnClickListener {
+        binding.fav?.setOnClickListener {
             startActivity(Intent(activity, MyWishlist::class.java))
             //finish()
-        }
+        }*/
 
+
+        bottomnav=binding.bottomNavLayout!!.bottomNavItem
+
+        bottomnav.setOnItemSelectedListener(object : NavigationBarView.OnItemSelectedListener {
+            override fun onNavigationItemSelected(item: MenuItem): Boolean {
+                when(item.itemId){
+
+                    R.id.action_favourite-> startActivity(Intent(activity, MyWishlist::class.java))
+
+                    R.id.action_account->  startActivity(Intent(activity, MyAccount::class.java))
+                }
+
+
+                return true
+
+            }
+        })
+
+
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        bottomnav.selectedItemId=R.id.action_home
+        onAddvertisementCall()
+        onApiCall()
+        onApicallcat()
     }
 
 
     //cat slide
     private fun onApicallcat() {
+        catSubModels.clear()
         var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
             .create(JsonPlaceholder::class.java)
 
@@ -141,9 +176,14 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
                        }
                     }
                     //arrivals Adapter
-                    homeCategoriesAdapter = HomeCategoriesAdapter(catSubModels, this@HomeScreen)
-                    binding.homeRecyclerView?.adapter = homeCategoriesAdapter
-                    binding.homeRecyclerView?.setHasFixedSize(true)
+                    try {
+                        homeCategoriesAdapter = HomeCategoriesAdapter(catSubModels, this@HomeScreen)
+                        binding.homeRecyclerView?.adapter = homeCategoriesAdapter
+                        binding.homeRecyclerView?.setHasFixedSize(true)
+                    }
+                    catch (e:Exception){
+                        Log.e("Home Exception",e.toString())
+                    }
 
                     Log.d(
                         ContentValues.TAG,
@@ -178,6 +218,7 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
     }
 
     private fun onAddvertisementCall() {
+        addlist.clear()
         var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
             .create(JsonPlaceholder::class.java)
 
@@ -197,7 +238,7 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
                         )
 
                         addlist.add(addModel)
-                        val decodedString: ByteArray = Base64.decode(
+                       /* val decodedString: ByteArray = Base64.decode(
 
                             addvertisement.advertismentImage.imagebyte,
                             Base64.DEFAULT)
@@ -213,7 +254,7 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
                             imageview.setImageDrawable(AppCompatResources.getDrawable(this@HomeScreen,R.drawable.ic_baseline_image_24))
                             binding.viewFliper.addView(imageview)
 
-                           }
+                           }*/
 
 
                         /*Glide.with(activity)
@@ -242,18 +283,75 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
     }
 
     private fun setSliderItems(adlist: ArrayList<AddModels>) {
-        var sliderAdapter=HomeSliderAdapter(this,adlist)
-        binding.viewFliperAdapter.adapter=sliderAdapter
-        binding.viewFliperAdapter.flipInterval=2600
-        binding.viewFliperAdapter.isAutoStart=true
+
+        try {
+
+            val sliderAdapter = HomeSliderAdapter(this, adlist)
+            binding.viewFliperAdapter.adapter = sliderAdapter
+            binding.viewFliperAdapter.flipInterval = 5000
+            binding.viewFliperAdapter.startFlipping()
+        }
+        catch (e:Exception){
+            e.toString()
+        }
 
     }
 
     private fun onApiCall() {
+        arrival_list.clear()
         var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
             .create(JsonPlaceholder::class.java)
 
-        res.viewCategory().enqueue(object : Callback<List<CategoryListApiModel>?> {
+        res.viewProductList().enqueue(object : Callback<List<ProductDetailsListApiModel>?> {
+            override fun onResponse(
+                call: Call<List<ProductDetailsListApiModel>?>,
+                response: Response<List<ProductDetailsListApiModel>?>
+            ) {
+
+                if (response.isSuccessful) {
+
+                    for (arrivalsmodels in response.body()!!) {
+                        if (arrivalsmodels.collection.equals("New Arrival")) {
+                            val arrivalsModels = ArrivalsModels(
+                                arrivalsmodels.categoryType.categoryimage.imagebyte,
+                                arrivalsmodels.productTitle,
+                                arrivalsmodels.productid.toString(),
+                                arrivalsmodels.createdDate
+                            )
+
+                            arrival_list.add(arrivalsModels)
+
+
+                        }
+
+                        binding.arrivalsRecycler.layoutManager =
+                            GridLayoutManager(this@HomeScreen, 2)
+                        val arrivalAdapter =
+                            ArrivalsAdapter(arrival_list, this@HomeScreen, this@HomeScreen)
+                        binding.arrivalsRecycler.adapter = arrivalAdapter
+                        binding.arrivalsRecycler.setHasFixedSize(true)
+
+
+                    }
+
+                } else {
+                    binding.appProgressBar2?.visibility = View.VISIBLE
+                    Toast.makeText(
+                        applicationContext,
+                        "Something Went Wrong Please Try Again Later",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+
+
+
+            override fun onFailure(call: Call<List<ProductDetailsListApiModel>?>, t: Throwable) {
+
+            }
+        })
+
+       /* res.viewCategory().enqueue(object : Callback<List<CategoryListApiModel>?> {
             override fun onResponse(
                 call: Call<List<CategoryListApiModel>?>,
                 response: Response<List<CategoryListApiModel>?>
@@ -271,11 +369,11 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
 
                         arrival_list.add(arrivalsModels)
                         try {
-                            var simpleDateFormat = SimpleDateFormat(
+                            val simpleDateFormat = SimpleDateFormat(
                                 "yyyy-MM-dd HH:mm:ss.SSSZ",
                                 Locale.getDefault()
                             )
-                            var arivalDate =
+                            val arivalDate =
                                 simpleDateFormat.parse(arrival_list.get(0).ArrivalCreatedDate)
                             var currentDate = java.util.Calendar.getInstance().time
 
@@ -313,19 +411,27 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
                     )
                 }
 
+*/
+            //}
 
-            }
-
-            override fun onFailure(call: Call<List<CategoryListApiModel>?>, t: Throwable) {
+           /* override fun onFailure(call: Call<List<CategoryListApiModel>?>, t: Throwable) {
                 Log.d(ContentValues.TAG, "onResponse: arrival failure: " + t.message)
             }
-        })
+        })*/
 
 
     }
 
     override fun ArrivalsPageItemClickListner(arrivals: ArrivalsModels) {
-        startActivity(Intent(activity, CategoryActivity::class.java))
+       /* startActivity(Intent(activity, CategoryActivity::class.java))
+        val intent =Intent(activity, CategoryActivity::class.java)
+        intent.putExtra("cat__iD", arrivals.ArrivalId)
+        intent.putExtra("category_name",arrivals.ArrivalName)
+        startActivity(intent)*/
+        val intent = Intent(activity, ProductDetails::class.java)
+        intent.putExtra("inner_sunid",arrivals.ArrivalId)
+        intent.putExtra("product_name", arrivals.ArrivalName)
+        startActivity(intent)
     }
 
     /* override fun ArrivalsPageItemClickListner(arrivals: ArrivalsModels){
@@ -354,18 +460,47 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.homepagemenu, menu)
+        var menuitem=menu.findItem(R.id.my_cart)
+        var actionview=menuitem.actionView
+        var cartcount=actionview.findViewById<TextView>(R.id.cart_count)//Getting the textview reference from action layout defined for the menu item
+        var cart=actionview.findViewById<ImageView>(R.id.cart_icon)
+        setupCartCount(cartcount, cart)
         return true
     }
+
+    private fun setupCartCount(cartcount: TextView?, cartitem: ImageView,) {
+
+        cartitem.setOnClickListener {
+            startActivity(Intent(activity, MyCart::class.java))
+        }
+
+
+        Util.getCartCount(context = this,object : Util.CartCountListener {//Gets the cart count
+            override fun getCartCount(cartsize: Int) {
+                //Get the cart count entries
+                Log.d("--Cart count--",cartsize.toString())
+                if(cartsize==0) {
+                 cartcount?.visibility=View.GONE
+                }else {
+                    cartcount?.visibility=View.VISIBLE
+                    cartcount?.text = cartsize.toString()
+                }
+
+            }
+        })
+
+
+    }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-            R.id.search_bar -> startActivity(Intent(activity, SearchActivity::class.java))
+            R.id.search_bar -> startActivity(Intent(activity, SearchActivity::class.java) )
             R.id.notification_bar -> startActivity(Intent(activity, Notifications::class.java))
             R.id.my_cart -> startActivity(Intent(activity, MyCart::class.java))
         }
-        return super.onOptionsItemSelected(item)
-
+        return true
     }
 
     override fun HomeScreenItemClickListner(homecategory: SubCatListModels, position: Int) {

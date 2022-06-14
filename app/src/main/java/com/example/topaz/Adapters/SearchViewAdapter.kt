@@ -47,4 +47,8 @@ class SearchViewAdapter(var searchList: ArrayList<SearchListModel>, var searchLi
         }
 
     }
+
+    public fun clearList(){
+        searchList.clear()
+    }
 }

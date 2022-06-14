@@ -57,7 +57,7 @@
             android:layout_width="96dp"
             android:layout_height="96dp"
             android:layout_marginStart="153dp"
-            android:layout_marginTop="148dp"
+            android:layout_marginTop="100dp"
             android:src="@drawable/ellipse_89"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -140,37 +140,43 @@
         app:layout_constraintStart_toStartOf="@+id/textView43"
         app:layout_constraintTop_toTopOf="parent" />
 
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="horizontal"
+        android:background="@color/white_gr"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="495dp"
+        android:layout_marginEnd="47dp">
     <EditText
         android:id="@+id/email_id_change"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginStart="47dp"
-        android:layout_marginTop="495dp"
-        android:layout_marginEnd="47dp"
-        android:background="@color/white_gr"
-        android:paddingStart="20dp"
+        android:layout_height="wrap_content"
         android:text=""
+        android:layout_weight="1"
+        android:background="@color/white_gr"
         android:textColor="@color/black"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:padding="@dimen/_10sdp"
+        android:textSize="14sp"/>
 
 
     <TextView
         android:id="@+id/change1"
-        android:layout_width="53dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="512dp"
-        android:layout_marginEnd="20dp"
-        android:gravity="right"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/change"
+        android:gravity="start"
+        android:layout_gravity="center_vertical"
         android:textColor="@color/purple"
-        android:textSize="14sp"
+        android:textSize="13sp"
+        android:layout_weight="4"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/email_id_change"
         app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
 
 
     <TextView
@@ -206,10 +212,10 @@
         android:layout_width="53dp"
         android:layout_height="20dp"
         android:layout_marginTop="609dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="10dp"
         android:text="@string/change"
         android:textColor="@color/purple"
-        android:textSize="14sp"
+        android:textSize="13sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/phone_no_change"
         app:layout_constraintTop_toTopOf="parent" />
@@ -218,10 +224,10 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/reset_btn"
         android:layout_width="150dp"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_marginStart="47dp"
         android:layout_marginTop="30dp"
-        android:background="@color/white_gr"
+        android:background="@drawable/category_btn_unselected"
         android:text="@string/reset"
         android:textColor="@color/blue"
         android:textSize="16sp"
@@ -231,7 +237,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/update"
         android:layout_width="150dp"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="47dp"
         android:background="@color/btn"
@@ -241,6 +247,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/reset_btn"
         app:layout_constraintTop_toTopOf="@+id/reset_btn" />
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:visibility="gone"
+        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/editprofileProgress"
+        android:backgroundTint="@color/blue"/>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,6 +11,7 @@
 
     <item android:id="@+id/my_cart"
         android:icon="@drawable/ic_baseline_shopping_cart_24"
+        android:actionLayout="@layout/custom_cart_action_item_layout"
         app:showAsAction="always"
         android:title="TODO" />
 </menu>

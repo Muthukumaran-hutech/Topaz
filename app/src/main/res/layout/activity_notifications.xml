@@ -47,7 +47,7 @@
         app:tabTextColor="@color/black"
         app:tabIndicatorColor="@color/blue"
         app:tabIndicatorHeight="4dp"
-        android:paddingStart="15dp"
+        android:layout_marginLeft="@dimen/_15sdp"
         app:tabIndicatorFullWidth="false"
         app:tabSelectedTextColor="@color/purple"/>
 

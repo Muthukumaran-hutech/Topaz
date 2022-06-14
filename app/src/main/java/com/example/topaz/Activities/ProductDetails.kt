@@ -8,6 +8,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Base64
 import android.util.Log
@@ -15,6 +16,8 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -27,6 +30,7 @@ import com.example.topaz.Interface.JsonPlaceholder
 import com.example.topaz.Models.*
 import com.example.topaz.R
 import com.example.topaz.RetrofitApiInstance.UpdateAccountInfoInstance
+import com.example.topaz.Utility.Util
 import com.example.topaz.databinding.ActivityProductDetailsBinding
 import com.google.firebase.database.*
 import retrofit2.Call
@@ -60,6 +64,7 @@ class ProductDetails : AppCompatActivity() {
         custId = sharedPreference.getString("customercode", "").toString()
 
         val item = intent.getStringExtra("inner_sunid")
+        var productname = intent.getStringExtra("product_name")
         productId = item!!
 
         binding.getAPrice.isEnabled = false
@@ -70,9 +75,11 @@ class ProductDetails : AppCompatActivity() {
         binding.prodScrollView.isFillViewport = true
         setSupportActionBar(binding.prodDetailsToolbar)
         supportActionBar?.title = ""
+        binding.textView9.text=productname
 
         binding.productBackArrow.setOnClickListener {
-            startActivity(Intent(activity, InnerCategories::class.java))
+            //startActivity(Intent(activity, InnerCategories::class.java))
+            finish()
 
         }
 
@@ -108,9 +115,10 @@ class ProductDetails : AppCompatActivity() {
         //-----------------Slide model list---------------------//
 
         //slidemodellist.add(SlideModel(imageDrawable, scaleType = ScaleTypes.FIT ))
-        binding.productImageSlider.setImageList(slidemodellist, ScaleTypes.FIT)
+        binding.productImageSlider.setImageList(slidemodellist)
 
         binding.appProgressBar3.visibility = View.VISIBLE
+
 
         onApiCallProductDetails()
 
@@ -120,7 +128,7 @@ class ProductDetails : AppCompatActivity() {
         binding.whislistProdDetails.setOnClickListener {
             var detailsFirebaseModel = DetailsFirebaseModel(
                 custId = custId.toString(),
-                productImage = product.Productimage2.imagepath,
+                productImage = product.Productimage2.imagebyte,
                 productid = product.productid,
                 productTitle = product.productTitle,
                 thickness = product.thickness,
@@ -138,6 +146,8 @@ class ProductDetails : AppCompatActivity() {
                 applicationContext, " Product Added To WishList",
                 Toast.LENGTH_LONG
             ).show()
+            binding.whislistProdDetails.visibility=View.INVISIBLE
+            binding.whislistProdDetails1.visibility=View.VISIBLE
         }
 
         binding.getAPrice.setOnClickListener {
@@ -170,7 +180,7 @@ class ProductDetails : AppCompatActivity() {
     }
 
     private fun checkIfActiveCartExists() {
-        var activecartquery = database.child(custId).orderByChild("cartActive").equalTo(true)
+        val activecartquery = database.child(custId).orderByChild("cartActive").equalTo(true)
         activecartquery.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
 
@@ -195,8 +205,8 @@ class ProductDetails : AppCompatActivity() {
                     }
                 } else {
                     Log.d(TAG, "data not found: " + snapshot)
-                    var cart_id = database.child(custId).push().key
-                    var cartListItems = CartList(
+                    val cart_id = database.child(custId).push().key
+                    val cartListItems = CartList(
                         custId = custId,
                         cartId = cart_id.toString(),
                         cartActive = true
@@ -224,7 +234,7 @@ class ProductDetails : AppCompatActivity() {
                         .setValue(cartProductListItem.get(0))//Inserting products into Cart
 
                     Toast.makeText(
-                        applicationContext, " Product Added To MyCart",
+                        this@ProductDetails, " Product Added To MyCart",
                         Toast.LENGTH_LONG
                     ).show()
                 }
@@ -285,6 +295,7 @@ class ProductDetails : AppCompatActivity() {
                     binding.getAPrice.isEnabled = true
                     binding.buyNow.isEnabled = true
                     binding.addToCart.isEnabled = true
+                    checkIfProductIsAddedToWishlist()
 
                 } else {
                     val message = "SERVER ERROR "
@@ -335,8 +346,37 @@ class ProductDetails : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.prod_page_menu, menu)
+        inflater.inflate(R.menu.homepagemenu, menu)
+        var menuitem=menu.findItem(R.id.my_cart)
+        var actionview=menuitem.actionView
+        var cartcount=actionview.findViewById<TextView>(R.id.cart_count)//Getting the textview reference from action layout defined for the menu item
+        var cart=actionview.findViewById<ImageView>(R.id.cart_icon)
+        setupCartCount(cartcount, cart)
+
         return true
+    }
+
+    private fun setupCartCount(cartcount: TextView?, cart: ImageView?) {
+        cart?.setOnClickListener {
+            startActivity(Intent(activity, MyCart::class.java))
+        }
+
+
+        Util.getCartCount(context = this,object : Util.CartCountListener {//Gets the cart count
+        override fun getCartCount(cartsize: Int) {
+            //Get the cart count entries
+            Log.d("--Cart count--",cartsize.toString())
+            if(cartsize==0) {
+                cartcount?.visibility=View.GONE
+            }else {
+                cartcount?.visibility=View.VISIBLE
+                cartcount?.text = cartsize.toString()
+            }
+
+        }
+        })
+
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -347,6 +387,26 @@ class ProductDetails : AppCompatActivity() {
             R.id.my_cart -> startActivity(Intent(activity, MyCart::class.java))
         }
         return super.onOptionsItemSelected(item)
+
+    }
+
+
+    fun checkIfProductIsAddedToWishlist(){
+        database = FirebaseDatabase.getInstance().getReference("WhishList")
+        var ref=database.child(custId.toString()).child(product.productid.toString())
+        ref.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                 binding.whislistProdDetails.visibility=View.INVISIBLE
+                 binding.whislistProdDetails1.visibility=View.VISIBLE
+
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+               Log.e("Wishlist error","true")
+            }
+        })
 
     }
 

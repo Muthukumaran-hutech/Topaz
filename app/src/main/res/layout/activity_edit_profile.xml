@@ -57,7 +57,7 @@
             android:layout_width="96dp"
             android:layout_height="96dp"
             android:layout_marginStart="153dp"
-            android:layout_marginTop="148dp"
+            android:layout_marginTop="100dp"
             android:src="@drawable/ellipse_89"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -141,7 +141,7 @@
     <EditText
         android:id="@+id/email_id_change"
         android:layout_width="320dp"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:layout_marginStart="47dp"
         android:layout_marginTop="495dp"
         android:background="@color/white_gr"
@@ -156,12 +156,14 @@
     <TextView
         android:id="@+id/change1"
         android:layout_width="53dp"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="512dp"
         android:layout_marginEnd="20dp"
         android:gravity="right"
         android:text="@string/change"
         android:textColor="@color/purple"
+        android:paddingTop="@dimen/_5sdp"
+        android:paddingBottom="@dimen/_5sdp"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/email_id_change"
@@ -212,9 +214,9 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/reset_btn"
         android:layout_width="150dp"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_marginStart="47dp"
-        android:background="@color/white_gr"
+        android:background="@drawable/category_btn_unselected"
         android:layout_marginTop="@dimen/_40sdp"
         android:text="@string/reset"
         android:textColor="@color/blue"
@@ -225,8 +227,8 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/update"
         android:layout_width="150dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="217dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="219dp"
         android:background="@color/btn"
         android:layout_marginTop="@dimen/_40sdp"
         android:text="@string/update"
@@ -234,6 +236,16 @@
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phone_no_change" />
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/editprofileProgress"
+        android:backgroundTint="@color/blue"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

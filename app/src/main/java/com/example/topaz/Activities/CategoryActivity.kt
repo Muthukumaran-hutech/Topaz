@@ -11,6 +11,8 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.topaz.Adapters.CategoryAdapter
@@ -23,8 +25,11 @@ import com.example.topaz.Models.CategoriesModel
 import com.example.topaz.Models.HomeCategoryModel
 import com.example.topaz.R
 import com.example.topaz.RetrofitApiInstance.UpdateAccountInfoInstance
+import com.example.topaz.Utility.Util
 import com.example.topaz.databinding.ActivityCategoryBinding
 import com.example.topaz.databinding.ActivityLoginBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
 import kotlinx.android.synthetic.main.activity_account_information.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -40,6 +45,7 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
     var categoryInnerlist = java.util.ArrayList<CategoriesModel>()
     var catId = ""
     var categoryName ="";
+    lateinit var bottomnav:BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +62,8 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
         binding.appProgressBar2.visibility = View.VISIBLE
         categoryApiCall()
 
-        binding.home.setOnClickListener {
+
+       /* binding.home?.setOnClickListener {
             startActivity(Intent(activity, HomeScreen::class.java))
 
 
@@ -75,12 +82,31 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
         binding.fav.setOnClickListener {
             startActivity(Intent(activity, MyWishlist::class.java))
 
-        }
+        }*/
+
+       bottomnav=binding.catBottomNavLayout!!.bottomNavItem
+       bottomnav.selectedItemId=R.id.action_category
+       bottomnav.setOnItemSelectedListener(object : NavigationBarView.OnItemSelectedListener {
+           override fun onNavigationItemSelected(item: MenuItem): Boolean {
+               when(item.itemId){
+                   R.id.action_home-> startActivity(Intent(activity, HomeScreen::class.java))
+                   R.id.action_favourite-> startActivity(Intent(activity, MyWishlist::class.java))
+
+                   R.id.action_account->  startActivity(Intent(activity, MyAccount::class.java))
+               }
+
+               return true
+           }
+       })
+
 
         binding.categoryBackArrow.setOnClickListener {
-            startActivity(Intent(activity, HomeScreen::class.java))
+            finish()
+            //startActivity(Intent(activity, HomeScreen::class.java))
 
         }
+
+
     }
 
     private fun categoryApiCall() {
@@ -113,7 +139,7 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
                               this@CategoryActivity,
                               3
                           )//Count depicts no of elements in row
-                          var categoryAdapter = CategoryAdapter(
+                          val categoryAdapter = CategoryAdapter(
                               categoryInnerlist,
                               this@CategoryActivity,
                               this@CategoryActivity
@@ -243,8 +269,36 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.categories_page_menu, menu)
+        inflater.inflate(R.menu.homepagemenu, menu)
+        var menuitem=menu.findItem(R.id.my_cart)
+        var actionview=menuitem.actionView
+        var cartcount=actionview.findViewById<TextView>(R.id.cart_count)//Getting the textview reference from action layout defined for the menu item
+        var cart=actionview.findViewById<ImageView>(R.id.cart_icon)
+        setupCartCount(cartcount, cart)
         return true
+    }
+
+    private fun setupCartCount(cartcount: TextView?, cart: ImageView?) {
+
+        cart?.setOnClickListener {
+            startActivity(Intent(activity, MyCart::class.java))
+        }
+
+
+        Util.getCartCount(context = this,object : Util.CartCountListener {//Gets the cart count
+        override fun getCartCount(cartsize: Int) {
+            //Get the cart count entries
+            Log.d("--Cart count--",cartsize.toString())
+            if(cartsize==0) {
+                cartcount?.visibility=View.GONE
+            }else {
+                cartcount?.visibility=View.VISIBLE
+                cartcount?.text = cartsize.toString()
+            }
+
+        }
+        })
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -252,7 +306,7 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
         when (item.itemId) {
             R.id.search_bar -> startActivity(Intent(activity, SearchActivity::class.java))
             R.id.notification_bar -> startActivity(Intent(activity, Notifications::class.java))
-            R.id.my_cart -> startActivity(Intent(activity, MyCart::class.java))
+            /*R.id.my_cart -> startActivity(Intent(activity, MyCart::class.java))*/
         }
         return super.onOptionsItemSelected(item)
 

@@ -50,27 +50,30 @@ class MyOrdersAdapter(
             orderItemClickListner: OrderItemClickListner,
             context: Context
         ) {
+            var statuscolor=0
             status.text = orderListItem[position].QuotationStatus
             orderId.text = orderListItem[position].quotationID
             date.text = orderListItem[position].quotationDate
             quantity.text = orderListItem[position].quotationquantity.toString()
 
-            if (status.text =="Order Placed"){
-                status.getResources().getColor(R.color.black)
+            if (orderListItem[position].QuotationStatus.toString() =="Order Placed"){
+               statuscolor= status.getResources().getColor(R.color.black)
             }
 
-            if (status.text =="Qutation Requested"){
-                status.getResources().getColor(R.color.blue)
+            if (orderListItem[position].QuotationStatus =="Qutation Requested"){
+                statuscolor= status.getResources().getColor(R.color.blue)
             }
 
-            if (status.text =="Quotation Received"){
-                status.getResources().getColor(R.color.green)
+            if (orderListItem[position].QuotationStatus =="Quotation Received"){
+                statuscolor= status.getResources().getColor(R.color.green)
             }
 
 
-            if (status.text =="Order Cancelled"){
-                status.getResources().getColor(R.color.red)
+            if (orderListItem[position].QuotationStatus =="Order Cancelled"){
+                statuscolor= status.getResources().getColor(R.color.red)
             }
+
+            status.setTextColor(statuscolor)
 
 
 

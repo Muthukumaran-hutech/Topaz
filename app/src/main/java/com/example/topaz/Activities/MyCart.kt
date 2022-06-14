@@ -16,6 +16,7 @@ import com.example.topaz.Interface.MyCartItemClickListner
 import com.example.topaz.Models.CartList
 import com.example.topaz.Models.CartProductList
 import com.example.topaz.Models.ProductQuotationsModel
+import com.example.topaz.R
 import com.example.topaz.databinding.ActivityMyCartBinding
 import com.google.firebase.database.*
 
@@ -40,7 +41,6 @@ class MyCart : AppCompatActivity(), MyCartItemClickListner,IncreementDecreementI
         binding.linearLayout3.visibility = View.GONE
         binding.chckbtn.visibility = View.GONE
         binding.cartRecycle.visibility = View.GONE
-        //binding.cartEmpty.visibility = View.VISIBLE
 
      /*val price =   binding.priceentry.setText(cartData.get(0).price)
       binding.discountentry.setText("")
@@ -91,6 +91,10 @@ class MyCart : AppCompatActivity(), MyCartItemClickListner,IncreementDecreementI
                     }
 
 
+
+                }else{
+                    binding.appProgressBar2.visibility =View.GONE
+                    binding.cartEmpty.visibility=View.VISIBLE
                 }
 
             }
@@ -127,10 +131,11 @@ class MyCart : AppCompatActivity(), MyCartItemClickListner,IncreementDecreementI
                         binding.chckbtn.visibility = View.VISIBLE
                         binding.cartRecycle.visibility = View.VISIBLE
                         binding.cartEmpty.visibility = View.GONE
+                        initializePriceDetails()
                     }
                 }
                 else{
-
+                    binding.appProgressBar2.visibility =View.GONE
                 }
 
             }
@@ -142,7 +147,33 @@ class MyCart : AppCompatActivity(), MyCartItemClickListner,IncreementDecreementI
 
     }
 
+    private fun initializePriceDetails() {
+        var price=0;
+        var totaldiscount=0;
+        var deliverycharges=0
+        for(cartlist in cartData){
+            if(cartlist.isActive) {
+                var quantity = 1
+                if (!cartlist.quantity.isEmpty()) {
+                    quantity = cartlist.quantity.toInt()
+                }
+                price = price + (cartlist.price.toInt() * quantity)
 
+                totaldiscount = totaldiscount + ((cartlist.price.toInt()*quantity) * 10 / 100)
+            }
+
+        }
+
+
+        var payableamount= price- totaldiscount
+        binding.priceentry.text=getString(R.string.Rs)+price.toString()
+        binding.discountentry.text="-"+ getString(R.string.Rs)+totaldiscount.toString()
+        binding.totalamtentry.text=getString(R.string.Rs)+payableamount.toString()
+
+        Log.d("Total price",price.toString())
+        Log.d("Total discount",totaldiscount.toString())
+        Log.d("Payable amount", payableamount.toString())
+    }
 
 
     override fun MyCartItemClickListner(data: CartProductList, position: Int) {

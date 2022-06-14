@@ -48,6 +48,8 @@ class MyCartAdapter(
             quantity=cartData.get(position).quantity.toInt()
             holder.number.setText(cartData.get(position).quantity.toString())
         }
+
+
         holder.plus.setOnClickListener {
 
             if (cartData.get(position).quantity.isNotEmpty()) {

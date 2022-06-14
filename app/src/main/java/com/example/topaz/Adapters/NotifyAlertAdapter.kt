@@ -14,6 +14,7 @@ import com.example.topaz.Fragments.AlertFragment
 import com.example.topaz.Interface.NotifyAlertItemClickListner
 import com.example.topaz.Models.NotifyAlertModel
 import com.example.topaz.R
+import java.text.SimpleDateFormat
 import java.util.ArrayList
 
 class NotifyAlertAdapter(
@@ -53,25 +54,37 @@ class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)  {
         notificationAlertItemClickListner: NotifyAlertItemClickListner, context: AlertFragment
     ) {
 
-        alerttext.text = offerAlertlist[position].OfferTitle
-        alertprice.text = offerAlertlist[position].OfferPrice
-        dt_date.text = offerAlertlist[position].OffercreatedDate
+      try {
+          var simpledateformat = SimpleDateFormat("MMM dd yyyy")
+          var dateformat = SimpleDateFormat("yyyy-MM-dd")
+          alerttext.text = offerAlertlist[position].OfferTitle
+          alertprice.text = context.getString(R.string.Rs)+offerAlertlist[position].OfferPrice + "/"
+          dt_date.text =
+              simpledateformat.format(dateformat.parse(offerAlertlist[position].OffercreatedDate)!!)
 
 
-        val decodedString: ByteArray = Base64.decode(offerAlertlist.get(position).OfferImage,Base64.DEFAULT)
-        val bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+          val decodedString: ByteArray =
+              Base64.decode(offerAlertlist.get(position).OfferImage, Base64.DEFAULT)
+          val bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
 
 
 
-        Glide.with(context)
-            .applyDefaultRequestOptions(RequestOptions().placeholder(R.drawable.ic_baseline_image_24).error(R.drawable.ic_baseline_image_24))
-            .load(bitmap)
-            .into(alertimage)
+          Glide.with(context)
+              .applyDefaultRequestOptions(
+                  RequestOptions().placeholder(R.drawable.ic_baseline_image_24)
+                      .error(R.drawable.ic_baseline_image_24)
+              )
+              .load(bitmap)
+              .into(alertimage)
 
-        alertimage.setOnClickListener {
-            //Onclick will trigger the interface in activity
-            notificationAlertItemClickListner.NotifyAlertItemClickListner(offerAlertlist[position])
-        }
+          alertimage.setOnClickListener {
+              //Onclick will trigger the interface in activity
+              notificationAlertItemClickListner.NotifyAlertItemClickListner(offerAlertlist[position])
+          }
+      }
+      catch (e:Exception){
+          e.toString()
+      }
 
     }
 

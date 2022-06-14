@@ -46,17 +46,17 @@
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5">
 
         <LinearLayout
             android:id="@+id/constraint2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/_20sdp"
             android:orientation="vertical">
 
             <TextView
@@ -78,11 +78,14 @@
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:layout_marginStart="20dp"
+                android:textAllCaps="false"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
-                android:background="@color/white_gr"
+                android:background="@color/white"
+                android:paddingRight="@dimen/_5sdp"
+                android:elevation="@dimen/_5sdp"
                 android:drawableStart="@drawable/rectangle_471"
-                android:drawableEnd="@drawable/minus"
+                android:drawableEnd="@drawable/pls"
                 android:text="@string/why_is_centuryply_a_better_product"
                 android:visibility="visible" />
 
@@ -92,6 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="27dp"
                 android:layout_marginEnd="20dp"
+                android:padding="@dimen/_5sdp"
                 android:visibility="gone"
                 android:text="@string/century_ply_uses_good_quality_raw_material_and_also_has_rigorous_quality_checks_at_every_stage_to_verify_that_the_best_product_is_going_to_the_market"
                 android:textColor="@color/black"
@@ -101,14 +105,16 @@
                 android:id="@+id/q2"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_gravity="center"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:textColor="@color/black"
                 android:textSize="12sp"
+                android:layout_gravity="start|center_vertical"
                 android:textStyle="bold"
-                android:background="@color/white_gr"
+                android:paddingRight="@dimen/_5sdp"
+                android:background="@color/white"
+                android:textAllCaps="false"
                 android:drawableStart="@drawable/rectangle_471"
                 android:drawableEnd="@drawable/pls"
                 android:text="@string/what_grade_of_plywood_is_recommended_for_green_buildings"
@@ -120,7 +126,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="27dp"
                 android:layout_marginEnd="20dp"
-                android:text=""
+                android:text="Sample text"
+                android:visibility="gone"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
@@ -132,10 +139,12 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
-                android:background="@color/white_gr"
+                android:background="@color/white"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold"
+                android:textAllCaps="false"
+                android:paddingRight="@dimen/_5sdp"
                 android:drawableStart="@drawable/rectangle_471"
                 android:drawableEnd="@drawable/pls"
                 android:text="@string/how_to_recognise_fake_plywood_brand"
@@ -149,6 +158,7 @@
                 android:layout_marginEnd="20dp"
                 android:text="@string/q3ans"
                 android:textColor="@color/black"
+                android:visibility="gone"
                 android:textSize="14sp" />
 
             <androidx.appcompat.widget.AppCompatButton
@@ -159,9 +169,11 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
-                android:background="@color/white_gr"
+                android:background="@color/white"
                 android:textColor="@color/black"
                 android:textSize="12sp"
+                android:paddingRight="@dimen/_5sdp"
+                android:textAllCaps="false"
                 android:textStyle="bold"
                 android:drawableStart="@drawable/rectangle_471"
                 android:drawableEnd="@drawable/pls"
@@ -176,6 +188,7 @@
                 android:layout_marginEnd="20dp"
                 android:text="@string/q4ans"
                 android:textColor="@color/black"
+                android:visibility="gone"
                 android:textSize="14sp" />
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/q5"
@@ -185,9 +198,11 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
-                android:background="@color/white_gr"
+                android:background="@color/white"
                 android:textColor="@color/black"
                 android:textSize="12sp"
+                android:paddingRight="@dimen/_5sdp"
+                android:textAllCaps="false"
                 android:textStyle="bold"
                 android:drawableStart="@drawable/rectangle_471"
                 android:drawableEnd="@drawable/pls"
@@ -202,8 +217,10 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
-                android:background="@color/white_gr"
+                android:background="@color/white"
                 android:textColor="@color/black"
+                android:paddingRight="@dimen/_5sdp"
+                android:textAllCaps="false"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:drawableStart="@drawable/rectangle_471"
@@ -219,6 +236,7 @@
                 android:layout_marginEnd="20dp"
                 android:text="@string/gurjan"
                 android:textColor="@color/black"
+                android:visibility="gone"
                 android:textSize="14sp" />
 
             <androidx.appcompat.widget.AppCompatButton
@@ -229,13 +247,15 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
-                android:background="@color/white_gr"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                android:textStyle="bold"
+                android:textAllCaps="false"
+                android:paddingRight="@dimen/_5sdp"
+                android:background="@color/white"
                 android:drawableStart="@drawable/rectangle_471"
                 android:drawableEnd="@drawable/pls"
                 android:text="@string/does_using_gurjan_make_ply_better"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold"
                 android:visibility="visible" />
 
             <TextView
@@ -246,6 +266,7 @@
                 android:layout_marginEnd="20dp"
                 android:text="@string/gur_ply"
                 android:textColor="@color/black"
+                android:visibility="gone"
                 android:textSize="14sp" />
 
             <androidx.appcompat.widget.AppCompatButton
@@ -256,10 +277,12 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
-                android:background="@color/white_gr"
+                android:background="@color/white"
                 android:textColor="@color/black"
+                android:paddingRight="@dimen/_5sdp"
                 android:textSize="12sp"
                 android:textStyle="bold"
+                android:textAllCaps="false"
                 android:drawableStart="@drawable/rectangle_471"
                 android:drawableEnd="@drawable/pls"
                 android:text="@string/how_to_get_redressal_of_plywood_complaints"
@@ -273,10 +296,12 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
-                android:background="@color/white_gr"
+                android:background="@color/white"
                 android:textColor="@color/black"
                 android:textSize="12sp"
+                android:paddingRight="@dimen/_5sdp"
                 android:textStyle="bold"
+                android:textAllCaps="false"
                 android:drawableStart="@drawable/rectangle_471"
                 android:drawableEnd="@drawable/pls"
                 android:text="@string/where_to_get_quality_of_plywood_checked"
@@ -289,6 +314,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="27dp"
                 android:layout_marginEnd="20dp"
+                android:visibility="gone"
                 android:text="@string/ply_check"
                 android:textColor="@color/black"
                 android:textSize="14sp" />

@@ -35,8 +35,8 @@ interface JsonPlaceholder {
     @GET("viewProductDetails/{productId}")
     fun viewProduct(@Path("productId") productId: String): Call<ProductDetailsListApiModel>
 
-    @GET("viewProducts")
-    fun viewProductList(): Call<ProductDetailsListApiModel>
+    @GET("viewProduct")
+    fun viewProductList(): Call<List<ProductDetailsListApiModel>>
 
     @GET("offers/get")
     fun viewOffers(): Call<List<OffersListApiModel>>

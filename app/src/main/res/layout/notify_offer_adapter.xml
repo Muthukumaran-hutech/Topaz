@@ -7,17 +7,17 @@
     tools:context=".Fragments.FragmentOffers">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="30dp"
         android:layout_marginTop="20dp"
+        android:padding="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
         app:cardCornerRadius="5dp"
         android:elevation="3dp">
 
         <LinearLayout
-            android:layout_width="350dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/offers_border"
             android:orientation="vertical">

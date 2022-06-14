@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="@dimen/_178sdp"
         app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/cbimage"
+        android:scaleType="centerCrop"
         app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/advertisement_image"
         app:layout_constraintEnd_toEndOf="parent">

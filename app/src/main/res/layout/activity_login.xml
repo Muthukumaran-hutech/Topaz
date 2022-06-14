@@ -126,4 +126,5 @@
         app:layout_constraintEnd_toEndOf="@+id/phone_no_edit_text"
         app:layout_constraintStart_toStartOf="@+id/country_Code_Picker"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

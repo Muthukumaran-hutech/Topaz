@@ -61,6 +61,8 @@ class HomeSliderAdapter(var context: Context,var sliderlist:List<AddModels>): Ba
             adTitle?.visibility=View.VISIBLE
             adDescription?.visibility=View.VISIBLE
             adImage?.setImageBitmap(bitmap)
+            adTitle?.text=sliderlist.get(position).addtitle
+            adDescription?.text=sliderlist.get(position).addDescription
 
         }
 

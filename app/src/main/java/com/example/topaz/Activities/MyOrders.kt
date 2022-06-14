@@ -10,6 +10,9 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.topaz.Adapters.MyOrdersAdapter
 import com.example.topaz.ApiModels.ViewOrderApimodel
@@ -18,6 +21,7 @@ import com.example.topaz.Interface.OrderItemClickListner
 import com.example.topaz.Models.OrderModels
 import com.example.topaz.R
 import com.example.topaz.RetrofitApiInstance.UpdateAccountInfoInstance
+import com.example.topaz.Utility.Util
 import com.example.topaz.databinding.ActivityMyOrdersBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -98,6 +102,13 @@ class MyOrders : AppCompatActivity(), OrderItemClickListner {
                         //   Log.d(TAG, "qty: "+orderList.orderItems[0].quantity.toString())
                         orderListItem.add(odList)
 
+                        if(orderListItem.size==0){
+                            binding.orderEmptyText.visibility=View.VISIBLE
+                        }
+                        else{
+                            binding.orderEmptyText.visibility=View.GONE
+                        }
+
 
                         Log.d(TAG, "Onorder success2: " + orderList.orderItems.size)
                     }
@@ -120,8 +131,36 @@ class MyOrders : AppCompatActivity(), OrderItemClickListner {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.orders_toolbar, menu)
+        inflater.inflate(R.menu.homepagemenu, menu)
+
+        var menuitem=menu.findItem(R.id.my_cart)
+        var actionview=menuitem.actionView
+        var cartcount=actionview.findViewById<TextView>(R.id.cart_count)//Getting the textview reference from action layout defined for the menu item
+        var cart=actionview.findViewById<ImageView>(R.id.cart_icon)
+        setupCartCount(cartcount, cart)
         return true
+    }
+
+    private fun setupCartCount(cartcount: TextView?, cart: ImageView?) {
+        cart?.setOnClickListener {
+            startActivity(Intent(activity, MyCart::class.java))
+        }
+
+
+        Util.getCartCount(context = this,object : Util.CartCountListener {//Gets the cart count
+        override fun getCartCount(cartsize: Int) {
+            //Get the cart count entries
+            Log.d("--Cart count--",cartsize.toString())
+            if(cartsize==0) {
+                cartcount?.visibility= View.GONE
+            }else {
+                cartcount?.visibility= View.VISIBLE
+                cartcount?.text = cartsize.toString()
+            }
+
+        }
+        })
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

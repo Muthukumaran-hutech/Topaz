@@ -17,6 +17,7 @@
         android:layout_marginStart="10dp"
         android:gravity="center"
         android:id="@+id/category_layout"
+        android:padding="@dimen/_5sdp"
         android:background="@drawable/category_btn_unselected">
     <ImageView
         android:layout_width="wrap_content"
@@ -26,10 +27,11 @@
         android:id="@+id/category_image"/>
     <TextView
         android:id="@+id/categoryTitle"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
+        android:padding="@dimen/_2sdp"
         android:text="@string/plywood"
         android:textColor="@color/black"
         android:textSize="14sp"/>

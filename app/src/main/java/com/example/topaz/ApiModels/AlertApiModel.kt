@@ -190,9 +190,9 @@ class Detaildiscount {
 
     @SerializedName("discountid")
     public var discountid: Long = 0
-
+/*
     @SerializedName("productName")
-    public var productName: String = ""
+    public var productName: String = ""*/
 
     @SerializedName("size")
     public var size: String = ""

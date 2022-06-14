@@ -78,9 +78,9 @@ class AlertFragment : Fragment(), NotifyAlertItemClickListner {
                         var alertModel = NotifyAlertModel(
                             alertOffers.orderItems.get(0).product.categoryType.categoryimage.imagebyte,
                             alertOffers.orderItems.get(0).product.productTitle,
-                            alertOffers.orderItems.get(0).price.toString(),
                             alertOffers.orderItems.get(0).thickness,
-                            alertOffers.orderItems.get(0).product.categoryType.categoryimage.creationTime
+                            alertOffers.orderItems.get(0).price.toString(),
+                            alertOffers.createdDate
                         )
 
                         offerAlertlist.add(alertModel)

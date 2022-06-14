@@ -129,7 +129,7 @@
         android:layout_height="wrap_content"
         android:indeterminate="true"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/catbasetextview"
+        app:layout_constraintBottom_toTopOf="@+id/cat_bottom_nav_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView5"/>
@@ -138,14 +138,14 @@
         android:id="@+id/category_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/catbasetextview"
+        app:layout_constraintBottom_toTopOf="@+id/cat_bottom_nav_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
 
 
-    <TextView
+   <!-- <TextView
         android:id="@+id/catbasetextview"
         android:layout_width="match_parent"
         android:layout_height="77dp"
@@ -252,7 +252,9 @@
         android:textColor="@color/white"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />-->
+    <include layout="@layout/bottomnavigation_layout"
+        android:id="@+id/cat_bottom_nav_layout"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
