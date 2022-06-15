@@ -25,6 +25,7 @@ class EditAddAddress : AppCompatActivity() {
     private lateinit var binding: ActivityEditAddAddressBinding
 
     lateinit var activity: Activity
+    var custEmailId:String?=""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +43,7 @@ class EditAddAddress : AppCompatActivity() {
         var custId = sharedPreference.getString("customercode", "")
         var custAddress = sharedPreference.getString("addressLine", "")
         var custPhoneno = sharedPreference.getString("primaryPhonenumber", "")
-        var custEmailId = sharedPreference.getString("email", "")
+         custEmailId = sharedPreference.getString("email", "")
         var custCity = sharedPreference.getString("city", "")
         var custState = sharedPreference.getString("state", "")
 
@@ -60,7 +61,10 @@ class EditAddAddress : AppCompatActivity() {
         }
 
         binding.saveAddressBtn.setOnClickListener {
-            updateuserinfo()
+
+            if(validateFields()) {
+                updateuserinfo()
+            }
         }
 
 
@@ -68,94 +72,138 @@ class EditAddAddress : AppCompatActivity() {
     }
 
     private fun updateuserinfo() {
-        var accountName = binding.nameAddress.text
-        var accountPhoneNo = binding.phoneNoChange.text.toString()
-        var locality = binding.locality.text
-        var houseNo = binding.houseNo.text
-        var pincode = binding.pincode.text.toString()
-        var city = binding.city.text
-        var state = binding.state.text
-        var landmark = binding.landmark.text
-        var address = locality.toString() + houseNo.toString() + landmark.toString()
 
-        var saveAddressModel = SaveAddressModel(
-            customerName = accountName.toString(),
-            primaryPhonenumber = accountPhoneNo.toLong(),
-            addressLine = address.toString(),
-            zipcode = pincode.toLong(),
-            city = city.toString(),
-            stateName = state.toString()
+        try {
+            var accountName = binding.nameAddress.text
+            var accountPhoneNo = binding.phoneNoChange.text.toString()
+            var locality = binding.locality.text
+            var houseNo = binding.houseNo.text
+            var pincode = binding.pincode.text.toString()
+            var city = binding.city.text
+            var state = binding.state.text
+            var landmark = binding.landmark.text
+            var address = locality.toString() + houseNo.toString() + landmark.toString()
 
-        )
+            var saveAddressModel = SaveAddressModel(
+                customerName = accountName.toString(),
+                primaryPhonenumber = accountPhoneNo.toLong(),
+                addressLine = address.toString(),
+                zipcode = pincode.toLong(),
+                city = city.toString(),
+                stateName = state.toString()
 
-        var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
-            .create(JsonPlaceholder::class.java)
-        val sharedPreference =  getSharedPreferences("CUSTOMER_DATA", Context.MODE_PRIVATE)
-        var custId=sharedPreference.getString("customercode","")
-        res.saveAddress(custId!!,customerDetails(saveAddressModel)).enqueue(object : Callback<UpdateUserApiModel?> {
-            override fun onResponse(
-                call: Call<UpdateUserApiModel?>,
-                response: Response<UpdateUserApiModel?>
-            ) {
-                if (response.isSuccessful){
-                    Log.d("Update Res success:", response.body()!!.message)
-                    Toast.makeText(
-                        applicationContext,
-                        "Details Updated Sucessfully",
-                        Toast.LENGTH_LONG
-                    )
-                        .show()
-                    startActivity(Intent(activity, MyAccount::class.java))
-                    finish()
-                }
-                else{
-                 //  Log.d("Update Res fail:", response.body()!!.message)
-                }
+            )
 
-            }
+            var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
+                .create(JsonPlaceholder::class.java)
+            val sharedPreference = getSharedPreferences("CUSTOMER_DATA", Context.MODE_PRIVATE)
+            var custId = sharedPreference.getString("customercode", "")
+            res.saveAddress(custId!!, customerDetails(saveAddressModel))
+                .enqueue(object : Callback<UpdateUserApiModel?> {
+                    override fun onResponse(
+                        call: Call<UpdateUserApiModel?>,
+                        response: Response<UpdateUserApiModel?>
+                    ) {
+                        if (response.isSuccessful) {
+                            Log.d("Update Res success:", response.body()!!.message)
+                            Toast.makeText(
+                                applicationContext,
+                                "Details Updated Sucessfully",
+                                Toast.LENGTH_LONG
+                            )
+                                .show()
+                            startActivity(Intent(activity, MyAccount::class.java))
+                            finish()
+                        } else {
+                            //  Log.d("Update Res fail:", response.body()!!.message)
+                        }
 
-            override fun onFailure(call: Call<UpdateUserApiModel?>, t: Throwable) {
-                t.message?.let { Log.d("Update Res failure:", it) }
-            }
-        })
+                    }
+
+                    override fun onFailure(call: Call<UpdateUserApiModel?>, t: Throwable) {
+                        t.message?.let { Log.d("Update Res failure:", it) }
+                    }
+                })
+
+        }
+        catch (e:Exception){
+            e.toString()
+        }
+    }
+
+    fun validateFields():Boolean
+    {
+        var isValid=true
+        if(binding.city.text.toString().isEmpty()){
+            isValid=false
+            Toast.makeText(this,"City cannot be empty",Toast.LENGTH_LONG).show()
+        }
+        else if(binding.pincode.text.toString().isEmpty()){
+            isValid=false
+            Toast.makeText(this,"Pincode cannot be empty",Toast.LENGTH_LONG).show()
+        }
+
+        else if(binding.state.text.toString().isEmpty()){
+            isValid= false
+            Toast.makeText(this,"State cannot be empty",Toast.LENGTH_LONG).show()
+        }
+
+        else if(binding.nameAddress.text.toString().isEmpty()){
+            isValid=false
+            Toast.makeText(this,"Name field cannot be empty",Toast.LENGTH_LONG).show()
+        }
+
+        return isValid
 
     }
+
+
+
+    private  fun customerDetails(saveAddressModel: SaveAddressModel): JsonObject {
+        var json2 = JsonObject()
+        // json2.addproperty("stateName","Karnataka")
+        json2.addProperty("stateName",saveAddressModel.stateName)
+        var countryjson= JsonObject()
+        countryjson.addProperty("countryName","")
+        var accountdetails=JsonObject()
+        accountdetails.addProperty("accountNumber","")
+        accountdetails.addProperty("ifscCode","")
+        accountdetails.addProperty("branchName","")
+        accountdetails.addProperty("upiNumber","")
+        val json = JsonObject()
+        try{
+            json.addProperty("customerName",  saveAddressModel.customerName)
+            json.addProperty("primaryPhonenumber", saveAddressModel.primaryPhonenumber)
+            json.addProperty("addressLine",  saveAddressModel.addressLine)
+            json.addProperty("zipcode",  saveAddressModel.zipcode)
+            json.addProperty("city",  saveAddressModel.city)
+            //json.addProperty("state",  json2)
+            json.add("state", Gson().toJsonTree(json2))
+            json.add("country",Gson().toJsonTree(countryjson))
+            json.add("accountdetails",Gson().toJsonTree(accountdetails))
+            json.addProperty("email", custEmailId)
+            json.addProperty("secondaryPhonenumber",0)
+
+            Log.d(TAG, "customerDetails: json check "+ json.toString())
+        }catch (e: Exception) {
+        }
+
+        return json
+
+    }
+
+
+
 }
 
 
 
-private  fun customerDetails(saveAddressModel: SaveAddressModel): JsonObject {
-    var json2 = JsonObject()
-   // json2.addproperty("stateName","Karnataka")
-    json2.addProperty("stateName",saveAddressModel.stateName)
-    var countryjson= JsonObject()
-    countryjson.addProperty("countryName","")
-    var accountdetails=JsonObject()
-    accountdetails.addProperty("accountNumber","")
-    accountdetails.addProperty("ifscCode","")
-    accountdetails.addProperty("branchName","")
-    accountdetails.addProperty("upiNumber","")
-    val json = JsonObject()
-    try{
-        json.addProperty("customerName",  saveAddressModel.customerName)
-        json.addProperty("primaryPhonenumber", saveAddressModel.primaryPhonenumber)
-        json.addProperty("addressLine",  saveAddressModel.addressLine)
-        json.addProperty("zipcode",  saveAddressModel.zipcode)
-        json.addProperty("city",  saveAddressModel.city)
-        //json.addProperty("state",  json2)
-        json.add("state", Gson().toJsonTree(json2))
-        json.add("country",Gson().toJsonTree(countryjson))
-        json.add("accountdetails",Gson().toJsonTree(accountdetails))
-        json.addProperty("email","muthuking58@gmail.com")
-        json.addProperty("secondaryPhonenumber",0)
 
-        Log.d(TAG, "customerDetails: json check "+ json.toString())
-    }catch (e: Exception) {
-    }
 
-    return json
 
-}
+
+
+
 /*
 
 private  fun customerDetails(saveAddressModel: SaveAddressModel): JsonObject {

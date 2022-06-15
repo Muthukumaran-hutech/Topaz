@@ -3,6 +3,7 @@ package com.example.topaz.Activities
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -33,6 +34,7 @@ class EditProfile : AppCompatActivity() {
     val REQUEST_CODE = 100
     lateinit var activity: Activity
     private lateinit var database: DatabaseReference
+    private lateinit var sharedPreference:SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +42,7 @@ class EditProfile : AppCompatActivity() {
         setContentView(binding.root)
 
         activity = this
-        val sharedPreference = getSharedPreferences("CUSTOMER_DATA", Context.MODE_PRIVATE)
+      sharedPreference = getSharedPreferences("CUSTOMER_DATA", Context.MODE_PRIVATE)
         var custName = sharedPreference.getString("customerName", "")
         var custEmailId = sharedPreference.getString("email", "")
         var custPhoneno = sharedPreference.getString("primaryPhonenumber", "")
@@ -134,6 +136,7 @@ class EditProfile : AppCompatActivity() {
             ) {
                 binding.editprofileProgress.visibility=View.GONE
                 if(response.isSuccessful){
+                 saveDataLocally()
                  Toast.makeText(this@EditProfile,"Profile details updated successfully",Toast.LENGTH_LONG).show()
                 }
                 else{
@@ -190,5 +193,18 @@ class EditProfile : AppCompatActivity() {
 
         return isValid
 
+    }
+
+    fun saveDataLocally(){
+        try{
+            val editor=sharedPreference.edit()
+            editor.putString("customerName",binding.firstName.text.toString()).apply()
+            editor.putString("email",binding.emailIdChange.text.toString()).apply()
+            editor.putString("primaryPhonenumber", binding.phoneNoChange.text.toString()).apply()
+
+        }
+        catch (e:Exception){
+            e.toString()
+        }
     }
 }
