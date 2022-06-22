@@ -119,6 +119,15 @@ interface JsonPlaceholder {
     @GET("getSubCategoryByCategoryName/{categoryName}")
    public fun getSubcategoryList(@Path("categoryName") categoryName:String):Call<List<SubCategoryListApiModel>>
 
+   @GET("discount/{productId}")
+   fun getDiscountOnProduct(@Path("productId") productId: String):Call<DiscountListApiModel>
+
+   @GET("all/discountlist")
+   fun getAllDiscount():Call<List<DiscountListApiModel>>
+
+   @POST("add/order")
+   fun addNewOrder(@Body jsonObject: JsonObject):Call<AddOrderApiModel>
+
 
 
 }

@@ -19,7 +19,7 @@
 
     <TextView
         android:id="@+id/textView13"
-        android:layout_width="220dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
@@ -49,17 +49,18 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text=""
+        android:text="59/"
+        android:textSize="17sp"
         android:textColor="@color/primary_blue"
         app:layout_constraintStart_toStartOf="@+id/textView13"
         app:layout_constraintTop_toBottomOf="@+id/textView44" />
 
     <TextView
         android:id="@+id/textView16"
-        android:layout_width="117dp"
+        android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
         android:text="@string/square_feet"
         android:textColor="@color/netural_black"
         android:textSize="14sp"
@@ -74,6 +75,7 @@
         android:layout_marginTop="4dp"
         android:text="@string/_84"
         android:textColor="@color/black"
+        android:background="@drawable/strike_through"
         app:layout_constraintEnd_toEndOf="@+id/textView14"
         app:layout_constraintStart_toStartOf="@+id/textView14"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
@@ -83,10 +85,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="5dp"
         android:text="24% Off"
         android:textColor="@color/primary_red"
         app:layout_constraintStart_toEndOf="@+id/textView15"
+        app:layout_constraintBottom_toBottomOf="@id/textView15"
         app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
     <ImageView

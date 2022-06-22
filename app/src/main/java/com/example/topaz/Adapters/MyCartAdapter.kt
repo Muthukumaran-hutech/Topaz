@@ -121,7 +121,7 @@ class MyCartAdapter(
             context: Context
         ) {
             cartTitle.text = cartData[position].product_title
-            cartRupees.text =  cartData[position].price
+            cartRupees.text =  context.getString(R.string.Rs)+cartData[position].price+"/"
             //var rupees = getString(R.string.Rs) + binding.textView14.text + getString(R.string.slash)
             val decodedString: ByteArray =
                 Base64.decode(cartData.get(position).cartImage, Base64.DEFAULT)

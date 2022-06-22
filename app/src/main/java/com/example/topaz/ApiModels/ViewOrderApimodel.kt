@@ -1,6 +1,8 @@
 package com.example.topaz.ApiModels
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 class ViewOrderApimodel {
 
@@ -35,8 +37,8 @@ class ViewOrderApimodel {
 
 
 }
-
-class ItmOrdr {
+@Parcelize
+public class ItmOrdr:Parcelable {
 
     @SerializedName("orderItemId")
     public var orderItemId: Long = 0
@@ -174,8 +176,8 @@ class Detaildiscount1{
     @SerializedName("discountid")
     public var discountid: Long = 0
 
-    @SerializedName("productName")
-    public var productName: String = ""
+   /* @SerializedName("productName")
+    public var productName: String = ""*/
 
     @SerializedName("size")
     public var size: String = ""
@@ -321,6 +323,9 @@ class PROD10 {
 
     @SerializedName("categoryType")
     public var categoryType: CType1 = CType1()
+
+    @SerializedName("sqFeetPrice")
+    public var actualSqFeet: Double = .0
 
 
 

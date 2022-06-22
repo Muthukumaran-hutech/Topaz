@@ -54,6 +54,7 @@
         android:fillViewport="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/order_details_toolbar">
 
 
@@ -148,44 +149,57 @@
 
         </LinearLayout>
 
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:id="@+id/actionItemLayout"
+          android:layout_marginLeft="@dimen/_10sdp"
+          android:layout_marginRight="@dimen/_10sdp"
+          android:gravity="center"
+          app:layout_constraintTop_toBottomOf="@id/orderlinearlayout">
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/downloadinvoice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/transperent"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:textSize="12sp"
+            android:background="@drawable/category_btn_unselected"
+            android:paddingRight="5dp"
+            android:paddingLeft="5dp"
             android:drawableStart="@drawable/download_icon"
-            android:paddingStart="20dp"
+            android:layout_weight="1"
             android:text="@string/download_invoice"
-            android:textColor="@color/blue"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/orderlinearlayout" />
+            android:textColor="@color/blue"/>
 
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/print"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:background="@color/transperent"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/category_btn_unselected"
             android:drawableStart="@drawable/print"
-            android:paddingStart="20dp"
+            android:paddingStart="5dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:textSize="12sp"
             android:text="@string/print"
-            android:textColor="@color/blue"
-            app:layout_constraintStart_toEndOf="@+id/downloadinvoice"
-            app:layout_constraintTop_toBottomOf="@+id/orderlinearlayout" />
+            android:textColor="@color/blue"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/shareinvoice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:background="@color/transperent"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/category_btn_unselected"
             android:drawableStart="@drawable/share_icon"
-            android:paddingStart="20dp"
+            android:paddingStart="@dimen/_5sdp"
+            android:paddingRight="@dimen/_5sdp"
+            android:textSize="12sp"
+            android:layout_weight="1"
             android:text="@string/share"
-            android:textColor="@color/blue"
-            app:layout_constraintStart_toEndOf="@+id/print"
-            app:layout_constraintTop_toBottomOf="@+id/orderlinearlayout" />
+            android:textColor="@color/blue"/>
+      </LinearLayout>
 
 
         <ImageView
@@ -196,13 +210,13 @@
             android:src="@drawable/line_99"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/print" />
+            app:layout_constraintTop_toBottomOf="@+id/actionItemLayout" />
 
         <TextView
             android:id="@+id/shipping"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="20dp"
             android:text="@string/shipping_details"
             android:textColor="@color/black"
@@ -219,7 +233,7 @@
             android:layout_marginTop="20dp"
             android:text="@string/shipped"
             android:textColor="@color/black"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/shipping" />
@@ -239,7 +253,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/detailsrecycler"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -259,7 +273,7 @@
             android:id="@+id/pqymentinfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="20dp"
             android:text="@string/payment_informations"
             android:textColor="@color/black"
@@ -273,11 +287,11 @@
             android:id="@+id/paymentmethod"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:text="@string/payment_method"
             android:textColor="@color/black"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pqymentinfo" />
@@ -291,7 +305,7 @@
             android:layout_marginStart="20dp"
             android:text="Pay on Delivery (POD)"
             android:textColor="@color/blue"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/paymentmethod"
             app:layout_constraintTop_toTopOf="@+id/paymentmethod" />
@@ -304,7 +318,7 @@
             android:layout_marginTop="20dp"
             android:text="@string/shipping_address"
             android:textColor="@color/black"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/paymentmethod" />
@@ -325,7 +339,7 @@
 
             <TextView
                 android:id="@+id/shipingad"
-                android:layout_width="287dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="80dp"
@@ -353,9 +367,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iig2">
             <TextView
                 android:layout_width="wrap_content"
@@ -367,68 +378,167 @@
                 android:textSize="14sp"
                 android:textStyle="bold"/>
 
-            <TextView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                    android:text="@string/price_3_items"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/discountentry_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="2"
+                    android:text="₹ 5088"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/discount"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/deliverychargesentry_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="-₹ 300"
+                    android:textColor="@color/black"
+                    android:layout_weight="2"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp">
+                 <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/delivery_charges"
+                android:textColor="@color/black"
+               android:layout_weight="1"
+                android:textSize="14sp"/>
+
+
+                <TextView
+                    android:id="@+id/totalamtentry_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="₹0"
+                    android:layout_weight="2"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tax_entry"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:textSize="14sp"/>
+
+
+                <TextView
+                    android:id="@+id/taxentry"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="₹ 250"
+                    android:layout_weight="2"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+
+          <!--  <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="30dp"
+
                 android:text="@string/price_3_items"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
+-->
 
-
-            <TextView
+            <!--<TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:text="@string/discount"
                 android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:textSize="14sp" />-->
 
-            <TextView
+           <!-- <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
                 android:text="@string/delivery_charges"
                 android:textColor="@color/black"
-                android:textSize="14sp"/>
+                android:textSize="14sp"/>-->
 
 
-            <TextView
+           <!-- <TextView
                 android:id="@+id/discountentry_3"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="320dp"
                 android:layout_marginTop="-100dp"
+                android:layout_marginRight="@dimen/_20sdp"
                 android:gravity="right"
                 android:text="₹ 5088"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
-
-            <TextView
+-->
+          <!--  <TextView
                 android:id="@+id/deliverychargesentry_3"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-               android:layout_marginStart="320dp"
                 android:layout_marginTop="22dp"
+                android:layout_marginRight="20dp"
                 android:gravity="right"
                 android:text="-₹ 300"
                 android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:textSize="14sp" />-->
 
 
-            <TextView
+            <!--<TextView
                 android:id="@+id/totalamtentry_3"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-               android:layout_marginStart="320dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
                 android:gravity="right"
                 android:text="₹ 250"
                 android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:textSize="14sp" />-->
 
             <ImageView
                 android:id="@+id/iig3"
@@ -440,32 +550,52 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/totalamtentry_3" />
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:text="@string/order_total"
-                android:textColor="@color/netural_black"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
 
-            <TextView
+                    android:text="@string/order_total"
+                    android:textColor="@color/netural_black"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/ttlamt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="₹ 5238"
+                    android:layout_weight="2"
+                    android:textColor="@color/blue"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+           <!-- <TextView
                 android:id="@+id/ttlamt"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-               android:layout_marginStart="320dp"
                 android:layout_marginTop="-20dp"
                 android:gravity="right"
                 android:text="₹ 5238"
+                android:layout_marginRight="22dp"
                 android:textColor="@color/blue"
-                android:textSize="14sp"
+                android:textSize="17sp"
                 android:textStyle="bold" />
-
-
-
+-->
         </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -26,6 +27,7 @@ class EditAddAddress : AppCompatActivity() {
 
     lateinit var activity: Activity
     var custEmailId:String?=""
+    lateinit var sharedPreference:SharedPreferences
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +40,7 @@ class EditAddAddress : AppCompatActivity() {
         setSupportActionBar(binding.editAddressToolbar)
         supportActionBar?.title = ""
 
-        val sharedPreference = getSharedPreferences("CUSTOMER_DATA", Context.MODE_PRIVATE)
+        sharedPreference = getSharedPreferences("CUSTOMER_DATA", Context.MODE_PRIVATE)
         var custName = sharedPreference.getString("customerName", "")
         var custId = sharedPreference.getString("customercode", "")
         var custAddress = sharedPreference.getString("addressLine", "")
@@ -46,6 +48,7 @@ class EditAddAddress : AppCompatActivity() {
          custEmailId = sharedPreference.getString("email", "")
         var custCity = sharedPreference.getString("city", "")
         var custState = sharedPreference.getString("state", "")
+        var zipcode = sharedPreference.getString("zipcode","")
 
         binding.nameAddress.setText(custName)
         binding.phoneNoChange.setText(custPhoneno)
@@ -53,11 +56,11 @@ class EditAddAddress : AppCompatActivity() {
         binding.houseNo.setText(custAddress)
         binding.city.setText(custCity)
         binding.state.setText(custState)
+        binding.pincode.setText(zipcode)
 
 
         binding.categoryBackArrow.setOnClickListener {
-           /* intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            finish()*/
+            finish()
         }
 
         binding.saveAddressBtn.setOnClickListener {
@@ -112,16 +115,18 @@ class EditAddAddress : AppCompatActivity() {
                                 Toast.LENGTH_LONG
                             )
                                 .show()
-                            startActivity(Intent(activity, MyAccount::class.java))
+
+                            storeDataLocally()
                             finish()
                         } else {
-                            //  Log.d("Update Res fail:", response.body()!!.message)
+                             Log.d("Update Res fail:", response.body()!!.message)
                         }
 
                     }
 
                     override fun onFailure(call: Call<UpdateUserApiModel?>, t: Throwable) {
-                        t.message?.let { Log.d("Update Res failure:", it) }
+                        t.message?.let {
+                            Log.d("Update Res failure:", it) }
                     }
                 })
 
@@ -164,7 +169,7 @@ class EditAddAddress : AppCompatActivity() {
         // json2.addproperty("stateName","Karnataka")
         json2.addProperty("stateName",saveAddressModel.stateName)
         var countryjson= JsonObject()
-        countryjson.addProperty("countryName","")
+        countryjson.addProperty("countryName","India")
         var accountdetails=JsonObject()
         accountdetails.addProperty("accountNumber","")
         accountdetails.addProperty("ifscCode","")
@@ -190,6 +195,18 @@ class EditAddAddress : AppCompatActivity() {
 
         return json
 
+    }
+
+
+    private fun storeDataLocally(){
+        var editor=sharedPreference.edit()
+        editor.putString("customerName",binding.nameAddress.text.toString())
+        editor.putString("addressLine",binding.locality.text.toString())
+        editor.putString("primaryPhonenumber",binding.phoneNoChange.text.toString())
+        editor.putString("zipcode",binding.pincode.text.toString())
+        editor.putString("city",binding.city.text.toString())
+        editor.putString("state",binding.state.text.toString())
+        editor.apply()
     }
 
 

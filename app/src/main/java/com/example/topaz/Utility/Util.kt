@@ -1,9 +1,14 @@
 package com.example.topaz.Utility
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.util.Base64
 import android.util.Log
 import com.example.topaz.Models.CartList
 import com.example.topaz.Models.CartProductList
+import com.example.topaz.Models.QuatationDetailModel
+import com.example.topaz.Models.QuatationListModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -13,6 +18,11 @@ object Util {
 
     interface CartCountListener{
         fun getCartCount(cartsize:Int)
+    }
+
+
+    interface QuotationCountListener{
+         fun getQuotationCount(quotationsize:Int)
     }
 
 
@@ -81,6 +91,116 @@ object Util {
                 cartCountListener.getCartCount(0)
             }
         })
+
+    }
+
+
+    public fun extractNumbersFromString(input:String,type:String):List<String>{
+         var list= listOf<String>()
+        try{
+            if(type.equals("Percentage")) {
+                list = Regex("\\D+").split(input)
+            }
+            else{
+                var size1=input.split("*")
+                list=(size1[0]+size1[1]).split("ft")
+
+            }
+
+
+        }
+        catch (e:Exception){
+            e.printStackTrace()
+            list= listOf<String>(" ")
+
+        }
+
+        return list
+
+    }
+
+    public fun getBitmapFromBase64(path:String):Bitmap?{
+        var bitmap:Bitmap?=null
+        try{
+            var decodedstring=Base64.decode(path, Base64.DEFAULT)
+             bitmap= BitmapFactory.decodeByteArray(decodedstring,0,decodedstring.size)
+
+
+        }
+        catch (e:Exception){
+            e.printStackTrace()
+        }
+
+        return bitmap
+    }
+
+
+    fun getQuoteListEntry(context: Context,quotationCountListener: QuotationCountListener){
+        try {
+            val sharedPreference =
+                context.getSharedPreferences("CUSTOMER_DATA", Context.MODE_PRIVATE)
+            val custid = sharedPreference.getString("customercode", "").toString()
+            val quoteref = FirebaseDatabase.getInstance().getReference("MyQuotation")
+            var query = quoteref.child(custid).orderByChild("quotationStatus").equalTo(true)
+            query.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if(snapshot.exists()){
+                        for(snap in snapshot.children){
+                            var quatationListModel=snap.getValue(QuatationDetailModel::class.java)
+                            fetchProducts(quatationListModel?.quotationId,quotationCountListener)
+                        }
+                    }
+                    else{
+                        quotationCountListener.getQuotationCount(0)
+                    }
+
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                }
+            })
+        }
+        catch (e:Exception){
+            e.toString()
+        }
+
+
+    }
+
+    private fun fetchProducts(quotationId: String?, quotationCountListener: QuotationCountListener) {
+        try{
+            val quotationlist=ArrayList<QuatationListModel>()
+            val prdref = FirebaseDatabase.getInstance().getReference("QuotationProductList")
+            quotationId?.let {
+                prdref.child(it).child("Products").addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        quotationlist.clear()
+                        if(snapshot.exists()){
+                            for(snap in snapshot.children){
+                                var quotationListModel=snap.getValue(QuatationListModel::class.java)!!
+                                quotationlist.add(quotationListModel)
+
+                            }
+                            quotationCountListener.getQuotationCount(quotationsize = quotationlist.size)
+                        }
+                        else{
+                            quotationCountListener.getQuotationCount(0)
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        quotationCountListener.getQuotationCount(0)
+                    }
+                })
+            }
+
+
+
+        }
+        catch (e:Exception){
+            e.toString()
+        }
 
     }
 }

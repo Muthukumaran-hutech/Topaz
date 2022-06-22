@@ -6,7 +6,8 @@ data class DetailsFirebaseModel (
     var productid: Int = 0,
     var productTitle: String = "",
     var thickness: String = "",
-    var price: Int = 0,
+    var price: Double = .0,
     var productDiscountId: String = "",
-    var addedToWishList:Boolean=true
+    var addedToWishList:Boolean=true,
+    var actualPrice: Double=.0,
         )

@@ -35,6 +35,9 @@ class ProductDetailsListApiModel {
     @SerializedName("thickness")
     public var thickness: String = ""
 
+    @SerializedName("sqFeetPrice")
+    public var sqFeetPrice:Double?=.0
+
     @SerializedName("brand")
     public var brand: String = ""
 

@@ -128,6 +128,13 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
                     R.id.action_favourite-> startActivity(Intent(activity, MyWishlist::class.java))
 
                     R.id.action_account->  startActivity(Intent(activity, MyAccount::class.java))
+
+                    R.id.action_category ->{val intent =Intent(activity, CategoryActivity::class.java)
+                         intent.putExtra("from","Bottomnav")
+                         startActivity(intent)
+
+                    }
+
                 }
 
 
@@ -461,10 +468,20 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.homepagemenu, menu)
         var menuitem=menu.findItem(R.id.my_cart)
+        var quoteitem = menu.findItem(R.id.quotationStatus)
+
+
         var actionview=menuitem.actionView
+        var quoteactionview= quoteitem.actionView
+
         var cartcount=actionview.findViewById<TextView>(R.id.cart_count)//Getting the textview reference from action layout defined for the menu item
         var cart=actionview.findViewById<ImageView>(R.id.cart_icon)
+
+        var quotecount = quoteactionview.findViewById<TextView>(R.id.quotation_count)
+        var quotationview = quoteactionview.findViewById<ImageView>(R.id.quotationstatus_icon)
+
         setupCartCount(cartcount, cart)
+        setUpQuoteListCount(quotecount,quotationview)
         return true
     }
 
@@ -492,6 +509,31 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
 
     }
 
+    private fun setUpQuoteListCount(quoteTextView: TextView,quoteitem:ImageView){
+
+
+        quoteitem.setOnClickListener {
+          startActivity(Intent(this,ProductQuotation::class.java))
+        }
+
+
+        Util.getQuoteListEntry(this,object : Util.QuotationCountListener {
+            override fun getQuotationCount(quotationsize: Int) {
+
+                if(quotationsize==0){
+                    quoteTextView.visibility= View.GONE
+                }
+                else{
+                    quoteTextView.visibility = View.VISIBLE
+                    quoteTextView.text  = quotationsize.toString()
+
+                }
+
+            }
+        })
+
+    }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
@@ -508,6 +550,7 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
         val intent =Intent(activity, CategoryActivity::class.java)
         intent.putExtra("cat__iD", homecategory.catID)
         intent.putExtra("category_name",homecategory.catTitle)
+        intent.putExtra("from","Homepage")
         startActivity(intent)
     }
 

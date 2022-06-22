@@ -56,17 +56,28 @@
         app:layout_constraintTop_toBottomOf="@+id/order_toolbar" />
 
     <TextView
+        android:id="@+id/orderEmptyText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:textSize="@dimen/_15sdp"
-        android:id="@+id/orderEmptyText"
-        android:visibility="gone"
         android:gravity="center"
         android:text="No orders yet"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins"
+        android:textSize="@dimen/_15sdp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/orderProgress"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
 

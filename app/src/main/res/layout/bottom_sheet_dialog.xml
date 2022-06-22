@@ -1,65 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<!--<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-   >
 
+   >-->
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <RelativeLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
 
 
         <!--text view for displaying course name-->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_close_icon"
+            android:id="@+id/closeDialog"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:padding="@dimen/_5sdp"/>
         <TextView
             android:id="@+id/idTVCourseName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_20sdp"
+
             android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginLeft="30dp"
             android:gravity="left"
-            android:paddingStart="@dimen/_20sdp"
             android:text="@string/quantity"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
 
         <!--button for dismissing our dialog-->
-
-        <EditText
-            android:id="@+id/count_text"
-            android:layout_width="@dimen/_200sdp"
-            android:layout_height="@dimen/_30sdp"
-            android:layout_below="@+id/idTVCourseName"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="@dimen/_40sdp"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:layout_marginEnd="@dimen/_50sdp"
-            android:background="@drawable/bottom_sheet"
-            android:inputType="number"
-            android:paddingStart="@dimen/_15sdp"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/idBtnconfirm"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/count_text"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="@dimen/_50sdp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/bck_color_btn"
-            android:text="@string/confirm"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:layout_below="@id/idTVCourseName"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_30sdp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/grey_border_btn_style"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="46dp"
+                    android:layout_height="38dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/_1sdp"
+                    android:background="@drawable/bottom_sheet"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@color/bottomsheet_grey"
+                        android:padding="@dimen/_5sdp"
+                        android:id="@+id/decrementQuantity"
+                        android:src="@drawable/ic_decrement_icon" />
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/count_text"
+                    android:layout_width="96dp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:background="@color/transperent"
+                    android:inputType="number"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="46dp"
+                    android:layout_height="38dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/bottom_sheet">
+
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:padding="@dimen/_5sdp"
+                        android:id="@+id/incrementQuantity"
+                        android:background="@color/bottomsheet_grey"
+                        android:src="@drawable/ic_increment_icon" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/idBtnconfirm"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/bck_color_btn"
+                android:text="@string/confirm"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </LinearLayout>
 
     </RelativeLayout>
+</ScrollView>
 
-</androidx.cardview.widget.CardView>
+
+<!--
+</androidx.cardview.widget.CardView>-->

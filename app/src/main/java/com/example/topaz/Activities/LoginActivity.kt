@@ -112,10 +112,11 @@ class LoginActivity : AppCompatActivity() {
         editor.putString("primaryPhonenumber",checkUserApiModel.primaryPhonenumber)
         editor.putString("email",checkUserApiModel.email)
         editor.putString("addressLine",checkUserApiModel.addressLine)
-        editor.putString("addressLine",checkUserApiModel.city)
-        editor.putString("state", checkUserApiModel.state.toString())
+        //editor.putString("addressLine",checkUserApiModel.city)
+        editor.putString("state", checkUserApiModel.state.stateName.toString())
         // editor.putString("secondaryPhonenumber","")
         editor.putString("city",checkUserApiModel.city)
+        editor.putString("zipcode",checkUserApiModel.zipcode.toString())
         //editor.putLong("l",100L)
         editor.apply()
     }

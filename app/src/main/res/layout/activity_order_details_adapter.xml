@@ -18,11 +18,12 @@
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="220dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:background="@color/white"
         android:text=""
+        android:layout_marginTop="@dimen/_20sdp" 
         android:textColor="@color/netural_black"
         android:textSize="14sp"
         android:textStyle="bold"
@@ -31,26 +32,27 @@
 
     <TextView
         android:id="@+id/pri"
-        android:layout_width="58dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:text=""
+        android:text="58/"
+        android:textSize="@dimen/_17sdp"
         android:textColor="@color/primary_blue"
         app:layout_constraintStart_toStartOf="@+id/title"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <TextView
         android:id="@+id/textView16"
-        android:layout_width="117dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_5sdp"
         android:text="@string/square_feet"
         android:textColor="@color/netural_black"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/pri"
+        app:layout_constraintBottom_toBottomOf="@id/pri"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
 

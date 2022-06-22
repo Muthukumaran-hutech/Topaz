@@ -79,7 +79,7 @@ class MyAccount : AppCompatActivity() {
 
         myaddressprofile?.setOnClickListener{
             startActivity(Intent(activity,EditAddAddress::class.java))
-            finish()
+            //finish()
         }
 
         notificationsprofile?.setOnClickListener{

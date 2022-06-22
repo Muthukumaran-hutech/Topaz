@@ -58,7 +58,7 @@
     <string name="wooden_waterproof_plywood_sheet_thickness_18_mm">Wooden Waterproof Plywood Sheet</string>
     <string name="_59">₹59/</string>
     <string name="square_feet">Square Feet</string>
-    <string name="_84">₹ 84</string>
+    <string name="_84">₹ 1</string>
     <string name="best_waterproof_plywoods">Best Waterproof Plywoods</string>
     <string name="waterproof_plywoods">Waterproof Plywoods</string>
     <string name="body_shape">Wooden Waterproof Plywood Sheet, Thickness: 18 mm</string>
@@ -174,11 +174,12 @@
     <string name="delivery_charges">Delivery Charges</string>
     <string name="price_3_items">Price (3 items)</string>
     <string name="order_details">Order Details</string>
+    <string name="tax_entry">Tax(GST:18%)</string>
     <string name="faq">FAQ</string>
     <string name="frequently_asked_questions">Frequently Asked Questions</string>
     <string name="why_is_centuryply_a_better_product">Why is CenturyPly a better product?</string>
     <string name="century_ply_uses_good_quality_raw_material_and_also_has_rigorous_quality_checks_at_every_stage_to_verify_that_the_best_product_is_going_to_the_market">Century Ply uses good quality raw material and also has rigorous quality checks at every stage to verify that the best product is going to the market.</string>
-    <string name="what_grade_of_plywood_is_recommended_for_green_buildings">What grade of plywood is recommended for Green buildings?</string>
+    <string name="what_grade_of_plywood_is_recommended_for_green_buildings">What grade of plywood is recommended \nfor Green buildings?</string>
     <string name="where_to_get_quality_of_plywood_checked">Where to get quality of plywood checked?</string>
     <string name="how_to_get_redressal_of_plywood_complaints">How to get redressal of plywood complaints?</string>
     <string name="does_using_gurjan_make_ply_better">Does using gurjan make ply better?</string>
@@ -220,5 +221,10 @@
     <string name="confirm">Confirm</string>
     <string name="units">UNITS</string>
     <string name="gold_wood_industries_">Gold Wood Industries</string>
+    <string name="price_label">Price:</string>
+    <string name="quantity_label">Quantity:</string>
+    <string name="updateqty">UpdateQuantity</string>
+    <string name="updatetotalvalue">TotalValue</string>
+    <string name="updatequotationdesc">QuotationDescription</string>
 
 </resources>

@@ -1,7 +1,6 @@
 package com.example.topaz.Activities
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
@@ -16,23 +15,17 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.topaz.Adapters.CategoryAdapter
 import com.example.topaz.Adapters.InnerCategoryAdapter
-import com.example.topaz.Adapters.MywishlistAdapter
-import com.example.topaz.ApiModels.CategoryListApiModel
+import com.example.topaz.ApiModels.DiscountListApiModel
 import com.example.topaz.ApiModels.SubCategoryApiModel
 import com.example.topaz.Interface.InnerCategoryItemClickListner
 import com.example.topaz.Interface.JsonPlaceholder
-import com.example.topaz.Models.CategoriesModel
+import com.example.topaz.Models.DiscountModel
 import com.example.topaz.Models.InnerCategoryModelList
-import com.example.topaz.Models.ProductDetailsModel
 import com.example.topaz.R
 import com.example.topaz.RetrofitApiInstance.UpdateAccountInfoInstance
 import com.example.topaz.Utility.Util
-import com.example.topaz.databinding.ActivityCategoryBinding
 import com.example.topaz.databinding.ActivityInnerCategoriesBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 import kotlinx.android.synthetic.main.bottomnavigation_layout.view.*
 import retrofit2.Call
@@ -47,6 +40,7 @@ class InnerCategories : AppCompatActivity(), InnerCategoryItemClickListner {
     var custId = ""
     var catid = ""
     var innerCategories=SubCategoryApiModel()
+    var discountList=ArrayList<DiscountModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -101,9 +95,13 @@ class InnerCategories : AppCompatActivity(), InnerCategoryItemClickListner {
 
 
 
+
+
+
     }
 
     private fun onApiCallInnerCategory() {
+        binding.innerCategoryProgress?.visibility= View.VISIBLE
         var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
             .create(JsonPlaceholder::class.java)
 
@@ -113,23 +111,32 @@ class InnerCategories : AppCompatActivity(), InnerCategoryItemClickListner {
                 response: Response<List<SubCategoryApiModel>?>
             ) {
 
+                binding.innerCategoryProgress?.visibility= View.GONE
                 if(response.isSuccessful){
                     for(innercategorylist in response.body()!!){
                         var innerCategoryModelList = InnerCategoryModelList(
                             innercategorylist.Productimage1.imagebyte,
                             innercategorylist.productTitle,
-                            innercategorylist.price.toString(),
+                            innercategorylist.sqFeetPrice,
                             innercategorylist.thickness,
                             innercategorylist.subcategory.subid.toString(),
-                            innercategorylist.productid.toString()
+                            innercategorylist.productid.toString(),
+                            size = innercategorylist.size
 
                         )
                         inerCategorylist.add(innerCategoryModelList)
 
                     }
-                    val innercategoryAdapter = InnerCategoryAdapter(inerCategorylist,this@InnerCategories,this@InnerCategories)
+                    if(inerCategorylist.size >0) {
+                        binding.innerCatNoProductsFound?.visibility= View.GONE
+                        getDiscountList()
+                    }
+                    else{
+                        binding.innerCatNoProductsFound?.visibility= View.VISIBLE
+                    }
+                    /*val innercategoryAdapter = InnerCategoryAdapter(inerCategorylist,this@InnerCategories,this@InnerCategories)
                     binding.innerrecycler.adapter = innercategoryAdapter
-                    binding.innerrecycler.setHasFixedSize(true)
+                    binding.innerrecycler.setHasFixedSize(true)*/
                     //Toast. makeText(applicationContext,"Something Went Wronng Please Try Again Later", Toast.LENGTH_LONG).show()
 
                     Log.d(
@@ -137,6 +144,7 @@ class InnerCategories : AppCompatActivity(), InnerCategoryItemClickListner {
                         "On Inner: " + response.body()
                     )
                 }else{
+                    binding.innerCategoryProgress?.visibility= View.GONE
                     Toast. makeText(applicationContext,"NO DATA TO DISPLAY", Toast.LENGTH_LONG).show()
 
                     Log.d(
@@ -147,6 +155,7 @@ class InnerCategories : AppCompatActivity(), InnerCategoryItemClickListner {
             }
 
             override fun onFailure(call: Call<List<SubCategoryApiModel>?>, t: Throwable) {
+                binding.innerCategoryProgress?.visibility= View.GONE
                 Toast. makeText(applicationContext,"Something Went Wronng Please Try Again Later", Toast.LENGTH_LONG).show()
 
                 Log.d(
@@ -175,9 +184,41 @@ class InnerCategories : AppCompatActivity(), InnerCategoryItemClickListner {
         var actionview=menuitem.actionView
         var cartcount=actionview.findViewById<TextView>(R.id.cart_count)//Getting the textview reference from action layout defined for the menu item
         var cart=actionview.findViewById<ImageView>(R.id.cart_icon)
+
+        var quoteitem = menu.findItem(R.id.quotationStatus)
+        var quoteactionview= quoteitem.actionView
+        var quotecount = quoteactionview.findViewById<TextView>(R.id.quotation_count)
+        var quotationview = quoteactionview.findViewById<ImageView>(R.id.quotationstatus_icon)
+
+
+        setUpQuoteListCount(quotecount,quotationview)
         setupCartCount(cartcount, cart)
         return true
     }
+
+
+    private fun setUpQuoteListCount(quotecount: TextView?, quotationview: ImageView?) {
+        quotationview?.setOnClickListener {
+            startActivity(Intent(this,ProductQuotation::class.java))
+        }
+
+
+        Util.getQuoteListEntry(this,object : Util.QuotationCountListener {
+            override fun getQuotationCount(quotationsize: Int) {
+
+                if(quotationsize==0){
+                    quotecount?.visibility= View.GONE
+                }
+                else{
+                    quotecount?.visibility = View.VISIBLE
+                    quotecount?.text  = quotationsize.toString()
+
+                }
+
+            }
+        })
+    }
+
 
     private fun setupCartCount(cartcount: TextView?, cart: ImageView?) {
 
@@ -210,11 +251,109 @@ class InnerCategories : AppCompatActivity(), InnerCategoryItemClickListner {
                 Toast.LENGTH_SHORT
             ).show()
             R.id.my_cart -> startActivity(Intent(activity, MyCart::class.java))
+            R.id.search_bar -> startActivity(Intent(activity, SearchActivity::class.java) )
         }
         return super.onOptionsItemSelected(item)
 
     }
 
+    private fun getDiscountList(){
+
+        try{
+            binding.innerCategoryProgress?.visibility= View.VISIBLE
+            val discountres = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
+                .create(JsonPlaceholder::class.java)
+
+            discountres.getAllDiscount().enqueue(object : Callback<List<DiscountListApiModel>?> {
+                override fun onResponse(
+                    call: Call<List<DiscountListApiModel>?>,
+                    response: Response<List<DiscountListApiModel>?>
+                ) {
+                    binding.innerCategoryProgress?.visibility= View.GONE
+                    if(response.isSuccessful){
+
+                        for(discountlist in response.body()!!){
+                                val discountModel = DiscountModel(
+                                    discountId = discountlist.discountId,
+                                    discount = discountlist.discount,
+                                    productId = discountlist.productdetail?.productId,
+                                    squarefeetprice = discountlist.squareFeetPrice
+                                )
+                                discountList.add(discountModel)
+                        }
+
+                        mapDiscountsToProoduct()
+                    }
+                    else{
+                        binding.innerCategoryProgress?.visibility= View.GONE
+
+                    }
+                }
+
+                override fun onFailure(call: Call<List<DiscountListApiModel>?>, t: Throwable) {
+                    binding.innerCategoryProgress?.visibility= View.GONE
+
+                    Log.e("Discount failure", t.toString())
+                }
+            })
+
+            /*discountres.getDiscountOnProduct("5").enqueue(object : Callback<DiscountListApiModel?> {
+                override fun onResponse(
+                    call: Call<DiscountListApiModel?>,
+                    response: Response<DiscountListApiModel?>
+                ) {
+
+                    if(response.isSuccessful){
+
+                        Log.d("Discount success","true")
+
+                        var discountListApiModel:DiscountListApiModel=response.body()!!
+                        Log.d("discount detail",discountListApiModel.discount.toString())
+                    }
+                    else{
+                        Log.d("Discount failure","true")
+
+                    }
+
+                }
+
+                override fun onFailure(call: Call<DiscountListApiModel?>, t: Throwable) {
+                    Log.d("Discount failure","true")
+                }
+            })*/
+
+
+
+
+        }
+        catch (e:Exception){
+            e.printStackTrace()
+            binding.innerCategoryProgress?.visibility= View.GONE
+        }
+
+    }
+
+    private fun mapDiscountsToProoduct() {//Mapping discount to respective products
+
+      for(i in inerCategorylist.indices){
+          addDiscountToSelectedProduct(i,inerCategorylist[i].InnerCateegoryProductId)
+      }
+    }
+
+    private fun addDiscountToSelectedProduct(i: Int, innerCateegoryProductId: String) {
+        for(discount in discountList){
+            if(discount.productId.toString().equals(innerCateegoryProductId)){
+                inerCategorylist[i].discount=discount.discount
+            }
+        }
+        val innercategoryAdapter = InnerCategoryAdapter(inerCategorylist,this@InnerCategories,this@InnerCategories)
+        binding.innerrecycler.adapter = innercategoryAdapter
+        binding.innerrecycler.setHasFixedSize(true)
+
+        Log.d("Discount list",inerCategorylist[0].InnerCateegoryProductId+" "+inerCategorylist[0].discount)
+
+
+    }
 
 
 }

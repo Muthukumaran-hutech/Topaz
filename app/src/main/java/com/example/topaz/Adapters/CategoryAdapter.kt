@@ -38,6 +38,7 @@ class CategoryAdapter(var list2: ArrayList<CategoriesModel>, var categoryPageIte
     }
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
         var catImage=itemView.findViewById<ImageView>(R.id.plwwoodss)
         var catName=itemView.findViewById<TextView>(R.id.plwwoodsstext)
 
@@ -47,30 +48,42 @@ class CategoryAdapter(var list2: ArrayList<CategoriesModel>, var categoryPageIte
             categoryPageItemClickListner1: CategoryPageItemClickListner,
             context: Context
         ) {
-          ///catImage.setImageResource(listModel2[position].CateegoryImage)
-            catName.text = listModel2[position].CateegoryName
 
-            //----------Write the logic----------------
+            try {
+                ///catImage.setImageResource(listModel2[position].CateegoryImage)
+                catName.text = listModel2[position].CateegoryName
 
-            val decodedString: ByteArray = Base64.decode(listModel2.get(position).CateegoryImage,Base64.DEFAULT)
-            val bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
-           /* if (listModel2.get(position).CateegoryImage.isEmpty()){*/
+                //----------Write the logic----------------
+
+                val decodedString: ByteArray =
+                    Base64.decode(listModel2.get(position).CateegoryImage, Base64.DEFAULT)
+                val bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+                /* if (listModel2.get(position).CateegoryImage.isEmpty()){*/
 
 
                 Glide.with(context)
-                    .applyDefaultRequestOptions(RequestOptions().placeholder(R.drawable.ic_baseline_image_24).error(R.drawable.ic_baseline_image_24))
+                    .applyDefaultRequestOptions(
+                        RequestOptions().placeholder(R.drawable.ic_baseline_image_24)
+                            .error(R.drawable.ic_baseline_image_24)
+                    )
                     .load(bitmap)
                     .into(catImage)
                 //catImage.setImageResource(R.drawable.ic_baseline_image_24)
-            /*}*/
+                /*}*/
 
-            catImage.setOnClickListener {
-                //Onclick will trigger the interface in activity
-                categoryPageItemClickListner1.CategoryPageItemClickListner(listModel2[position])
+                catImage.setOnClickListener {
+                    //Onclick will trigger the interface in activity
+                    categoryPageItemClickListner1.CategoryPageItemClickListner(listModel2[position])
+                }
+            }
+            catch (e:Exception){
+                e.toString()
             }
         }
 
 
 
     }
+
+
 }

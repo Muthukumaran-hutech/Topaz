@@ -316,6 +316,7 @@
         android:layout_marginStart="48dp"
         android:layout_marginTop="30dp"
         android:text="@string/type_of_address"
+        android:visibility="gone"
         android:textColor="@color/violet"
         android:textSize="14sp"
         android:textStyle="bold"
@@ -326,9 +327,10 @@
         android:id="@+id/radiogrp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="81dp"
+        android:layout_marginStart="65dp"
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView40">
 

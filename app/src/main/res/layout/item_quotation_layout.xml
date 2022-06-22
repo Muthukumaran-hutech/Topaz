@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/headerLayout"
+        android:padding="@dimen/_5sdp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="2dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:id="@+id/headerProductTitle"
+            android:text="Hardwood kitply plywood"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:id="@+id/quantityLayout"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:id="@+id/headerQuantity"
+                android:text="Qty:1"
+                android:layout_gravity="center"
+                android:padding="2dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                android:text="Price:300"
+                android:textSize="12sp"
+                android:id="@+id/headerPrice"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/blue"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/quotation_arrow"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/showDetailsLayout"
+            android:layout_weight="2.5"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/quotation_down_arrow"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/hideDetailsLayout"
+            android:visibility="gone"
+            android:layout_weight="2"/>
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout"
+        android:id="@+id/quatationDetailsLayout"
+        android:visibility="visible"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="@dimen/_5sdp">
+        <ImageView
+            android:id="@+id/innercatimage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+
+            android:layout_marginTop="10dp"
+            android:src="@drawable/doors"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/productDetailTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/white"
+            android:text="@string/wooden_waterproof_plywood_sheet_thickness_18_mm"
+            android:textColor="@color/netural_black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/innercatimage"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+       <!-- <TextView
+            android:id="@+id/thic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="@string/thickness_"
+            android:textColor="@color/netural_black"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/thic_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_80sdp"
+            android:layout_marginTop="-20dp"
+            android:text=""
+            android:textColor="@color/netural_black"
+            android:textSize="14sp"
+            android:textStyle="bold" />-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/priceLayout"
+            app:layout_constraintTop_toBottomOf="@id/innercatimage"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:text="@string/quantity"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:text="@string/s_ft_price"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:visibility="visible"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/total_value"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/quantityEntry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:background="@drawable/editable_background"
+                    android:hint="@string/quantity"
+                    android:inputType=""
+                    android:layout_weight="1"
+                    android:textColorHint="@color/black"
+                    android:textColor="@color/black"
+                    android:layout_marginRight="23dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+
+                <EditText
+                    android:id="@+id/priceEntry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:background="@drawable/editable_background"
+                    android:hint="@string/s_ft_price"
+                    android:paddingStart="10dp"
+                    android:enabled="false"
+                    android:layout_weight="1"
+                    android:layout_marginRight="23dp"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/totalValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:background="@drawable/editable_background"
+                    android:hint="@string/total_value_2"
+                    android:paddingStart="5dp"
+                    android:layout_weight="1"
+                    android:paddingTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:textColorHint="@color/black"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+       <!-- <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="@string/quantity"
+            android:id="@+id/quatationQuantity"
+            android:textColor="@color/black"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/innercatimage"
+            android:textSize="12sp"
+            android:textStyle="bold" />-->
+
+
+        <!--<TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:text="@string/s_ft_price"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:id="@+id/sqftText"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="@+id/qutyentry"
+            app:layout_constraintTop_toBottomOf="@id/innercatimage" />-->
+
+      <!--  <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/qutyentry"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            android:background="@drawable/editable_background"
+            android:hint="@string/quantity"
+            android:inputType=""
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:textStyle="bold" />-->
+        <!--<EditText
+            android:id="@+id/priceentry"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:background="@drawable/editable_background"
+            app:layout_constraintStart_toStartOf="@id/sqftText"
+            app:layout_constraintTop_toBottomOf="@id/sqftText"
+            android:hint="@string/s_ft_price"
+            android:layout_marginTop="10dp"
+            android:paddingStart="10dp"
+            android:textColor="@color/black"
+            android:visibility="gone"
+            android:textSize="12sp"
+            android:textStyle="bold" />-->
+        <!--<TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/total_value"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:id="@+id/totalValueText"
+            android:textSize="12sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="@id/priceentry"
+            app:layout_constraintTop_toBottomOf="@id/innercatimage"
+            android:textStyle="bold" />-->
+
+        <!--<TextView
+            android:id="@+id/totalvalue"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:background="@drawable/editable_background"
+            android:hint="@string/total_value_2"
+            android:paddingStart="5dp"
+            android:paddingTop="10dp"
+            android:textColorHint="@color/black"
+            android:layout_marginRight="@dimen/_5sdp"
+            app:layout_constraintStart_toEndOf="@id/priceentry"
+            app:layout_constraintStart_toStartOf="@id/totalValueText"
+            app:layout_constraintTop_toBottomOf="@id/totalValueText"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            android:textSize="12sp"
+            android:textStyle="bold" />-->
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/thickness"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/priceLayout"
+            android:textColor="@color/black"
+            android:id="@+id/thicknessText"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/product_thickness_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            app:layout_constraintTop_toBottomOf="@id/thicknessText"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:id="@+id/sizeFeetText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/product_thickness_recycler"
+            android:layout_marginTop="20dp"
+            android:text="@string/size_feet" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/feet_recyclyer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/sizeFeetText"
+            android:layout_marginTop="@dimen/_15sdp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/requirement_details"
+            android:id="@+id/requirementDetailsText"
+            app:layout_constraintTop_toBottomOf="@id/feet_recyclyer"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+
+
+        <EditText
+            android:id="@+id/desc_details"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:layout_marginTop="20dp"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingTop="2dp"
+            android:gravity="start"
+            android:text="asas"
+            android:textColorHint="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/requirementDetailsText"
+            android:background="@drawable/editable_background"
+            app:layout_constraintStart_toStartOf="parent"
+            android:hint="@string/enter_requirement_details"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+
+
+        <!--<TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="270dp"
+            android:layout_marginTop="-15dp"
+            android:text="@string/total_value"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/qutyentry"
+            android:layout_width="105dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/editable_background"
+            android:hint="@string/quantity"
+            android:inputType=""
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/priceentry"
+            android:layout_width="105dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="145dp"
+            android:layout_marginTop="-35dp"
+            android:background="@drawable/editable_background"
+            android:hint="@string/s_ft_price"
+            android:paddingStart="10dp"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/totalvalue"
+            android:layout_width="105dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="270dp"
+            android:layout_marginTop="-35dp"
+            android:background="@drawable/editable_background"
+            android:hint="@string/total_value_2"
+            android:paddingStart="5dp"
+            android:paddingTop="10dp"
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/thickness"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/product_quotqtion_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:layout_marginTop="20dp"
+            android:text="@string/size_feet" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/feet_recyclyer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/requirement_details"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/desc_details"
+            android:layout_width="374dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_35sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:layout_marginTop="20dp"
+            android:paddingStart="@dimen/_10sdp"
+            android:textColorHint="@color/black"
+            android:background="@drawable/editable_background"
+            android:hint="@string/enter_requirement_details"
+            android:textColor="@color/black"
+            android:textSize="16sp" />-->
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/quotation_divider_color"
+        app:layout_constraintTop_toBottomOf="@id/quatationDetailsLayout"
+        android:layout_marginTop="@dimen/_5sdp"/>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

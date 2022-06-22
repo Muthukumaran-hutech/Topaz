@@ -38,11 +38,17 @@ class SearchViewAdapter(var searchList: ArrayList<SearchListModel>, var searchLi
        // val search:TextView = itemView.findViewById(R.id.search_icon)
 
         fun bindItems(searchList:List<SearchListModel>, position: Int, searchListPageItemClickListner: SearchListPageItemClickListner){
-            Heading.text = searchList[position].SearchText
 
-            Heading.setOnClickListener {
-                //Onclick will trigger the interface in activity
-                searchListPageItemClickListner.SearchListPageItemClickListner(searchList[position])
+            try {
+                Heading.text = searchList[position].SearchText
+
+                Heading.setOnClickListener {
+                    //Onclick will trigger the interface in activity
+                    searchListPageItemClickListner.SearchListPageItemClickListner(searchList[position])
+                }
+            }
+            catch (e:Exception){
+                e.printStackTrace()
             }
         }
 

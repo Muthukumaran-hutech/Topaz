@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+<item android:id="@+id/quotationStatus"
+    android:icon="@drawable/ic_quotation_status"
+    android:title="Quote Status"
+    app:actionLayout="@layout/custom_quotation_action_item_layout"
+    app:showAsAction="always"/>
 <item android:id="@+id/search_bar"
     android:icon="@drawable/ic_baseline_search_24"
     app:showAsAction="always"
@@ -17,4 +22,5 @@
         app:showAsAction="always"
         app:actionLayout="@layout/custom_cart_action_item_layout"
         android:title="TODO" />
+
 </menu>

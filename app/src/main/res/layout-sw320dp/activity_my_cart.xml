@@ -58,10 +58,10 @@
         android:layout_height="wrap_content"
         android:indeterminate="true"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cart_list_toolbar"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <ImageView
         android:id="@+id/cart_empty"
@@ -77,9 +77,10 @@
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_170sdp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_30sdp"
         android:orientation="vertical"
+        android:elevation="@dimen/_5sdp"
         app:layout_constraintBottom_toTopOf="@+id/chckbtn"
         tools:layout_editor_absoluteX="9dp">
 
@@ -87,53 +88,177 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
+            android:paddingTop="@dimen/_10sdp"
             android:text="@string/price_details"
             android:textColor="@color/black"
             android:textSize="14sp"
             android:textStyle="bold" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider_color"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="@dimen/_10sdp"/>
 
 
-
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="30dp"
+            android:orientation="horizontal">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="Price"
+            android:layout_weight="1"
             android:textColor="@color/black"
             android:textSize="14sp" />
 
-
+            <TextView
+                android:id="@+id/priceentry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:text="Discount 10%"
+            android:layout_weight="1"
+            android:text="Discount"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+        <TextView
+            android:id="@+id/discountentry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="14sp" />
 
-        <TextView
+    </LinearLayout>
+
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal"
+         android:layout_marginStart="20dp"
+         android:layout_marginTop="20dp">
+         <TextView
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:text="Delivery Charges"
+             android:layout_weight="1"
+             android:textColor="@color/black"
+             android:textSize="14sp" />
+         <TextView
+             android:id="@+id/deliverychargesentry"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:gravity="center"
+             android:text="0"
+             android:layout_weight="2"
+             android:textColor="@color/black"
+             android:textSize="14sp" />
+
+
+
+     </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tax (GST:18%)"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/taxentryfield"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="0"
+                android:layout_weight="2"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+
+
+        </LinearLayout>
+
+
+       <!-- <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:text="Delivery Charges"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
+            android:text="Discount"
+            android:textColor="@color/black"
+            android:textSize="14sp" />-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider_color"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_10sdp"/>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="21dp"
-            android:text="Total Amount"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            android:layout_marginTop="21dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:text="Total Amount"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/totalamtentry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="2"
+                android:text=""
+                android:textColor="@color/blue"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
 
-        <TextView
+        </LinearLayout>
+
+
+
+
+
+
+        <!--<TextView
             android:id="@+id/priceentry"
             android:layout_width="50dp"
             android:layout_height="25dp"
@@ -142,9 +267,9 @@
             android:gravity="right"
             android:text=""
             android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:textSize="14sp" />-->
 
-        <TextView
+      <!--  <TextView
             android:id="@+id/discountentry"
             android:layout_width="50dp"
             android:layout_height="25dp"
@@ -153,9 +278,9 @@
             android:gravity="right"
             android:text=""
             android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:textSize="14sp" />-->
 
-        <TextView
+       <!-- <TextView
             android:id="@+id/deliverychargesentry"
             android:layout_width="50dp"
             android:layout_height="25dp"
@@ -165,16 +290,17 @@
             android:text="0"
             android:textColor="@color/black"
             android:textSize="14sp" />
+-->
 
-         <View
+        <!-- <View
              android:layout_width="match_parent"
              android:layout_height="1dp"
              android:background="@color/divider_color"
              android:layout_marginBottom="@dimen/_5sdp"
              android:layout_marginTop="@dimen/_5sdp"/>
+-->
 
-
-        <TextView
+       <!-- <TextView
             android:id="@+id/totalamtentry"
             android:layout_width="50dp"
             android:layout_height="25dp"
@@ -183,7 +309,7 @@
             android:text=""
             android:textColor="@color/blue"
             android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textStyle="bold" />-->
 
         <ImageView
             android:id="@+id/textView"
@@ -194,7 +320,6 @@
 
 
     </LinearLayout>
-
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/chckbtn"
@@ -213,6 +338,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

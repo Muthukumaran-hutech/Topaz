@@ -113,20 +113,32 @@
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/dtandtime"
         app:layout_constraintTop_toBottomOf="@+id/orderid" />
-
-    <TextView
-        android:id="@+id/unit"
+    <LinearLayout
         android:layout_width="48dp"
         android:layout_height="50dp"
         android:layout_marginEnd="70dp"
+        app:layout_constraintEnd_toEndOf="parent"
         android:background="@color/white_gr"
         android:gravity="center"
-        android:text="114 UNIT"
+        app:layout_constraintTop_toTopOf="@+id/qutrequest"
+        android:orientation="vertical">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/unit"
+        android:gravity="center"
+        android:text="115"
         android:textColor="@color/black"
         android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/qutrequest" />
+        android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:text="UNIT"/>
+    </LinearLayout>
 
     <ImageView
         android:layout_width="20dp"
@@ -145,34 +157,49 @@
         android:visibility="gone"
         app:layout_constraintStart_toEndOf="@+id/unit"
         app:layout_constraintTop_toTopOf="@+id/unit" />
-
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:layout_marginTop="30dp"
+       android:layout_marginLeft="27dp"
+       android:layout_marginRight="27dp"
+       android:paddingBottom="@dimen/_5sdp"
+       android:id="@+id/orderActionLayout"
+       app:layout_constraintStart_toStartOf="@+id/dtandtime"
+       app:layout_constraintTop_toBottomOf="@+id/dtandtime">
     <TextView
         android:id="@+id/helpbtn"
-        android:layout_width="151dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="30dp"
-        android:background="@color/gr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="Need help?"
+        android:background="@drawable/need_help_button_bg"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_weight="1"
         android:gravity="center"
         android:textSize="12sp"
-        android:textColor="@color/black_gr"
-        app:layout_constraintStart_toStartOf="@+id/dtandtime"
-        app:layout_constraintTop_toBottomOf="@+id/dtandtime" />
+        android:textColor="@color/black_gr"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/detailsbtn"
-        android:layout_width="151dp"
+        android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginStart="30dp"
         android:background="@drawable/bt_bck"
+        android:layout_marginStart="@dimen/_20sdp"
         android:gravity="center"
         android:textAllCaps="false"
         android:text="@string/view_details"
+        android:layout_weight="1"
         android:textColor="@color/blue"
         android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/helpbtn"
-        app:layout_constraintTop_toTopOf="@+id/helpbtn" />
+        android:textStyle="bold"/>
+   </LinearLayout>
+  <View
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      app:layout_constraintTop_toBottomOf="@id/orderActionLayout"
+      android:background="@color/gr"
+      android:layout_marginTop="@dimen/_5sdp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

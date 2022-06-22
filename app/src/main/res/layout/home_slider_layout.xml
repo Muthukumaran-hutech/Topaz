@@ -10,6 +10,9 @@
         app:layout_constraintStart_toStartOf="parent"
         android:src="@drawable/cbimage"
         android:scaleType="centerCrop"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginRight="@dimen/_5sdp"
+        android:layout_marginLeft="@dimen/_5sdp"
         app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/advertisement_image"
         app:layout_constraintEnd_toEndOf="parent">

@@ -44,26 +44,32 @@ class HomeSliderAdapter(var context: Context,var sliderlist:List<AddModels>): Ba
         var adImage=view?.findViewById<ImageView>(R.id.advertisement_image)
         var adTitle=view?.findViewById<TextView>(R.id.advertisement_title)
         var adDescription=view?.findViewById<TextView>(R.id.advertisement_description)
-        val decodedString: ByteArray = Base64.decode(
 
-            sliderlist.get(position).addImage,
-            Base64.DEFAULT)
+        try {
+            val decodedString: ByteArray = Base64.decode(
 
-        val bitmap =
-            BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+                sliderlist.get(position).addImage,
+                Base64.DEFAULT
+            )
 
-        if(bitmap==null){
-            adTitle?.visibility=View.GONE
-            adDescription?.visibility=View.GONE
-            adImage?.setImageResource(R.drawable.ic_baseline_image_24)
+            val bitmap =
+                BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+
+            if (bitmap == null) {
+                adTitle?.visibility = View.GONE
+                adDescription?.visibility = View.GONE
+                adImage?.setImageResource(R.drawable.ic_baseline_image_24)
+            } else {
+                adTitle?.visibility = View.VISIBLE
+                adDescription?.visibility = View.VISIBLE
+                adImage?.setImageBitmap(bitmap)
+                adTitle?.text = sliderlist.get(position).addtitle
+                adDescription?.text = sliderlist.get(position).addDescription
+
+            }
         }
-        else{
-            adTitle?.visibility=View.VISIBLE
-            adDescription?.visibility=View.VISIBLE
-            adImage?.setImageBitmap(bitmap)
-            adTitle?.text=sliderlist.get(position).addtitle
-            adDescription?.text=sliderlist.get(position).addDescription
-
+        catch (e:Exception){
+            e.printStackTrace()
         }
 
 

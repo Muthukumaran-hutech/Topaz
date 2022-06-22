@@ -100,7 +100,7 @@ class EditProfile : AppCompatActivity() {
 
 
         binding.backarrow1.setOnClickListener {
-            startActivity(Intent(activity, MyAccount::class.java))
+            //startActivity(Intent(activity, MyAccount::class.java))
             finish()
         }
     }

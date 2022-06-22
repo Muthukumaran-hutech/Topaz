@@ -16,6 +16,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.topaz.Adapters.CategoryAdapter
+import com.example.topaz.Adapters.HomeCategoriesAdapter
 import com.example.topaz.ApiModels.CategoryListApiModel
 import com.example.topaz.ApiModels.SubCategoryListApiModel
 import com.example.topaz.ApiModels.UpdateUserApiModel
@@ -23,6 +24,7 @@ import com.example.topaz.Interface.CategoryPageItemClickListner
 import com.example.topaz.Interface.JsonPlaceholder
 import com.example.topaz.Models.CategoriesModel
 import com.example.topaz.Models.HomeCategoryModel
+import com.example.topaz.Models.SubCatListModels
 import com.example.topaz.R
 import com.example.topaz.RetrofitApiInstance.UpdateAccountInfoInstance
 import com.example.topaz.Utility.Util
@@ -45,22 +47,31 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
     var categoryInnerlist = java.util.ArrayList<CategoriesModel>()
     var catId = ""
     var categoryName ="";
+    var from=""
     lateinit var bottomnav:BottomNavigationView
+    var catSubModels = ArrayList<SubCatListModels>()
+    lateinit var categoryAdapter: CategoryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCategoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        catId = intent.getStringExtra("cat__iD").toString()
-        categoryName = intent.getStringExtra("category_name") as String
+        from=intent.getStringExtra("from").toString()
 
         activity = this
         setSupportActionBar(binding.catToolbar)
         supportActionBar?.title = ""
 
         binding.appProgressBar2.visibility = View.VISIBLE
-        categoryApiCall()
+
+        if(from.equals("Homepage")) {
+            catId = intent.getStringExtra("cat__iD").toString()
+            categoryName = intent.getStringExtra("category_name") as String
+            categoryApiCall()
+        }
+        else{
+            loadHomePageCategoryItem()
+        }
 
 
        /* binding.home?.setOnClickListener {
@@ -109,6 +120,75 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
 
     }
 
+    private fun loadHomePageCategoryItem() {
+        try{
+
+            catSubModels.clear()
+            var categoryres = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
+                .create(JsonPlaceholder::class.java)
+            categoryres.viewCategory().enqueue(object : Callback<List<CategoryListApiModel>?> {
+                override fun onResponse(
+                    call: Call<List<CategoryListApiModel>?>,
+                    response: Response<List<CategoryListApiModel>?>
+                ) {
+                    binding.appProgressBar2.visibility = View.GONE
+                    if(response.isSuccessful){
+                        for (subCatListModel in response.body()!!) {
+                            val categoryModel = CategoriesModel(
+                                "",
+                                subCatListModel.categoryName,
+                                "",
+                                subCatListModel.categoryid
+
+                            )
+
+                            if(subCatListModel.active) {
+                                categoryInnerlist.add(categoryModel)
+                            }
+                        }
+                        //arrivals Adapter
+                        try {
+                            binding.categoryRecyclerView.layoutManager = GridLayoutManager(
+                                this@CategoryActivity,
+                                3
+                            )//Count depicts no of elements in row
+                            val categoryAdapter = CategoryAdapter(
+                                categoryInnerlist,
+                                this@CategoryActivity,
+                                this@CategoryActivity
+                            )
+                            binding.categoryRecyclerView.adapter = categoryAdapter
+                            binding.categoryRecyclerView.setHasFixedSize(true)
+
+
+                        }
+                        catch (e:Exception){
+                            Log.e("Home Exception",e.toString())
+                        }
+
+
+                    }
+                    else{
+                        binding.appProgressBar2.visibility = View.GONE
+                        Toast.makeText(this@CategoryActivity,"Something went wrong",Toast.LENGTH_LONG).show()
+                    }
+
+                }
+
+                override fun onFailure(call: Call<List<CategoryListApiModel>?>, t: Throwable) {
+                    binding.appProgressBar2.visibility = View.GONE
+                    Toast.makeText(this@CategoryActivity,"Something went wrong",Toast.LENGTH_LONG).show()
+                }
+            })
+
+
+
+        }
+        catch (e:Exception){
+            e.toString()
+        }
+    }
+
     private fun categoryApiCall() {
         val res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
             .create(JsonPlaceholder::class.java)
@@ -139,7 +219,7 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
                               this@CategoryActivity,
                               3
                           )//Count depicts no of elements in row
-                          val categoryAdapter = CategoryAdapter(
+                          categoryAdapter = CategoryAdapter(
                               categoryInnerlist,
                               this@CategoryActivity,
                               this@CategoryActivity
@@ -243,9 +323,26 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
     }
 
     override fun CategoryPageItemClickListner(categories: CategoriesModel) {
-        var intent = Intent(activity, InnerCategories::class.java)
-        intent.putExtra("cat_id", categories.CateegorySubId)
-        startActivity(intent)
+
+        try {
+
+            if (from.equals("Homepage")) {
+                var intent = Intent(activity, InnerCategories::class.java)
+                intent.putExtra("cat_id", categories.CateegorySubId)
+                startActivity(intent)
+            } else {
+                categoryInnerlist.clear()
+                binding.appProgressBar2.visibility = View.VISIBLE
+                catId = categories.CateegoryId
+                categoryName = categories.CateegoryName
+                categoryApiCall()
+                from="Homepage"
+
+            }
+        }
+        catch (e:Exception){
+            e.toString()
+        }
 
     }
 
@@ -274,8 +371,36 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
         var actionview=menuitem.actionView
         var cartcount=actionview.findViewById<TextView>(R.id.cart_count)//Getting the textview reference from action layout defined for the menu item
         var cart=actionview.findViewById<ImageView>(R.id.cart_icon)
+
+        var quoteitem = menu.findItem(R.id.quotationStatus)
+        var quoteactionview= quoteitem.actionView
+        var quotecount = quoteactionview.findViewById<TextView>(R.id.quotation_count)
+        var quotationview = quoteactionview.findViewById<ImageView>(R.id.quotationstatus_icon)
         setupCartCount(cartcount, cart)
+        setUpQuoteListCount(quotecount,quotationview)
         return true
+    }
+
+    private fun setUpQuoteListCount(quotecount: TextView?, quotationview: ImageView?) {
+        quotationview?.setOnClickListener {
+            startActivity(Intent(this,ProductQuotation::class.java))
+        }
+
+
+        Util.getQuoteListEntry(this,object : Util.QuotationCountListener {
+            override fun getQuotationCount(quotationsize: Int) {
+
+                if(quotationsize==0){
+                    quotecount?.visibility= View.GONE
+                }
+                else{
+                    quotecount?.visibility = View.VISIBLE
+                    quotecount?.text  = quotationsize.toString()
+
+                }
+
+            }
+        })
     }
 
     private fun setupCartCount(cartcount: TextView?, cart: ImageView?) {

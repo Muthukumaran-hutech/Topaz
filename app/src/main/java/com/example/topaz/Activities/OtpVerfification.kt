@@ -2,11 +2,8 @@ package com.example.topaz.Activities
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.ContentValues
+import android.content.*
 import android.content.ContentValues.TAG
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -45,6 +42,7 @@ class OtpVerfification : AppCompatActivity() {
     var ss = ""
     var cs = ""
     private val REQ_USER_CONSENT = 200
+    lateinit var editor:SharedPreferences.Editor
 
 
 
@@ -62,7 +60,7 @@ class OtpVerfification : AppCompatActivity() {
         }
 
         val sharedPreference =  getSharedPreferences("CUSTOMER_DATA", Context.MODE_PRIVATE)
-        val editor = sharedPreference.edit()
+         editor = sharedPreference.edit()
 
 
 
@@ -83,7 +81,10 @@ class OtpVerfification : AppCompatActivity() {
 
                 Toast.makeText(applicationContext, "Please Enter The Valid OTP", Toast.LENGTH_LONG)
                     .show()
-            } else {
+                editor.putString("isUserLoggedIn","false").apply()
+            }
+
+            else {
                 binding.appProgressBar.visibility = View.VISIBLE
                 var otpCode =
                     (binding.OTP1.text.toString() + binding.OTP2.text.toString() + binding.OTP3.text.toString()
@@ -286,8 +287,10 @@ class OtpVerfification : AppCompatActivity() {
                     // Sign in failed, display a message and update the UI
                     Log.w(TAG, "signInWithCredential:failure", it.exception)
                     if (it.exception is FirebaseAuthInvalidCredentialsException) {
+
                         Toast.makeText(applicationContext, "Please Enter The Valid OTP", Toast.LENGTH_LONG)
                             .show()
+                        editor.putString("isUserLoggedIn","false").apply()
                     }
                     // Update UI
                 }
@@ -344,8 +347,8 @@ class OtpVerfification : AppCompatActivity() {
                 binding.countdownTimer.text = binding.otpNtRecieved.toString()
                 binding.otpNtRecieved.visibility = View.VISIBLE
                 binding.resendOtpBtn.visibility = View.VISIBLE
-                binding.appProgressBar.visibility = View.GONE
-                binding.countdownTimer.visibility = View.GONE
+                binding.appProgressBar.visibility = View.INVISIBLE
+                binding.countdownTimer.visibility = View.INVISIBLE
             }
         }.start()
 

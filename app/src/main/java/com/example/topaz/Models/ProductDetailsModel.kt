@@ -14,4 +14,8 @@ import kotlinx.android.parcel.Parcelize
  var ProductBrand: String = "",
  var ProductWoodType: String = "",
    // var ProductSupplier: String = "",
- var ProductDescription: String = ""): Parcelable
+ var ProductDescription: String = "",
+ var quantity:String= "",
+ var totalvalue:String= ""
+
+ ): Parcelable

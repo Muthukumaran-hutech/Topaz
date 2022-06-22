@@ -83,13 +83,10 @@
 
     <LinearLayout
         android:id="@+id/otp_linear_layout"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/_50sdp"
-        android:layout_marginStart="27dp"
         android:layout_marginTop="@dimen/_220sdp"
-        android:layout_marginEnd="27dp"
         android:orientation="horizontal"
-        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -98,7 +95,6 @@
             android:id="@+id/OTP_1"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:layout_marginStart="5dp"
             android:autofillHints="smsOTPCode"
             android:background="@color/gr"
             android:clickable="true"
@@ -193,42 +189,41 @@
 
     <TextView
         android:id="@+id/countdown_timer"
-        android:layout_width="@dimen/_39sdp"
-        android:layout_height="@dimen/_19sdp"
-        android:layout_marginStart="@dimen/_49sdp"
-        android:layout_marginTop="@dimen/_280sdp"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/otp_linear_layout"
+        app:layout_constraintEnd_toEndOf="@id/otp_linear_layout"
+        app:layout_constraintStart_toStartOf="@id/otp_linear_layout"
+        android:textColor="@color/dark_gray_color"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:textSize="14sp"/>
 
     <TextView
         android:id="@+id/otp_nt_recieved"
-        android:layout_width="@dimen/_115sdp"
-        android:layout_height="@dimen/_19sdp"
-        android:layout_marginStart="@dimen/_49sdp"
-        android:layout_marginTop="@dimen/_300sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/didn_t_receive_otp"
         android:textColor="@color/black"
         android:textSize="14sp"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginLeft="@dimen/_27sdp"
+        app:layout_constraintTop_toBottomOf="@id/countdown_timer"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
         android:id="@+id/resend_otp_btn"
-        android:layout_width="@dimen/_115sdp"
-        android:layout_height="@dimen/_19sdp"
-        android:layout_marginStart="@dimen/_200sdp"
-        android:layout_marginTop="@dimen/_300sdp"
-        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
         android:text="@string/resend_otp"
         android:textColor="@color/black"
         android:textSize="14sp"
         android:textStyle="bold"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/countdown_timer"
+        app:layout_constraintEnd_toEndOf="@id/otp_linear_layout"
+        app:layout_constraintStart_toStartOf="@id/otp_linear_layout"
+        android:layout_marginRight="@dimen/_27sdp"/>
 
     <ProgressBar
         android:id="@+id/app_progress_bar"
@@ -244,16 +239,17 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/login_btn_phone"
-        android:layout_width="@dimen/_270sdp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="@dimen/_350sdp"
+        app:layout_constraintTop_toBottomOf="@id/otp_nt_recieved"
         android:background="@drawable/roundedbtndarkblue"
         android:text="@string/login"
         android:textAllCaps="false"
+        android:layout_marginRight="@dimen/_27sdp"
+        android:layout_marginLeft="@dimen/_27sdp"
         android:textColor="@color/white"
+        android:layout_marginTop="@dimen/_30sdp"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

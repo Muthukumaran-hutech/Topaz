@@ -21,6 +21,7 @@
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
         android:background="@color/white"
         android:text="@string/wooden_waterproof_plywood_sheet_thickness_18_mm"
         android:textColor="@color/netural_black"
@@ -31,26 +32,29 @@
 
     <TextView
         android:id="@+id/textView14"
-        android:layout_width="58dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:gravity="center"
         android:text="@string/_59"
+        android:textStyle="bold"
         android:textColor="@color/primary_blue"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/textView13"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
     <TextView
         android:id="@+id/textView16"
-        android:layout_width="117dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="20dp"
         android:text="@string/square_feet"
         android:textColor="@color/netural_black"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/textView14"
+        app:layout_constraintBottom_toBottomOf="@id/textView14"
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
     <TextView
@@ -58,7 +62,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:textSize="12sp"
         android:text="@string/_84"
+        android:background="@drawable/strike_through"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/textView14"
         app:layout_constraintStart_toStartOf="@+id/textView14"
@@ -69,10 +75,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="24% Off"
+        android:textSize="12sp"
         android:textColor="@color/primary_red"
         app:layout_constraintStart_toEndOf="@+id/textView15"
+        app:layout_constraintBottom_toBottomOf="@id/textView15"
         app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
     <ImageView
@@ -80,7 +88,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:src="@drawable/ic_baseline_favorite_24"
         app:layout_constraintStart_toEndOf="@+id/textView17"
         app:layout_constraintTop_toBottomOf="@+id/textView16" />

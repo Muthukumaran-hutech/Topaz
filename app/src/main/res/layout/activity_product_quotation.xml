@@ -36,6 +36,7 @@
         android:id="@+id/quotation_scrollview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:visibility="gone"
         android:background="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/quotationbtn"
         app:layout_constraintEnd_toEndOf="parent"
@@ -238,6 +239,37 @@
         </LinearLayout>
 
     </ScrollView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/quotation_toolbar"
+        android:id="@+id/quotationList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/quotationbtn"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="140dp"
+        android:layout_height="35dp"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:backgroundTint="@color/blue"
+        android:paddingRight="5dp"
+        android:textColorHighlight="@color/blue"
+        android:textColor="@color/white"
+        android:paddingLeft="5dp"
+        android:id="@+id/addMoreProduct"
+        android:textSize="14dp"
+        android:drawableRight="@drawable/add_product_arrow"
+        android:text="Add More Products"
+        android:textAllCaps="false"
+
+        android:background="@drawable/category_btn_unselected"
+        app:layout_constraintEnd_toEndOf="@id/quotationbtn"
+        app:layout_constraintBottom_toTopOf="@id/quotationbtn"/>
+
+
 
 
     <androidx.appcompat.widget.AppCompatButton
@@ -254,4 +286,28 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/quotationProgress"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center"
+        android:id="@+id/quotationNotFoundText"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:visibility="gone"
+        android:paddingTop="@dimen/_5sdp"
+        android:text="Quotation list is empty"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

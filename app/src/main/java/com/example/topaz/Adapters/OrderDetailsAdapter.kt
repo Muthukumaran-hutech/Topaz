@@ -52,7 +52,7 @@ class OrderDetailsAdapter(
             context: Context
         ) {
             title.text = orderListItem[position].quotationTitle
-            price.text = orderListItem[position].quotationSqftPrice.toString()
+            price.text = context.getString(R.string.Rs)+orderListItem[position].quotationSqftPrice.toString()+"/"
 
 
             val decodedString: ByteArray = Base64.decode(orderListItem.get(position).image,

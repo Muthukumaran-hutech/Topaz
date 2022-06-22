@@ -96,6 +96,7 @@ SearchActivity : AppCompatActivity(), SearchListPageItemClickListner {
                 if (newText?.length==0){
                     searchAdapter.clearList()
                     binding.searchProduct.visibility = View.VISIBLE
+                    binding.userSearchList.visibility= View.GONE
                     binding.searchResult.text="0"+" "+"Result"
 
                 }
@@ -103,6 +104,7 @@ SearchActivity : AppCompatActivity(), SearchListPageItemClickListner {
                 else{
                     binding.searchProduct.visibility = View.GONE
                     binding.userSearchList.visibility = View.VISIBLE
+                    binding.userSearchList.visibility= View.VISIBLE
                     filteredlist=searchInnerlist.filter { s-> (s.SearchText.lowercase().contains(newText.toString().lowercase()) || s.CategoryName.lowercase().contains(newText.toString().lowercase())) }
                     searchAdapter= SearchViewAdapter(filteredlist as ArrayList<SearchListModel> ,this@SearchActivity)
                     binding.userSearchList.adapter = searchAdapter
@@ -202,11 +204,16 @@ SearchActivity : AppCompatActivity(), SearchListPageItemClickListner {
 // This is where you process the intent and extract the speech text from the intent.
 
 
-    override fun SearchListPageItemClickListner(search: SearchListModel) {
-        val intent = Intent(activity, ProductDetails::class.java)
-        intent.putExtra("inner_sunid",search.ProductId)
-        intent.putExtra("product_name", search.SearchText)
-        startActivity(intent)
+    override fun SearchListPageItemClickListner(data: SearchListModel) {
+        try {
+            val intent = Intent(activity, ProductDetails::class.java)
+            intent.putExtra("inner_sunid", data.ProductId)
+            intent.putExtra("product_name", data.SearchText)
+            startActivity(intent)
+        }
+        catch (e:Exception){
+            e.toString()
+        }
 
     }
 
@@ -220,10 +227,10 @@ SearchActivity : AppCompatActivity(), SearchListPageItemClickListner {
         //super.onBackPressed()
         val message = "Are you sure yo want to exit"
         AlertDialog.Builder(this)
-            .setTitle("Applcation will be logged out ")
             .setMessage(message)
             .setPositiveButton("OK") { _, _ ->
                 super.onBackPressed()
+
 
                 //  binding.phoneContainer.helperText = getString(R.id.Required)
             }.setNegativeButton("Cancel") { _, _ ->

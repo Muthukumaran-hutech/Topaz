@@ -20,11 +20,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
+import com.example.topaz.ApiModels.DiscountListApiModel
 import com.example.topaz.ApiModels.ProductDetailsListApiModel
 import com.example.topaz.Interface.JsonPlaceholder
 import com.example.topaz.Models.*
@@ -33,6 +35,7 @@ import com.example.topaz.RetrofitApiInstance.UpdateAccountInfoInstance
 import com.example.topaz.Utility.Util
 import com.example.topaz.databinding.ActivityProductDetailsBinding
 import com.google.firebase.database.*
+import com.google.firebase.ktx.Firebase
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -51,6 +54,11 @@ class ProductDetails : AppCompatActivity() {
     var custId = ""
     var productId = ""
     var product = ProductDetailsListApiModel()
+    lateinit var quatationRef:DatabaseReference
+    lateinit var quatationProductRef:DatabaseReference
+    var discountId=""
+    var productdiscount=""
+    var actualprice="0"
 
 
     private lateinit var database: DatabaseReference
@@ -76,6 +84,7 @@ class ProductDetails : AppCompatActivity() {
         setSupportActionBar(binding.prodDetailsToolbar)
         supportActionBar?.title = ""
         binding.textView9.text=productname
+
 
         binding.productBackArrow.setOnClickListener {
             //startActivity(Intent(activity, InnerCategories::class.java))
@@ -109,13 +118,15 @@ class ProductDetails : AppCompatActivity() {
                .load(bitmap)
                .into(catImage)*/
 
-        slidemodellist.add(SlideModel(R.drawable.ic_baseline_image_24))
+        slidemodellist.add(SlideModel(R.drawable.ic_baseline_image_24,ScaleTypes.FIT))
 
 
         //-----------------Slide model list---------------------//
 
         //slidemodellist.add(SlideModel(imageDrawable, scaleType = ScaleTypes.FIT ))
         binding.productImageSlider.setImageList(slidemodellist)
+
+
 
         binding.appProgressBar3.visibility = View.VISIBLE
 
@@ -126,15 +137,16 @@ class ProductDetails : AppCompatActivity() {
 
 
         binding.whislistProdDetails.setOnClickListener {
-            var detailsFirebaseModel = DetailsFirebaseModel(
+            val detailsFirebaseModel = DetailsFirebaseModel(
                 custId = custId.toString(),
                 productImage = product.Productimage2.imagebyte,
                 productid = product.productid,
                 productTitle = product.productTitle,
                 thickness = product.thickness,
-                price = product.price,
-                productDiscountId = "",
-                addedToWishList = true
+                price = product.sqFeetPrice!!,
+                productDiscountId = productdiscount,
+                addedToWishList = true,
+                actualPrice = actualprice.toDouble()
             )
 
             //creating database and child to fire base
@@ -150,22 +162,25 @@ class ProductDetails : AppCompatActivity() {
             binding.whislistProdDetails1.visibility=View.VISIBLE
         }
 
-        binding.getAPrice.setOnClickListener {
+        binding.getAPrice.setOnClickListener {//Add quotation
             sendUserData()
-            var intent = Intent(activity, ProductQuotation::class.java)
-            var productDetailsModel1 = ProductDetailsModel(
+            checkIfQuatationExists()
+            val intent = Intent(activity, ProductQuotation::class.java)
+           /* var productDetailsModel1 = ProductDetailsModel(
                 product.productid,
                 product.Productimage2.imagepath,
                 product.productTitle,
-                product.price.toString(),
+                product.sqFeetPrice.toString(),
                 product.size,
                 product.thickness,
                 product.brand,
                 product.woodType,
                 //productList.get(0).ProductImage
             )
-            intent.putExtra("extra_item", productDetailsModel1)
+            intent.putExtra("extra_item", productDetailsModel1)*/
             startActivity(intent)
+
+
         }
 
         binding.buyNow.setOnClickListener {
@@ -177,6 +192,9 @@ class ProductDetails : AppCompatActivity() {
             product.productTitle
             product.price
         }
+
+        quatationRef=FirebaseDatabase.getInstance().getReference("MyQuotation")
+        quatationProductRef=FirebaseDatabase.getInstance().getReference("QuotationProductList")
     }
 
     private fun checkIfActiveCartExists() {
@@ -192,10 +210,15 @@ class ProductDetails : AppCompatActivity() {
                             CartProductList(
                                 product_title = product.productTitle,
                                 cartImage = product.Productimage2.imagepath,
-                                price = product.price.toString(),
+                                price = product.sqFeetPrice.toString(),
                                 isActive = true,
                                 product_id = product.productid.toString(),
-                                cart_id = cart_id!!.cartId.toString()
+                                cart_id = cart_id!!.cartId.toString(),
+                                quantity = "1",
+                                discount = productdiscount,
+                                discount_id = discountId.toInt(),
+                                size = product.size,
+                                actualPrice = actualprice
                             )
                         )
                         database1.child(cart_id!!.cartId).child("Products")
@@ -217,11 +240,18 @@ class ProductDetails : AppCompatActivity() {
                         CartProductList(
                             product_title = product.productTitle,
                             cartImage = product.Productimage2.imagepath,
-                            price = product.price.toString(),
+                            price = product.sqFeetPrice.toString(),
                             isActive = true,
                             product_id = product.productid.toString(),
-                            cart_id = cart_id.toString()
+                            cart_id = cart_id.toString(),
+                            quantity = "1",
+                            discount = productdiscount,
+                            discount_id = discountId.toInt(),
+                            size = product.size,
+                            actualPrice = actualprice
+
                         )
+
                     )
                     //------------------------------------Cart creation------------------------------------------
                     database.child(custId.toString()).child(cart_id.toString())
@@ -251,17 +281,18 @@ class ProductDetails : AppCompatActivity() {
     }
 
     private fun onApiCallProductDetails() {
-        var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
+        val res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
             .create(JsonPlaceholder::class.java)
 
-
+       //binding.productDetailsProgress.visibility= View.VISIBLE
         res.viewProduct(productId).enqueue(object : Callback<ProductDetailsListApiModel> {
             override fun onResponse(
                 call: Call<ProductDetailsListApiModel>,
                 response: Response<ProductDetailsListApiModel>
             ) {
                 if (response.isSuccessful) {
-                    binding.appProgressBar3.visibility = View.GONE
+                     binding.appProgressBar3.visibility = View.GONE
+                       // binding.productDetailsProgress.visibility= View.GONE
 
                     product = response.body()!!
 
@@ -284,7 +315,7 @@ class ProductDetails : AppCompatActivity() {
                         getString(R.string.Rs) + binding.textView14.text /*+ getString(R.string.slash)*/
 
                     binding.woodMaterialName.text = product?.productTitle
-                    binding.textView14.text = rupees + product?.price + "/"
+                    binding.textView14.text = rupees + product?.sqFeetPrice.toString() + "/"
                     binding.productSpecificationSize.text = product?.size
                     binding.productSpecificationThickness.text = product?.thickness
                     binding.productSpecificationBrand.text = product?.brand
@@ -295,7 +326,9 @@ class ProductDetails : AppCompatActivity() {
                     binding.getAPrice.isEnabled = true
                     binding.buyNow.isEnabled = true
                     binding.addToCart.isEnabled = true
+                    actualprice=product?.sqFeetPrice.toString()
                     checkIfProductIsAddedToWishlist()
+                    getDiscountByProductId()
 
                 } else {
                     val message = "SERVER ERROR "
@@ -351,7 +384,14 @@ class ProductDetails : AppCompatActivity() {
         var actionview=menuitem.actionView
         var cartcount=actionview.findViewById<TextView>(R.id.cart_count)//Getting the textview reference from action layout defined for the menu item
         var cart=actionview.findViewById<ImageView>(R.id.cart_icon)
+
+        var quoteitem = menu.findItem(R.id.quotationStatus)
+        var quoteactionview= quoteitem.actionView
+        var quotecount = quoteactionview.findViewById<TextView>(R.id.quotation_count)
+        var quotationview = quoteactionview.findViewById<ImageView>(R.id.quotationstatus_icon)
+
         setupCartCount(cartcount, cart)
+        setUpQuoteListCount(quotecount,quotationview)
 
         return true
     }
@@ -377,6 +417,29 @@ class ProductDetails : AppCompatActivity() {
         })
 
 
+    }
+
+
+    private fun setUpQuoteListCount(quotecount: TextView?, quotationview: ImageView?) {
+        quotationview?.setOnClickListener {
+            startActivity(Intent(this,ProductQuotation::class.java))
+        }
+
+
+        Util.getQuoteListEntry(this,object : Util.QuotationCountListener {
+            override fun getQuotationCount(quotationsize: Int) {
+
+                if(quotationsize==0){
+                    quotecount?.visibility= View.GONE
+                }
+                else{
+                    quotecount?.visibility = View.VISIBLE
+                    quotecount?.text  = quotationsize.toString()
+
+                }
+
+            }
+        })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -409,6 +472,192 @@ class ProductDetails : AppCompatActivity() {
         })
 
     }
+
+
+    private fun getDiscountByProductId(){
+
+        val discount = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
+            .create(JsonPlaceholder::class.java)
+
+        binding.productDetailsProgress.visibility= View.VISIBLE
+        binding.textView17.visibility = View.VISIBLE
+        binding.textView15.visibility = View.VISIBLE
+        discount.getDiscountOnProduct(productId).enqueue(object : Callback<DiscountListApiModel?> {
+            override fun onResponse(
+                call: Call<DiscountListApiModel?>,
+                response: Response<DiscountListApiModel?>
+            ) {
+
+              try {
+                  if (response.isSuccessful) {
+                      binding.productDetailsProgress.visibility= View.GONE
+                      if (response.body() != null) {
+                          Log.d("Discount", response.body()!!.discount!!)
+                          response.body()?.let {
+                              val discountListApiModel = it
+                              binding.textView17.text = discountListApiModel?.discount + " " + "Off"
+                              if (discountListApiModel.discount != null) {
+                                  try {
+                                      binding.textView15.text =
+                                          getString(R.string.Rs) + product.sqFeetPrice!!.toString()
+                                      val discount1 =
+                                          Util.extractNumbersFromString(discountListApiModel.discount.toString(),"Percentage")
+
+                                      var sqfeetprice =
+                                          (product.sqFeetPrice!!.toInt() * discount1[0].toInt()) / 100
+                                      var discountedsqfeet =
+                                          product.sqFeetPrice!!.toInt() - sqfeetprice
+                                      // Log.d("--Discounted price--",(product.sqFeetPrice!!.toInt() - sqfeetprice).toString())
+                                      product.sqFeetPrice = discountedsqfeet.toDouble()
+                                      binding.textView14.text =
+                                          getString(R.string.Rs) + product?.sqFeetPrice.toString() + "/"
+                                      discountId=discountListApiModel.discountId.toString()
+                                      productdiscount=discountListApiModel.discount!!
+                                  } catch (e: Exception) {
+                                      e.printStackTrace()
+                                  }
+
+
+                              }
+
+                          }
+                      } else {
+                          binding.productDetailsProgress.visibility= View.GONE
+                          binding.textView17.visibility = View.INVISIBLE
+                          binding.textView15.visibility = View.INVISIBLE
+                          Toast.makeText(this@ProductDetails, "No data", Toast.LENGTH_LONG)
+                      }
+                  } else {
+                      binding.productDetailsProgress.visibility= View.GONE
+                      binding.textView17.visibility = View.INVISIBLE
+                      binding.textView15.visibility = View.INVISIBLE
+                      Toast.makeText(this@ProductDetails, "No data", Toast.LENGTH_LONG).show()
+                      Log.d("Discount Failed", "true")
+                  }
+              }
+              catch (e:java.lang.Exception){
+                  e.printStackTrace()
+                  binding.productDetailsProgress.visibility= View.GONE
+                  binding.textView17.visibility = View.INVISIBLE
+                  binding.textView15.visibility = View.INVISIBLE
+              }
+            }
+
+            override fun onFailure(call: Call<DiscountListApiModel?>, t: Throwable) {
+                Log.d("Discount Failed","true")
+                binding.productDetailsProgress.visibility= View.GONE
+                binding.textView17.visibility = View.INVISIBLE
+                binding.textView15.visibility = View.INVISIBLE
+                Toast.makeText(this@ProductDetails,"Something went wrong:",Toast.LENGTH_LONG).show()
+            }
+        })
+    }
+
+    fun  initializeQuatationModel(){
+        try{
+            val quatationref=FirebaseDatabase.getInstance().getReference("MyQuotation")
+            val quatationId=quatationref.child(custId).push().key.toString()
+            val quatationDetailModel=QuatationDetailModel(
+                quotationStatus = true,
+                quotationId = quatationId,
+                custId = custId
+            )
+            quatationref.child(custId).child(quatationId).setValue(quatationDetailModel)
+            addQuatationList(quatationId = quatationDetailModel.quotationId)
+
+
+        }
+        catch (e:Exception){
+            e.printStackTrace()
+        }
+
+    }
+
+    fun addQuatationList(quatationId:String){
+        try{
+            val ref=quatationProductRef.child(quatationId).child("Products")
+            ref.child(productId).addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+
+                    if(!snapshot.exists()){//Only if product is not added earlier, then add the product
+                        ref.child(productId).setValue(prepareQuatationModel())
+                    }
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                }
+            })
+
+
+            Toast.makeText(this,"Added successfully",Toast.LENGTH_LONG).show()
+        }
+        catch (e:java.lang.Exception){
+            e.printStackTrace()
+        }
+    }
+
+
+    fun checkIfQuatationExists(){
+        try{
+            val qref=quatationRef.child(custId).orderByChild("quotationStatus").equalTo(true)
+            qref.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if(snapshot.exists()){
+                        for(snap in snapshot.children){
+
+                            var quatationDetailModel=snap.getValue(QuatationDetailModel::class.java)!!
+                            Log.d("Quotation detail",quatationDetailModel.quotationId)
+
+                            addQuatationList(quatationId = quatationDetailModel.quotationId)
+
+
+                        }
+                    }
+
+                    else{
+                        initializeQuatationModel()
+                        Log.d("QDD Failure","true")
+                    }
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                Log.d("Quotation failure","true")
+                }
+            })
+
+
+        }
+        catch (e:java.lang.Exception){
+            e.printStackTrace()
+        }
+
+    }
+
+    fun prepareQuatationModel():QuatationListModel{
+        val productDetailsModel1 = QuatationListModel(
+            product.productid,
+            product.Productimage2.imagebyte,
+            product.productTitle,
+            product.sqFeetPrice.toString(),
+            product.size,
+            product.thickness,
+            product.brand,
+            product.woodType,
+            "",
+            quantity = "1",
+            totalvalue = product.sqFeetPrice.toString(),
+            expanded = false,
+            discountId=discountId
+            //productList.get(0).ProductImage
+        )
+
+        return productDetailsModel1
+    }
+
+
 
 
 }

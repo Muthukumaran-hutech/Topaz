@@ -113,7 +113,15 @@ class MyWishlist : AppCompatActivity(), WishListItemClickListner {
         var actionview=menuitem.actionView
         var cartcount=actionview.findViewById<TextView>(R.id.cart_count)//Getting the textview reference from action layout defined for the menu item
         var cart=actionview.findViewById<ImageView>(R.id.cart_icon)
+
+
+        var quoteitem = menu.findItem(R.id.quotationStatus)
+        var quoteactionview= quoteitem.actionView
+        var quotecount = quoteactionview.findViewById<TextView>(R.id.quotation_count)
+        var quotationview = quoteactionview.findViewById<ImageView>(R.id.quotationstatus_icon)
+
         setupCartCount(cartcount, cart)
+        setUpQuoteListCount(quotecount,quotationview)
         return true
     }
 
@@ -139,6 +147,29 @@ class MyWishlist : AppCompatActivity(), WishListItemClickListner {
         })
 
 
+    }
+
+
+    private fun setUpQuoteListCount(quotecount: TextView?, quotationview: ImageView?) {
+        quotationview?.setOnClickListener {
+            startActivity(Intent(this,ProductQuotation::class.java))
+        }
+
+
+        Util.getQuoteListEntry(this,object : Util.QuotationCountListener {
+            override fun getQuotationCount(quotationsize: Int) {
+
+                if(quotationsize==0){
+                    quotecount?.visibility= View.GONE
+                }
+                else{
+                    quotecount?.visibility = View.VISIBLE
+                    quotecount?.text  = quotationsize.toString()
+
+                }
+
+            }
+        })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
