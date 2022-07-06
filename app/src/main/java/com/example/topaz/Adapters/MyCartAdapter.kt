@@ -120,34 +120,42 @@ class MyCartAdapter(
             myCartItemClickListner: MyCartItemClickListner,
             context: Context
         ) {
-            cartTitle.text = cartData[position].product_title
-            cartRupees.text =  context.getString(R.string.Rs)+cartData[position].price+"/"
-            //var rupees = getString(R.string.Rs) + binding.textView14.text + getString(R.string.slash)
-            val decodedString: ByteArray =
-                Base64.decode(cartData.get(position).cartImage, Base64.DEFAULT)
-            val bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+            try {
+                cartTitle.text = cartData[position].product_title+"\n"+"Thickness:" +" "+cartData[position].thickness
+                cartRupees.text = context.getString(R.string.Rs) + cartData[position].price + "/"
+                //var rupees = getString(R.string.Rs) + binding.textView14.text + getString(R.string.slash)
+                val decodedString: ByteArray =
+                    Base64.decode(cartData.get(position).cartImage, Base64.DEFAULT)
+                val bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
 
-            Glide.with(context)
-                .applyDefaultRequestOptions(
-                    RequestOptions().placeholder(R.drawable.ic_baseline_image_24)
-                        .error(R.drawable.ic_baseline_image_24)
-                )
-                .load(bitmap)
-                .into(cartImage)
-            cartDelete.setOnClickListener {
-                val message = "Are you sure yo want to Delete Cart Item"
-                AlertDialog.Builder(context)
-                    .setTitle("")
-                    .setMessage(message)
-                    .setPositiveButton("OK") { _, _ ->
-                        myCartItemClickListner.MyCartItemClickListner(cartData[position],position)
+                Glide.with(context)
+                    .applyDefaultRequestOptions(
+                        RequestOptions().placeholder(R.drawable.ic_baseline_image_24)
+                            .error(R.drawable.ic_baseline_image_24)
+                    )
+                    .load(bitmap)
+                    .into(cartImage)
+                cartDelete.setOnClickListener {
+                    val message = "Are you sure yo want to Delete Cart Item"
+                    AlertDialog.Builder(context)
+                        .setTitle("")
+                        .setMessage(message)
+                        .setPositiveButton("OK") { _, _ ->
+                            myCartItemClickListner.MyCartItemClickListner(
+                                cartData[position],
+                                position
+                            )
 
-                        //  binding.phoneContainer.helperText = getString(R.id.Required)
-                    }.setNegativeButton("Cancel") { _, _ ->
-                        //dismissDialog(0)
-                        //  binding.phoneContainer.helperText = getString(R.id.Required)
-                    }
-                    .show()
+                            //  binding.phoneContainer.helperText = getString(R.id.Required)
+                        }.setNegativeButton("Cancel") { _, _ ->
+                            //dismissDialog(0)
+                            //  binding.phoneContainer.helperText = getString(R.id.Required)
+                        }
+                        .show()
+                }
+            }
+            catch (e:Exception){
+                e.toString()
             }
 
         }

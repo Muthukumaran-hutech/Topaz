@@ -4,5 +4,6 @@ class SubCatListModels (
         var isCategoryClicked: Boolean=false,
         var catTitle: String = "",
         var catID: String = "",
+        var catImage: String =""
 
         )

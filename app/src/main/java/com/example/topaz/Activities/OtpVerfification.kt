@@ -11,6 +11,7 @@ import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.KeyEvent
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -116,7 +117,6 @@ class OtpVerfification : AppCompatActivity() {
                 //pHONEAUTH
                 binding.appProgressBar.visibility = View.GONE
                 binding.loginBtnPhone.isEnabled = true
-                editor.putString("isUserLoggedIn","true").apply()
                 val smscode = credential.smsCode
                // Toast.makeText(applicationContext, smscode, Toast.LENGTH_LONG).show()
                 //getOtpFromMessage(smscode)
@@ -183,10 +183,16 @@ class OtpVerfification : AppCompatActivity() {
         }
         binding.OTP1.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
+                if(s.toString().length==1){
+                    binding.OTP2.requestFocus()
+                }
+                else{
+                    binding.OTP1.requestFocus()
+                }
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                binding.OTP2.requestFocus()
+
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -195,6 +201,12 @@ class OtpVerfification : AppCompatActivity() {
 
         binding.OTP2.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
+                if(s.toString().length==1){
+                    binding.OTP3.requestFocus()
+                }
+                else{
+                    binding.OTP2.requestFocus()
+                }
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -207,10 +219,18 @@ class OtpVerfification : AppCompatActivity() {
 
         binding.OTP3.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
+
+                if(s.toString().length==1){
+                    binding.OTP4.requestFocus()
+                }
+                else{
+                    binding.OTP3.requestFocus()
+                }
             }
 
+
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                binding.OTP4.requestFocus()
+
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -219,10 +239,18 @@ class OtpVerfification : AppCompatActivity() {
 
         binding.OTP4.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
+                if(s.toString().length==1){
+                    binding.OTP5.requestFocus()
+                }
+                else{
+                    binding.OTP4.requestFocus()
+                }
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                binding.OTP5.requestFocus()
+
+
+
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -231,10 +259,16 @@ class OtpVerfification : AppCompatActivity() {
 
         binding.OTP5.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
+                if(s.toString().length==1){
+                    binding.OTP6.requestFocus()
+                }
+                else{
+                    binding.OTP5.requestFocus()
+                }
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                binding.OTP6.requestFocus()
+
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -252,6 +286,68 @@ class OtpVerfification : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             }
         })
+
+//Handling delete functionaluty
+        binding.OTP2.setOnKeyListener(object : View.OnKeyListener {
+            override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
+                if(keyCode == KeyEvent.KEYCODE_DEL){
+                    if(binding.OTP2.text.toString().isEmpty()) {
+                        binding.OTP1.requestFocus()
+                    }
+                }
+
+                return false
+            }
+        })
+        binding.OTP3.setOnKeyListener(object : View.OnKeyListener {
+            override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
+                if(keyCode == KeyEvent.KEYCODE_DEL){
+                      if(binding.OTP3.text.toString().isEmpty()) {
+                          binding.OTP2.requestFocus()
+                      }
+                }
+
+                return false
+            }
+        })
+        binding.OTP4.setOnKeyListener(object : View.OnKeyListener {
+            override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
+                if(keyCode == KeyEvent.KEYCODE_DEL){
+                    if(binding.OTP4.text.toString().isEmpty()) {
+                        binding.OTP3.requestFocus()
+                    }
+                }
+
+                return false
+            }
+        })
+        binding.OTP5.setOnKeyListener(object : View.OnKeyListener {
+            override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
+                if(keyCode == KeyEvent.KEYCODE_DEL){
+
+                    if(binding.OTP5.text.toString().isEmpty()) {
+                        binding.OTP4.requestFocus()
+                    }
+
+                }
+
+                return false
+            }
+        })
+        binding.OTP6.setOnKeyListener(object : View.OnKeyListener {
+            override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
+                if(keyCode == KeyEvent.KEYCODE_DEL){
+
+                    if(binding.OTP6.text.toString().isEmpty()) {
+                        binding.OTP5.requestFocus()
+                    }
+                }
+
+                return false
+            }
+        })
+
+
 
 
     }
@@ -273,11 +369,13 @@ class OtpVerfification : AppCompatActivity() {
             .addOnCompleteListener(this@OtpVerfification, OnCompleteListener {
 
                 if (it.isSuccessful) {
+                    editor.putString("isUserLoggedIn","true").apply()
                     var intent = Intent(this, AccountInformation::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                     intent.putExtra("phoneno1", ss.toString())
                     startActivity(intent)
                     finish()
+
 
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithCredential:success")

@@ -46,7 +46,10 @@ class NotifyOfferAdapter(var offerList: ArrayList<NotifyOfferModels>, var notify
         ) {
             ///catImage.setImageResource(listModel2[position].CateegoryImage)
             offerTitle.text = offerList[position].OfferTitle
-            offerDesc.text = offerList[position].OfferDesc
+
+            if(!offerList[position].OfferDesc.equals("null")) {
+                offerDesc.text = offerList[position].OfferDesc
+            }
 
             //----------Write the logic----------------
 

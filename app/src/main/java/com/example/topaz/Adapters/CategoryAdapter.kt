@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -19,7 +20,7 @@ import kotlin.collections.ArrayList
 
 
 class CategoryAdapter(var list2: ArrayList<CategoriesModel>, var categoryPageItemClickListner1: CategoryPageItemClickListner,var context:Context) : RecyclerView.Adapter<CategoryAdapter.MyViewHolder>() {
-
+    var selectedposition=-1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -30,7 +31,12 @@ class CategoryAdapter(var list2: ArrayList<CategoriesModel>, var categoryPageIte
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val data = list2[position]
         holder.bindItems(list2,position,categoryPageItemClickListner1,context)
+        holder.itemView.setOnClickListener {
+            //Onclick will trigger the interface in activity
+            selectedposition = position
+            categoryPageItemClickListner1.CategoryPageItemClickListner(list2[position])
 
+        }
     }
 
     override fun getItemCount(): Int {
@@ -48,6 +54,8 @@ class CategoryAdapter(var list2: ArrayList<CategoriesModel>, var categoryPageIte
             categoryPageItemClickListner1: CategoryPageItemClickListner,
             context: Context
         ) {
+
+            var selectedposition=-1
 
             try {
                 ///catImage.setImageResource(listModel2[position].CateegoryImage)
@@ -71,10 +79,9 @@ class CategoryAdapter(var list2: ArrayList<CategoriesModel>, var categoryPageIte
                 //catImage.setImageResource(R.drawable.ic_baseline_image_24)
                 /*}*/
 
-                catImage.setOnClickListener {
-                    //Onclick will trigger the interface in activity
-                    categoryPageItemClickListner1.CategoryPageItemClickListner(listModel2[position])
-                }
+
+
+
             }
             catch (e:Exception){
                 e.toString()
@@ -83,6 +90,16 @@ class CategoryAdapter(var list2: ArrayList<CategoriesModel>, var categoryPageIte
 
 
 
+    }
+
+    fun resetAdapterList(){
+        try{
+            list2.clear()
+            notifyDataSetChanged()
+        }
+        catch (e:Exception){
+            e.toString()
+        }
     }
 
 

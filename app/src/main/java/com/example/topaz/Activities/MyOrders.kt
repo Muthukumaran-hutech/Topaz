@@ -68,20 +68,22 @@ class MyOrders : AppCompatActivity(), OrderItemClickListner {
 
     private fun onOrderApiCall(custId: String) {
 
-        binding.orderProgress.visibility=View.VISIBLE
-        var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
-            .create(JsonPlaceholder::class.java)
+        try {
 
-        res.viewOders(custId).enqueue(object : Callback<List<ViewOrderApimodel>?> {
-            override fun onResponse(
-                call: Call<List<ViewOrderApimodel>?>,
-                response: Response<List<ViewOrderApimodel>?>
-            ) {
-                binding.orderProgress.visibility=View.GONE
-                if (response.isSuccessful) {
-                    Log.d(TAG, "Onorder success: " + response.body())
-                    for (orderList in response.body()!!) {
-                        /* var odList = OrderModels(
+            binding.orderProgress.visibility = View.VISIBLE
+            var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
+                .create(JsonPlaceholder::class.java)
+
+            res.viewOders(custId).enqueue(object : Callback<List<ViewOrderApimodel>?> {
+                override fun onResponse(
+                    call: Call<List<ViewOrderApimodel>?>,
+                    response: Response<List<ViewOrderApimodel>?>
+                ) {
+                    binding.orderProgress.visibility = View.GONE
+                    if (response.isSuccessful) {
+                        Log.d(TAG, "Onorder success: " + response.body())
+                        for (orderList in response.body()!!) {
+                            /* var odList = OrderModels(
                             orderList.orderstatus.status,
                             orderList.orderid,
                             orderList.createdDate
@@ -91,51 +93,56 @@ class MyOrders : AppCompatActivity(), OrderItemClickListner {
 
 
 //                        Log.d(TAG, "Onorder success2: " + orderList.orderItems.get(0).product.productTitle)
-                        var odList = OrderModels(
-                            "",
-                            orderList.orderstatus.status,
-                            orderList.orderid,
-                            orderList.createdDate,
-                            orderList.orderItems.get(0).quantity,
-                            orderList.orderItems.get(0).thickness,
-                            orderList.orderItems.get(0).sqFeetPrice,
-                            orderList.orderItems.get(0).productRRR?.productTitle.toString(),
-                            orderList.paymentmode,
-                            orderList.customer.addressLine,
-                            amountWithoutTax = orderList.amountwithouttax,
-                            amountWithTax = orderList.amountwithtax,
-                            orderitemlist = orderList.orderItems
+                            var odList = OrderModels(
+                                "",
+                                orderList.orderstatus.status,
+                                orderList.orderid,
+                                orderList.createdDate,
+                                orderList.orderItems.get(0).quantity,
+                                orderList.orderItems.get(0).thickness,
+                                orderList.orderItems.get(0).sqFeetPrice,
+                                orderList.orderItems.get(0).productRRR?.productTitle.toString(),
+                                orderList.paymentmode,
+                                orderList.customer.addressLine,
+                                amountWithoutTax = orderList.amountwithouttax,
+                                amountWithTax = orderList.amountwithtax,
+                                orderitemlist = orderList.orderItems
 
 
-                        )
-                        //   Log.d(TAG, "qty: "+orderList.orderItems[0].quantity.toString())
+                            )
+                            //   Log.d(TAG, "qty: "+orderList.orderItems[0].quantity.toString())
 
-                        orderListItem.add(odList)
+                            orderListItem.add(odList)
 
-                        if(orderListItem.size==0){
-                            binding.orderEmptyText.visibility=View.VISIBLE
+                            if (orderListItem.size == 0) {
+                                binding.orderEmptyText.visibility = View.VISIBLE
+                            } else {
+                                binding.orderEmptyText.visibility = View.GONE
+                            }
+
+
+                            Log.d(TAG, "Onorder success2: " + orderList.orderItems.size)
                         }
-                        else{
-                            binding.orderEmptyText.visibility=View.GONE
-                        }
 
-
-                        Log.d(TAG, "Onorder success2: " + orderList.orderItems.size)
+                        /* var ordersAdapter = MyOrdersAdapter(orderListItem, this@MyOrders, this@MyOrders)*/
+                        val ordersAdapter =
+                            MyOrdersAdapter(orderListItem, this@MyOrders, this@MyOrders)
+                        binding.ordersrecycler.adapter = ordersAdapter
+                    } else {
+                        Log.d(TAG, "Onorder Fail: " + response.body())
+                        binding.orderProgress.visibility = View.GONE
                     }
-
-                   /* var ordersAdapter = MyOrdersAdapter(orderListItem, this@MyOrders, this@MyOrders)*/
-                    val ordersAdapter = MyOrdersAdapter(orderListItem, this@MyOrders, this@MyOrders)
-                    binding.ordersrecycler.adapter = ordersAdapter
-                } else {
-                    Log.d(TAG, "Onorder Fail: " + response.body())
-                    binding.orderProgress.visibility=View.GONE
                 }
-            }
 
-            override fun onFailure(call: Call<List<ViewOrderApimodel>?>, t: Throwable) {
-                Log.d(TAG, "Onorder Failure: " + t.message)
-            }
-        })
+                override fun onFailure(call: Call<List<ViewOrderApimodel>?>, t: Throwable) {
+                    Log.d(TAG, "Onorder Failure: " + t.message)
+                }
+            })
+
+        }
+        catch (e:Exception){
+            e.toString()
+        }
 
 
     }

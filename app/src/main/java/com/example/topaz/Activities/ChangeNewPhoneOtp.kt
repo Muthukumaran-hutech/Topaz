@@ -12,6 +12,7 @@ import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.KeyEvent
 import android.view.View
 import android.widget.Toast
 import com.example.topaz.ApiModels.ChangeNewEmailOtpApiModel
@@ -34,6 +35,7 @@ class ChangeNewPhoneOtp : AppCompatActivity() {
     var phoneChange = ""
     lateinit var sharedPreference : SharedPreferences
     var custId = ""
+    var mobNumber = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,8 +51,11 @@ class ChangeNewPhoneOtp : AppCompatActivity() {
         }
 
         binding.resendOtp2.setOnClickListener {
-            checkUserApiCall(custId)
+           // checkUserApiCall(custId)
+            binding.newPhoneChangeProgress.visibility= View.VISIBLE
+            resendNewPhoneOTP()
             countdownTimer()
+
         }
         sharedPreference =  getSharedPreferences("CUSTOMER_DATA", Context.MODE_PRIVATE)
         custId= sharedPreference.getString("customercode","").toString()
@@ -79,10 +84,17 @@ class ChangeNewPhoneOtp : AppCompatActivity() {
         countdownTimer()
         binding.otp01.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
+
+                if(s.toString().length==1){
+                    binding.otp02.requestFocus()
+                }
+                else{
+                    binding.otp01.requestFocus()
+                }
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                binding.otp02.requestFocus()
+               // binding.otp02.requestFocus()
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -91,10 +103,16 @@ class ChangeNewPhoneOtp : AppCompatActivity() {
 
         binding.otp02.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
+                if(s.toString().length==1){
+                    binding.otp03.requestFocus()
+                }
+                else{
+                    binding.otp02.requestFocus()
+                }
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                binding.otp03.requestFocus()
+                //binding.otp03.requestFocus()
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -103,10 +121,16 @@ class ChangeNewPhoneOtp : AppCompatActivity() {
 
         binding.otp03.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
+                if(s.toString().length==1){
+                    binding.otp04.requestFocus()
+                }
+                else{
+                    binding.otp03.requestFocus()
+                }
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                binding.otp04.requestFocus()
+                //binding.otp04.requestFocus()
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -115,10 +139,16 @@ class ChangeNewPhoneOtp : AppCompatActivity() {
 
         binding.otp04.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
+                if(s.toString().length==1){
+                    binding.otp05.requestFocus()
+                }
+                else{
+                    binding.otp04.requestFocus()
+                }
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                binding.otp05.requestFocus()
+               // binding.otp05.requestFocus()
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -127,10 +157,16 @@ class ChangeNewPhoneOtp : AppCompatActivity() {
 
         binding.otp05.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
+                if(s.toString().length==1){
+                    binding.otp06.requestFocus()
+                }
+                else{
+                    binding.otp05.requestFocus()
+                }
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                binding.otp06.requestFocus()
+                //binding.otp06.requestFocus()
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -148,6 +184,68 @@ class ChangeNewPhoneOtp : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             }
         })
+
+
+        //Handling delete functionality
+        binding.otp02.setOnKeyListener(object : View.OnKeyListener {
+            override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
+                if(keyCode == KeyEvent.KEYCODE_DEL){
+                    if(binding.otp02.text.toString().isEmpty()) {
+                        binding.otp01.requestFocus()
+                    }
+                }
+
+                return false
+            }
+        })
+        binding.otp03.setOnKeyListener(object : View.OnKeyListener {
+            override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
+                if(keyCode == KeyEvent.KEYCODE_DEL){
+                    if(binding.otp03.text.toString().isEmpty()) {
+                        binding.otp02.requestFocus()
+                    }
+                }
+
+                return false
+            }
+        })
+        binding.otp04.setOnKeyListener(object : View.OnKeyListener {
+            override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
+                if(keyCode == KeyEvent.KEYCODE_DEL){
+                    if(binding.otp04.text.toString().isEmpty()) {
+                        binding.otp03.requestFocus()
+                    }
+                }
+
+                return false
+            }
+        })
+        binding.otp05.setOnKeyListener(object : View.OnKeyListener {
+            override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
+                if(keyCode == KeyEvent.KEYCODE_DEL){
+
+                    if(binding.otp05.text.toString().isEmpty()) {
+                        binding.otp04.requestFocus()
+                    }
+
+                }
+
+                return false
+            }
+        })
+        binding.otp06.setOnKeyListener(object : View.OnKeyListener {
+            override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
+                if(keyCode == KeyEvent.KEYCODE_DEL){
+
+                    if(binding.otp06.text.toString().isEmpty()) {
+                        binding.otp05.requestFocus()
+                    }
+                }
+
+                return false
+            }
+        })
+
 
 
 
@@ -231,5 +329,47 @@ class ChangeNewPhoneOtp : AppCompatActivity() {
                 Log.d(ContentValues.TAG, "onResponse otp failure phone: "+ t.message)
             }
         })
+    }
+
+
+    private fun resendNewPhoneOTP(){
+        try{
+            val resendRes = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
+                .create(JsonPlaceholder::class.java)
+
+            val body: RequestBody = mobNumber.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+            val requestBodyMap: MutableMap<String, RequestBody> = HashMap()
+            requestBodyMap["phoneNumber"] = body
+
+            resendRes.verifyNewPhoneNumber(customerID = custId,body).enqueue(object : Callback<OldPhoneApiModel?> {
+                override fun onResponse(
+                    call: Call<OldPhoneApiModel?>,
+                    response: Response<OldPhoneApiModel?>
+                ) {
+                    binding.newPhoneChangeProgress.visibility= View.GONE
+
+                    if(response.isSuccessful){
+                        Toast.makeText(this@ChangeNewPhoneOtp,"OTP sent to the entered number", Toast.LENGTH_LONG).show()
+                    }else{
+
+                        Toast.makeText(this@ChangeNewPhoneOtp,"Something went wrong", Toast.LENGTH_LONG).show()
+                    }
+
+                }
+
+                override fun onFailure(call: Call<OldPhoneApiModel?>, t: Throwable) {
+                    binding.newPhoneChangeProgress.visibility= View.GONE
+                 Toast.makeText(this@ChangeNewPhoneOtp,"Something went wrong", Toast.LENGTH_LONG).show()
+                }
+            })
+
+
+
+        }
+        catch (e:Exception){
+            binding.newPhoneChangeProgress.visibility= View.GONE
+            e.toString()
+        }
+
     }
 }

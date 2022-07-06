@@ -101,6 +101,7 @@ class OrderDetails : AppCompatActivity(), OrdDetPageItemclickListner {
          )
          binding.ttlamt.setText(getString(R.string.Rs)+amountwithtax)
          binding.totalamtentry2.setText(getString(R.string.Rs)+amountwithtax)
+         binding.priceLabelText.text="Price("+orderitemlist.size+"items"+")"
 
      }
      catch (e:Exception){

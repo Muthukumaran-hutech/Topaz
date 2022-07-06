@@ -79,12 +79,12 @@ class EditAddAddress : AppCompatActivity() {
         try {
             var accountName = binding.nameAddress.text
             var accountPhoneNo = binding.phoneNoChange.text.toString()
-            var locality = binding.locality.text
-            var houseNo = binding.houseNo.text
+            var locality = binding.locality.text.toString()
+            var houseNo = binding.houseNo.text.toString()
             var pincode = binding.pincode.text.toString()
-            var city = binding.city.text
-            var state = binding.state.text
-            var landmark = binding.landmark.text
+            var city = binding.city.text.toString()
+            var state = binding.state.text.toString()
+            var landmark = binding.landmark.text.toString()
             var address = locality.toString() + houseNo.toString() + landmark.toString()
 
             var saveAddressModel = SaveAddressModel(
@@ -96,6 +96,7 @@ class EditAddAddress : AppCompatActivity() {
                 stateName = state.toString()
 
             )
+            Log.e("Update cust res:",customerDetails(saveAddressModel).toString())
 
             var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
                 .create(JsonPlaceholder::class.java)
@@ -119,7 +120,8 @@ class EditAddAddress : AppCompatActivity() {
                             storeDataLocally()
                             finish()
                         } else {
-                             Log.d("Update Res fail:", response.body()!!.message)
+                            //response.body()?.message?.let { Log.d("Update Res fail:", it) }
+                            Toast.makeText(this@EditAddAddress,"Something went wrong while updating details",Toast.LENGTH_LONG).show()
                         }
 
                     }
@@ -129,7 +131,6 @@ class EditAddAddress : AppCompatActivity() {
                             Log.d("Update Res failure:", it) }
                     }
                 })
-
         }
         catch (e:Exception){
             e.toString()
@@ -179,15 +180,15 @@ class EditAddAddress : AppCompatActivity() {
         try{
             json.addProperty("customerName",  saveAddressModel.customerName)
             json.addProperty("primaryPhonenumber", saveAddressModel.primaryPhonenumber)
-            json.addProperty("addressLine",  saveAddressModel.addressLine)
-            json.addProperty("zipcode",  saveAddressModel.zipcode)
+            json.addProperty("email", custEmailId)
+            json.addProperty("addressLine", saveAddressModel.addressLine)
             json.addProperty("city",  saveAddressModel.city)
             //json.addProperty("state",  json2)
             json.add("state", Gson().toJsonTree(json2))
             json.add("country",Gson().toJsonTree(countryjson))
-            json.add("accountdetails",Gson().toJsonTree(accountdetails))
-            json.addProperty("email", custEmailId)
-            json.addProperty("secondaryPhonenumber",0)
+            json.addProperty("zipcode",  saveAddressModel.zipcode)
+            //json.add("accountdetails",Gson().toJsonTree(accountdetails))
+            //json.addProperty("secondaryPhonenumber",0)
 
             Log.d(TAG, "customerDetails: json check "+ json.toString())
         }catch (e: Exception) {

@@ -67,6 +67,7 @@
                 android:paddingRight="@dimen/_5sdp"
                 android:text="@string/frequently_asked_questions"
                 android:textColor="@color/violet"
+                android:fontFamily="@font/poppins_bold"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -74,15 +75,16 @@
                 android:id="@+id/q1"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:textColor="@color/black"
+                android:textColor="@color/faq_title_color"
                 android:textSize="12sp"
                 android:textStyle="bold"
+                android:fontFamily="@font/poppins"
                 android:layout_marginStart="20dp"
                 android:textAllCaps="false"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:background="@color/white"
-                android:paddingRight="@dimen/_5sdp"
+                android:paddingLeft="5dp"
                 android:elevation="@dimen/_5sdp"
                 android:textAlignment="viewStart"
                 android:drawableStart="@drawable/rectangle_471"
@@ -99,7 +101,7 @@
                 android:padding="@dimen/_5sdp"
                 android:visibility="gone"
                 android:text="@string/century_ply_uses_good_quality_raw_material_and_also_has_rigorous_quality_checks_at_every_stage_to_verify_that_the_best_product_is_going_to_the_market"
-                android:textColor="@color/black"
+                android:textColor="@color/faq_body_color"
                 android:textSize="14sp" />
 
             <androidx.appcompat.widget.AppCompatButton
@@ -109,8 +111,9 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
-                android:textColor="@color/black"
+                android:textColor="@color/faq_title_color"
                 android:textSize="12sp"
+                android:fontFamily="@font/poppins"
                 android:textAlignment="viewStart"
                 android:paddingRight="@dimen/_5sdp"
                 android:textStyle="bold"
@@ -129,7 +132,7 @@
                 android:layout_marginEnd="20dp"
                 android:text="Sample text"
                 android:visibility="gone"
-                android:textColor="@color/black"
+                android:textColor="@color/faq_body_color"
                 android:textSize="14sp" />
 
             <androidx.appcompat.widget.AppCompatButton
@@ -140,8 +143,9 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
+                android:fontFamily="@font/poppins"
                 android:background="@color/white"
-                android:textColor="@color/black"
+                android:textColor="@color/faq_title_color"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:textAllCaps="false"
@@ -158,7 +162,7 @@
                 android:layout_marginStart="22dp"
                 android:layout_marginEnd="20dp"
                 android:text="@string/q3ans"
-                android:textColor="@color/black"
+                android:textColor="@color/faq_body_color"
                 android:visibility="gone"
                 android:textSize="14sp" />
 
@@ -171,7 +175,8 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:background="@color/white"
-                android:textColor="@color/black"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/faq_title_color"
                 android:textSize="12sp"
                 android:paddingRight="@dimen/_5sdp"
                 android:textAllCaps="false"
@@ -188,7 +193,7 @@
                 android:layout_marginStart="27dp"
                 android:layout_marginEnd="20dp"
                 android:text="@string/q4ans"
-                android:textColor="@color/black"
+                android:textColor="@color/faq_body_color"
                 android:visibility="gone"
                 android:textSize="14sp" />
             <androidx.appcompat.widget.AppCompatButton
@@ -200,7 +205,8 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:background="@color/white"
-                android:textColor="@color/black"
+                android:textColor="@color/faq_title_color"
+                android:fontFamily="@font/poppins"
                 android:textSize="12sp"
                 android:paddingRight="@dimen/_5sdp"
                 android:textAllCaps="false"
@@ -219,7 +225,8 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:background="@color/white"
-                android:textColor="@color/black"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/faq_title_color"
                 android:paddingRight="@dimen/_5sdp"
                 android:textAllCaps="false"
                 android:textSize="12sp"
@@ -236,7 +243,7 @@
                 android:layout_marginStart="27dp"
                 android:layout_marginEnd="20dp"
                 android:text="@string/gurjan"
-                android:textColor="@color/black"
+                android:textColor="@color/faq_body_color"
                 android:visibility="gone"
                 android:textSize="14sp" />
 
@@ -248,13 +255,14 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
+                android:fontFamily="@font/poppins"
                 android:textAllCaps="false"
                 android:paddingRight="@dimen/_5sdp"
                 android:background="@color/white"
                 android:drawableStart="@drawable/rectangle_471"
                 android:drawableEnd="@drawable/pls"
                 android:text="@string/does_using_gurjan_make_ply_better"
-                android:textColor="@color/black"
+                android:textColor="@color/faq_title_color"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:visibility="visible" />
@@ -266,7 +274,7 @@
                 android:layout_marginStart="27dp"
                 android:layout_marginEnd="20dp"
                 android:text="@string/gur_ply"
-                android:textColor="@color/black"
+                android:textColor="@color/faq_body_color"
                 android:visibility="gone"
                 android:textSize="14sp" />
 
@@ -279,7 +287,8 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:background="@color/white"
-                android:textColor="@color/black"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/faq_title_color"
                 android:paddingRight="@dimen/_5sdp"
                 android:textSize="12sp"
                 android:textStyle="bold"
@@ -297,8 +306,9 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
+                android:fontFamily="@font/poppins"
                 android:background="@color/white"
-                android:textColor="@color/black"
+                android:textColor="@color/faq_title_color"
                 android:textSize="12sp"
                 android:paddingRight="@dimen/_5sdp"
                 android:textStyle="bold"
@@ -317,7 +327,7 @@
                 android:layout_marginEnd="20dp"
                 android:visibility="gone"
                 android:text="@string/ply_check"
-                android:textColor="@color/black"
+                android:textColor="@color/faq_body_color"
                 android:textSize="14sp" />
 
 

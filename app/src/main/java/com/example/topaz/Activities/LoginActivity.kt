@@ -6,10 +6,13 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.R
+import androidx.core.text.HtmlCompat
 import com.example.topaz.ApiModels.CheckUserApiModel
 import com.example.topaz.Interface.JsonPlaceholder
 import com.example.topaz.RetrofitApiInstance.UpdateAccountInfoInstance
@@ -43,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-
+         setSubtitleText()
         binding.phoneContinueBtn.setOnClickListener {
 
 
@@ -57,6 +60,14 @@ class LoginActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    private fun setSubtitleText() {
+      val firsttext=getString(com.example.topaz.R.string.dig)
+        val secondtext= "<font color='#0000'>"+getString(com.example.topaz.R.string.six)+"</font>"
+        val secontextbold="<b>"+secondtext+"</b>"
+        val thirdtext=getString(com.example.topaz.R.string.vernum)
+        binding.textView2.setText(HtmlCompat.fromHtml(firsttext+" "+secontextbold+" "+thirdtext,HtmlCompat.FROM_HTML_MODE_LEGACY))
     }
 
     private fun checkUserApiCall() {

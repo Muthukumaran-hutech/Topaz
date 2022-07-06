@@ -6,10 +6,8 @@ import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Base64
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
@@ -18,7 +16,6 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.denzcoskun.imageslider.constants.ScaleTypes
@@ -26,15 +23,14 @@ import com.denzcoskun.imageslider.models.SlideModel
 import com.example.topaz.Adapters.ArrivalsAdapter
 import com.example.topaz.Adapters.HomeCategoriesAdapter
 import com.example.topaz.Adapters.HomeSliderAdapter
-import com.example.topaz.ApiModels.AdvertisementApiModel
-import com.example.topaz.ApiModels.ArrivalsPageItemClickListner
-import com.example.topaz.ApiModels.CategoryListApiModel
-import com.example.topaz.ApiModels.ProductDetailsListApiModel
+import com.example.topaz.Adapters.OldStockListAdapter
+import com.example.topaz.ApiModels.*
 import com.example.topaz.Interface.HomeScreenItemClickListner
 import com.example.topaz.Interface.JsonPlaceholder
 import com.example.topaz.Models.*
 import com.example.topaz.R
 import com.example.topaz.RetrofitApiInstance.UpdateAccountInfoInstance
+import com.example.topaz.Utility.NetworkUtil
 import com.example.topaz.Utility.Util
 import com.example.topaz.databinding.ActivityHomeScreenBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -42,8 +38,6 @@ import com.google.android.material.navigation.NavigationBarView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.collections.ArrayList
 
 class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPageItemClickListner {
@@ -63,6 +57,9 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
     var bitmap = java.util.ArrayList<Bitmap>()
     lateinit var homeCategoriesAdapter:HomeCategoriesAdapter
     lateinit var bottomnav:BottomNavigationView
+    var isCategoryItemClicked=false
+    var discountList=ArrayList<DiscountModel>()
+    var oldstocklist = ArrayList<ArrivalsModels>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -144,108 +141,127 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
         })
 
 
+        if(!NetworkUtil.checkInternet(this)){
+            NetworkUtil.showNoNetworkDialog(context = this,activity = activity)
+        }
+        Log.d("--Network stats--",NetworkUtil.checkInternet(this).toString())
+
+
 
     }
 
     override fun onResume() {
         super.onResume()
         bottomnav.selectedItemId=R.id.action_home
-        onAddvertisementCall()
+       /* onAddvertisementCall()
         onApiCall()
-        onApicallcat()
+        onApicallcat()*/
+        if(isCategoryItemClicked){
+            homeCategoriesAdapter.resetCategorySelection()
+            isCategoryItemClicked=false
+            onApiCall()
+            onApicallcat()
+
+        }
     }
 
 
-    //cat slide
+    //Category API Call
     private fun onApicallcat() {
-        catSubModels.clear()
-        var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
-            .create(JsonPlaceholder::class.java)
+        try {
+            catSubModels.clear()
+            val res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
+                .create(JsonPlaceholder::class.java)
 
-        res.viewCategory().enqueue(object : Callback<List<CategoryListApiModel>?> {
-            override fun onResponse(
-                call: Call<List<CategoryListApiModel>?>,
-                response: Response<List<CategoryListApiModel>?>
-            ) {
-                if (response.isSuccessful) {
-                    binding.appProgressBar2?.visibility = View.GONE
-                    for (subCatListModel in response.body()!!) {
-                        val subCatListModels = SubCatListModels(
-                           // subCatListModels.categoryimage.imagebyte,
-                            isCategoryClicked = false,
-                            subCatListModel.categoryName,
-                            subCatListModel.categoryid
+            res.viewCategory().enqueue(object : Callback<List<CategoryListApiModel>?> {
+                override fun onResponse(
+                    call: Call<List<CategoryListApiModel>?>,
+                    response: Response<List<CategoryListApiModel>?>
+                ) {
+                    if (response.isSuccessful) {
+                        //binding.appProgressBar2?.visibility = View.GONE
+                        for (subCatListModel in response.body()!!) {
+                            val subCatListModels = SubCatListModels(
+                                // subCatListModels.categoryimage.imagebyte,
+                                isCategoryClicked = false,
+                                subCatListModel.categoryName,
+                                subCatListModel.categoryid,
+                            )
+
+
+                            if (subCatListModel.active) {
+                                catSubModels.add(subCatListModels)
+                            }
+                        }
+                        //arrivals Adapter
+                        try {
+                            homeCategoriesAdapter =
+                                HomeCategoriesAdapter(catSubModels, this@HomeScreen)
+                            binding.homeRecyclerView?.adapter = homeCategoriesAdapter
+                            binding.homeRecyclerView?.setHasFixedSize(true)
+                        } catch (e: Exception) {
+                            Log.e("Home Exception", e.toString())
+                        }
+
+                        Log.d(
+                            ContentValues.TAG,
+                            "onResponse: arrival Success" + response.body()
+                                ?.get(0)?.tags?.get(0)?.tags.toString()
                         )
+                    } else {
+                        binding.appProgressBar2?.visibility = View.VISIBLE
+                        Toast.makeText(
+                            applicationContext,
+                            "Something Went Wronng Please Try Again Later",
+                            Toast.LENGTH_LONG
+                        ).show()
 
-
-                       if(subCatListModel.active) {
-                           catSubModels.add(subCatListModels)
-                       }
+                        Log.d(
+                            ContentValues.TAG,
+                            "onResponse: arrival Fail: " + response.body()
+                                ?.get(0)?.tags?.get(0)?.tags.toString()
+                        )
                     }
-                    //arrivals Adapter
-                    try {
-                        homeCategoriesAdapter = HomeCategoriesAdapter(catSubModels, this@HomeScreen)
-                        binding.homeRecyclerView?.adapter = homeCategoriesAdapter
-                        binding.homeRecyclerView?.setHasFixedSize(true)
-                    }
-                    catch (e:Exception){
-                        Log.e("Home Exception",e.toString())
-                    }
 
-                    Log.d(
-                        ContentValues.TAG,
-                        "onResponse: arrival Success" + response.body()
-                            ?.get(0)?.tags?.get(0)?.tags.toString()
-                    )
-                } else {
-                    binding.appProgressBar2?.visibility = View.VISIBLE
-                    Toast.makeText(
-                        applicationContext,
-                        "Something Went Wronng Please Try Again Later",
-                        Toast.LENGTH_LONG
-                    ).show()
 
-                    Log.d(
-                        ContentValues.TAG,
-                        "onResponse: arrival Fail: " + response.body()
-                            ?.get(0)?.tags?.get(0)?.tags.toString()
-                    )
                 }
 
+                override fun onFailure(call: Call<List<CategoryListApiModel>?>, t: Throwable) {
+                    Log.d(ContentValues.TAG, "onResponse: arrival failure: " + t.message)
+                }
+            })
 
-            }
-
-            override fun onFailure(call: Call<List<CategoryListApiModel>?>, t: Throwable) {
-                Log.d(ContentValues.TAG, "onResponse: arrival failure: " + t.message)
-            }
-        })
-
-
-
+        }
+        catch (e:Exception){
+            e.toString()
+        }
     }
 
+
+
     private fun onAddvertisementCall() {
-        addlist.clear()
-        var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
-            .create(JsonPlaceholder::class.java)
+        try {
+            addlist.clear()
+            var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
+                .create(JsonPlaceholder::class.java)
 
-        res.viewAdvertisement().enqueue(object : Callback<List<AdvertisementApiModel>?> {
-            override fun onResponse(
-                call: Call<List<AdvertisementApiModel>?>,
-                response: Response<List<AdvertisementApiModel>?>
-            ) {
-                if (response.isSuccessful) {
-                    Log.d(TAG, "add success advertisement: " + response.body()?.get(0)?.advertisementid)
+            res.viewAdvertisement().enqueue(object : Callback<List<AdvertisementApiModel>?> {
+                override fun onResponse(
+                    call: Call<List<AdvertisementApiModel>?>,
+                    response: Response<List<AdvertisementApiModel>?>
+                ) {
+                    if (response.isSuccessful) {
+                        // Log.d(TAG, "add success advertisement: " + response.body()?.get(0)?.advertisementid)
 
-                    for (addvertisement in response.body()!!) {
-                        val addModel = AddModels(
-                            addvertisement.advertismentImage.imagebyte,
-                            addvertisement.title,
-                            addDescription = addvertisement.discription
-                        )
+                        for (addvertisement in response.body()!!) {
+                            val addModel = AddModels(
+                                addvertisement.advertismentImage.imagebyte,
+                                addvertisement.title,
+                                addDescription = addvertisement.discription
+                            )
 
-                        addlist.add(addModel)
-                       /* val decodedString: ByteArray = Base64.decode(
+                            addlist.add(addModel)
+                            /* val decodedString: ByteArray = Base64.decode(
 
                             addvertisement.advertismentImage.imagebyte,
                             Base64.DEFAULT)
@@ -264,28 +280,31 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
                            }*/
 
 
-                        /*Glide.with(activity)
+                            /*Glide.with(activity)
                             .applyDefaultRequestOptions(RequestOptions().placeholder(R.drawable.ic_baseline_image_24).error(R.drawable.ic_baseline_image_24))
                             .load(bitmap)
                             .into(imageview)*/
 
 
+                        }
 
+                        setSliderItems(addlist)
 
+                    } else {
+                        Log.d(TAG, "add fail advertisement: " + response.body())
                     }
 
-                    setSliderItems(addlist)
-
-                } else {
-                    Log.d(TAG, "add fail advertisement: " + response.body())
                 }
 
-            }
+                override fun onFailure(call: Call<List<AdvertisementApiModel>?>, t: Throwable) {
+                    Log.d(TAG, "add Failure advertisement: " + t.message)
+                }
+            })
 
-            override fun onFailure(call: Call<List<AdvertisementApiModel>?>, t: Throwable) {
-                Log.d(TAG, "add Failure advertisement: " + t.message)
-            }
-        })
+        }
+        catch (e:Exception){
+            e.toString()
+        }
 
     }
 
@@ -305,8 +324,9 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
     }
 
     private fun onApiCall() {
+        binding.homescreenProgress?.visibility= View.VISIBLE
         arrival_list.clear()
-        var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
+        val res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
             .create(JsonPlaceholder::class.java)
 
         res.viewProductList().enqueue(object : Callback<List<ProductDetailsListApiModel>?> {
@@ -315,30 +335,42 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
                 response: Response<List<ProductDetailsListApiModel>?>
             ) {
 
+                binding.homescreenProgress?.visibility=View.GONE
                 if (response.isSuccessful) {
 
                     for (arrivalsmodels in response.body()!!) {
-                        if (arrivalsmodels.collection.equals("New Arrival")) {
+                        if (arrivalsmodels.collection.equals("plywood")) {
                             val arrivalsModels = ArrivalsModels(
                                 arrivalsmodels.categoryType.categoryimage.imagebyte,
                                 arrivalsmodels.productTitle,
                                 arrivalsmodels.productid.toString(),
-                                arrivalsmodels.createdDate
+                                arrivalsmodels.createdDate,
+                                "",
+                                arrivalsmodels.sqFeetPrice
                             )
 
                             arrival_list.add(arrivalsModels)
 
 
                         }
+                        else{
+                            val arrivalsModels = ArrivalsModels(
+                                arrivalsmodels.categoryType.categoryimage.imagebyte,
+                                arrivalsmodels.productTitle,
+                                arrivalsmodels.productid.toString(),
+                                arrivalsmodels.createdDate,
+                                "",
+                                arrivalsmodels.sqFeetPrice
+                            )
+                            oldstocklist.add(arrivalsModels)
 
-                        binding.arrivalsRecycler.layoutManager =
-                            GridLayoutManager(this@HomeScreen, 2)
-                        val arrivalAdapter =
-                            ArrivalsAdapter(arrival_list, this@HomeScreen, this@HomeScreen)
-                        binding.arrivalsRecycler.adapter = arrivalAdapter
-                        binding.arrivalsRecycler.setHasFixedSize(true)
+                        }
 
 
+                    }
+
+                    if(arrival_list.size >0){
+                        getDiscountList()
                     }
 
                 } else {
@@ -354,6 +386,7 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
 
 
             override fun onFailure(call: Call<List<ProductDetailsListApiModel>?>, t: Throwable) {
+                binding.homescreenProgress?.visibility= View.GONE
 
             }
         })
@@ -546,13 +579,151 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
     }
 
     override fun HomeScreenItemClickListner(homecategory: SubCatListModels, position: Int) {
-       homeCategoriesAdapter.changeClickedState(position = position)
-        val intent =Intent(activity, CategoryActivity::class.java)
+       /* val intent =Intent(activity, CategoryActivity::class.java)
         intent.putExtra("cat__iD", homecategory.catID)
         intent.putExtra("category_name",homecategory.catTitle)
         intent.putExtra("from","Homepage")
+        startActivity(intent)*/
+        isCategoryItemClicked=true
+        homeCategoriesAdapter.changeClickedState(position,true)
+        val intent = Intent(activity, InnerCategories::class.java)
+        intent.putExtra("cat_id", homecategory.catID)
+        intent.putExtra("cat_name", homecategory.catTitle)
         startActivity(intent)
+
+
     }
 
+
+    fun getDiscountList(){
+        try{
+            binding.homescreenProgress?.visibility= View.VISIBLE
+            val discountres = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
+                .create(JsonPlaceholder::class.java)
+
+            discountres.getAllDiscount().enqueue(object : Callback<List<DiscountListApiModel>?> {
+                override fun onResponse(
+                    call: Call<List<DiscountListApiModel>?>,
+                    response: Response<List<DiscountListApiModel>?>
+                ) {
+                    binding.homescreenProgress?.visibility= View.GONE
+                    if(response.isSuccessful){
+                        for(discountlist in response.body()!!){
+                            val discountModel = DiscountModel(
+                                discountId = discountlist.discountId,
+                                discount = discountlist.discount,
+                                productId = discountlist.productdetail?.productId,
+                                squarefeetprice = discountlist.squareFeetPrice
+                            )
+                            discountList.add(discountModel)
+                        }
+
+                        mapDiscountToNewArrivalProducts()
+
+                    }
+                    else{
+                          initializeArrivalListAdapter()
+                          initializeOldStockList()
+
+                    }
+
+
+                }
+
+                override fun onFailure(call: Call<List<DiscountListApiModel>?>, t: Throwable) {
+                Log.e("Discount list Failure","true")
+                    binding.homescreenProgress?.visibility= View.GONE
+
+                }
+            })
+
+
+
+
+        }
+        catch (e:Exception){
+            e.toString()
+        }
+
+
+    }
+
+    private fun mapDiscountToNewArrivalProducts() {
+        try{
+
+            for( i in arrival_list.indices){
+                addDiscountToRespectiveProduct(i,arrival_list[i])
+            }
+
+
+        }
+        catch (e:Exception){
+            e.toString()
+        }
+    }
+
+    private fun addDiscountToRespectiveProduct(i: Int, arrivalsModels: ArrivalsModels) {
+        try{
+
+            for(discount in discountList){
+
+                if(discount.productId==arrivalsModels.ArrivalId.toInt()){
+                    arrival_list[i].Discount=discount.discount!!
+                }
+            }
+
+            initializeArrivalListAdapter()
+            initializeOldStockList()
+
+
+
+
+        }
+        catch(e:Exception){
+            e.toString()
+        }
+    }
+
+    private fun initializeArrivalListAdapter(){
+        try{
+            binding.arrivalsRecycler.layoutManager =LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
+               // GridLayoutManager(this@HomeScreen, 2)
+            val arrivalAdapter =
+                ArrivalsAdapter(arrival_list, this@HomeScreen, this@HomeScreen)
+            binding.arrivalsRecycler.adapter = arrivalAdapter
+            binding.arrivalsRecycler.setHasFixedSize(true)
+
+
+
+        }
+        catch (e:Exception){
+            e.toString()
+        }
+    }
+
+    private fun initializeOldStockList(){
+
+        try{
+            if(oldstocklist.size > 0){
+                binding.arrivalListSeparator?.visibility= View.VISIBLE
+            }
+            else{
+                binding.arrivalListSeparator?.visibility= View.GONE
+            }
+            binding.oldstocksRecycler?.layoutManager = GridLayoutManager(this,3)
+            val arrivalAdapter =
+                OldStockListAdapter(oldstocklist, this@HomeScreen, this@HomeScreen)
+            binding.oldstocksRecycler?.adapter = arrivalAdapter
+            binding.oldstocksRecycler?.setHasFixedSize(true)
+
+
+
+
+        }
+        catch (e:Exception){
+            e.toString()
+        }
+
+    }
 
 }

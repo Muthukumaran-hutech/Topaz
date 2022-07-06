@@ -1,6 +1,7 @@
 package com.example.topaz.Adapters
 
 import android.content.Context
+import android.graphics.Typeface
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import android.view.WindowManager
 import android.widget.*
 import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -113,7 +115,7 @@ class QuotationListAdapter(var quotationlist:List<QuatationListModel>,var contex
 
 
                 //Settting quotation details
-                producttitle.text=quatationListModel.ProductTitle+","+quatationListModel.ProductThickness
+                producttitle.text=quatationListModel.ProductTitle+","+"\n"+"Thickness:"+" "+quatationListModel.ProductThickness
 
                 Glide.with(context)
                     .load(Util.getBitmapFromBase64(quatationListModel.productImage))
@@ -144,12 +146,16 @@ class QuotationListAdapter(var quotationlist:List<QuatationListModel>,var contex
                     detailslayout.visibility = View.VISIBLE
                     disabledetails.visibility = View.VISIBLE
                     quantitylayout.visibility = View.INVISIBLE
+                    val typeface=ResourcesCompat.getFont(context,R.font.poppins_bold)
+                    headerProductTitle.setTypeface(typeface)
                 }
                 else{
                     disabledetails.visibility = View.GONE
                     detailslayout.visibility = View.GONE
                     enabledetails.visibility = View.VISIBLE
                     quantitylayout.visibility = View.VISIBLE
+                    val typeface=ResourcesCompat.getFont(context,R.font.poppins)
+                    headerProductTitle.setTypeface(typeface)
 
                 }
 

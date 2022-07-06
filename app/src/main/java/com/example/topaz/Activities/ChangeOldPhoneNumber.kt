@@ -58,7 +58,7 @@ class ChangeOldPhoneNumber : AppCompatActivity() {
     }
 
     private fun checkUserApiCall(custId : String) {
-        var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
+        val res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
             .create(JsonPlaceholder::class.java)
 
         val body: RequestBody = binding.changePhone.text.toString().toRequestBody("text/plain".toMediaTypeOrNull())

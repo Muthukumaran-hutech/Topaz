@@ -61,53 +61,58 @@ class AlertFragment : Fragment(), NotifyAlertItemClickListner {
     }
 
     private fun onOfferApiCall(view: View) {
-        var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
-            .create(JsonPlaceholder::class.java)
+        try {
+            var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
+                .create(JsonPlaceholder::class.java)
 
-        res.alertNotify(custId).enqueue(object : Callback<List<AlertApiModel>?> {
-            override fun onResponse(
-                call: Call<List<AlertApiModel>?>,
-                response: Response<List<AlertApiModel>?>
-            ) {
+            res.alertNotify(custId).enqueue(object : Callback<List<AlertApiModel>?> {
+                override fun onResponse(
+                    call: Call<List<AlertApiModel>?>,
+                    response: Response<List<AlertApiModel>?>
+                ) {
 
-                if (response.isSuccessful) {
-                     Log.d(TAG, "alert success: "+response.body())
-                    progressBar.visibility = View.GONE
-                    for (alertOffers in response.body()!!) {
-                        Log.d(TAG, "alert success size: "+ alertOffers.orderItems.size)
-                        var alertModel = NotifyAlertModel(
-                            alertOffers.orderItems.get(0).product.categoryType.categoryimage.imagebyte,
-                            alertOffers.orderItems.get(0).product.productTitle,
-                            alertOffers.orderItems.get(0).thickness,
-                            alertOffers.orderItems.get(0).price.toString(),
-                            alertOffers.createdDate
-                        )
-
-                        offerAlertlist.add(alertModel)
-
-                        alertRecycle.layoutManager =
-                            LinearLayoutManager(context)//Count depicts no of elements in row
-                        val alertAdapter =
-                            NotifyAlertAdapter(
-                                offerAlertlist,
-                                this@AlertFragment,
-                                this@AlertFragment
+                    if (response.isSuccessful) {
+                        Log.d(TAG, "alert success: " + response.body())
+                        progressBar.visibility = View.GONE
+                        for (alertOffers in response.body()!!) {
+                            Log.d(TAG, "alert success size: " + alertOffers.orderItems.size)
+                            var alertModel = NotifyAlertModel(
+                                alertOffers.orderItems.get(0).product.categoryType.categoryimage.imagebyte,
+                                alertOffers.orderItems.get(0).product.productTitle,
+                                alertOffers.orderItems.get(0).thickness,
+                                alertOffers.orderItems.get(0).price.toString(),
+                                alertOffers.createdDate
                             )
-                        alertRecycle.adapter = alertAdapter
-                        alertRecycle.setHasFixedSize(true)
+
+                            offerAlertlist.add(alertModel)
+
+                            alertRecycle.layoutManager =
+                                LinearLayoutManager(context)//Count depicts no of elements in row
+                            val alertAdapter =
+                                NotifyAlertAdapter(
+                                    offerAlertlist,
+                                    this@AlertFragment,
+                                    this@AlertFragment
+                                )
+                            alertRecycle.adapter = alertAdapter
+                            alertRecycle.setHasFixedSize(true)
+                        }
+
+
+                    } else {
+                        Log.d(TAG, "alert Fail: " + response.body())
                     }
 
-
-                }else{
-                    Log.d(TAG, "alert Fail: "+response.body())
                 }
 
-            }
-
-            override fun onFailure(call: Call<List<AlertApiModel>?>, t: Throwable) {
-                Log.d(TAG, "alert Failure: "+t.message)
-            }
-        })
+                override fun onFailure(call: Call<List<AlertApiModel>?>, t: Throwable) {
+                    Log.d(TAG, "alert Failure: " + t.message)
+                }
+            })
+        }
+        catch (e:Exception){
+            e.toString()
+        }
     }
 
 

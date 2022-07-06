@@ -74,7 +74,7 @@ class MyOrdersAdapter(
             }
 
 
-           else  if (orderListItem[position].QuotationStatus =="Cancelled"){
+           else  if (orderListItem[position].QuotationStatus =="Cancelled" || orderListItem[position].QuotationStatus=="Failed"){
                 statuscolor= status.getResources().getColor(R.color.red)
             }
             else{

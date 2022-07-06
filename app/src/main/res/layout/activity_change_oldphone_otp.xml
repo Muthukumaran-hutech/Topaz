@@ -47,48 +47,51 @@
     <TextView
         android:layout_width="243dp"
         android:layout_height="21dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="145dp"
         android:text="@string/enter_otp_to_change_phone_number_1"
         android:textColor="@color/black"
         android:textSize="14sp"
+        android:id="@+id/enterOtpText"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toBottomOf="@id/edit_address_toolbar"
+        app:layout_constraintStart_toStartOf="@id/otplinear"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="18dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="170dp"
         android:text="@string/otp_sent_to_the_phone_number____"
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="5dp"
+        android:id="@+id/changePhoneNumberText"
+        app:layout_constraintTop_toBottomOf="@id/enterOtpText"
+        app:layout_constraintStart_toStartOf="@id/otplinear"/>
 
     <LinearLayout
         android:id="@+id/otplinear"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="27dp"
-        android:layout_marginTop="245dp"
         android:layout_marginEnd="27dp"
         android:orientation="horizontal"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/changePhoneNumberText">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/otp_01"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginStart="5dp"
             android:background="@color/white_gr"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"
+            android:fontFamily="@font/poppins"
             android:inputType="number"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
             android:maxLength="1"
             android:text=""
             android:textColor="@color/black"
@@ -97,15 +100,18 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/otp_02"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginStart="5dp"
             android:background="@color/white_gr"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"
             android:inputType="number"
+            android:layout_marginRight="5dp"
             android:maxLength="1"
+            android:fontFamily="@font/poppins"
+            android:layout_weight="1"
             android:text=""
             android:textColor="@color/black"
             android:textSize="20sp"
@@ -113,14 +119,17 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/otp_03"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginStart="5dp"
             android:background="@color/white_gr"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"
             android:inputType="number"
+            android:fontFamily="@font/poppins"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
             android:maxLength="1"
             android:text=""
             android:textColor="@color/black"
@@ -129,15 +138,18 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/otp_04"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginStart="5dp"
             android:background="@color/white_gr"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"
             android:inputType="number"
+            android:fontFamily="@font/poppins"
+            android:layout_marginRight="5dp"
             android:maxLength="1"
+            android:layout_weight="1"
             android:text=""
             android:textColor="@color/black"
             android:textSize="20sp"
@@ -145,14 +157,17 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/otp_05"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginStart="5dp"
             android:background="@color/white_gr"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"
+            android:layout_marginRight="5dp"
             android:inputType="number"
+            android:fontFamily="@font/poppins"
+            android:layout_weight="1"
             android:maxLength="1"
             android:text=""
             android:textColor="@color/black"
@@ -161,15 +176,17 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/otp_06"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginStart="5dp"
             android:background="@color/white_gr"
             android:clickable="true"
             android:focusable="true"
             android:gravity="center"
             android:inputType="number"
+            android:layout_weight="1"
             android:maxLength="1"
+            android:fontFamily="@font/poppins"
             android:text=""
             android:textColor="@color/black"
             android:textSize="20sp"
@@ -192,52 +209,51 @@
         android:id="@+id/timer"
         android:layout_width="39dp"
         android:layout_height="19dp"
-        android:layout_marginStart="49dp"
-        android:layout_marginTop="347dp"
         android:text=""
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="@id/otplinear"
+        app:layout_constraintTop_toBottomOf="@id/otplinear"/>
 
     <TextView
         android:id="@+id/dint_recieve"
         android:layout_width="115dp"
         android:layout_height="19dp"
-        android:layout_marginStart="49dp"
-        android:layout_marginTop="369dp"
         android:text="@string/didn_t_receive_otp"
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="@id/otplinear"
+        app:layout_constraintTop_toBottomOf="@id/timer"/>
 
     <TextView
         android:id="@+id/resend_otp_2"
         android:layout_width="115dp"
         android:layout_height="19dp"
-        android:layout_marginStart="268dp"
-        android:layout_marginTop="369dp"
         android:text="@string/resend_otp"
         android:textColor="@color/black"
         android:textSize="14sp"
+        android:gravity="end"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/timer"
+        app:layout_constraintEnd_toEndOf="@id/otplinear"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/confirm_phone_otp"
-        android:layout_width="320dp"
+        android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginStart="47dp"
-        android:layout_marginTop="413dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginRight="27dp"
         android:background="@color/btn"
         android:text="@string/confirm_otp"
         android:textAllCaps="false"
         android:textColor="@color/white"
+        android:layout_marginTop="30dp"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/dint_recieve"
+        app:layout_constraintEnd_toEndOf="@id/otplinear"
+        app:layout_constraintStart_toStartOf="@id/otplinear"/>
 
 
 

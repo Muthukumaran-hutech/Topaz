@@ -51,6 +51,7 @@ class InnerCategories : AppCompatActivity(), InnerCategoryItemClickListner {
         custId = sharedPreference.getString("customercode", "").toString()
 
         val item = intent.getStringExtra("cat_id")
+        val categoryname = intent.getStringExtra("cat_name")
         catid = item!!
 
         onApiCallInnerCategory()
@@ -91,12 +92,7 @@ class InnerCategories : AppCompatActivity(), InnerCategoryItemClickListner {
 
 
 
-
-
-
-
-
-
+        binding.textView9.setText(categoryname)
 
     }
 
@@ -105,7 +101,7 @@ class InnerCategories : AppCompatActivity(), InnerCategoryItemClickListner {
         var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
             .create(JsonPlaceholder::class.java)
 
-        res.subCategory(catid).enqueue(object : Callback<List<SubCategoryApiModel>?> {
+        res.getProductByCategory(catid).enqueue(object : Callback<List<SubCategoryApiModel>?> {
             override fun onResponse(
                 call: Call<List<SubCategoryApiModel>?>,
                 response: Response<List<SubCategoryApiModel>?>
@@ -114,7 +110,7 @@ class InnerCategories : AppCompatActivity(), InnerCategoryItemClickListner {
                 binding.innerCategoryProgress?.visibility= View.GONE
                 if(response.isSuccessful){
                     for(innercategorylist in response.body()!!){
-                        var innerCategoryModelList = InnerCategoryModelList(
+                        val innerCategoryModelList = InnerCategoryModelList(
                             innercategorylist.Productimage1.imagebyte,
                             innercategorylist.productTitle,
                             innercategorylist.sqFeetPrice,

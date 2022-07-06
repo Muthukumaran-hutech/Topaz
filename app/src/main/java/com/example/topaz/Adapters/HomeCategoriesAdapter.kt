@@ -31,6 +31,14 @@ class HomeCategoriesAdapter(var catSubModels: ArrayList<SubCatListModels>, var h
         val data = catSubModels[position]
        // holder.imgtitle.text=data.HomeCategoryTitle
         holder.bindItems(catSubModels,position,homeScreenItemClickListner1,context)
+        holder.itemView.setOnClickListener {
+            if(position>=0) {
+                homeScreenItemClickListner1.HomeScreenItemClickListner(
+                    catSubModels.get(position),
+                    position
+                )
+            }
+        }
     }
 
     override fun getItemCount(): Int {
@@ -65,17 +73,29 @@ class HomeCategoriesAdapter(var catSubModels: ArrayList<SubCatListModels>, var h
                     categoryIcon.setColorFilter(context.getColor(R.color.blue))
                 }
             }
-            itemView.setOnClickListener {
+           /* itemView.setOnClickListener {
                 //Onclick will trigger the interface in activity
                 homeScreenItemClickListner1.HomeScreenItemClickListner(catSubModels.get(position),position)
-            }
+            }*/
         }
     }
-    public fun changeClickedState(position: Int){
-        catSubModels.get(position).isCategoryClicked=true
+    public fun changeClickedState(position: Int,status:Boolean){
+        catSubModels.get(position).isCategoryClicked=status
         notifyDataSetChanged()
 
 
+    }
+
+    public fun resetCategorySelection(){
+        try{
+            catSubModels.clear()
+            notifyDataSetChanged()
+
+
+        }
+        catch (e:Exception){
+            e.toString()
+        }
     }
 
 }

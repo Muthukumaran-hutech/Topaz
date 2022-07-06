@@ -58,41 +58,44 @@ class FragmentOffers : Fragment(), NotifyOfferItemClickListner {
     }
 
     private fun onOfferApiCall(view:View) {
-        var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
-            .create(JsonPlaceholder::class.java)
+        try {
+            var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
+                .create(JsonPlaceholder::class.java)
 
 
-        res.viewOffers().enqueue(object : Callback<List<OffersListApiModel>?> {
-            override fun onResponse(
-                call: Call<List<OffersListApiModel>?>,
-                response: Response<List<OffersListApiModel>?>
-            ) {
-                if (response.isSuccessful) {
-                    progressBar.visibility = View.GONE
-                    for (notifyOffers in response.body()!!) {
-                        var notifyOfferModel = NotifyOfferModels(
-                            notifyOffers.offerImage.imagebyte,
-                            notifyOffers.title,
-                            notifyOffers.description
+            res.viewOffers().enqueue(object : Callback<List<OffersListApiModel>?> {
+                override fun onResponse(
+                    call: Call<List<OffersListApiModel>?>,
+                    response: Response<List<OffersListApiModel>?>
+                ) {
+                    if (response.isSuccessful) {
+                        progressBar.visibility = View.GONE
+                        for (notifyOffers in response.body()!!) {
+                            var notifyOfferModel = NotifyOfferModels(
+                                notifyOffers.offerImage?.imagebyte,
+                                notifyOffers.title,
+                                notifyOffers.description
 
-                        )
-                        offerInnerlist.add(notifyOfferModel)
-                        offerrecycle.layoutManager = LinearLayoutManager(context)//Count depicts no of elements in row
-                        var notifyadapter = NotifyOfferAdapter(offerInnerlist, this@FragmentOffers)
-                        offerrecycle.adapter = notifyadapter
-                        offerrecycle.setHasFixedSize(true)
+                            )
+                            offerInnerlist.add(notifyOfferModel)
+                            offerrecycle.layoutManager =
+                                LinearLayoutManager(context)//Count depicts no of elements in row
+                            var notifyadapter =
+                                NotifyOfferAdapter(offerInnerlist, this@FragmentOffers)
+                            offerrecycle.adapter = notifyadapter
+                            offerrecycle.setHasFixedSize(true)
+                        }
+                        Log.d(TAG, "onResponse Success: " + response.body()?.get(0)?.description)
+
+
                     }
-                    Log.d(TAG, "onResponse Success: " + response.body()?.get(0)?.description)
+                }
 
+                override fun onFailure(call: Call<List<OffersListApiModel>?>, t: Throwable) {
+                    Log.d(TAG, "onResponse Failure: " + t.message)
 
                 }
-            }
-
-            override fun onFailure(call: Call<List<OffersListApiModel>?>, t: Throwable) {
-                Log.d(TAG, "onResponse Failure: "+t.message)
-
-            }
-        })/*object : Callback<List<OffersListApiModel>?> {
+            })/*object : Callback<List<OffersListApiModel>?> {
             override fun onResponse(
                 call: Call<List<ProductDetailsListApiModel>?>,
                 response: Response<List<ProductDetailsListApiModel>?>
@@ -134,6 +137,10 @@ class FragmentOffers : Fragment(), NotifyOfferItemClickListner {
             }
 
         })*/
+        }
+        catch (e:Exception){
+            e.toString()
+        }
 
     }
     override fun NotifyOfferItemClickListner(data: NotifyOfferModels) {

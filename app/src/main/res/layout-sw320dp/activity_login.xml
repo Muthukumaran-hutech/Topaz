@@ -29,9 +29,10 @@
         android:layout_marginStart="90dp"
         android:layout_marginTop="@dimen/_150sdp"
         android:layout_marginEnd="90dp"
+        android:fontFamily="@font/poppins_bold"
         android:gravity="center_vertical"
         android:text="@string/mobile_no"
-        android:textColor="@color/black"
+        android:textColor="@color/login_text1_color"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,15 +44,14 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="225dp"
-        android:gravity="center_vertical"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins"
         android:text="@string/dig"
-        android:textColor="@color/black"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textColor="@color/login_text2_color"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="@+id/phoneLayout"
+        app:layout_constraintStart_toStartOf="@+id/phoneLayout"
+        app:layout_constraintTop_toBottomOf="@id/textView" />
 
 
     <TextView
@@ -62,6 +62,8 @@
         android:layout_marginStart="5dp"
         android:gravity="center_vertical"
         android:text="@string/six"
+        android:visibility="gone"
+        android:fontFamily="@font/poppins"
         android:textColor="@color/black"
         android:textSize="14sp"
         android:textStyle="bold"
@@ -74,42 +76,48 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="5dp"
+        android:fontFamily="@font/poppins"
         android:gravity="center_vertical"
         android:text="@string/vernum"
-        android:textColor="@color/black"
+        android:visibility="gone"
+        android:textColor="@color/login_text2_color"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/textView12"
         app:layout_constraintTop_toTopOf="@+id/textView2" />
 
-
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:gravity="center_vertical"
+      android:layout_marginLeft="20dp"
+      android:layout_marginRight="20dp"
+      android:layout_marginTop="40dp"
+      android:id="@+id/phoneLayout"
+      app:layout_constraintTop_toBottomOf="@id/textView2">
     <com.hbb20.CountryCodePicker
         android:id="@+id/countryCodePicker"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:layout_marginStart="47dp"
-        android:layout_marginTop="@dimen/_220sdp"
         android:background="@drawable/roundedtext"
+        android:layout_marginRight="2dp"
         android:gravity="center"
-        app:ccp_textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:ccp_textSize="14sp"/>
 
     <EditText
         android:id="@+id/phone_no_edit_text"
-        android:layout_width="200dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="47dp"
         android:background="@drawable/roundedtext"
         android:hint="@string/enter_mobile_no"
+        android:layout_weight="1"
         android:inputType="number"
         android:maxLength="10"
         android:paddingStart="10dp"
         android:textColor="@color/black"
         android:textColorHint="@color/grey_1"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/countryCodePicker"
-        app:layout_constraintTop_toTopOf="@+id/countryCodePicker" />
+        android:textSize="14sp"/>
+  </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/phone_container"
@@ -123,8 +131,8 @@
         android:textSize="14sp"
         app:helperText="@string/required"
         app:helperTextTextColor="@color/red"
-        app:layout_constraintStart_toStartOf="@+id/countryCodePicker"
-        app:layout_constraintTop_toBottomOf="@+id/countryCodePicker" />
+        app:layout_constraintStart_toStartOf="@+id/phoneLayout"
+        app:layout_constraintTop_toBottomOf="@+id/phoneLayout" />
 
 
 
@@ -136,16 +144,17 @@
         android:background="@drawable/roundedbtndarkblue"
         android:text="@string/cont"
         android:textAllCaps="false"
+        android:foreground="?attr/selectableItemBackground"
         android:textColor="@color/white"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/phone_no_edit_text"
-        app:layout_constraintStart_toStartOf="@+id/countryCodePicker"
+        app:layout_constraintEnd_toEndOf="@+id/phoneLayout"
+        app:layout_constraintStart_toStartOf="@id/phoneLayout"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/phone_no_edit_text"
+        app:layout_constraintTop_toBottomOf="@id/phoneLayout"
         app:layout_constraintEnd_toEndOf="parent"
         android:progressTint="@color/dark_blue"
         android:visibility="gone"

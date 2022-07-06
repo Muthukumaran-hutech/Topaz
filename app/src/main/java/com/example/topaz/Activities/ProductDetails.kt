@@ -21,13 +21,16 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
+import com.example.topaz.Adapters.ProductImageSlider
 import com.example.topaz.ApiModels.DiscountListApiModel
 import com.example.topaz.ApiModels.ProductDetailsListApiModel
+import com.example.topaz.ApiModels.ProductImageModel
 import com.example.topaz.Interface.JsonPlaceholder
 import com.example.topaz.Models.*
 import com.example.topaz.R
@@ -56,9 +59,10 @@ class ProductDetails : AppCompatActivity() {
     var product = ProductDetailsListApiModel()
     lateinit var quatationRef:DatabaseReference
     lateinit var quatationProductRef:DatabaseReference
-    var discountId=""
+    var discountId="1"
     var productdiscount=""
     var actualprice="0"
+    var productimagelist= ArrayList<String>()
 
 
     private lateinit var database: DatabaseReference
@@ -72,7 +76,7 @@ class ProductDetails : AppCompatActivity() {
         custId = sharedPreference.getString("customercode", "").toString()
 
         val item = intent.getStringExtra("inner_sunid")
-        var productname = intent.getStringExtra("product_name")
+        val productname = intent.getStringExtra("product_name")
         productId = item!!
 
         binding.getAPrice.isEnabled = false
@@ -97,7 +101,7 @@ class ProductDetails : AppCompatActivity() {
             database1 = FirebaseDatabase.getInstance().getReference("MyCartProducts")
 
             //Check if Cart exists, if exists then update the items to that cart else create a new cart item
-            checkIfActiveCartExists()
+            checkIfActiveCartExists(navigatetocartpage = false)
 
         }
         var rupees = getString(R.string.Rs) + binding.textView14.text + getString(R.string.slash)
@@ -137,29 +141,34 @@ class ProductDetails : AppCompatActivity() {
 
 
         binding.whislistProdDetails.setOnClickListener {
-            val detailsFirebaseModel = DetailsFirebaseModel(
-                custId = custId.toString(),
-                productImage = product.Productimage2.imagebyte,
-                productid = product.productid,
-                productTitle = product.productTitle,
-                thickness = product.thickness,
-                price = product.sqFeetPrice!!,
-                productDiscountId = productdiscount,
-                addedToWishList = true,
-                actualPrice = actualprice.toDouble()
-            )
+            try {
+                val detailsFirebaseModel = DetailsFirebaseModel(
+                    custId = custId.toString(),
+                    productImage = product.Productimage2.imagebyte,
+                    productid = product.productid,
+                    productTitle = product.productTitle,
+                    thickness = product.thickness,
+                    price = product.sqFeetPrice!!,
+                    productDiscountId = productdiscount,
+                    addedToWishList = true,
+                    actualPrice = actualprice.toDouble()
+                )
 
-            //creating database and child to fire base
-            database = FirebaseDatabase.getInstance().getReference("WhishList")
-            database.child(custId.toString()).child(product.productid.toString())
-                .setValue(detailsFirebaseModel)
+                //creating database and child to fire base
+                database = FirebaseDatabase.getInstance().getReference("WhishList")
+                database.child(custId.toString()).child(product.productid.toString())
+                    .setValue(detailsFirebaseModel)
 
-            Toast.makeText(
-                applicationContext, " Product Added To WishList",
-                Toast.LENGTH_LONG
-            ).show()
-            binding.whislistProdDetails.visibility=View.INVISIBLE
-            binding.whislistProdDetails1.visibility=View.VISIBLE
+                Toast.makeText(
+                    applicationContext, " Product Added To WishList",
+                    Toast.LENGTH_LONG
+                ).show()
+                binding.whislistProdDetails.visibility = View.INVISIBLE
+                binding.whislistProdDetails1.visibility = View.VISIBLE
+            }
+            catch (e:Exception){
+                e.toString()
+            }
         }
 
         binding.getAPrice.setOnClickListener {//Add quotation
@@ -184,7 +193,12 @@ class ProductDetails : AppCompatActivity() {
         }
 
         binding.buyNow.setOnClickListener {
-            startActivity(Intent(activity, MyCart::class.java))
+            database = FirebaseDatabase.getInstance().getReference("MyCart")
+            database1 = FirebaseDatabase.getInstance().getReference("MyCartProducts")
+
+            //Check if Cart exists, if exists then update the items to that cart else create a new cart item
+            checkIfActiveCartExists(navigatetocartpage = true)
+
         }
         binding.shareProdDetails.setOnClickListener {
             product.productid
@@ -195,85 +209,115 @@ class ProductDetails : AppCompatActivity() {
 
         quatationRef=FirebaseDatabase.getInstance().getReference("MyQuotation")
         quatationProductRef=FirebaseDatabase.getInstance().getReference("QuotationProductList")
+
+        getProductImages()
+
+
+
     }
 
-    private fun checkIfActiveCartExists() {
-        val activecartquery = database.child(custId).orderByChild("cartActive").equalTo(true)
-        activecartquery.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
+    private fun checkIfActiveCartExists(navigatetocartpage:Boolean) {
+        try {
+            val activecartquery = database.child(custId).orderByChild("cartActive").equalTo(true)
+            activecartquery.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    try {
 
-                if (snapshot.exists()) {
-                    for (snap: DataSnapshot in snapshot.children) {
-                        Log.d(TAG, "datafound: " + snap)
-                        val cart_id = snap.getValue(CartList::class.java)
-                        cartProductListItem.add(
-                            CartProductList(
-                                product_title = product.productTitle,
-                                cartImage = product.Productimage2.imagepath,
-                                price = product.sqFeetPrice.toString(),
-                                isActive = true,
-                                product_id = product.productid.toString(),
-                                cart_id = cart_id!!.cartId.toString(),
-                                quantity = "1",
-                                discount = productdiscount,
-                                discount_id = discountId.toInt(),
-                                size = product.size,
-                                actualPrice = actualprice
+                        if (snapshot.exists()) {
+                            for (snap: DataSnapshot in snapshot.children) {
+                                Log.d(TAG, "datafound: " + snap)
+
+                                val cart_id = snap.getValue(CartList::class.java)
+                                cartProductListItem.add(
+                                    CartProductList(
+                                        product_title = product.productTitle,
+                                        cartImage = product.Productimage2.imagebyte,
+                                        price = product.sqFeetPrice.toString(),
+                                        isActive = true,
+                                        product_id = product.productid.toString(),
+                                        cart_id = cart_id!!.cartId.toString(),
+                                        quantity = "1",
+                                        discount = productdiscount,
+                                        discount_id = discountId.toInt(),
+                                        size = product.size,
+                                        actualPrice = actualprice,
+                                        thickness = product.thickness
+                                    )
+                                )
+                                database1.child(cart_id!!.cartId).child("Products")
+                                    .child(cartProductListItem.get(0).product_id)
+                                    .setValue(cartProductListItem.get(0))//
+
+                                if (navigatetocartpage) {
+                                    startActivity(Intent(activity, MyCart::class.java))
+                                }
+                                Toast.makeText(this@ProductDetails,"Product Added To Cart",Toast.LENGTH_LONG).show()
+
+                            }
+                        } else {
+                            Log.d(TAG, "data not found: " + snapshot)
+                            val cart_id = database.child(custId).push().key
+                            val cartListItems = CartList(
+                                custId = custId,
+                                cartId = cart_id.toString(),
+                                cartActive = true
+                                //    product_list = cartProductListItem
+
                             )
-                        )
-                        database1.child(cart_id!!.cartId).child("Products")
-                            .child(cartProductListItem.get(0).product_id)
-                            .setValue(cartProductListItem.get(0))//
 
+                            cartProductListItem.add(
+                                CartProductList(
+                                    product_title = product.productTitle,
+                                    cartImage = product.Productimage2.imagebyte,
+                                    price = product.sqFeetPrice.toString(),
+                                    isActive = true,
+                                    product_id = product.productid.toString(),
+                                    cart_id = cart_id.toString(),
+                                    quantity = "1",
+                                    discount = productdiscount,
+                                    discount_id = discountId.toInt(),
+                                    size = product.size,
+                                    actualPrice = actualprice,
+                                    thickness = product.thickness
+
+                                )
+
+                            )
+                            //------------------------------------Cart creation------------------------------------------
+                            database.child(custId.toString()).child(cart_id.toString())
+                                .setValue(cartListItems)
+
+
+                            //------------------------------------Cart insertion------------------------------------------
+                            database1.child(cart_id.toString()).child("Products")
+                                .child(cartProductListItem.get(0).product_id)
+                                .setValue(cartProductListItem.get(0))//Inserting products into Cart
+
+                            if (navigatetocartpage) {
+                                startActivity(Intent(activity, MyCart::class.java))
+                            }
+                            Toast.makeText(
+                                this@ProductDetails, "Product Added To Cart",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    } catch (e: Exception) {
+                        e.toString()
                     }
-                } else {
-                    Log.d(TAG, "data not found: " + snapshot)
-                    val cart_id = database.child(custId).push().key
-                    val cartListItems = CartList(
-                        custId = custId,
-                        cartId = cart_id.toString(),
-                        cartActive = true
-                        //    product_list = cartProductListItem
-
-                    )
-                    cartProductListItem.add(
-                        CartProductList(
-                            product_title = product.productTitle,
-                            cartImage = product.Productimage2.imagepath,
-                            price = product.sqFeetPrice.toString(),
-                            isActive = true,
-                            product_id = product.productid.toString(),
-                            cart_id = cart_id.toString(),
-                            quantity = "1",
-                            discount = productdiscount,
-                            discount_id = discountId.toInt(),
-                            size = product.size,
-                            actualPrice = actualprice
-
-                        )
-
-                    )
-                    //------------------------------------Cart creation------------------------------------------
-                    database.child(custId.toString()).child(cart_id.toString())
-                        .setValue(cartListItems)
-
-
-                    //------------------------------------Cart insertion------------------------------------------
-                    database1.child(cart_id.toString()).child("Products")
-                        .child(cartProductListItem.get(0).product_id)
-                        .setValue(cartProductListItem.get(0))//Inserting products into Cart
-
-                    Toast.makeText(
-                        this@ProductDetails, " Product Added To MyCart",
-                        Toast.LENGTH_LONG
-                    ).show()
                 }
-            }
 
-            override fun onCancelled(error: DatabaseError) {
+                override fun onCancelled(error: DatabaseError) {
 
-            }
-        })
+                }
+            })
+        }
+        catch (e:Exception){
+            e.toString()
+            Toast.makeText(this,"Something went wrong",Toast.LENGTH_LONG).show()
+        }
+
+
+
     }
 
     private fun sendUserData() {
@@ -314,7 +358,7 @@ class ProductDetails : AppCompatActivity() {
                     var rupees =
                         getString(R.string.Rs) + binding.textView14.text /*+ getString(R.string.slash)*/
 
-                    binding.woodMaterialName.text = product?.productTitle
+                    binding.woodMaterialName.text = product?.productTitle+","+"\n"+"Thickness:"+" "+product?.thickness
                     binding.textView14.text = rupees + product?.sqFeetPrice.toString() + "/"
                     binding.productSpecificationSize.text = product?.size
                     binding.productSpecificationThickness.text = product?.thickness
@@ -495,7 +539,7 @@ class ProductDetails : AppCompatActivity() {
                           Log.d("Discount", response.body()!!.discount!!)
                           response.body()?.let {
                               val discountListApiModel = it
-                              binding.textView17.text = discountListApiModel?.discount + " " + "Off"
+                              binding.textView17.text = discountListApiModel?.discount +"%"+ " " + "Off"
                               if (discountListApiModel.discount != null) {
                                   try {
                                       binding.textView15.text =
@@ -525,13 +569,13 @@ class ProductDetails : AppCompatActivity() {
                           binding.productDetailsProgress.visibility= View.GONE
                           binding.textView17.visibility = View.INVISIBLE
                           binding.textView15.visibility = View.INVISIBLE
-                          Toast.makeText(this@ProductDetails, "No data", Toast.LENGTH_LONG)
+                         // Toast.makeText(this@ProductDetails, "No data", Toast.LENGTH_LONG)
                       }
                   } else {
                       binding.productDetailsProgress.visibility= View.GONE
                       binding.textView17.visibility = View.INVISIBLE
                       binding.textView15.visibility = View.INVISIBLE
-                      Toast.makeText(this@ProductDetails, "No data", Toast.LENGTH_LONG).show()
+                      //Toast.makeText(this@ProductDetails, "No data", Toast.LENGTH_LONG).show()
                       Log.d("Discount Failed", "true")
                   }
               }
@@ -637,27 +681,109 @@ class ProductDetails : AppCompatActivity() {
     }
 
     fun prepareQuatationModel():QuatationListModel{
-        val productDetailsModel1 = QuatationListModel(
-            product.productid,
-            product.Productimage2.imagebyte,
-            product.productTitle,
-            product.sqFeetPrice.toString(),
-            product.size,
-            product.thickness,
-            product.brand,
-            product.woodType,
-            "",
-            quantity = "1",
-            totalvalue = product.sqFeetPrice.toString(),
-            expanded = false,
-            discountId=discountId
-            //productList.get(0).ProductImage
-        )
+        try {
+            val productDetailsModel1 = QuatationListModel(
+                product.productid,
+                product.Productimage2.imagebyte,
+                product.productTitle,
+                product.sqFeetPrice.toString(),
+                product.size,
+                product.thickness,
+                product.brand,
+                product.woodType,
+                "",
+                quantity = "1",
+                totalvalue = product.sqFeetPrice.toString(),
+                expanded = false,
+                discountId = discountId
+                //productList.get(0).ProductImage
+            )
 
-        return productDetailsModel1
+            return productDetailsModel1
+        }
+        catch (e:Exception){
+            e.toString()
+        }
+
+        return QuatationListModel()
+
     }
 
 
+    fun getProductImages(){
+        try{
+            val imagelist = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
+                .create(JsonPlaceholder::class.java)
+
+            imagelist.getProductImages(productId).enqueue(object : Callback<List<ProductImageModel>?> {
+                override fun onResponse(
+                    call: Call<List<ProductImageModel>?>,
+                    response: Response<List<ProductImageModel>?>
+                ) {
+                    if(response.isSuccessful){
+                        for(productimagedata in response.body()!! ){
+                            Log.d("Data","true")
+                            productimagelist.add(productimagedata.imagebyte!!)
+                        }
+
+                        initializeImageSliderList()
+                    }
+                    else{
+                        Log.d("No data","true")
+
+                    }
+                }
+                override fun onFailure(call: Call<List<ProductImageModel>?>, t: Throwable) {
+                   Log.e("Product image failure","true")
+                }
+            })
+
+
+
+        }
+        catch (e:Exception){
+            e.toString()
+        }
+    }
+
+    private fun initializeImageSliderList() {
+        try{
+            var imageSlider=ProductImageSlider(this,productimagelist)
+            binding.viewpagerData.adapter=imageSlider
+            if(productimagelist.size > 0) {
+                binding.indicatorData.visibility= View.VISIBLE
+                binding.indicatorData.setIndicatorCount(productimagelist.size)
+                binding.indicatorData.selectCurrentPosition(0)
+            }
+            else{
+                binding.indicatorData.visibility= View.INVISIBLE
+            }
+            binding.viewpagerData.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+                override fun onPageScrolled(
+                    position: Int,
+                    positionOffset: Float,
+                    positionOffsetPixels: Int
+                ) {
+                    //Log.d("Page chnaged","true")
+                }
+
+                override fun onPageSelected(position: Int) {
+                    binding.indicatorData.selectCurrentPosition(position)
+                    Log.d("Page chnaged","true")
+                }
+
+                override fun onPageScrollStateChanged(state: Int) {
+                    //Log.d("Page chnaged","true")
+                }
+            })
+
+
+
+        }
+        catch (e:Exception){
+            e.toString()
+        }
+    }
 
 
 }

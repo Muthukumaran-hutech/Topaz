@@ -18,11 +18,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="2dp"
+            android:gravity="center_vertical"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/_5sdp"
             android:textSize="15sp"
             android:textStyle="bold"
+            android:fontFamily="@font/poppins"
+            android:textColor="@color/netural_black"
             android:id="@+id/headerProductTitle"
             android:text="Hardwood kitply plywood"/>
         <LinearLayout
@@ -40,6 +42,7 @@
                 android:textSize="12sp"
                 android:id="@+id/headerQuantity"
                 android:text="Qty:1"
+                android:fontFamily="@font/roboto"
                 android:layout_gravity="center"
                 android:padding="2dp"/>
 
@@ -50,6 +53,7 @@
                 android:text="Price:300"
                 android:textSize="12sp"
                 android:id="@+id/headerPrice"
+                android:fontFamily="@font/roboto_bold"
                 android:layout_gravity="center"
                 android:textStyle="bold"
                 android:textColor="@color/blue"/>
@@ -86,8 +90,8 @@
         android:layout_marginTop="@dimen/_5sdp">
         <ImageView
             android:id="@+id/innercatimage"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
 
             android:layout_marginTop="10dp"
             android:src="@drawable/doors"
@@ -96,15 +100,17 @@
 
         <TextView
             android:id="@+id/productDetailTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="272dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="20dp"
             android:background="@color/white"
             android:text="@string/wooden_waterproof_plywood_sheet_thickness_18_mm"
+            android:fontFamily="@font/poppins_bold"
             android:textColor="@color/netural_black"
             android:textSize="14sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/innercatimage"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -145,13 +151,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/_5sdp"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_20sdp"
-                    android:text="@string/quantity"
-                    android:textColor="@color/black"
                     android:layout_weight="1"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="@string/quantity"
+                    android:textColor="@color/login_text1_color"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -160,8 +168,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:text="@string/s_ft_price"
-                    android:textColor="@color/black"
+                    android:textColor="@color/login_text1_color"
                     android:textSize="14sp"
+                    android:fontFamily="@font/lato_bold"
                     android:layout_weight="1"
                     android:textStyle="bold"
                     android:visibility="visible"/>
@@ -169,8 +178,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/total_value"
-                    android:textColor="@color/black"
+                    android:textColor="@color/login_text1_color"
                     android:layout_marginTop="@dimen/_20sdp"
+                    android:fontFamily="@font/lato_bold"
                     android:layout_weight="1"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -190,6 +200,7 @@
                     android:hint="@string/quantity"
                     android:inputType=""
                     android:layout_weight="1"
+                    android:fontFamily="@font/lato"
                     android:textColorHint="@color/black"
                     android:textColor="@color/black"
                     android:layout_marginRight="23dp"
@@ -206,6 +217,7 @@
                     android:paddingStart="10dp"
                     android:enabled="false"
                     android:layout_weight="1"
+                    android:fontFamily="@font/lato"
                     android:layout_marginRight="23dp"
                     android:textColor="@color/black"
                     android:textSize="12sp"
@@ -221,6 +233,7 @@
                     android:paddingStart="5dp"
                     android:layout_weight="1"
                     android:paddingTop="10dp"
+                    android:fontFamily="@font/lato"
                     android:layout_marginRight="20dp"
                     android:textColorHint="@color/black"
                     android:textColor="@color/black"
@@ -332,8 +345,9 @@
             android:text="@string/thickness"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/priceLayout"
-            android:textColor="@color/black"
+            android:textColor="@color/login_text1_color"
             android:id="@+id/thicknessText"
+            android:fontFamily="@font/lato_bold"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -341,18 +355,19 @@
             android:id="@+id/product_thickness_recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             app:layout_constraintTop_toBottomOf="@id/thicknessText"
             app:layout_constraintStart_toStartOf="parent"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/login_text1_color"
             android:textStyle="bold"
             android:textSize="14sp"
             android:id="@+id/sizeFeetText"
             app:layout_constraintStart_toStartOf="parent"
+            android:fontFamily="@font/lato_bold"
             app:layout_constraintTop_toBottomOf="@id/product_thickness_recycler"
             android:layout_marginTop="20dp"
             android:text="@string/size_feet" />
@@ -362,18 +377,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/sizeFeetText"
-            android:layout_marginTop="@dimen/_15sdp"/>
+            android:layout_marginTop="@dimen/_5sdp"/>
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="25dp"
             android:text="@string/requirement_details"
             android:id="@+id/requirementDetailsText"
             app:layout_constraintTop_toBottomOf="@id/feet_recyclyer"
             app:layout_constraintStart_toStartOf="parent"
-            android:textColor="@color/black"
+            android:textColor="@color/login_text1_color"
+            android:fontFamily="@font/lato_bold"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -385,12 +401,13 @@
             android:layout_height="80dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="@dimen/_15sdp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:paddingStart="@dimen/_10sdp"
             android:paddingTop="2dp"
             android:gravity="start"
+            android:fontFamily="@font/lato"
             android:text="asas"
-            android:textColorHint="@color/black"
+            android:textColorHint="@color/login_text1_color"
             app:layout_constraintTop_toBottomOf="@id/requirementDetailsText"
             android:background="@drawable/editable_background"
             app:layout_constraintStart_toStartOf="parent"

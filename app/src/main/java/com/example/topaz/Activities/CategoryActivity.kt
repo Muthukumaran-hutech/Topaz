@@ -14,7 +14,10 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.topaz.Adapters.CategoryAdapter
 import com.example.topaz.Adapters.HomeCategoriesAdapter
 import com.example.topaz.ApiModels.CategoryListApiModel
@@ -51,6 +54,7 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
     lateinit var bottomnav:BottomNavigationView
     var catSubModels = ArrayList<SubCatListModels>()
     lateinit var categoryAdapter: CategoryAdapter
+    var isCategoryOptionClicked=false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,14 +68,15 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
 
         binding.appProgressBar2.visibility = View.VISIBLE
 
-        if(from.equals("Homepage")) {
+        /*if(from.equals("Homepage")) {
             catId = intent.getStringExtra("cat__iD").toString()
             categoryName = intent.getStringExtra("category_name") as String
             categoryApiCall()
         }
         else{
             loadHomePageCategoryItem()
-        }
+        }*/
+        loadHomePageCategoryItem()
 
 
        /* binding.home?.setOnClickListener {
@@ -124,7 +129,7 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
         try{
 
             catSubModels.clear()
-            var categoryres = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
+            val categoryres = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
                 .create(JsonPlaceholder::class.java)
             categoryres.viewCategory().enqueue(object : Callback<List<CategoryListApiModel>?> {
                 override fun onResponse(
@@ -135,28 +140,42 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
                     if(response.isSuccessful){
                         for (subCatListModel in response.body()!!) {
                             val categoryModel = CategoriesModel(
-                                "",
+                                subCatListModel.categoryimage.imagebyte,
                                 subCatListModel.categoryName,
                                 "",
-                                subCatListModel.categoryid
+                                subCatListModel.categoryid,
+
 
                             )
 
-                            if(subCatListModel.active) {
+                            if(subCatListModel.active) {//Only active categories will be displayed
                                 categoryInnerlist.add(categoryModel)
                             }
                         }
                         //arrivals Adapter
                         try {
-                            binding.categoryRecyclerView.layoutManager = GridLayoutManager(
-                                this@CategoryActivity,
-                                3
-                            )//Count depicts no of elements in row
+
                             val categoryAdapter = CategoryAdapter(
                                 categoryInnerlist,
                                 this@CategoryActivity,
                                 this@CategoryActivity
                             )
+
+                            //Customizing  grid dividers
+                            val decor=ContextCompat.getDrawable(this@CategoryActivity,R.drawable.category_item_background)
+                            val verticaldecor=DividerItemDecoration(this@CategoryActivity, DividerItemDecoration.VERTICAL)
+                            val horizontaldecor = DividerItemDecoration(this@CategoryActivity, DividerItemDecoration.HORIZONTAL)
+
+                            verticaldecor.setDrawable(decor!!)
+                            horizontaldecor.setDrawable(decor!!)
+                            binding.categoryRecyclerView.addItemDecoration(horizontaldecor)
+                            binding.categoryRecyclerView.addItemDecoration(verticaldecor)
+
+
+                            binding.categoryRecyclerView.layoutManager = GridLayoutManager(
+                                this@CategoryActivity,
+                                3
+                            )//Count depicts no of elements in row
                             binding.categoryRecyclerView.adapter = categoryAdapter
                             binding.categoryRecyclerView.setHasFixedSize(true)
 
@@ -214,6 +233,8 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
                               categorylist.subid
 
                           )
+
+
                           categoryInnerlist.add(categoryModel)
                           binding.categoryRecyclerView.layoutManager = GridLayoutManager(
                               this@CategoryActivity,
@@ -326,7 +347,14 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
 
         try {
 
-            if (from.equals("Homepage")) {
+            isCategoryOptionClicked=true
+            val intent = Intent(activity, InnerCategories::class.java)
+            intent.putExtra("cat_id", categories.CateegorySubId)
+            intent.putExtra("cat_name", categories.CateegoryName)
+            startActivity(intent)
+
+            //Commented on 26-06-2022
+           /* if (from.equals("Homepage")) {
                 var intent = Intent(activity, InnerCategories::class.java)
                 intent.putExtra("cat_id", categories.CateegorySubId)
                 startActivity(intent)
@@ -338,7 +366,7 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
                 categoryApiCall()
                 from="Homepage"
 
-            }
+            }*/
         }
         catch (e:Exception){
             e.toString()
@@ -435,6 +463,21 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
         }
         return super.onOptionsItemSelected(item)
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+      /*  try {
+            if (isCategoryOptionClicked) {
+                isCategoryOptionClicked = false
+                categoryAdapter.resetAdapterList()
+                binding.appProgressBar2.visibility = View.VISIBLE
+                loadHomePageCategoryItem()
+            }
+        }
+        catch (e:Exception){
+            e.toString()
+        }*/
     }
 
 }

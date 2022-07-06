@@ -44,6 +44,7 @@ MywishlistAdapter(
         var wishRupees=itemView.findViewById<TextView>(R.id.textView14)
         var offer= itemView.findViewById<TextView>(R.id.textView17)
         var actualprice = itemView.findViewById<TextView>(R.id.textView15)
+
         var fav=itemView.findViewById<ImageView>(R.id.heart)
 
 
@@ -54,18 +55,18 @@ MywishlistAdapter(
             wishListItemClickListner: WishListItemClickListner,
             context: Context
         ) {
-            wishTitle.text = wishData[position].productTitle
+            wishTitle.text = wishData[position].productTitle+","+"\n"+"Thickess:"+" "+wishData[position].thickness
             wishRupees.text = context.getString(R.string.Rs)+wishData[position].price.toInt().toString()+"/"
 
             if(wishData[position].productDiscountId!=""){
                 actualprice.visibility= View.VISIBLE
-                actualprice.visibility= View.VISIBLE
-               actualprice.text=wishData[position].actualPrice.toString()
-                offer.text=wishData[position].productDiscountId
+                offer.visibility= View.VISIBLE
+               actualprice.text=context.getString(R.string.Rs)+wishData[position].actualPrice.toString()
+                offer.text=wishData[position].productDiscountId+"%"+" "+"Off"
             }
             else{
-                actualprice.visibility= View.GONE
-                actualprice.visibility= View.GONE
+                actualprice.visibility= View.INVISIBLE
+                offer.visibility= View.INVISIBLE
             }
 
             val decodedString: ByteArray = Base64.decode(wishData.get(position).productImage, Base64.DEFAULT)

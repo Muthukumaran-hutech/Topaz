@@ -94,77 +94,87 @@ class MyCart : AppCompatActivity(), MyCartItemClickListner,IncreementDecreementI
 
     private fun retrieveDataFirebase() {
 
-        database = FirebaseDatabase.getInstance().getReference("MyCart")
-        val query = database.child(custId.toString()).orderByChild("cartActive").equalTo(true)
+        try {
+            database = FirebaseDatabase.getInstance().getReference("MyCart")
+            val query = database.child(custId.toString()).orderByChild("cartActive").equalTo(true)
 
 
-        query.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    for (snap: DataSnapshot in snapshot.children) {
-                        val mylistdata = snap.getValue(CartList::class.java) as CartList
-                        // cartData.add(mylistdata)
-                        Log.d("Mycartm", mylistdata.custId)
-                        getCartItems(mylistdata.cartId)
-                        //Write a function to get products from Cart
-                        //fun_name(cart_id){    }
+            query.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        for (snap: DataSnapshot in snapshot.children) {
+                            val mylistdata = snap.getValue(CartList::class.java) as CartList
+                            // cartData.add(mylistdata)
+                            Log.d("Mycartm", mylistdata.custId)
+                            getCartItems(mylistdata.cartId)
+                            //Write a function to get products from Cart
+                            //fun_name(cart_id){    }
 
+                        }
+
+
+                    } else {
+                        binding.appProgressBar2.visibility = View.GONE
+                        binding.cartEmpty.visibility = View.VISIBLE
+                        binding.linearLayout3.visibility= View.GONE
                     }
 
-
-
-                }else{
-                    binding.appProgressBar2.visibility =View.GONE
-                    binding.cartEmpty.visibility=View.VISIBLE
                 }
 
-            }
+                override fun onCancelled(error: DatabaseError) {
 
-            override fun onCancelled(error: DatabaseError) {
-
-            }
-        })
+                }
+            })
+        }
+        catch (e:Exception){
+            e.toString()
+        }
     }
 
     private fun getCartItems(cartId: String) {
-        database1 = FirebaseDatabase.getInstance().getReference("MyCartProducts")
-        val query = database1.child(cartId).child("Products").orderByChild("active").equalTo(true)
-        query.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                cartData.clear()
-                if (snapshot.exists()) {
-                    for (snap: DataSnapshot in snapshot.children) {
-                        val mylistdata1 =
-                            snap.getValue(CartProductList::class.java) as CartProductList
-                        cartData.add(mylistdata1)
-                        cartAdapter =
-                            MyCartAdapter(cartData, this@MyCart, this@MyCart,this@MyCart)
-                        binding.cartRecycle.adapter = cartAdapter
-                        binding.cartRecycle.setHasFixedSize(true)
-                        Log.d("productid", mylistdata1.product_id)
-                        //Write a function to get products from Cart
-                        //fun_name(cart_id){    }
+        try {
+            database1 = FirebaseDatabase.getInstance().getReference("MyCartProducts")
+            val query =
+                database1.child(cartId).child("Products").orderByChild("active").equalTo(true)
+            query.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    cartData.clear()
+                    if (snapshot.exists()) {
+                        for (snap: DataSnapshot in snapshot.children) {
+                            val mylistdata1 =
+                                snap.getValue(CartProductList::class.java) as CartProductList
+                            cartData.add(mylistdata1)
+                            cartAdapter =
+                                MyCartAdapter(cartData, this@MyCart, this@MyCart, this@MyCart)
+                            binding.cartRecycle.adapter = cartAdapter
+                            binding.cartRecycle.setHasFixedSize(true)
+                            Log.d("productid", mylistdata1.product_id)
+                            //Write a function to get products from Cart
+                            //fun_name(cart_id){    }
 
+                        }
+                        if (cartData.size > 0) {
+                            binding.appProgressBar2.visibility = View.GONE
+                            binding.linearLayout3.visibility = View.VISIBLE
+                            binding.chckbtn.visibility = View.VISIBLE
+                            binding.cartRecycle.visibility = View.VISIBLE
+                            binding.cartEmpty.visibility = View.GONE
+                            initializePriceDetails()
+                        }
+                    } else {
+                        binding.appProgressBar2.visibility = View.GONE
                     }
-                    if(cartData.size>0){
-                        binding.appProgressBar2.visibility =View.GONE
-                        binding.linearLayout3.visibility = View.VISIBLE
-                        binding.chckbtn.visibility = View.VISIBLE
-                        binding.cartRecycle.visibility = View.VISIBLE
-                        binding.cartEmpty.visibility = View.GONE
-                        initializePriceDetails()
-                    }
-                }
-                else{
-                    binding.appProgressBar2.visibility =View.GONE
+
                 }
 
-            }
+                override fun onCancelled(error: DatabaseError) {
 
-            override fun onCancelled(error: DatabaseError) {
-
-            }
-        })
+                }
+            })
+        }
+        catch (e:Exception){
+            e.toString()
+        }
 
     }
 
@@ -256,7 +266,7 @@ class MyCart : AppCompatActivity(), MyCartItemClickListner,IncreementDecreementI
             binding.cartEmpty.visibility = View.VISIBLE
 
         } else {
-            //Write a function which changes the status of the product in MyCrtProducts
+            //Write a function which changes the status of the product in MyCart
             cartData.remove(data)
             cartAdapter.notifyItemRemoved(position)
             database1.child(data.cart_id).child("Products").child(data.product_id).child("active").setValue(false)
@@ -343,7 +353,7 @@ class MyCart : AppCompatActivity(), MyCartItemClickListner,IncreementDecreementI
                     orderdiscountdetails.addProperty("discountid",cartitemlist.discount_id)
                 }
                 else{
-                    orderdiscountdetails.addProperty("discountid","1")
+                    orderdiscountdetails.addProperty("discountid","1".toInt())
                 }
                 orderdiscount.add("discount",Gson().toJsonTree(orderdiscountdetails))
 
@@ -427,6 +437,8 @@ class MyCart : AppCompatActivity(), MyCartItemClickListner,IncreementDecreementI
 
             val cartref=FirebaseDatabase.getInstance().getReference("MyCart").child(custId)
             cartref.child(cartData.get(0).cart_id).child("cartActive").setValue(false)
+            cartData.clear()
+            cartAdapter.notifyDataSetChanged()
             startActivity(Intent(this@MyCart, MyOrders::class.java))
 
 

@@ -8,19 +8,19 @@ class OffersListApiModel {
     public var offerId: Int = 0
 
     @SerializedName("title")
-    public var title: String = ""
+    public var title: String? = ""
 
     @SerializedName("description")
-    public var description: String = ""
+    public var description: String? = ""
 
     @SerializedName("startDate")
-    public var startDate: String = ""
+    public var startDate: String? = ""
 
     @SerializedName("endDate")
-    public var endDate: String = ""
+    public var endDate: String? = ""
 
     @SerializedName("offerImage")
-    public var offerImage: OfferImage = OfferImage()
+    public var offerImage: OfferImage? = OfferImage()
 
 }
 

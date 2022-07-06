@@ -32,6 +32,9 @@ interface JsonPlaceholder {
     @GET("viewProdcutBySubCategoryId/{subid}")
     fun subCategory( @Path("subid") subid: String): Call<List<SubCategoryApiModel>>
 
+    @GET("viewProdcutByCategoryId/{categoryid}")
+    fun getProductByCategory( @Path("categoryid") subid: String): Call<List<SubCategoryApiModel>>
+
     @GET("viewProductDetails/{productId}")
     fun viewProduct(@Path("productId") productId: String): Call<ProductDetailsListApiModel>
 
@@ -127,6 +130,10 @@ interface JsonPlaceholder {
 
    @POST("add/order")
    fun addNewOrder(@Body jsonObject: JsonObject):Call<AddOrderApiModel>
+
+
+   @GET("getImage/{productId}")
+   fun getProductImages(@Path("productId") productId: String):Call<List<ProductImageModel>>
 
 
 

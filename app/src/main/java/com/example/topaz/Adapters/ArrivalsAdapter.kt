@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -15,6 +16,7 @@ import com.example.topaz.Activities.HomeScreen
 import com.example.topaz.ApiModels.ArrivalsPageItemClickListner
 import com.example.topaz.Models.ArrivalsModels
 import com.example.topaz.R
+import com.example.topaz.Utility.Util
 
 class ArrivalsAdapter(
     var arrival_list: ArrayList<ArrivalsModels>, var arrivalsPageItemClickListner: ArrivalsPageItemClickListner, var context: Context) : RecyclerView.Adapter<ArrivalsAdapter.MyViewHolder>(){
@@ -36,6 +38,7 @@ class ArrivalsAdapter(
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var arrivalImage=itemView.findViewById<ImageView>(R.id.arrival_plwwoodss)
         var arrivalName=itemView.findViewById<TextView>(R.id.arrival_plwwoodsstext)
+        var arrivalProductPrice = itemView.findViewById<TextView>(R.id.arrivalProductPrice)
         fun bindItems(
             arrivalList: List<ArrivalsModels>,
             position: Int,
@@ -43,6 +46,7 @@ class ArrivalsAdapter(
             context: Context
         ) {
             arrivalName.text = arrivalList[position].ArrivalName
+
 
             val decodedString: ByteArray = Base64.decode(arrivalList.get(position).ArrivalImage,
                 Base64.DEFAULT)
@@ -57,6 +61,21 @@ class ArrivalsAdapter(
             arrivalImage.setOnClickListener {
                 //Onclick will trigger the interface in activity
                 arrivalsPageItemClickListner.ArrivalsPageItemClickListner(arrivalList[position])
+            }
+            val sqfeettext="<font color='#0000'>"+"/Square Feet"+"</font>"
+
+            if(arrivalList[position].Discount!=""){
+
+                var discountvalue= Util.extractNumbersFromString(arrivalList[position].Discount,"Percentage")
+                var discountamount = (arrivalList[position].SqfeetPrice!!.toInt()*discountvalue[0].toInt())/100
+                var actualsqfeetprice = arrivalList[position].SqfeetPrice!!.toInt() - discountamount
+                arrivalProductPrice.text=HtmlCompat.fromHtml(context.getString(R.string.Rs)+actualsqfeetprice.toString()+" "+sqfeettext,HtmlCompat.FROM_HTML_MODE_LEGACY)
+
+
+            }
+            else{
+
+                arrivalProductPrice.text=HtmlCompat.fromHtml(context.getString(R.string.Rs)+arrivalList[position].SqfeetPrice.toString()+" "+sqfeettext,HtmlCompat.FROM_HTML_MODE_LEGACY)
             }
         }
 

@@ -26,16 +26,18 @@
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
             android:padding="@dimen/_5sdp"/>
+
         <TextView
             android:id="@+id/idTVCourseName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:layout_marginTop="@dimen/_30sdp"
             android:layout_marginLeft="30dp"
+            android:layout_marginTop="@dimen/_30sdp"
             android:gravity="left"
             android:text="@string/quantity"
-            android:textColor="@color/black"
+            android:fontFamily="@font/lato"
+            android:textColor="@color/login_text1_color"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -113,6 +115,7 @@
                 android:background="@drawable/bck_color_btn"
                 android:text="@string/confirm"
                 android:textAllCaps="false"
+                android:fontFamily="@font/poppins_semibold"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
         </LinearLayout>

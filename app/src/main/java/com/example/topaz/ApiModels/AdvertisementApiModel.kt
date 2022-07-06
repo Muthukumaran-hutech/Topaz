@@ -12,7 +12,7 @@ class AdvertisementApiModel {
     public var title: String = ""
 
     @SerializedName("discription")
-    public var discription: String = ""
+    public var discription: String? = ""
 
     @SerializedName("selectcustomers")
     public var selectcustomers: ArrayList<Addcust> = ArrayList<Addcust>()

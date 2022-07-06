@@ -50,14 +50,14 @@ class InnerCategoryAdapter(var list3: ArrayList<InnerCategoryModelList>, var inn
         fun bindItems(listModel3:List<InnerCategoryModelList>, position: Int, innerCategoryItemClickListner1: InnerCategoryItemClickListner,context: Context) {
             //innerCatImage.setImageResource(listModel3.get(position).InnerCateegoryImage)
          try {
-             catName.text = listModel3[position].InnerCateegoryTitle
-             catthick.text = listModel3[position].InnerCateegoryhickness
+             catName.text = listModel3[position].InnerCateegoryTitle+","
+             catthick.text = context.getString(R.string.thickness_label)+listModel3[position].InnerCateegoryhickness
              catprice.text =
                  context.getString(R.string.Rs) + listModel3[position].InnerCateegoryPrice + "/"
              if (listModel3[position].discount != null && listModel3[position].discount != "") {
                  discount.visibility=View.VISIBLE
                  initialprice.visibility=View.VISIBLE
-                 discount.text = listModel3[position].discount
+                 discount.text = listModel3[position].discount+"%"+" "+"Off"
                  var discountvalue = Util.extractNumbersFromString(listModel3[position].discount!!,"Percentage")
                  var discountamount =
                      (listModel3[position].InnerCateegoryPrice.toInt() * discountvalue[0].toInt()) / 100

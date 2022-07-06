@@ -31,14 +31,13 @@ class SplashScreen : AppCompatActivity() {
 
            if( sharedPreference.getString("isUserLoggedIn","").toString()=="true") {
 
-
                val intent = Intent(this, HomeScreen::class.java)
                startActivity(intent)
                finish()
            }
             else{
 
-              /* val intent = Intent(this, HomeScreen::class.java)
+              /* val intent = Intent(this, OtpVerfification::class.java)
                startActivity(intent)
                finish()*/
                val intent = Intent(this, IntroSlider::class.java)
