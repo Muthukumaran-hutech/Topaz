@@ -75,7 +75,10 @@ class MyCart : AppCompatActivity(), MyCartItemClickListner,IncreementDecreementI
 
         binding.chckbtn.setOnClickListener {
            Log.d("--CART DATA--",prepareCartRequestObject().toString())
-            createOrder()
+
+            if(cartData.size > 0) {
+                createOrder()
+            }
         }
 
 
@@ -99,7 +102,7 @@ class MyCart : AppCompatActivity(), MyCartItemClickListner,IncreementDecreementI
             val query = database.child(custId.toString()).orderByChild("cartActive").equalTo(true)
 
 
-            query.addValueEventListener(object : ValueEventListener {
+            query.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
                         for (snap: DataSnapshot in snapshot.children) {
@@ -144,6 +147,7 @@ class MyCart : AppCompatActivity(), MyCartItemClickListner,IncreementDecreementI
                             val mylistdata1 =
                                 snap.getValue(CartProductList::class.java) as CartProductList
                             cartData.add(mylistdata1)
+
                             cartAdapter =
                                 MyCartAdapter(cartData, this@MyCart, this@MyCart, this@MyCart)
                             binding.cartRecycle.adapter = cartAdapter
@@ -255,10 +259,12 @@ class MyCart : AppCompatActivity(), MyCartItemClickListner,IncreementDecreementI
     override fun MyCartItemClickListner(data: CartProductList, position: Int) {
 
         if (cartData.size == 1) {
+            Log.d("Item removed",data.cart_id)
             database.child(custId).child(data.cart_id).child("cartActive").setValue(false)
-            cartData.remove(data)
+
             cartAdapter.notifyItemRemoved(position)
             database1.child(data.cart_id).child("Products").child(data.product_id).child("active").setValue(false)
+            cartData.remove(data)
 
             binding.linearLayout3.visibility = View.GONE
             binding.chckbtn.visibility = View.GONE
@@ -267,17 +273,33 @@ class MyCart : AppCompatActivity(), MyCartItemClickListner,IncreementDecreementI
 
         } else {
             //Write a function which changes the status of the product in MyCart
-            cartData.remove(data)
-            cartAdapter.notifyItemRemoved(position)
             database1.child(data.cart_id).child("Products").child(data.product_id).child("active").setValue(false)
+            cartAdapter.notifyItemRemoved(position)
+            cartData.remove(data)
 
-            binding.linearLayout3.visibility = View.GONE
-            binding.chckbtn.visibility = View.GONE
-            binding.cartRecycle.visibility = View.GONE
-            binding.cartEmpty.visibility = View.VISIBLE
+
+            binding.linearLayout3.visibility = View.VISIBLE
+            binding.chckbtn.visibility = View.VISIBLE
+            binding.cartRecycle.visibility = View.VISIBLE
+            //binding.cartEmpty.visibility = View.VISIBLE
         }
 
         Toast.makeText(this, "Removed from the MyCart", Toast.LENGTH_LONG).show()
+    }
+
+
+    //Triggers when Cart item is clicked
+    override fun onCartItemClick(data: CartProductList) {
+        try{
+            val intent=Intent(this,ProductDetails::class.java)
+
+            intent.putExtra("inner_sunid",data.product_id)
+            intent.putExtra("product_name", data.product_title)
+            startActivity(intent)
+        }
+        catch (e:Exception){
+            e.toString()
+        }
     }
 
     override fun IncreementDecreementItemClickListner(data: CartProductList, quantity: Int) {
@@ -337,7 +359,7 @@ class MyCart : AppCompatActivity(), MyCartItemClickListner,IncreementDecreementI
                 val orderdetailsObj = JsonObject()
                 var size= listOf<String>()
                 size=Util.extractNumbersFromString(cartitemlist.size,"Size")
-                var productsize=size[0].toDouble().toInt() * size[1].toDouble().toInt()
+                val productsize=size[0].toDouble().toInt() * size[1].toDouble().toInt()
 
                 val totalprice= cartitemlist.price.toDouble().toInt() * cartitemlist.quantity.toInt()* productsize.toInt()
 
@@ -375,16 +397,14 @@ class MyCart : AppCompatActivity(), MyCartItemClickListner,IncreementDecreementI
         catch (e:Exception){
             e.toString()
         }
-
         return  requestobject
-
     }
 
     fun createOrder(){
         try{
 
             binding.appProgressBar2.visibility= View.VISIBLE
-            var createorderres = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
+            val createorderres = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
                 .create(JsonPlaceholder::class.java)
 
             createorderres.addNewOrder(prepareCartRequestObject()).enqueue(object : Callback<AddOrderApiModel?> {
@@ -439,7 +459,10 @@ class MyCart : AppCompatActivity(), MyCartItemClickListner,IncreementDecreementI
             cartref.child(cartData.get(0).cart_id).child("cartActive").setValue(false)
             cartData.clear()
             cartAdapter.notifyDataSetChanged()
-            startActivity(Intent(this@MyCart, MyOrders::class.java))
+            val intent=Intent(activity, OrderConfirmation::class.java)
+            intent.putExtra("type","OrderPlacement")
+            startActivity(intent)
+            finish()
 
 
         }

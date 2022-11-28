@@ -16,6 +16,7 @@ import androidx.core.text.HtmlCompat
 import com.example.topaz.ApiModels.CheckUserApiModel
 import com.example.topaz.Interface.JsonPlaceholder
 import com.example.topaz.RetrofitApiInstance.UpdateAccountInfoInstance
+import com.example.topaz.Utility.Util
 import com.example.topaz.databinding.ActivityLoginBinding
 import com.google.firebase.auth.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -48,8 +49,7 @@ class LoginActivity : AppCompatActivity() {
 
          setSubtitleText()
         binding.phoneContinueBtn.setOnClickListener {
-
-
+            //Util.hideKeyBoard(this,it)
             if(isEnabled&&validatePhoneNumber()) {
                 binding.loginProgress?.visibility=View.VISIBLE
                 checkUserApiCall()
@@ -58,6 +58,7 @@ class LoginActivity : AppCompatActivity() {
 
 
         }
+        binding.phoneNoEditText.isFocusableInTouchMode=true
 
 
     }
@@ -71,7 +72,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun checkUserApiCall() {
-        var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
+        val res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
             .create(JsonPlaceholder::class.java)
 
         val body: RequestBody = binding.phoneNoEditText.text.toString().toRequestBody("text/plain".toMediaTypeOrNull())
@@ -94,7 +95,7 @@ class LoginActivity : AppCompatActivity() {
                }
                else{
                    binding.loginProgress?.visibility=View.GONE
-                   val message = "This is not a Registerd number"
+                   val message = "This is not a Registered number"
                    AlertDialog.Builder(this@LoginActivity)
                        .setTitle("Please contact your Administrator ")
                        .setMessage(message)
@@ -140,6 +141,7 @@ class LoginActivity : AppCompatActivity() {
             intent.putExtra("countrycode", "+91")
             intent.putExtra("phoneno", binding.phoneNoEditText.text.toString())
             startActivity(intent)
+
         } else {
             inValidForm()
         }

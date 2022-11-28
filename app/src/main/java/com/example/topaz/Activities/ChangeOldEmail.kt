@@ -8,12 +8,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.example.topaz.ApiModels.ChangeEmailOtpApiModel
 import com.example.topaz.ApiModels.UpdateUserApiModel
 import com.example.topaz.Interface.JsonPlaceholder
 import com.example.topaz.R
 import com.example.topaz.RetrofitApiInstance.UpdateAccountInfoInstance
+import com.example.topaz.Utility.Util
 import com.example.topaz.databinding.ActivityChangeEmailBinding
 import com.example.topaz.databinding.ActivityChangeOldEmailBinding
 import com.google.gson.JsonObject
@@ -48,49 +50,61 @@ class ChangeOldEmail : AppCompatActivity() {
 
 
         binding.sendOtp.setOnClickListener {
+            Util.hideKeyBoard(this,it)
             checkUserApiCall(custId!!)
         }
     }
 
     private fun checkUserApiCall(custId:String) {
-        var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
-            .create(JsonPlaceholder::class.java)
+        try {
+            binding.oldEmailProgress.visibility= View.VISIBLE
+            val res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
+                .create(JsonPlaceholder::class.java)
 
-        res.verifyOldEmail(custId,email(email = binding.changeEmail.text.toString())).enqueue(object :
-            Callback<ChangeEmailOtpApiModel?>{
-            override fun onResponse(
-                call: Call<ChangeEmailOtpApiModel?>,
-                response: Response<ChangeEmailOtpApiModel?>
-            ) {
-                if (response.isSuccessful){
-                    Log.d("Update Res:", response.body()!!.email)
-                    var message = "Otp Sent to the registered EmailId"
-                    //message += "\n\n " + binding.phoneContainer.helperText
-                    AlertDialog.Builder(this@ChangeOldEmail)
-                        .setTitle("")
-                        .setMessage(message)
-                        .setPositiveButton("Ok") { _, _ ->
-                            startActivity(Intent(activity, ChangeOldEmailOtp::class.java))
-                            finish()
-                        }.show()
+            res.verifyOldEmail(custId, email(email = binding.changeEmail.text.toString()))
+                .enqueue(object :
+                    Callback<ChangeEmailOtpApiModel?> {
+                    override fun onResponse(
+                        call: Call<ChangeEmailOtpApiModel?>,
+                        response: Response<ChangeEmailOtpApiModel?>
+                    ) {
+                        binding.oldEmailProgress.visibility= View.GONE
+                        if (response.isSuccessful) {
+                            Log.d("Update Res:", response.body()!!.email)
+                            var message = "Otp Sent to the registered EmailId"
+                            //message += "\n\n " + binding.phoneContainer.helperText
+                            AlertDialog.Builder(this@ChangeOldEmail)
+                                .setTitle("")
+                                .setMessage(message)
+                                .setPositiveButton("Ok") { _, _ ->
+                                    startActivity(Intent(activity, ChangeOldEmailOtp::class.java))
+                                    finish()
+                                }.show()
 
-                }else{
-                    Log.d("Update Res on failure:", response.body()!!.email)
-                }
+                        } else {
+                            binding.oldEmailProgress.visibility= View.GONE
+                            Log.d("Update Res on failure:", response.body()!!.email)
+                        }
 
-            }
+                    }
 
-            override fun onFailure(call: Call<ChangeEmailOtpApiModel?>, t: Throwable) {
-                Toast.makeText(
-                    applicationContext,
-                    "Something Went Wrong User Details Not updated",
-                    Toast.LENGTH_LONG
-                )
-                    .show()
-                Log.d("Failure", t.message.toString())
-            }
+                    override fun onFailure(call: Call<ChangeEmailOtpApiModel?>, t: Throwable) {
+                        Toast.makeText(
+                            applicationContext,
+                            "Something Went Wrong User Details Not updated",
+                            Toast.LENGTH_LONG
+                        )
+                            .show()
+                        Log.d("Failure", t.message.toString())
+                        binding.oldEmailProgress.visibility= View.GONE
+                    }
 
-        })
+                })
+        }
+        catch (e:Exception){
+            e.toString()
+            binding.oldEmailProgress.visibility= View.GONE
+        }
     }
 
     private fun email( email:String): JsonObject {

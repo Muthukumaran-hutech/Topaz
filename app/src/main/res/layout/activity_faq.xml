@@ -84,11 +84,11 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:background="@color/white"
-                android:paddingLeft="5dp"
                 android:elevation="@dimen/_5sdp"
                 android:textAlignment="viewStart"
                 android:drawableStart="@drawable/rectangle_471"
                 android:drawableEnd="@drawable/pls"
+                android:paddingRight="5dp"
                 android:text="@string/why_is_centuryply_a_better_product"
                 android:visibility="visible" />
 

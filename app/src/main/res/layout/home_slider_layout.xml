@@ -19,15 +19,12 @@
     </ImageView>-->
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_178sdp"
-        android:src="@drawable/cbimage"
-        android:scaleType="centerCrop"
+        android:layout_height="175dp"
         android:layout_weight="1"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:layout_marginRight="@dimen/_5sdp"
-        android:layout_marginLeft="@dimen/_5sdp"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/plywoodbiards"
         app:layout_constraintStart_toStartOf="parent"
         android:id="@+id/advertisement_image"/>
 

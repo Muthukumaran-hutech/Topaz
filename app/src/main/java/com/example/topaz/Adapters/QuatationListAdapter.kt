@@ -15,6 +15,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.topaz.Activities.ProductQuotation
 import com.example.topaz.Models.FeetModel
 import com.example.topaz.Models.QuatationListModel
 import com.example.topaz.Models.ThicknessModel
@@ -33,7 +34,19 @@ class QuotationListAdapter(var quotationlist:List<QuatationListModel>,var contex
 
     override fun onBindViewHolder(holder: QuotationViewHolder, position: Int) {
         holder.bindItems(quatationListModel = quotationlist[position],position,context)
-        holder.enabledetails.setOnClickListener {
+
+        holder.itemView.setOnClickListener {
+            if(quotationlist[position].expanded){
+                quotationlist[position].expanded=false
+                updateExpandStatus(quotationlist[position])
+            }
+            else{
+                quotationlist[position].expanded=true
+                updateExpandStatus(quotationlist[position])
+            }
+        }
+
+        /*holder.enabledetails.setOnClickListener {
             quotationlist[position].expanded=true
             updateExpandStatus(quotationlist[position])
             //notifyDataSetChanged()
@@ -44,7 +57,7 @@ class QuotationListAdapter(var quotationlist:List<QuatationListModel>,var contex
             updateExpandStatus(quotationlist[position])
            // notifyDataSetChanged()
         }
-
+*/
     }
 
     private fun updateExpandStatus(quatationListModel: QuatationListModel) {
@@ -292,7 +305,7 @@ class QuotationListAdapter(var quotationlist:List<QuatationListModel>,var contex
                 val quantity = view.findViewById<EditText>(R.id.count_text)
                 val increment = view.findViewById<ImageButton>(R.id.incrementQuantity)
                 val decrement = view.findViewById<ImageButton>(R.id.decrementQuantity)
-                var closedialog= view.findViewById<ImageView>(R.id.closeDialog)
+                val closedialog= view.findViewById<ImageView>(R.id.closeDialog)
 
                 quantity.setText(quatationListModel.quantity.toString())
 
@@ -302,6 +315,7 @@ class QuotationListAdapter(var quotationlist:List<QuatationListModel>,var contex
                         //Update quantity value in database
                         dialog.dismiss()
                     }
+                    //Util.hideKeyBoard(context as ProductQuotation,it)
                 }
 
                 closedialog.setOnClickListener {

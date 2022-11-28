@@ -20,6 +20,7 @@ import com.example.topaz.Interface.JsonPlaceholder
 import com.example.topaz.Models.ProductDetailsModel
 import com.example.topaz.R
 import com.example.topaz.RetrofitApiInstance.UpdateAccountInfoInstance
+import com.example.topaz.Utility.Util
 import com.example.topaz.databinding.ActivityChangeOldEmailBinding
 import com.example.topaz.databinding.ActivityEmailChangeOtpBinding
 import com.google.firebase.auth.PhoneAuthOptions
@@ -224,6 +225,7 @@ class EmailChangeOtp : AppCompatActivity() {
 
         binding.confirmEmailOtp2.setOnClickListener {
 
+            Util.hideKeyBoard(this,it)
             if (binding.otp001.text.toString().trim().isEmpty()
                 || binding.otp002.text.toString().trim().isEmpty()
                 || binding.otp003.text.toString().trim().isEmpty()
@@ -236,7 +238,6 @@ class EmailChangeOtp : AppCompatActivity() {
                     .show()
             } else {
                 binding.appProgressBar.visibility = View.VISIBLE
-                binding.appProgressBar.visibility = View.VISIBLE
                 checkUserApiCall()
             }
 
@@ -245,41 +246,58 @@ class EmailChangeOtp : AppCompatActivity() {
     }
 
     private fun checkUserApiCall() {
-        val res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
-            .create(JsonPlaceholder::class.java)
+        try {
+            val res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
+                .create(JsonPlaceholder::class.java)
 
 
-        val recievedOtp = binding.otp001.text.toString() + binding.otp002.text.toString() +
-                binding.otp003.text.toString() + binding.otp004.text.toString() +
-                binding.otp005.text.toString() + binding.otp006.text.toString()
+            val recievedOtp = binding.otp001.text.toString() + binding.otp002.text.toString() +
+                    binding.otp003.text.toString() + binding.otp004.text.toString() +
+                    binding.otp005.text.toString() + binding.otp006.text.toString()
 
-        val body: RequestBody = recievedOtp.toRequestBody("text/plain".toMediaTypeOrNull())
-        val requestBodyMap: MutableMap<String, RequestBody> = HashMap()
-        requestBodyMap["emailOtp"] = body
+            val body: RequestBody = recievedOtp.toRequestBody("text/plain".toMediaTypeOrNull())
+            val requestBodyMap: MutableMap<String, RequestBody> = HashMap()
+            requestBodyMap["emailOtp"] = body
 
-        res.verifyNewEmailOtp(requestBody = body)
-            .enqueue(object : Callback<ChangeNewEmailOtpApiModel?> {
-                override fun onResponse(
-                    call: Call<ChangeNewEmailOtpApiModel?>,
-                    response: Response<ChangeNewEmailOtpApiModel?>
-                ) {
-                    if (response.isSuccessful) {
-                        val sharedPreference =  getSharedPreferences("CUSTOMER_DATA", Context.MODE_PRIVATE)
-                        val editor = sharedPreference.edit()
-                        editor.putString("email",emailChange).apply()
-                        Log.d(TAG, "onResponse: Success " + response.body().toString())
-                        startActivity(Intent(activity, EditProfile::class.java))
-                        finish()
-                        Toast.makeText(
-                            applicationContext,
-                            "Email Verified Sucessfully",
-                            Toast.LENGTH_LONG
-                        )
-                            .show()
+            res.verifyNewEmailOtp(requestBody = body)
+                .enqueue(object : Callback<ChangeNewEmailOtpApiModel?> {
+                    override fun onResponse(
+                        call: Call<ChangeNewEmailOtpApiModel?>,
+                        response: Response<ChangeNewEmailOtpApiModel?>
+                    ) {
+                        binding.appProgressBar.visibility = View.GONE
+                        if (response.isSuccessful) {
+                            val sharedPreference =
+                                getSharedPreferences("CUSTOMER_DATA", Context.MODE_PRIVATE)
+                            val editor = sharedPreference.edit()
+                            editor.putString("email", emailChange).apply()
+                            Log.d(TAG, "onResponse: Success " + response.body().toString())
+                            startActivity(Intent(activity, EditProfile::class.java))
+                            finish()
+                            Toast.makeText(
+                                applicationContext,
+                                "Email Verified Successfully",
+                                Toast.LENGTH_LONG
+                            )
+                                .show()
 
 
-                    } else {
-                        Log.d(TAG, "onResponse: Fail " + response.body().toString())
+                        } else {
+                            //Log.d(TAG, "onResponse: Fail " + response.body().toString())
+                            Toast.makeText(this@EmailChangeOtp,"Invalid OTP",Toast.LENGTH_LONG).show()
+
+                           /* Toast.makeText(
+                                applicationContext,
+                                "Something Went Wrong User Details Not updated",
+                                Toast.LENGTH_LONG
+                            )
+                                .show()*/
+
+                        }
+                    }
+
+                    override fun onFailure(call: Call<ChangeNewEmailOtpApiModel?>, t: Throwable) {
+                        Log.d(TAG, "onResponse: Failure " + t.message)
                         Toast.makeText(
                             applicationContext,
                             "Something Went Wrong User Details Not updated",
@@ -288,19 +306,12 @@ class EmailChangeOtp : AppCompatActivity() {
                             .show()
 
                     }
-                }
+                })
 
-                override fun onFailure(call: Call<ChangeNewEmailOtpApiModel?>, t: Throwable) {
-                    Log.d(TAG, "onResponse: Failure " + t.message)
-                    Toast.makeText(
-                        applicationContext,
-                        "Something Went Wrong User Details Not updated",
-                        Toast.LENGTH_LONG
-                    )
-                        .show()
-
-                }
-            })
+        }
+        catch (e:Exception){
+            e.toString()
+        }
 
 
     }
@@ -313,7 +324,7 @@ class EmailChangeOtp : AppCompatActivity() {
     private fun resendNewEmailChangeOTP() {
         try {
             binding.appProgressBar.visibility = View.VISIBLE
-            var resendNewEmailOtpRes = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
+            val resendNewEmailOtpRes = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
                 .create(JsonPlaceholder::class.java)
 
             val body: RequestBody =

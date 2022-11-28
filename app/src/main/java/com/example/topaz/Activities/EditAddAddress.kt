@@ -41,19 +41,19 @@ class EditAddAddress : AppCompatActivity() {
         supportActionBar?.title = ""
 
         sharedPreference = getSharedPreferences("CUSTOMER_DATA", Context.MODE_PRIVATE)
-        var custName = sharedPreference.getString("customerName", "")
+        val custName = sharedPreference.getString("customerName", "")
         var custId = sharedPreference.getString("customercode", "")
-        var custAddress = sharedPreference.getString("addressLine", "")
-        var custPhoneno = sharedPreference.getString("primaryPhonenumber", "")
+        val custAddress = sharedPreference.getString("addressLine", "")
+        val custPhoneno = sharedPreference.getString("primaryPhonenumber", "")
          custEmailId = sharedPreference.getString("email", "")
-        var custCity = sharedPreference.getString("city", "")
+        val custCity = sharedPreference.getString("city", "")
         var custState = sharedPreference.getString("state", "")
         var zipcode = sharedPreference.getString("zipcode","")
 
         binding.nameAddress.setText(custName)
         binding.phoneNoChange.setText(custPhoneno)
         binding.locality.setText(custAddress)
-        binding.houseNo.setText(custAddress)
+        //binding.houseNo.setText(custAddress)
         binding.city.setText(custCity)
         binding.state.setText(custState)
         binding.pincode.setText(zipcode)
@@ -85,7 +85,7 @@ class EditAddAddress : AppCompatActivity() {
             var city = binding.city.text.toString()
             var state = binding.state.text.toString()
             var landmark = binding.landmark.text.toString()
-            var address = locality.toString() + houseNo.toString() + landmark.toString()
+            var address = locality.toString()
 
             var saveAddressModel = SaveAddressModel(
                 customerName = accountName.toString(),

@@ -7,12 +7,14 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import com.example.topaz.ApiModels.VerifyNewEmailApiModel
 import com.example.topaz.Interface.JsonPlaceholder
 import com.example.topaz.R
 import com.example.topaz.RetrofitApiInstance.UpdateAccountInfoInstance
+import com.example.topaz.Utility.Util
 import com.example.topaz.databinding.ActivityCategoryBinding
 import com.example.topaz.databinding.ActivityChangeEmailBinding
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -39,7 +41,7 @@ class ChangeEmail : AppCompatActivity() {
 
 
         binding.categoryBackArrow.setOnClickListener {
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+           // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             finish()
         }
 
@@ -47,54 +49,69 @@ class ChangeEmail : AppCompatActivity() {
 
 
         binding.sendOtp.setOnClickListener {
+            Util.hideKeyBoard(this,it)
             onApiCall()
         }
     }
 
     private fun onApiCall() {
-        var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
-            .create(JsonPlaceholder::class.java)
 
-        val body: RequestBody =
-            binding.changeEmail.text.toString().toRequestBody("text/plain".toMediaTypeOrNull())
-        val requestBodyMap: MutableMap<String, RequestBody> = HashMap()
-        requestBodyMap["email"] = body
+        try {
+            binding.changeNewEmailProgress.visibility = View.VISIBLE
+            var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
+                .create(JsonPlaceholder::class.java)
 
-        res.verifyNewEmail(mail, body).enqueue(object : Callback<VerifyNewEmailApiModel?> {
-            override fun onResponse(
-                call: Call<VerifyNewEmailApiModel?>,
-                response: Response<VerifyNewEmailApiModel?>
-            ) {
-                if (response.isSuccessful) {
-                    var message = "Otp Sent to the entered EmailId"
-                    //message += "\n\n " + binding.phoneContainer.helperText
-                    AlertDialog.Builder(this@ChangeEmail)
-                        .setTitle("")
-                        .setMessage(message)
-                        .setPositiveButton("Ok") { _, _ ->
-                            var intent=Intent(activity,EmailChangeOtp::class.java)
-                            intent.putExtra("extra_email",binding.changeEmail.text.toString() )
-                            startActivity(intent)
-                            finish()
-                        }.show()
-                } else {
+            val body: RequestBody =
+                binding.changeEmail.text.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+            val requestBodyMap: MutableMap<String, RequestBody> = HashMap()
+            requestBodyMap["email"] = body
+
+            res.verifyNewEmail(mail, body).enqueue(object : Callback<VerifyNewEmailApiModel?> {
+                override fun onResponse(
+                    call: Call<VerifyNewEmailApiModel?>,
+                    response: Response<VerifyNewEmailApiModel?>
+                ) {
+                    binding.changeNewEmailProgress.visibility = View.GONE
+                    if (response.isSuccessful) {
+                        var message = "Otp Sent to the entered EmailId"
+                        //message += "\n\n " + binding.phoneContainer.helperText
+                        AlertDialog.Builder(this@ChangeEmail)
+                            .setTitle("")
+                            .setMessage(message)
+                            .setPositiveButton("Ok") { _, _ ->
+                                var intent = Intent(activity, EmailChangeOtp::class.java)
+                                intent.putExtra("extra_email", binding.changeEmail.text.toString())
+                                startActivity(intent)
+                                finish()
+                            }.show()
+                    } else {
+                        Toast.makeText(
+                            applicationContext,
+                            "Something Went Wrong",
+                            Toast.LENGTH_LONG
+                        )
+                            .show()
+
+                        binding.changeNewEmailProgress.visibility = View.GONE
+                    }
+                }
+
+                override fun onFailure(call: Call<VerifyNewEmailApiModel?>, t: Throwable) {
                     Toast.makeText(
                         applicationContext,
                         "Something Went Wrong",
                         Toast.LENGTH_LONG
                     )
                         .show()
-                }
-            }
 
-            override fun onFailure(call: Call<VerifyNewEmailApiModel?>, t: Throwable) {
-                Toast.makeText(
-                    applicationContext,
-                    "Something Went Wrong",
-                    Toast.LENGTH_LONG
-                )
-                    .show()
-            }
-        })
+                    binding.changeNewEmailProgress.visibility = View.GONE
+                }
+            })
+
+        }
+        catch (e:Exception){
+            e.toString()
+            binding.changeNewEmailProgress.visibility = View.GONE
+        }
     }
 }

@@ -227,5 +227,6 @@
     <string name="updatetotalvalue">TotalValue</string>
     <string name="updatequotationdesc">QuotationDescription</string>
     <string name="thickness_label">Thickness:</string>
+    <string name="no_data_found">No data found</string>
 
 </resources>

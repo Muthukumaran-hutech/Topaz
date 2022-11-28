@@ -19,6 +19,7 @@ import com.example.topaz.ApiModels.OldPhoneApiModel
 import com.example.topaz.Interface.JsonPlaceholder
 import com.example.topaz.R
 import com.example.topaz.RetrofitApiInstance.UpdateAccountInfoInstance
+import com.example.topaz.Utility.Util
 import com.example.topaz.databinding.ActivityChangeOldEmailOtpBinding
 import com.example.topaz.databinding.ActivityChangeOldphoneOtpBinding
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -54,7 +55,7 @@ class ChangeOldphoneOtp : AppCompatActivity() {
 
 
         binding.confirmPhoneOtp.setOnClickListener {
-
+            Util.hideKeyBoard(this,it)
             if (binding.otp01.text.toString().trim().isEmpty()
                 || binding.otp02.text.toString().trim().isEmpty()
                 || binding.otp03.text.toString().trim().isEmpty()
@@ -66,7 +67,6 @@ class ChangeOldphoneOtp : AppCompatActivity() {
                 Toast.makeText(applicationContext, "Please Enter The Valid OTP", Toast.LENGTH_LONG)
                     .show()
             } else {
-                binding.appProgressBar.visibility = View.VISIBLE
                 binding.appProgressBar.visibility = View.VISIBLE
 
                 checkUserApiCall(custId)
@@ -249,6 +249,11 @@ class ChangeOldphoneOtp : AppCompatActivity() {
         }
 
 
+        binding.categoryBackArrow.setOnClickListener {
+            finish()
+        }
+
+
 
 
     }
@@ -314,17 +319,24 @@ class ChangeOldphoneOtp : AppCompatActivity() {
                 call: Call<ChangeOldPhoneOtpApiModel?>,
                 response: Response<ChangeOldPhoneOtpApiModel?>
             ) {
+                binding.appProgressBar.visibility = View.GONE
                 if (response.isSuccessful){
                     Log.d(ContentValues.TAG, "onResponse succes phone: "+ response.body().toString())
                     startActivity(Intent(activity, ChangePhoneNo::class.java))
                     finish()
                 }else{
-                    Log.d(ContentValues.TAG, "onResponse succes phone: "+ response.body().toString())
+
+                    Toast.makeText(this@ChangeOldphoneOtp,"Invalid OTP",Toast.LENGTH_LONG).show()
+
+
+                    //Log.d(ContentValues.TAG, "Invalid credentials: "+ response.body().toString())
                 }
             }
 
             override fun onFailure(call: Call<ChangeOldPhoneOtpApiModel?>, t: Throwable) {
-                Log.d(ContentValues.TAG, "onResponse succes phone: "+ t.message)
+                Log.d(ContentValues.TAG, "Failure: "+ t.message)
+                binding.appProgressBar.visibility = View.GONE
+
             }
         })
 

@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,6 +34,7 @@ import kotlin.math.log
 class FragmentOffers : Fragment(), NotifyOfferItemClickListner {
     lateinit var progressBar: ProgressBar
     lateinit var offerrecycle: RecyclerView
+    lateinit var noDataFoundText: TextView
     var offerInnerlist = java.util.ArrayList<NotifyOfferModels>()
 
     override fun onCreateView(
@@ -55,6 +57,7 @@ class FragmentOffers : Fragment(), NotifyOfferItemClickListner {
 
         progressBar = view.findViewById(R.id.app_progress_bar_2)
         offerrecycle = view.findViewById(R.id.notify_offer_recycler_view)
+        noDataFoundText = view.findViewById(R.id.offersNoDataFoundText)
     }
 
     private fun onOfferApiCall(view:View) {
@@ -80,11 +83,20 @@ class FragmentOffers : Fragment(), NotifyOfferItemClickListner {
                             offerInnerlist.add(notifyOfferModel)
                             offerrecycle.layoutManager =
                                 LinearLayoutManager(context)//Count depicts no of elements in row
-                            var notifyadapter =
-                                NotifyOfferAdapter(offerInnerlist, this@FragmentOffers)
-                            offerrecycle.adapter = notifyadapter
-                            offerrecycle.setHasFixedSize(true)
                         }
+
+                        if(offerInnerlist.size == 0){
+                            noDataFoundText.visibility =View.VISIBLE
+                        }
+                        else{
+                            noDataFoundText.visibility =View.GONE
+                        }
+
+
+                        var notifyadapter =
+                            NotifyOfferAdapter(offerInnerlist, this@FragmentOffers)
+                        offerrecycle.adapter = notifyadapter
+                        offerrecycle.setHasFixedSize(true)
                         Log.d(TAG, "onResponse Success: " + response.body()?.get(0)?.description)
 
 

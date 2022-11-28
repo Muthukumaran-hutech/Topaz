@@ -3,23 +3,25 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@color/white"
+    android:paddingRight="10dp"
+    android:paddingLeft="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:id="@+id/product_image_layout"
-        android:layout_marginRight="10dp"
         app:cardCornerRadius="@dimen/_5sdp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
     <ImageView
         android:id="@+id/arrival_plwwoodss"
         android:layout_width="@dimen/_84sdp"
-        android:layout_height="@dimen/_91sdp">
+        android:layout_height="@dimen/_91sdp"
+
+        android:scaleType="fitXY">
+
 
     </ImageView>
     </androidx.cardview.widget.CardView>
@@ -27,15 +29,16 @@
 
     <TextView
         android:id="@+id/arrival_plwwoodsstext"
-        android:layout_width="wrap_content"
+        android:layout_width="106dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:gravity="left"
-        android:text=""
+        android:gravity="center"
         android:textColor="@color/netural_black"
         android:textSize="12sp"
         android:fontFamily="@font/poppins_bold"
-        android:textStyle="bold"
+        android:ellipsize="end"
+        android:text=""
+        android:maxLines="1"
         app:layout_constraintStart_toStartOf="@+id/product_image_layout"
         app:layout_constraintTop_toBottomOf="@+id/product_image_layout" />
 

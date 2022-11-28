@@ -1,10 +1,13 @@
 package com.example.topaz.Utility
 
+import android.app.Activity
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Base64
 import android.util.Log
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import com.example.topaz.Models.CartList
 import com.example.topaz.Models.CartProductList
 import com.example.topaz.Models.QuatationDetailModel
@@ -202,5 +205,22 @@ object Util {
             e.toString()
         }
 
+    }
+
+
+    fun hideKeyBoard(activity: Activity, v: View){
+        try {
+            var view= activity.currentFocus
+            if(view==null){
+                view=View(activity)
+            }
+
+                val inputkeyboard =
+                    activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputkeyboard.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+        catch (e:java.lang.Exception){
+            e.toString()
+        }
     }
 }

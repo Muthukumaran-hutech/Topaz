@@ -25,7 +25,7 @@
 
     <TextView
         android:layout_width="94dp"
-        android:layout_height="22dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="54dp"
         android:layout_marginTop="20dp"
         android:textColor="@color/white"
@@ -38,8 +38,8 @@
         android:id="@+id/backarrow1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="19dp"
         android:src="@drawable/ic_baseline_arrow_back_24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -49,8 +49,8 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="114dp"
-        android:src="@drawable/ellipse_89"
+        android:layout_marginTop="110dp"
+        android:src="@drawable/user_placeholder"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -63,6 +63,7 @@
         android:layout_marginTop="124dp"
         android:text=""
         android:textColor="@color/black"
+        android:fontFamily="@font/lato_bold"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -71,11 +72,12 @@
     <TextView
         android:id="@+id/edite_profile_mail"
         android:layout_width="wrap_content"
-        android:layout_height="22dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="105dp"
         android:layout_marginTop="151dp"
         android:text=""
         android:textColor="@color/blue"
+        android:fontFamily="@font/lato"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -86,9 +88,12 @@
         android:layout_height="14dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="151dp"
+
         android:src="@drawable/ic_baseline_edit_24"
         android:textColor="@color/blue"
         android:textSize="14sp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/edite_profile_mail"
         app:layout_constraintStart_toEndOf="@+id/edite_profile_mail"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -98,6 +103,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="210dp"
         android:src="@drawable/line_83"
+        android:id="@+id/dividerOne"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -105,12 +111,12 @@
         android:id="@+id/myorderprofile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="218dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/dividerOne"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -123,6 +129,7 @@
             android:layout_height="wrap_content"
             android:text="@string/my_order"
             android:textSize="14sp"
+            android:fontFamily="@font/poppins"
             android:textColor="@color/black"
             android:layout_marginStart="20dp"/>
 
@@ -133,19 +140,20 @@
         android:layout_width="382dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="262dp"
         android:src="@drawable/line_83"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="20dp"
+        android:id="@+id/dividerTwo"
+        app:layout_constraintTop_toBottomOf="@id/myorderprofile"
+        app:layout_constraintStart_toStartOf="parent"/>
     <LinearLayout
         android:id="@+id/myaddressprofile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="286dp"
         android:orientation="horizontal"
+        android:layout_marginTop="17dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/dividerTwo">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -157,7 +165,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
+            android:layout_gravity="center_vertical"
             android:text="@string/my_address"
+            android:fontFamily="@font/poppins"
             android:textColor="@color/black"
             android:textSize="14sp" />
 
@@ -168,19 +178,20 @@
         android:layout_width="382dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="328dp"
+        android:layout_marginTop="20dp"
         android:src="@drawable/line_83"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/dividerThree"
+        app:layout_constraintTop_toBottomOf="@id/myaddressprofile"
+        app:layout_constraintStart_toStartOf="parent"/>
     <LinearLayout
         android:id="@+id/notificationsprofile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="354dp"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/dividerThree"
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -193,6 +204,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:text="@string/notifications"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="@font/poppins"
             android:textColor="@color/black"
             android:textSize="14sp" />
 
@@ -204,19 +217,20 @@
         android:layout_width="382dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="396dp"
         android:src="@drawable/line_83"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/dividerFour"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/notificationsprofile"
+        app:layout_constraintStart_toStartOf="parent"/>
     <LinearLayout
         android:id="@+id/helpprofile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="422dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/dividerFour"
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -230,6 +244,8 @@
             android:layout_marginStart="20dp"
             android:text="@string/help"
             android:textColor="@color/black"
+            android:fontFamily="@font/poppins"
+            android:layout_gravity="center_vertical"
             android:textSize="14sp" />
 
 
@@ -240,19 +256,22 @@
         android:layout_width="382dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="466dp"
         android:src="@drawable/line_83"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/dividerFive"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/helpprofile"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+
     <LinearLayout
         android:id="@+id/logout_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="490dp"
         android:orientation="horizontal"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/dividerFive"
+        app:layout_constraintStart_toStartOf="parent">
 
 
         <ImageView
@@ -266,6 +285,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:text="@string/logout"
+            android:fontFamily="@font/poppins"
             android:textColor="@color/primary_red"
             android:textSize="14sp" />
 
@@ -275,9 +295,10 @@
         android:layout_width="382dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="530dp"
+        android:layout_marginTop="20dp"
+        android:id="@+id/dividerSix"
         android:src="@drawable/line_83"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/logout_profile"
+        app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

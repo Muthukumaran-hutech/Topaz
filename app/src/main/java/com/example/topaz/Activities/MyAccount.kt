@@ -69,7 +69,7 @@ class MyAccount : AppCompatActivity() {
 
         editemailicon?.setOnClickListener{
             startActivity(Intent(activity,EditProfile::class.java))
-            finish()
+            //finish()
         }
 
         myorderprofile?.setOnClickListener{
@@ -94,6 +94,7 @@ class MyAccount : AppCompatActivity() {
 
         binding.logoutProfile.setOnClickListener{
 
+
             var message = "Are you sure you want to Logout? "
             //message += "\n\n " + binding.phoneContainer.helperText
             AlertDialog.Builder(this)
@@ -102,7 +103,7 @@ class MyAccount : AppCompatActivity() {
                 .setPositiveButton("Yes") { _, _ ->
                     editor.putString("isUserLoggedIn","false").apply()
                     startActivity(Intent(activity,LoginActivity::class.java))
-                    finish()
+                    finishAffinity()
                 }.setNegativeButton("No") { _, _ ->
                     //doNothing
                 }.show()

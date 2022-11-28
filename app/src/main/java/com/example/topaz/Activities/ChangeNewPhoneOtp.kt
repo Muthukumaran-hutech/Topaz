@@ -20,6 +20,7 @@ import com.example.topaz.ApiModels.OldPhoneApiModel
 import com.example.topaz.Interface.JsonPlaceholder
 import com.example.topaz.R
 import com.example.topaz.RetrofitApiInstance.UpdateAccountInfoInstance
+import com.example.topaz.Utility.Util
 import com.example.topaz.databinding.ActivityChangeNewPhoneOtpBinding
 import com.example.topaz.databinding.ActivityChangeOldphoneOtpBinding
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -57,11 +58,17 @@ class ChangeNewPhoneOtp : AppCompatActivity() {
             countdownTimer()
 
         }
+
+
+        binding.categoryBackArrow.setOnClickListener {
+            finish()
+        }
         sharedPreference =  getSharedPreferences("CUSTOMER_DATA", Context.MODE_PRIVATE)
         custId= sharedPreference.getString("customercode","").toString()
 
         binding.confirmPhoneOtp2.setOnClickListener {
 
+            Util.hideKeyBoard(this,it)
             if (binding.otp01.text.toString().trim().isEmpty()
                 || binding.otp02.text.toString().trim().isEmpty()
                 || binding.otp03.text.toString().trim().isEmpty()
@@ -74,8 +81,6 @@ class ChangeNewPhoneOtp : AppCompatActivity() {
                     .show()
             } else {
                 binding.appProgressBar.visibility = View.VISIBLE
-                binding.appProgressBar.visibility = View.VISIBLE
-
                 checkUserApiCall(custId)
 
             }
@@ -294,7 +299,7 @@ class ChangeNewPhoneOtp : AppCompatActivity() {
     }
 
     private fun checkUserApiCall(custId: String) {
-        var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
+        val res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
             .create(JsonPlaceholder::class.java)
 
 
@@ -312,6 +317,7 @@ class ChangeNewPhoneOtp : AppCompatActivity() {
                 call: Call<ChangeNewEmailOtpApiModel?>,
                 response: Response<ChangeNewEmailOtpApiModel?>
             ) {
+                binding.appProgressBar.visibility = View.GONE
                 if (response.isSuccessful){
                     Log.d(ContentValues.TAG, "onResponse otp succes phone: "+ response.body().toString())
                     val editor = sharedPreference.edit()
@@ -321,12 +327,14 @@ class ChangeNewPhoneOtp : AppCompatActivity() {
                     startActivity(Intent(activity, EditProfile::class.java))
                     finish()
                 }else{
-                    Log.d(ContentValues.TAG, "onResponse otp fail phone: "+ response.body().toString())
+                    Toast.makeText(this@ChangeNewPhoneOtp,"Invalid OTP",Toast.LENGTH_LONG).show()
+                    //Log.d(ContentValues.TAG, "onResponse otp fail phone: "+ response.body().toString())
                 }
             }
 
             override fun onFailure(call: Call<ChangeNewEmailOtpApiModel?>, t: Throwable) {
                 Log.d(ContentValues.TAG, "onResponse otp failure phone: "+ t.message)
+                binding.appProgressBar.visibility = View.GONE
             }
         })
     }

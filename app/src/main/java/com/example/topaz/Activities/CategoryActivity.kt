@@ -162,7 +162,7 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
                             )
 
                             //Customizing  grid dividers
-                            val decor=ContextCompat.getDrawable(this@CategoryActivity,R.drawable.category_item_background)
+                            /*val decor=ContextCompat.getDrawable(this@CategoryActivity,R.drawable.category_item_background)
                             val verticaldecor=DividerItemDecoration(this@CategoryActivity, DividerItemDecoration.VERTICAL)
                             val horizontaldecor = DividerItemDecoration(this@CategoryActivity, DividerItemDecoration.HORIZONTAL)
 
@@ -170,7 +170,7 @@ class CategoryActivity : AppCompatActivity(), CategoryPageItemClickListner {
                             horizontaldecor.setDrawable(decor!!)
                             binding.categoryRecyclerView.addItemDecoration(horizontaldecor)
                             binding.categoryRecyclerView.addItemDecoration(verticaldecor)
-
+*/
 
                             binding.categoryRecyclerView.layoutManager = GridLayoutManager(
                                 this@CategoryActivity,

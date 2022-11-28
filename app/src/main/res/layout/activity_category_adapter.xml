@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="10dp"
+    android:paddingBottom="5dp"
     android:paddingRight="5dp"
     android:foreground="?attr/selectableItemBackground"
     android:background="@drawable/list_selector">
@@ -20,7 +20,8 @@
     <ImageView
         android:id="@+id/plwwoodss"
         android:layout_width="101dp"
-        android:layout_height="102dp"/>
+        android:layout_height="102dp"
+        android:scaleType="fitXY"></ImageView>
     </androidx.cardview.widget.CardView>
 
 

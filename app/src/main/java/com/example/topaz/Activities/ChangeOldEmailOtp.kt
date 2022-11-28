@@ -19,6 +19,7 @@ import com.example.topaz.ApiModels.ChangeEmailOtpVerifyApiModel
 import com.example.topaz.Interface.JsonPlaceholder
 import com.example.topaz.R
 import com.example.topaz.RetrofitApiInstance.UpdateAccountInfoInstance
+import com.example.topaz.Utility.Util
 import com.example.topaz.databinding.ActivityChangeOldEmailOtpBinding
 import com.example.topaz.databinding.ActivityEmailChangeOtpBinding
 import com.google.firebase.auth.PhoneAuthOptions
@@ -58,6 +59,7 @@ class ChangeOldEmailOtp : AppCompatActivity() {
 
 
         binding.confirmEmailOtp.setOnClickListener {
+            Util.hideKeyBoard(this,it)
 
             if (binding.otp01.text.toString().trim().isEmpty()
                 || binding.otp02.text.toString().trim().isEmpty()
@@ -71,8 +73,6 @@ class ChangeOldEmailOtp : AppCompatActivity() {
                     .show()
             } else {
                 binding.appProgressBar.visibility = View.VISIBLE
-                binding.appProgressBar.visibility = View.VISIBLE
-
                 checkUserApiCall()
             }
 
@@ -256,7 +256,7 @@ class ChangeOldEmailOtp : AppCompatActivity() {
     }
 
     private fun checkUserApiCall() {
-        var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
+        val res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
             .create(JsonPlaceholder::class.java)
 
         val recievedOtp = binding.otp01.text.toString() + binding.otp02.text.toString() +
@@ -274,6 +274,7 @@ class ChangeOldEmailOtp : AppCompatActivity() {
                     call: Call<ChangeEmailOtpVerifyApiModel?>,
                     response: Response<ChangeEmailOtpVerifyApiModel?>
                 ) {
+                    binding.appProgressBar.visibility = View.GONE
                     if (response.isSuccessful) {
                         Toast.makeText(
                             applicationContext,
@@ -289,12 +290,13 @@ class ChangeOldEmailOtp : AppCompatActivity() {
                         startActivity(intent)
                         finish()
                     } else {
-                        Toast.makeText(
+                        /*Toast.makeText(
                             applicationContext,
                             "Something Went Wrong User Details Not updated",
                             Toast.LENGTH_LONG
                         )
-                            .show()
+                            .show()*/
+                        Toast.makeText(this@ChangeOldEmailOtp,"Invalid OTP",Toast.LENGTH_LONG).show()
 
                     }
                 }
@@ -302,10 +304,11 @@ class ChangeOldEmailOtp : AppCompatActivity() {
                 override fun onFailure(call: Call<ChangeEmailOtpVerifyApiModel?>, t: Throwable) {
                     Toast.makeText(
                         applicationContext,
-                        "Something Went Wrong User Details Not updated",
+                        "Something Went Wrong",
                         Toast.LENGTH_LONG
                     )
                         .show()
+                    binding.appProgressBar.visibility = View.GONE
 
                 }
             })

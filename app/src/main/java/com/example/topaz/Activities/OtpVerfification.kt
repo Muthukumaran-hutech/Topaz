@@ -17,6 +17,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
+import com.example.topaz.Utility.Util
 import com.example.topaz.databinding.ActivityOtpVerfificationBinding
 import com.google.android.gms.auth.api.phone.SmsRetriever
 import com.google.android.gms.tasks.OnCompleteListener
@@ -71,6 +72,7 @@ class OtpVerfification : AppCompatActivity() {
         binding.appProgressBar.visibility = View.VISIBLE
         binding.loginBtnPhone.isEnabled = false
         binding.loginBtnPhone.setOnClickListener {
+            Util.hideKeyBoard(this,it)
 
             if (binding.OTP1.text.toString().trim().isEmpty()
                 || binding.OTP2.text.toString().trim().isEmpty()
@@ -370,8 +372,8 @@ class OtpVerfification : AppCompatActivity() {
 
                 if (it.isSuccessful) {
                     editor.putString("isUserLoggedIn","true").apply()
-                    var intent = Intent(this, AccountInformation::class.java)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    val intent = Intent(this, AccountInformation::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
                     intent.putExtra("phoneno1", ss.toString())
                     startActivity(intent)
                     finish()
@@ -383,6 +385,7 @@ class OtpVerfification : AppCompatActivity() {
                     //val user = it.result?.user
                 } else {
                     // Sign in failed, display a message and update the UI
+                    binding.appProgressBar.visibility = View.GONE
                     Log.w(TAG, "signInWithCredential:failure", it.exception)
                     if (it.exception is FirebaseAuthInvalidCredentialsException) {
 

@@ -194,8 +194,9 @@
         <entry key="..\:/Users/Admin/Desktop/Topaz Docs/TopazLatest/Topaz/app/src/main/res/drawable/strike_through.xml" value="0.154" />
         <entry key="..\:/Users/Admin/Desktop/Topaz Docs/TopazLatest/Topaz/app/src/main/res/font/poppins_bold.xml" value="0.23047699451245252" />
         <entry key="..\:/Users/Admin/Desktop/Topaz Docs/TopazLatest/Topaz/app/src/main/res/layout-sw320dp-small/activity_inner_categories.xml" value="0.536" />
-        <entry key="..\:/Users/Admin/Desktop/Topaz Docs/TopazLatest/Topaz/app/src/main/res/layout-sw320dp-small/activity_inner_category_adapter.xml" value="0.536" />
+        <entry key="..\:/Users/Admin/Desktop/Topaz Docs/TopazLatest/Topaz/app/src/main/res/layout-sw320dp-small/activity_inner_category_adapter.xml" value="0.4532871972318339" />
         <entry key="..\:/Users/Admin/Desktop/Topaz Docs/TopazLatest/Topaz/app/src/main/res/layout-sw320dp/activity_account_information.xml" value="0.264" />
+        <entry key="..\:/Users/Admin/Desktop/Topaz Docs/TopazLatest/Topaz/app/src/main/res/layout-sw320dp/activity_add_address.xml" value="0.20863616930312098" />
         <entry key="..\:/Users/Admin/Desktop/Topaz Docs/TopazLatest/Topaz/app/src/main/res/layout-sw320dp/activity_category.xml" value="0.20863616930312098" />
         <entry key="..\:/Users/Admin/Desktop/Topaz Docs/TopazLatest/Topaz/app/src/main/res/layout-sw320dp/activity_change_phone_no.xml" value="0.4" />
         <entry key="..\:/Users/Admin/Desktop/Topaz Docs/TopazLatest/Topaz/app/src/main/res/layout-sw320dp/activity_edit_add_address.xml" value="0.264" />
@@ -257,8 +258,8 @@
         <entry key="..\:/Users/Admin/Desktop/Topaz Docs/TopazLatest/Topaz/app/src/main/res/layout/fragment_alert.xml" value="0.20863616930312098" />
         <entry key="..\:/Users/Admin/Desktop/Topaz Docs/TopazLatest/Topaz/app/src/main/res/layout/fragment_notification_offer.xml" value="0.20863616930312098" />
         <entry key="..\:/Users/Admin/Desktop/Topaz Docs/TopazLatest/Topaz/app/src/main/res/layout/fragment_offers.xml" value="0.1" />
-        <entry key="..\:/Users/Admin/Desktop/Topaz Docs/TopazLatest/Topaz/app/src/main/res/layout/home_slider_layout.xml" value="0.4" />
-        <entry key="..\:/Users/Admin/Desktop/Topaz Docs/TopazLatest/Topaz/app/src/main/res/layout/item_oldstock_adapter_layout.xml" value="0.10431808465156049" />
+        <entry key="..\:/Users/Admin/Desktop/Topaz Docs/TopazLatest/Topaz/app/src/main/res/layout/home_slider_layout.xml" value="0.264" />
+        <entry key="..\:/Users/Admin/Desktop/Topaz Docs/TopazLatest/Topaz/app/src/main/res/layout/item_oldstock_adapter_layout.xml" value="0.4" />
         <entry key="..\:/Users/Admin/Desktop/Topaz Docs/TopazLatest/Topaz/app/src/main/res/layout/item_quotation_layout.xml" value="0.264" />
         <entry key="..\:/Users/Admin/Desktop/Topaz Docs/TopazLatest/Topaz/app/src/main/res/layout/notify_offer_adapter.xml" value="0.20863616930312098" />
         <entry key="..\:/Users/Admin/Desktop/Topaz Docs/TopazLatest/Topaz/app/src/main/res/layout/productslider_item_layout.xml" value="0.15647712697734073" />
@@ -268,6 +269,62 @@
         <entry key="..\:/Users/Admin/Desktop/Topaz Docs/TopazLatest/Topaz/app/src/main/res/menu/homepagemenu.xml" value="0.536" />
         <entry key="..\:/Users/Admin/Desktop/Topaz Docs/TopazLatest/Topaz/app/src/main/res/menu/orders_toolbar.xml" value="0.536" />
         <entry key="..\:/Users/Admin/Desktop/Topaz Docs/TopazLatest/Topaz/app/src/main/res/menu/prod_page_menu.xml" value="0.20863616930312098" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/drawable/blue_button_rounded_corner.xml" value="0.152" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/drawable/bottom_sheet_dialog_style.xml" value="0.169" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/drawable/category_btn_unselected.xml" value="0.152" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/drawable/grey_border_btn_style.xml" value="0.152" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/drawable/grey_rounded_border_style.xml" value="0.152" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/drawable/roundedbtndarkblue.xml" value="0.169" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout-sw320dp-small/activity_inner_category_adapter.xml" value="0.2" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout-sw320dp/activity_account_information.xml" value="0.20863616930312098" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout-sw320dp/activity_change_phone_no.xml" value="0.4" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout-sw320dp/activity_edit_add_address.xml" value="0.4" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout-sw320dp/activity_edit_profile.xml" value="0.4" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout-sw320dp/activity_home_screen.xml" value="0.20521590423257802" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout-sw320dp/activity_login.xml" value="0.20863616930312098" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout-sw320dp/activity_my_cart.xml" value="0.20863616930312098" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout-sw320dp/activity_my_cart_adapter.xml" value="0.4" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout-sw320dp/activity_my_orders_adapter.xml" value="0.20863616930312098" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout-sw320dp/activity_otp_verfification.xml" value="0.15989739204788372" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/activity_account_information.xml" value="1.3799342105263157" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/activity_arrivals_adapter.xml" value="0.20521590423257802" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/activity_category_adapter.xml" value="0.15989739204788372" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/activity_change_email.xml" value="0.264" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/activity_change_new_phone_otp.xml" value="0.5051903114186851" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/activity_change_old_email.xml" value="0.4" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/activity_change_old_email_otp.xml" value="0.4" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/activity_change_old_phone_number.xml" value="0.264" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/activity_change_oldphone_otp.xml" value="0.4" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/activity_change_phone_no.xml" value="1.2269736842105263" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/activity_confirm_payment.xml" value="0.15989739204788372" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/activity_edit_add_address.xml" value="1.2269736842105263" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/activity_edit_profile.xml" value="1.2269736842105263" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/activity_email_change_otp.xml" value="0.4" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/activity_faq.xml" value="0.20863616930312098" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/activity_home_screen.xml" value="1.2269736842105263" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/activity_inner_category_adapter.xml" value="1.3799342105263157" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/activity_login.xml" value="1.3799342105263157" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/activity_my_account.xml" value="0.2989571263035921" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/activity_my_cart.xml" value="1.3799342105263157" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/activity_my_orders.xml" value="0.20863616930312098" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/activity_my_wishlist.xml" value="0.20863616930312098" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/activity_notification_alert_adapter.xml" value="0.20863616930312098" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/activity_notifications.xml" value="0.12612227447627192" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/activity_order_confirmation.xml" value="0.4" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/activity_order_details.xml" value="0.264" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/activity_order_details_adapter.xml" value="0.20863616930312098" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/activity_otp_verfification.xml" value="1.3357142857142856" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/activity_product_details.xml" value="0.264" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/activity_product_quotation.xml" value="0.264" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/activity_product_quotation_adapter.xml" value="0.20863616930312098" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/activity_search.xml" value="0.264" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/bottom_sheet_dialog.xml" value="0.20863616930312098" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/fragment_alert.xml" value="0.12612227447627192" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/fragment_offers.xml" value="0.12612227447627192" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/home_slider_layout.xml" value="0.10175288584865327" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/item_quotation_layout.xml" value="0.5051903114186851" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/notify_offer_adapter.xml" value="0.12612227447627192" />
+        <entry key="..\:/Users/Admin/Desktop/TopazDocs/TopazLatest/Topaz/app/src/main/res/layout/productslider_item_layout.xml" value="0.20863616930312098" />
       </map>
     </option>
   </component>

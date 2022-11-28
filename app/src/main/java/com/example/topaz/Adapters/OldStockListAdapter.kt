@@ -17,22 +17,18 @@ import com.example.topaz.Models.ArrivalsModels
 import com.example.topaz.R
 import com.example.topaz.Utility.Util
 
-class OldStockListAdapter (var arrival_list: ArrayList<ArrivalsModels>, var arrivalsPageItemClickListner: ArrivalsPageItemClickListner, var context: Context) : RecyclerView.Adapter<ArrivalsAdapter.MyViewHolder>(){
+class OldStockListAdapter (var arrival_list: ArrayList<ArrivalsModels>, var arrivalsPageItemClickListner: ArrivalsPageItemClickListner, var context: Context) : RecyclerView.Adapter<OldStockListAdapter.MyViewHolder>(){
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ArrivalsAdapter.MyViewHolder {
+    ): OldStockListAdapter.MyViewHolder {
 
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_oldstock_adapter_layout, parent, false)
-        return ArrivalsAdapter.MyViewHolder(view)
+        return OldStockListAdapter.MyViewHolder(view)
 
     }
 
-    override fun onBindViewHolder(holder: ArrivalsAdapter.MyViewHolder, position: Int) {
-        val data = arrival_list[position]
-        holder.bindItems(arrival_list,position,arrivalsPageItemClickListner,context)
-    }
 
     override fun getItemCount(): Int {
         return arrival_list.size
@@ -41,7 +37,7 @@ class OldStockListAdapter (var arrival_list: ArrayList<ArrivalsModels>, var arri
 
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var arrivalImage=itemView.findViewById<ImageView>(R.id.arrival_plwwoodss)
+        var arrivalImage=itemView.findViewById<ImageView>(R.id.oldstock_plywood_image)
         var arrivalName=itemView.findViewById<TextView>(R.id.arrival_plwwoodsstext)
         var arrivalProductPrice = itemView.findViewById<TextView>(R.id.arrivalProductPrice)
         fun bindItems(
@@ -59,8 +55,8 @@ class OldStockListAdapter (var arrival_list: ArrayList<ArrivalsModels>, var arri
 
             Glide.with(context)
                 .applyDefaultRequestOptions(
-                    RequestOptions().placeholder(R.drawable.ic_baseline_image_24).error(
-                        R.drawable.ic_baseline_image_24))
+                    RequestOptions().placeholder(R.drawable.plywoodbiards).error(
+                        R.drawable.plywoodbiards))
                 .load(bitmap)
                 .into(arrivalImage)
 
@@ -88,6 +84,11 @@ class OldStockListAdapter (var arrival_list: ArrayList<ArrivalsModels>, var arri
             }
         }
 
+    }
+
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        val data = arrival_list[position]
+        holder.bindItems(arrival_list,position,arrivalsPageItemClickListner,context)
     }
 
 

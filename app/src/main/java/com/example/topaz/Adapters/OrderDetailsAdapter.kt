@@ -62,7 +62,7 @@ class OrderDetailsAdapter(
 
 
             Glide.with(context)
-                .applyDefaultRequestOptions(RequestOptions().placeholder(R.drawable.ic_baseline_image_24).error(R.drawable.ic_baseline_image_24))
+                .applyDefaultRequestOptions(RequestOptions().placeholder(R.drawable.plywoodbiards).error(R.drawable.plywoodbiards))
                 .load(bitmap)
                 .into(img)
         }

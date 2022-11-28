@@ -72,7 +72,12 @@ class OrderDetails : AppCompatActivity(), OrdDetPageItemclickListner {
                 //Get the total
 
                 totalprice = totalprice + actualprice
-                totaldiscount = totaldiscount + (actualprice - discountedprice)
+                if(discountedprice < actualprice) {
+                    totaldiscount = totaldiscount + (actualprice - discountedprice)
+                }
+                else{
+                    totaldiscount = totaldiscount + (discountedprice - actualprice)
+                }
             }
             catch (e:Exception){
                 e.toString()

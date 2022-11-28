@@ -34,6 +34,7 @@ class SplashScreen : AppCompatActivity() {
                val intent = Intent(this, HomeScreen::class.java)
                startActivity(intent)
                finish()
+
            }
             else{
 

@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/white"
     tools:context=".Activities.EditProfile">
 
@@ -51,105 +51,123 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
+<FrameLayout
+    android:layout_width="96dp"
+    android:layout_height="96dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_marginTop="45dp"
+    android:id="@+id/profileImageLayout"
+    app:layout_constraintTop_toBottomOf="@id/textView3">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/edit_profile_image"
             android:layout_width="96dp"
             android:layout_height="96dp"
-            android:layout_marginStart="153dp"
-            android:layout_marginTop="100dp"
-            android:src="@drawable/ellipse_89"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:src="@drawable/user_placeholder"/>
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="bottom">
     <ImageView
         android:id="@+id/edit_image"
-        android:layout_width="30dp"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_marginStart="224dp"
-        android:layout_marginTop="202dp"
-        android:src="@drawable/edit_icon"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:visibility="gone"
+        android:src="@drawable/edit_icon"/>
+    </LinearLayout>
+</FrameLayout>
 
 
     <TextView
         android:id="@+id/textView43"
-        android:layout_width="76dp"
+        android:layout_width="wrap_content"
         android:layout_height="21dp"
-        android:layout_marginTop="278dp"
         android:text="@string/first_name"
-        android:textColor="@color/black"
+        android:textColor="@color/edit_profile_label_color"
         android:textSize="14sp"
+        android:fontFamily="@font/poppins_bold"
         android:textStyle="bold"
+        android:layout_marginTop="@dimen/_20sdp"
         app:layout_constraintStart_toStartOf="@+id/first_name"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/profileImageLayout"/>
 
     <EditText
         android:id="@+id/first_name"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginStart="47dp"
-        android:layout_marginTop="303dp"
         android:layout_marginEnd="47dp"
-        android:background="@color/white_gr"
+        android:layout_marginTop="2dp"
+        android:background="@drawable/grey_rounded_border_filled"
+        android:fontFamily="@font/poppins"
         android:paddingStart="20dp"
         android:text=""
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/textView43"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
         android:id="@+id/textView42"
-        android:layout_width="75dp"
+        android:layout_width="wrap_content"
         android:layout_height="21dp"
-        android:layout_marginTop="374dp"
         android:text="@string/last_name"
-        android:textColor="@color/black"
+        android:textColor="@color/edit_profile_label_color"
         android:textSize="14sp"
+        android:visibility="gone"
+        android:fontFamily="@font/poppins_bold"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/first_name"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/textView43"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/textView43"/>
 
     <EditText
         android:id="@+id/last_name"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginStart="47dp"
-        android:layout_marginTop="399dp"
         android:layout_marginEnd="47dp"
-        android:background="@color/white_gr"
+        android:background="@drawable/grey_rounded_border_filled"
         android:paddingStart="20dp"
+        android:visibility="gone"
         android:text=""
         android:textColor="@color/black"
+        android:fontFamily="@font/poppins"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/textView42"/>
 
     <TextView
-        android:layout_width="101dp"
+        android:layout_width="wrap_content"
         android:layout_height="21dp"
-        android:layout_marginTop="470dp"
         android:text="@string/email_address"
-        android:textColor="@color/black"
+        android:textColor="@color/edit_profile_label_color"
         android:textSize="14sp"
         android:textStyle="bold"
+        android:fontFamily="@font/poppins_bold"
+        android:id="@+id/emailAddressTextField"
+        android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="@+id/textView43"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/last_name"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/emailAddressTextField"
         android:orientation="horizontal"
         android:background="@color/white_gr"
+        android:id="@+id/emailAddressLayout"
+        android:layout_marginTop="2dp"
         android:layout_marginStart="47dp"
-        android:layout_marginTop="495dp"
         android:layout_marginEnd="47dp">
     <EditText
         android:id="@+id/email_id_change"
@@ -157,7 +175,8 @@
         android:layout_height="wrap_content"
         android:text=""
         android:layout_weight="1"
-        android:background="@color/white_gr"
+        android:background="@drawable/grey_rounded_border_filled"
+        android:fontFamily="@font/poppins"
         android:textColor="@color/black"
         android:padding="@dimen/_10sdp"
         android:textSize="14sp"/>
@@ -171,82 +190,98 @@
         android:gravity="start"
         android:layout_gravity="center_vertical"
         android:textColor="@color/purple"
+        android:fontFamily="@font/poppins"
         android:textSize="13sp"
-        android:layout_weight="4"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/email_id_change"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_weight="3"
+        android:textStyle="bold"/>
     </LinearLayout>
 
 
     <TextView
         android:id="@+id/textView21"
-        android:layout_width="105dp"
+        android:layout_width="wrap_content"
         android:layout_height="21dp"
-        android:layout_marginTop="567dp"
         android:text="@string/phone_number"
-        android:textColor="@color/black"
+        android:textColor="@color/edit_profile_label_color"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/textView43"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:fontFamily="@font/poppins_bold"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/emailAddressLayout"
+        app:layout_constraintStart_toStartOf="@+id/textView43"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="47dp"
+        android:layout_marginEnd="47dp"
+        android:orientation="horizontal"
+        android:id="@+id/phoneChangeLayout"
+        android:background="@drawable/grey_rounded_border_filled"
+        app:layout_constraintTop_toBottomOf="@id/textView21">
 
     <EditText
         android:id="@+id/phone_no_change"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_marginStart="47dp"
-        android:layout_marginTop="592dp"
-        android:layout_marginEnd="47dp"
-        android:background="@color/white_gr"
+        android:layout_marginTop="2dp"
         android:paddingStart="20dp"
+        android:background="@color/white_gr"
+        android:fontFamily="@font/poppins"
         android:text=""
+        android:layout_weight="1"
         android:textColor="@color/black"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="14sp"/>
 
     <TextView
         android:id="@+id/change2"
-        android:layout_width="53dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="609dp"
-        android:layout_marginEnd="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/change"
         android:textColor="@color/purple"
         android:textSize="13sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/phone_no_change"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_weight="3"
+        android:fontFamily="@font/poppins"
+        android:gravity="start"
+        android:textStyle="bold"/>
+    </LinearLayout>
 
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="47dp"
+        android:layout_marginRight="47dp"
+        app:layout_constraintStart_toStartOf="@id/phoneChangeLayout"
+        app:layout_constraintTop_toBottomOf="@+id/phoneChangeLayout">
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/reset_btn"
-        android:layout_width="150dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginStart="47dp"
-        android:layout_marginTop="30dp"
         android:background="@drawable/category_btn_unselected"
         android:text="@string/reset"
+        android:layout_weight="1"
+        android:fontFamily="@font/poppins"
+        android:layout_marginRight="10dp"
         android:textColor="@color/blue"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phone_no_change" />
+        android:textSize="16sp"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/update"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="47dp"
-        android:background="@color/btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/blue_button_rounded_corner"
         android:text="@string/update"
         android:textColor="@color/white"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/reset_btn"
-        app:layout_constraintTop_toTopOf="@+id/reset_btn" />
+        android:fontFamily="@font/poppins"
+        android:layout_marginLeft="5dp"
+        android:padding="10dp"
+        android:layout_weight="1"
+        android:textSize="16sp"/>
+    </LinearLayout>
 
     <ProgressBar
         android:layout_width="match_parent"

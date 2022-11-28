@@ -19,9 +19,9 @@
 
     <TextView
         android:id="@+id/textView13"
-        android:layout_width="220dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="10dp"
         android:background="@color/white"
         android:text=""
@@ -65,22 +65,83 @@
 
     <ImageView
         android:id="@+id/textView15"
-        android:layout_width="30dp"
+        android:layout_width="wrap_content"
         android:layout_height="25dp"
         android:layout_marginTop="10dp"
-       android:src="@drawable/ic_baseline_delete_outline_24"
-        app:layout_constraintEnd_toEndOf="@+id/pri"
+        android:src="@drawable/ic_baseline_delete_outline_24"
         app:layout_constraintStart_toStartOf="@+id/pri"
-        app:layout_constraintBottom_toBottomOf="@id/minusbtn"
+        app:layout_constraintBottom_toBottomOf="@id/incrementDecrementLayout"
         app:layout_constraintTop_toBottomOf="@+id/pri" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/incrementDecrementLayout"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
 
-    <androidx.appcompat.widget.AppCompatButton
+        app:layout_constraintStart_toEndOf="@+id/textView15"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16">
+        <LinearLayout
+            android:layout_width="35dp"
+            android:layout_height="24dp"
+            android:background="@drawable/grey_rounded_border_filled">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/minusbtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/grey_border_btn_style"
+            android:text="@string/minus"
+            android:textColor="@color/netural_grey"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="40dp"
+            android:layout_height="24dp"
+            android:background="@color/neutal_light">
+        <EditText
+            android:id="@+id/numbercount"
+            android:layout_width="40dp"
+            android:layout_height="25dp"
+            android:background="@color/neutal_light"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="1"
+            android:textColor="@color/black"
+            android:textSize="12sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="35dp"
+            android:layout_height="24dp">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/plusbtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/grey_border_btn_style"
+            android:gravity="center"
+            android:text="@string/add"
+            android:textColor="@color/netural_grey"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+   <!-- <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/minusbtn"
         android:layout_width="35dp"
         android:layout_height="25dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/minus_border"
+        android:background="@drawable/bottom_sheet"
         android:gravity="center"
         android:paddingBottom="7dp"
         android:text="@string/minus"
@@ -119,7 +180,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/numbercount"
-        app:layout_constraintTop_toTopOf="@+id/numbercount" />
+        app:layout_constraintTop_toTopOf="@+id/numbercount" />-->
 
     <ImageView
         android:layout_width="match_parent"
@@ -127,5 +188,5 @@
         android:layout_marginTop="20dp"
         android:src="@drawable/line_83"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/minusbtn" />
+        app:layout_constraintTop_toBottomOf="@+id/incrementDecrementLayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>

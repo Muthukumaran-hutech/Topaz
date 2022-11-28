@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.util.Base64
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,7 +41,7 @@ class MyCartAdapter(
         val data = cartData[position]
         holder.bindItems(cartData, position, myCartItemClickListner, context)
 
-        holder.number.isEnabled = false
+       holder.number.isEnabled = false
         if (cartData.get(position).quantity.isEmpty()){
             quantity = 1
         }
@@ -52,22 +53,38 @@ class MyCartAdapter(
 
         holder.plus.setOnClickListener {
 
-            if (cartData.get(position).quantity.isNotEmpty()) {
-                if (cartData.get(position).quantity.toInt() >= 1) {
-                    //var qnty = cartData.get(position).quantity.toInt()
-                    quantity++
-                    holder.number.setText(quantity.toString())
+            Log.d("--Quantity---",position.toString())
+            var quantity1 = cartData.get(position).quantity.toInt()
 
+                if (quantity1!=0) {
+                    if (quantity1 >= 1) {
+                        //var qnty = cartData.get(position).quantity.toInt()
+                        quantity1=quantity1+1
+                        // holder.number.setText(quantity.toString())
+                        holder.number.setText(quantity1.toString())
+                        increementDecreementItemClickListner.IncreementDecreementItemClickListner(
+                            cartData.get(position),
+                            quantity1
+                        )
+
+                    } else {
+                        //doNothing
+                    }
                 } else {
-                    //doNothing
+                    quantity1=quantity1 + 1
+                    // holder.number.setText(quantity.toString())
+                    increementDecreementItemClickListner.IncreementDecreementItemClickListner(
+                        cartData.get(position),
+                        quantity1
+                    )
+                    holder.number.setText(quantity1.toString())
                 }
-            }else{
-                quantity++
-                holder.number.setText(quantity.toString())
-            }
-            increementDecreementItemClickListner.IncreementDecreementItemClickListner(cartData.get(position),quantity)
+
         }
         holder.minus.setOnClickListener {
+            quantity=cartData.get(position).quantity.toInt()
+
+
             if (cartData.get(position).quantity.isNotEmpty()) {
                 if (cartData.get(position).quantity.toInt() >= 1) {
                     //var qnt = cartData.get(position).quantity.toInt()
@@ -86,6 +103,7 @@ class MyCartAdapter(
             else{
 
                 quantity--
+               // increementDecreementItemClickListner.IncreementDecreementItemClickListner(cartData.get(position),quantity)
                 if (quantity>0){
                     holder.number.setText(quantity.toString())
                 }else{
@@ -96,6 +114,11 @@ class MyCartAdapter(
             increementDecreementItemClickListner.IncreementDecreementItemClickListner(cartData.get(position),quantity)
 
 
+        }
+
+
+        holder.itemView.setOnClickListener {
+            //myCartItemClickListner.onCartItemClick(cartData.get(position))
         }
     }
 

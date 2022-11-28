@@ -378,9 +378,9 @@ class ProductQuotation : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.homepagemenu, menu)
-        var menuitem=menu.findItem(R.id.my_cart)
-        var actionview=menuitem.actionView
-        var cartcount=actionview.findViewById<TextView>(R.id.cart_count)//Getting the textview reference from action layout defined for the menu item
+        val menuitem=menu.findItem(R.id.my_cart)
+        val actionview=menuitem.actionView
+        val cartcount=actionview.findViewById<TextView>(R.id.cart_count)//Getting the textview reference from action layout defined for the menu item
         var cart=actionview.findViewById<ImageView>(R.id.cart_icon)
 
         var quoteitem = menu.findItem(R.id.quotationStatus)
@@ -541,7 +541,9 @@ class ProductQuotation : AppCompatActivity() {
             val quotationref = FirebaseDatabase.getInstance().getReference("MyQuotation")
             quotationref.child(custId).child(quotationlist.get(0).quotationId)
                 .child("quotationStatus").setValue(false)
-            startActivity(Intent(activity, OrderConfirmation::class.java))
+            var intent=Intent(activity, OrderConfirmation::class.java)
+            intent.putExtra("type","ProductQuotation")
+            startActivity(intent)
             finish()
         }
         catch (e:Exception){

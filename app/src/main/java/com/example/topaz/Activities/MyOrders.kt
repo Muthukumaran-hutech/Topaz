@@ -14,6 +14,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.topaz.Adapters.MyOrdersAdapter
 import com.example.topaz.ApiModels.ViewOrderApimodel
@@ -71,7 +72,7 @@ class MyOrders : AppCompatActivity(), OrderItemClickListner {
         try {
 
             binding.orderProgress.visibility = View.VISIBLE
-            var res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
+            val res = UpdateAccountInfoInstance.getUpdateAccountInfoInstance()
                 .create(JsonPlaceholder::class.java)
 
             res.viewOders(custId).enqueue(object : Callback<List<ViewOrderApimodel>?> {
@@ -81,7 +82,7 @@ class MyOrders : AppCompatActivity(), OrderItemClickListner {
                 ) {
                     binding.orderProgress.visibility = View.GONE
                     if (response.isSuccessful) {
-                        Log.d(TAG, "Onorder success: " + response.body())
+                        //Log.d(TAG, "Onorder success: " + response.body())
                         for (orderList in response.body()!!) {
                             /* var odList = OrderModels(
                             orderList.orderstatus.status,
@@ -90,38 +91,41 @@ class MyOrders : AppCompatActivity(), OrderItemClickListner {
                         )
                         orderListItem.add(odList)
                     }*/
-
-
 //                        Log.d(TAG, "Onorder success2: " + orderList.orderItems.get(0).product.productTitle)
-                            var odList = OrderModels(
-                                "",
-                                orderList.orderstatus.status,
-                                orderList.orderid,
-                                orderList.createdDate,
-                                orderList.orderItems.get(0).quantity,
-                                orderList.orderItems.get(0).thickness,
-                                orderList.orderItems.get(0).sqFeetPrice,
-                                orderList.orderItems.get(0).productRRR?.productTitle.toString(),
-                                orderList.paymentmode,
-                                orderList.customer.addressLine,
-                                amountWithoutTax = orderList.amountwithouttax,
-                                amountWithTax = orderList.amountwithtax,
-                                orderitemlist = orderList.orderItems
+
+                 if(!orderList.orderstatus.status.contains("Quote")) {
+                     if (orderList.orderItems.size > 0) {
+                         val odList = OrderModels(
+                             "",
+                             orderList.orderstatus.status,
+                             orderList.orderid,
+                             orderList.createdDate,
+                             orderList.orderItems.get(0).quantity,
+                             orderList.orderItems.get(0).thickness,
+                             orderList.orderItems.get(0).sqFeetPrice,
+                             orderList.orderItems.get(0).productRRR?.productTitle.toString(),
+                             orderList.paymentmode,
+                             orderList.customer.addressLine,
+                             amountWithoutTax = orderList.amountwithouttax,
+                             amountWithTax = orderList.amountwithtax,
+                             orderitemlist = orderList.orderItems
 
 
-                            )
-                            //   Log.d(TAG, "qty: "+orderList.orderItems[0].quantity.toString())
+                         )
+                         //   Log.d(TAG, "qty: "+orderList.orderItems[0].quantity.toString())
 
-                            orderListItem.add(odList)
-
-                            if (orderListItem.size == 0) {
-                                binding.orderEmptyText.visibility = View.VISIBLE
-                            } else {
-                                binding.orderEmptyText.visibility = View.GONE
-                            }
+                         orderListItem.add(odList)
+                     }
+                 }
 
 
                             Log.d(TAG, "Onorder success2: " + orderList.orderItems.size)
+                        }
+
+                        if (orderListItem.size == 0) {
+                            binding.orderEmptyText.visibility = View.VISIBLE
+                        } else {
+                            binding.orderEmptyText.visibility = View.GONE
                         }
 
                         /* var ordersAdapter = MyOrdersAdapter(orderListItem, this@MyOrders, this@MyOrders)*/

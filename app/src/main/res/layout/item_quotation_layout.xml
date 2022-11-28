@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
@@ -409,7 +410,7 @@
             android:text="asas"
             android:textColorHint="@color/login_text1_color"
             app:layout_constraintTop_toBottomOf="@id/requirementDetailsText"
-            android:background="@drawable/editable_background"
+            android:background="@drawable/grey_rounded_border_filled"
             app:layout_constraintStart_toStartOf="parent"
             android:hint="@string/enter_requirement_details"
             android:textColor="@color/black"

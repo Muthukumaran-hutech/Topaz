@@ -37,7 +37,7 @@ class Notifications : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.notificationsBackArrow.setOnClickListener{
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+           // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             finish()
         }
 

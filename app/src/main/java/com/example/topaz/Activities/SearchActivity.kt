@@ -223,7 +223,7 @@ SearchActivity : AppCompatActivity(), SearchListPageItemClickListner {
 
     }
 
-    override fun onBackPressed() {
+    /*override fun onBackPressed() {
         //super.onBackPressed()
         val message = "Are you sure yo want to exit"
         AlertDialog.Builder(this)
@@ -238,5 +238,5 @@ SearchActivity : AppCompatActivity(), SearchListPageItemClickListner {
                 //  binding.phoneContainer.helperText = getString(R.id.Required)
             }
             .show()
-    }
+    }*/
 }

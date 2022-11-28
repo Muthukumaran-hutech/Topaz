@@ -57,13 +57,22 @@ class InnerCategoryAdapter(var list3: ArrayList<InnerCategoryModelList>, var inn
              if (listModel3[position].discount != null && listModel3[position].discount != "") {
                  discount.visibility=View.VISIBLE
                  initialprice.visibility=View.VISIBLE
-                 discount.text = listModel3[position].discount+"%"+" "+"Off"
-                 var discountvalue = Util.extractNumbersFromString(listModel3[position].discount!!,"Percentage")
-                 var discountamount =
+                 discount.text = listModel3[position].discount+" "+"Off"
+                 val discountvalue = Util.extractNumbersFromString(listModel3[position].discount!!,"Percentage")
+                 val discountamount =
                      (listModel3[position].InnerCateegoryPrice.toInt() * discountvalue[0].toInt()) / 100
-                 var actualsqfeetvalue =
-                     listModel3[position].InnerCateegoryPrice.toInt() - discountamount
-                 catprice.text = context.getString(R.string.Rs) + actualsqfeetvalue + "/"
+
+
+                 if(discountamount < listModel3[position].InnerCateegoryPrice.toInt()) {
+                     val actualsqfeetvalue =
+                         listModel3[position].InnerCateegoryPrice.toInt() - discountamount
+                     catprice.text = context.getString(R.string.Rs) + actualsqfeetvalue + "/"
+                 }
+                 else{
+                     val actualsqfeetvalue =
+                         discountamount - listModel3[position].InnerCateegoryPrice.toInt()
+                     catprice.text = context.getString(R.string.Rs) + actualsqfeetvalue + "/"
+                 }
                  initialprice.text =
                      context.getString(R.string.Rs) + listModel3[position].InnerCateegoryPrice
              }
@@ -97,10 +106,15 @@ class InnerCategoryAdapter(var list3: ArrayList<InnerCategoryModelList>, var inn
              /*}*/
 
 
-             catImage.setOnClickListener {
-                 //Onclick will trigger the interface in activity
+             //Onclick of itemview will trigger the interface
+             itemView.setOnClickListener{
                  innerCategoryItemClickListner1.InnerCategoryItemClickListner(listModel3[position])
              }
+
+          /*   catImage.setOnClickListener {
+                 //Onclick will trigger the interface in activity
+                 innerCategoryItemClickListner1.InnerCategoryItemClickListner(listModel3[position])
+             }*/
 
         }
          catch (e:Exception){

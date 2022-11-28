@@ -210,9 +210,10 @@
         android:layout_width="39dp"
         android:layout_height="19dp"
         android:text=""
-        android:textColor="@color/black"
+        android:textColor="@color/dark_gray_color"
         android:textSize="14sp"
         android:layout_marginTop="30dp"
+        android:layout_marginLeft="2dp"
         app:layout_constraintStart_toStartOf="@id/otplinear"
         app:layout_constraintTop_toBottomOf="@id/otplinear"/>
 
@@ -221,39 +222,40 @@
         android:layout_width="115dp"
         android:layout_height="19dp"
         android:text="@string/didn_t_receive_otp"
-        android:textColor="@color/black"
+        android:textColor="@color/dark_gray_color"
+        android:fontFamily="@font/lato"
         android:textSize="14sp"
         android:layout_marginTop="5dp"
+        android:layout_marginLeft="2dp"
         app:layout_constraintStart_toStartOf="@id/otplinear"
         app:layout_constraintTop_toBottomOf="@id/timer"/>
 
     <TextView
         android:id="@+id/resend_otp_2"
         android:layout_width="115dp"
-        android:layout_height="19dp"
+        android:layout_height="wrap_content"
         android:text="@string/resend_otp"
         android:textColor="@color/black"
         android:textSize="14sp"
         android:gravity="end"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/timer"
+        app:layout_constraintBottom_toBottomOf="@id/dint_recieve"
         app:layout_constraintEnd_toEndOf="@id/otplinear"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/confirm_phone_otp"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginStart="27dp"
+        android:layout_height="50dp"
         android:layout_marginRight="27dp"
-        android:background="@color/btn"
+        android:layout_marginLeft="27dp"
+        android:background="@drawable/roundedbtndarkblue"
         android:text="@string/confirm_otp"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:layout_marginTop="30dp"
         android:textSize="14sp"
-        app:layout_constraintTop_toBottomOf="@id/dint_recieve"
-        app:layout_constraintEnd_toEndOf="@id/otplinear"
-        app:layout_constraintStart_toStartOf="@id/otplinear"/>
+        app:layout_constraintTop_toBottomOf="@id/dint_recieve"/>
 
 
 

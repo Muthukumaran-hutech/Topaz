@@ -138,6 +138,7 @@ class EditProfile : AppCompatActivity() {
                 if(response.isSuccessful){
                  saveDataLocally()
                  Toast.makeText(this@EditProfile,"Profile details updated successfully",Toast.LENGTH_LONG).show()
+                    finish()
                 }
                 else{
                     Toast.makeText(this@EditProfile,"Profile update failed",Toast.LENGTH_LONG).show()

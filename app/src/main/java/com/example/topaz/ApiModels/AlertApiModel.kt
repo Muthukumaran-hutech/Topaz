@@ -59,7 +59,7 @@ class ItmOrdr1 {
     public var orderItemId: Long = 0
 
     @SerializedName("quantity")
-    public var quantity: Long = 0
+    public var quantity: Int = 0
 
    /* @SerializedName("price")
     public var price: String = ""

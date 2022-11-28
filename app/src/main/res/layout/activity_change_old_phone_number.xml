@@ -45,52 +45,60 @@
     </androidx.appcompat.widget.Toolbar>
 
     <TextView
-        android:layout_width="179dp"
+        android:layout_width="wrap_content"
         android:layout_height="21dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="155dp"
         android:text="@string/enter_phone_number"
+        android:layout_marginTop="55dp"
         android:textColor="@color/login_text1_color"
         android:textSize="14sp"
-        android:fontFamily="@font/poppins_bold"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:fontFamily="@font/poppins_semibold"
+        android:id="@+id/enterPhoneNumberLabel"
+        app:layout_constraintStart_toStartOf="@id/change_phone"
+        app:layout_constraintTop_toBottomOf="@id/edit_address_toolbar"/>
 
     <EditText
         android:id="@+id/change_phone"
-        android:layout_width="320dp"
+        android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_marginStart="47dp"
-        android:layout_marginTop="179dp"
-        android:layout_marginEnd="47dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
         android:inputType="phone"
         android:textColor="@color/black"
-        android:background="@color/white_gr"
+        android:background="@drawable/grey_rounded_border_filled"
         android:hint="@string/enter_phone_number__"
+        android:layout_marginTop="5dp"
         android:paddingStart="17dp"
         android:fontFamily="@font/poppins"
+        app:layout_constraintTop_toBottomOf="@id/enterPhoneNumberLabel"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/send_otp"
-        android:layout_width="320dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="47dp"
-        android:layout_marginTop="254dp"
-        android:layout_marginEnd="47dp"
-        android:background="@color/buy_btn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/roundedbtndarkblue"
         android:textAllCaps="false"
         android:fontFamily="@font/poppins_bold"
         android:text="@string/send_otp_for_verifications"
         android:textColor="@color/white"
         android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/change_phone"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/changeOldPhoneProgress"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
 

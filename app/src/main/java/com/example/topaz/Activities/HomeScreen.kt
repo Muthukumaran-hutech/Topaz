@@ -18,12 +18,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager.widget.ViewPager
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
-import com.example.topaz.Adapters.ArrivalsAdapter
-import com.example.topaz.Adapters.HomeCategoriesAdapter
-import com.example.topaz.Adapters.HomeSliderAdapter
-import com.example.topaz.Adapters.OldStockListAdapter
+import com.example.topaz.Adapters.*
 import com.example.topaz.ApiModels.*
 import com.example.topaz.Interface.HomeScreenItemClickListner
 import com.example.topaz.Interface.JsonPlaceholder
@@ -60,6 +58,7 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
     var isCategoryItemClicked=false
     var discountList=ArrayList<DiscountModel>()
     var oldstocklist = ArrayList<ArrivalsModels>()
+    var selectedposition=0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -156,11 +155,12 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
        /* onAddvertisementCall()
         onApiCall()
         onApicallcat()*/
-        if(isCategoryItemClicked){
-            homeCategoriesAdapter.resetCategorySelection()
+        if(isCategoryItemClicked){//Only if item is clicked this operation needs to be performed
+            homeCategoriesAdapter.changeClickedState(position = selectedposition,false)
+          //  homeCategoriesAdapter.resetCategorySelection()
             isCategoryItemClicked=false
-            onApiCall()
-            onApicallcat()
+            //onApiCall()
+            //onApicallcat()
 
         }
     }
@@ -311,11 +311,45 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
     private fun setSliderItems(adlist: ArrayList<AddModels>) {
 
         try {
+            val advertisementadapter=AdvertisementBannerSlider(this, adlist)
+            binding.advertisementViewPager?.adapter = advertisementadapter
 
-            val sliderAdapter = HomeSliderAdapter(this, adlist)
+            if(adlist.size > 0){
+
+                binding.indicatorData?.visibility= View.VISIBLE
+                binding.indicatorData?.setIndicatorCount(adlist.size)
+                binding.indicatorData?.selectCurrentPosition(0)
+
+            }
+            else{
+                binding.indicatorData?.visibility= View.GONE
+            }
+
+            /*val sliderAdapter = HomeSliderAdapter(this, adlist)
             binding.viewFliperAdapter.adapter = sliderAdapter
             binding.viewFliperAdapter.flipInterval = 5000
-            binding.viewFliperAdapter.startFlipping()
+            binding.viewFliperAdapter.startFlipping()*/
+
+
+
+            binding.advertisementViewPager?.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+                override fun onPageScrolled(
+                    position: Int,
+                    positionOffset: Float,
+                    positionOffsetPixels: Int
+                ) {
+                    //Log.d("Page chnaged","true")
+                }
+
+                override fun onPageSelected(position: Int) {
+                    binding.indicatorData?.selectCurrentPosition(position)
+                    Log.d("Page chnaged","true")
+                }
+
+                override fun onPageScrollStateChanged(state: Int) {
+                    //Log.d("Page chnaged","true")
+                }
+            })
         }
         catch (e:Exception){
             e.toString()
@@ -481,9 +515,9 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
 
     override fun onBackPressed() {
         //super.onBackPressed()
-        val message = "Are you sure yo want to exit"
+        val message = "Are you sure you want to exit"
         AlertDialog.Builder(this)
-            .setTitle("Applcation will be logged out ")
+            .setTitle("Exit Application")
             .setMessage(message)
             .setPositiveButton("OK") { _, _ ->
                 super.onBackPressed()
@@ -500,7 +534,7 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.homepagemenu, menu)
-        var menuitem=menu.findItem(R.id.my_cart)
+        val menuitem=menu.findItem(R.id.my_cart)
         var quoteitem = menu.findItem(R.id.quotationStatus)
 
 
@@ -585,6 +619,7 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
         intent.putExtra("from","Homepage")
         startActivity(intent)*/
         isCategoryItemClicked=true
+        selectedposition = position
         homeCategoriesAdapter.changeClickedState(position,true)
         val intent = Intent(activity, InnerCategories::class.java)
         intent.putExtra("cat_id", homecategory.catID)
@@ -710,7 +745,7 @@ class HomeScreen : AppCompatActivity(), HomeScreenItemClickListner, ArrivalsPage
             else{
                 binding.arrivalListSeparator?.visibility= View.GONE
             }
-            binding.oldstocksRecycler?.layoutManager = GridLayoutManager(this,3)
+            binding.oldstocksRecycler?.layoutManager = GridLayoutManager(this,2)
             val arrivalAdapter =
                 OldStockListAdapter(oldstocklist, this@HomeScreen, this@HomeScreen)
             binding.oldstocksRecycler?.adapter = arrivalAdapter

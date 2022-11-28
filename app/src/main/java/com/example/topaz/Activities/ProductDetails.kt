@@ -6,11 +6,7 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
-import android.opengl.Visibility
 import android.os.Bundle
-import android.util.Base64
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
@@ -20,10 +16,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.ViewPager
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
@@ -38,7 +31,6 @@ import com.example.topaz.RetrofitApiInstance.UpdateAccountInfoInstance
 import com.example.topaz.Utility.Util
 import com.example.topaz.databinding.ActivityProductDetailsBinding
 import com.google.firebase.database.*
-import com.google.firebase.ktx.Firebase
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -200,19 +192,26 @@ class ProductDetails : AppCompatActivity() {
             checkIfActiveCartExists(navigatetocartpage = true)
 
         }
+
+        //To be implemented by using  firebase dynamic links for now implementing normal share functionality using Intents
         binding.shareProdDetails.setOnClickListener {
-            product.productid
+           /* product.productid
             product.Productimage2.imagepath
             product.productTitle
-            product.price
+            product.price*/
+
+            val shareintent=Intent(Intent.ACTION_SEND)
+            shareintent.setType("text/plain")
+            shareintent.putExtra(Intent.EXTRA_TEXT,"Hey, checkout this product on Topaz")
+            Intent.createChooser(shareintent,"How do you want to share?")
+            startActivity(shareintent)
+
         }
 
         quatationRef=FirebaseDatabase.getInstance().getReference("MyQuotation")
         quatationProductRef=FirebaseDatabase.getInstance().getReference("QuotationProductList")
 
         getProductImages()
-
-
 
     }
 
@@ -244,14 +243,10 @@ class ProductDetails : AppCompatActivity() {
                                         thickness = product.thickness
                                     )
                                 )
-                                database1.child(cart_id!!.cartId).child("Products")
-                                    .child(cartProductListItem.get(0).product_id)
-                                    .setValue(cartProductListItem.get(0))//
 
-                                if (navigatetocartpage) {
-                                    startActivity(Intent(activity, MyCart::class.java))
-                                }
-                                Toast.makeText(this@ProductDetails,"Product Added To Cart",Toast.LENGTH_LONG).show()
+                                checkIfProductAlreadyExists(cart_id!!.cartId,cartProductListItem.get(0).product_id,navigatetocartpage)
+
+                                //Toast.makeText(this@ProductDetails,"Already  added to cart",Toast.LENGTH_LONG).show()
 
                             }
                         } else {
@@ -289,6 +284,7 @@ class ProductDetails : AppCompatActivity() {
 
 
                             //------------------------------------Cart insertion------------------------------------------
+                            cartProductListItem.get(0).cart_id=cart_id.toString()
                             database1.child(cart_id.toString()).child("Products")
                                 .child(cartProductListItem.get(0).product_id)
                                 .setValue(cartProductListItem.get(0))//Inserting products into Cart
@@ -297,7 +293,7 @@ class ProductDetails : AppCompatActivity() {
                                 startActivity(Intent(activity, MyCart::class.java))
                             }
                             Toast.makeText(
-                                this@ProductDetails, "Product Added To Cart",
+                                this@ProductDetails, "Product added to cart",
                                 Toast.LENGTH_LONG
                             ).show()
                         }
@@ -318,6 +314,75 @@ class ProductDetails : AppCompatActivity() {
 
 
 
+    }
+
+    private fun checkIfProductAlreadyExists(
+        cart_id: String,
+        productId: String,
+        navigatetocartpage: Boolean
+    ) {
+        try{
+            binding.appProgressBar3.visibility = View.VISIBLE
+            val query=database1.child(cart_id).child("Products").child(productId)
+            query.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    binding.appProgressBar3.visibility = View.GONE
+                        if (snapshot.exists()) {
+
+                            if (snapshot.value != null) {
+                                if (navigatetocartpage) {
+                                    startActivity(Intent(activity, MyCart::class.java))
+                                }
+                                var cartprodlist=snapshot.getValue(CartProductList::class.java)!!
+
+                               if(cartprodlist.isActive){//Checking if product status is active and if the same product is added, then show a message that it is already added.
+                                   Toast.makeText(this@ProductDetails,"Already added to the cart",Toast.LENGTH_LONG).show()
+                               }
+                                else{
+                                   Toast.makeText(
+                                       this@ProductDetails,
+                                       "Added  to the cart",
+                                       Toast.LENGTH_LONG
+                                   ).show()
+                                   database1.child(cart_id).child("Products")
+                                       .child(cartProductListItem.get(0).product_id)
+                                       .setValue(cartProductListItem.get(0))//
+                               }
+                            }
+
+
+                        }
+
+
+
+                        else  {//If new product is added for the first time
+                            if (navigatetocartpage) {
+                                startActivity(Intent(activity, MyCart::class.java))
+                            }
+                            database1.child(cart_id).child("Products")
+                                .child(cartProductListItem.get(0).product_id)
+                                .setValue(cartProductListItem.get(0))//
+                            Toast.makeText(
+                                this@ProductDetails,
+                                "Added  to the cart",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                   Log.d("Product error","true")
+                    binding.appProgressBar3.visibility = View.GONE
+                }
+            })
+
+
+        }
+        catch (e:Exception){
+            e.toString()
+            binding.appProgressBar3.visibility = View.GONE
+        }
     }
 
     private fun sendUserData() {
@@ -497,16 +562,24 @@ class ProductDetails : AppCompatActivity() {
 
     }
 
-
+//Checking if product is already added to Wishlist
     fun checkIfProductIsAddedToWishlist(){
         database = FirebaseDatabase.getInstance().getReference("WhishList")
         var ref=database.child(custId.toString()).child(product.productid.toString())
         ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                if(snapshot.exists()){
-                 binding.whislistProdDetails.visibility=View.INVISIBLE
-                 binding.whislistProdDetails1.visibility=View.VISIBLE
+                if(snapshot.value!=null) {
+                    if (snapshot.exists()) {
+                        val wishlistdata = snapshot.getValue(DetailsFirebaseModel::class.java)!!
+                        Log.d("--Wishlistdata--",wishlistdata?.addedToWishList.toString())
 
+                        if(wishlistdata.addedToWishList) {
+
+                            binding.whislistProdDetails.visibility = View.INVISIBLE
+                            binding.whislistProdDetails1.visibility = View.VISIBLE
+                        }
+
+                    }
                 }
             }
 
@@ -539,20 +612,31 @@ class ProductDetails : AppCompatActivity() {
                           Log.d("Discount", response.body()!!.discount!!)
                           response.body()?.let {
                               val discountListApiModel = it
-                              binding.textView17.text = discountListApiModel?.discount +"%"+ " " + "Off"
+                              binding.textView17.text = discountListApiModel?.discount + " " + "Off"
                               if (discountListApiModel.discount != null) {
                                   try {
                                       binding.textView15.text =
                                           getString(R.string.Rs) + product.sqFeetPrice!!.toString()
                                       val discount1 =
-                                          Util.extractNumbersFromString(discountListApiModel.discount.toString(),"Percentage")
+                                          Util.extractNumbersFromString(discountListApiModel.discount.toString(),"Percentage")//Extracts number from text
 
-                                      var sqfeetprice =
+                                      val sqfeetprice =
                                           (product.sqFeetPrice!!.toInt() * discount1[0].toInt()) / 100
-                                      var discountedsqfeet =
-                                          product.sqFeetPrice!!.toInt() - sqfeetprice
-                                      // Log.d("--Discounted price--",(product.sqFeetPrice!!.toInt() - sqfeetprice).toString())
-                                      product.sqFeetPrice = discountedsqfeet.toDouble()
+
+                                      if(sqfeetprice <product.sqFeetPrice!!.toInt()) {
+                                          val discountedsqfeet =
+                                              product.sqFeetPrice!!.toInt() - sqfeetprice
+                                          // Log.d("--Discounted price--",(product.sqFeetPrice!!.toInt() - sqfeetprice).toString())
+                                          product.sqFeetPrice = discountedsqfeet.toDouble()
+                                      }
+                                      else{
+                                          val discountedsqfeet =
+                                              sqfeetprice - product.sqFeetPrice!!.toInt()
+                                          // Log.d("--Discounted price--",(product.sqFeetPrice!!.toInt() - sqfeetprice).toString())
+                                          product.sqFeetPrice = discountedsqfeet.toDouble()
+                                      }
+
+
                                       binding.textView14.text =
                                           getString(R.string.Rs) + product?.sqFeetPrice.toString() + "/"
                                       discountId=discountListApiModel.discountId.toString()
@@ -650,7 +734,7 @@ class ProductDetails : AppCompatActivity() {
                     if(snapshot.exists()){
                         for(snap in snapshot.children){
 
-                            var quatationDetailModel=snap.getValue(QuatationDetailModel::class.java)!!
+                            val quatationDetailModel=snap.getValue(QuatationDetailModel::class.java)!!
                             Log.d("Quotation detail",quatationDetailModel.quotationId)
 
                             addQuatationList(quatationId = quatationDetailModel.quotationId)

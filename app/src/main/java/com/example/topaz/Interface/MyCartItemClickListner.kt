@@ -6,5 +6,6 @@ import com.example.topaz.Models.CategoriesModel
 
 interface MyCartItemClickListner {
     fun MyCartItemClickListner(data: CartProductList, position: Int)
+    fun onCartItemClick(data: CartProductList)
 
 }
